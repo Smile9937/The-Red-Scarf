@@ -66,13 +66,14 @@ public abstract class Character : MonoBehaviour
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
             facingRight = !facingRight;
-            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+            transform.Rotate(0, 180, 0);
         }
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log("Took " + damage + " damage");
 
         if(currentHealth <= 0)
         {

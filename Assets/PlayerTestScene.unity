@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  jumpForce: 0
+  jumpForce: 4
   jumpTime: 0
   groundCheck: {fileID: 1311228824}
   radius: 0.1
@@ -317,6 +317,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
+  maxHealth: 100
 --- !u!50 &474137148
 Rigidbody2D:
   serializedVersion: 4
@@ -849,10 +850,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 1791802292}
-  attackRange: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  bullet: {fileID: 7233836941818762748, guid: 93f71f2845f6dae47af51e35887d3d8f, type: 3}
+  attackRange: 0.5
+  attackDamage: 40
+  attackRate: 2
 --- !u!61 &994797619
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -921,6 +925,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
+  maxHealth: 100
 --- !u!1 &1311228823
 GameObject:
   m_ObjectHideFlags: 0

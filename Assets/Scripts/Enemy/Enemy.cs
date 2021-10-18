@@ -12,7 +12,6 @@ public class Enemy : Character
     public override void Update()
     {
         base.Update();
-        Jump();
     }
 
     protected override void HandleMovement()
