@@ -18,9 +18,11 @@ public class Character_Skills : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        // For debug purposes
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            AdjustCharacterSkillMeter(0.1f, true);
+            AdjustCharacterSkillMeter(0.1f);
+            InterruptPassiveCharacterSkillGain(true);
         }
     }
 
@@ -29,31 +31,37 @@ public class Character_Skills : MonoBehaviour
         while (true)
         {
             Debug.Log(characterSkillMeter);
+            float theDelayBetween = 0.1f;
             if (!temporaryStopOfHandling)
             {
-                AdjustCharacterSkillMeter(0.01f, false);
+                AdjustCharacterSkillMeter(0.01f);
+                theDelayBetween = 1f;
             }
-            yield return new WaitForSeconds(Time.deltaTime + delayBetweenUpdates);
+            else
+            {
+                theDelayBetween = delayBetweenUpdates;
+            }
+            yield return new WaitForSeconds(Time.deltaTime + theDelayBetween);
         }
     }
 
-    public void AdjustCharacterSkillMeter(float adjustment, bool isMajorInterruption)
+    public void AdjustCharacterSkillMeter(float adjustment)
     {
         if (isRage)
         {
             characterSkillMeter -= adjustment;
         }
-        else if (!isRage && characterSkillMeter < 0)
+        else if (!isRage)
         {
             characterSkillMeter += adjustment;
         }
         characterSkillMeter = Mathf.Clamp(characterSkillMeter, 0, 1);
-        InterruptPassiveCharacterSkillGain(isMajorInterruption);
     }
     public void InterruptPassiveCharacterSkillGain(bool isInterrupted)
     {
         temporaryStopOfHandling = isInterrupted;
-        Invoke("ReturnPassiveSkillGain", 0.75f);
+        CancelInvoke();
+        Invoke("ReturnPassiveSkillGain", 2f);
     }
     private void ReturnPassiveSkillGain()
     {
