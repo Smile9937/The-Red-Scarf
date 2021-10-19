@@ -26,9 +26,8 @@ public abstract class Character : MonoBehaviour
     [Header("Character Status")]
     [SerializeField] protected int maxHealth = 100;
     protected int currentHealth;
-    [SerializeField] private float secondsOfInvincibility = 0.5f;
+    [SerializeField] private float secondsOfInvincibility;
     bool isInvincible = false;
-    [SerializeField] private GameObject sprite;
 
     protected Rigidbody2D myRigidbody;
     protected Animator myAnimator;

@@ -18,13 +18,23 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-
-        if(enemy != null)
+        if(other.tag != "Room")
         {
-            enemy.TakeDamage(damage);
+            Enemy enemy = other.GetComponent<Enemy>();
+
+            if(enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+
+            BreakableObject breakableObject = other.GetComponent<BreakableObject>();
+
+            if(breakableObject != null)
+            {
+                breakableObject.TakeDamage(damage);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     IEnumerator Destroy()
