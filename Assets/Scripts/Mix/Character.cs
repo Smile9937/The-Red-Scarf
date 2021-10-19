@@ -26,6 +26,9 @@ public abstract class Character : MonoBehaviour
     [Header("Character Status")]
     [SerializeField] protected int maxHealth = 100;
     protected int currentHealth;
+    [SerializeField] private float secondsOfInvincibility = 0.5f;
+    bool isInvincible = false;
+    [SerializeField] private GameObject sprite;
 
     protected Rigidbody2D myRigidbody;
     protected Animator myAnimator;
@@ -72,6 +75,8 @@ public abstract class Character : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isInvincible)
+            return;
         currentHealth -= damage;
         Debug.Log("Took " + damage + " damage");
 
@@ -79,6 +84,16 @@ public abstract class Character : MonoBehaviour
         {
             Die();
         }
+        StartCoroutine(InvincibilityFrames());
+    }
+
+    IEnumerator InvincibilityFrames()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(secondsOfInvincibility);
+
+        isInvincible = false;
     }
     protected abstract void Die();
     private void OnDrawGizmos()

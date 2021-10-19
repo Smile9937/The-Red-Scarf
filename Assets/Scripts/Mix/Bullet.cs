@@ -6,12 +6,14 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     [SerializeField] private int damage = 50;
+    [SerializeField] private int destroyTimer = 10;
     Rigidbody2D myRigidbody;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myRigidbody.velocity = transform.right * speed;
+        StartCoroutine(Destroy());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +24,12 @@ public class Bullet : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
+        Destroy(gameObject);
+    }
+
+    IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(destroyTimer);
         Destroy(gameObject);
     }
 }
