@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public class MovingPlatform : ActivatableObject
 {
@@ -15,20 +16,20 @@ public class MovingPlatform : ActivatableObject
     private bool moveBack;
     private bool moveToStart;
 
-    public List<GameObject> waypoints;
-    public GameObject waypointPrefab;
-    public List<GameObject> waypointObjects;
+    [SerializeField] private List<Vector2> positions;
 
     private int currentWaypointIndex = 0;
+    private Vector3 currentTarget;
 
-    Vector3 currentTarget;
+    [Header("On Scene Variables")]
+    [SerializeField] private List<Vector2> waypointDistances;
 
     private void Start()
     {
-        if(waypointObjects.Count > 0)
-        {
-            currentTarget = waypointObjects[currentWaypointIndex].transform.position;
-        }
+        positions.Insert(0, transform.position);
+
+        currentTarget = transform.position;
+
         tolerance = speed * Time.deltaTime;
     }
     public override void Activate()
@@ -58,7 +59,7 @@ public class MovingPlatform : ActivatableObject
         {
             UpdateTarget();
         }
-        if(moveToStart && transform.position == waypointObjects[0].transform.position)
+        if(moveToStart && (Vector2) transform.position == positions[0])
         {
             moveToStart = false;
             automatic = false;
@@ -67,8 +68,8 @@ public class MovingPlatform : ActivatableObject
 
     private void MovePlatform()
     {
-        Vector3 heading = currentTarget - transform.position;
-        transform.position += heading / heading.magnitude * speed * Time.deltaTime;
+        Vector2 heading = currentTarget - transform.position;
+        transform.position += (Vector3) heading / heading.magnitude * speed * Time.deltaTime;
         if(heading.magnitude < tolerance)
         {
             transform.position = currentTarget;
@@ -88,11 +89,9 @@ public class MovingPlatform : ActivatableObject
     }
     private void NextPlatform()
     {
-
         if(!moveBack)
         {
-
-            if(currentWaypointIndex >= waypointObjects.Count - 1)
+            if(currentWaypointIndex >= positions.Count - 1)
             {
                 if(moveFromEndToStart)
                 {
@@ -118,8 +117,7 @@ public class MovingPlatform : ActivatableObject
                 currentWaypointIndex--;
             }
         }
-        currentTarget = waypointObjects[currentWaypointIndex].transform.position;
-
+        currentTarget = positions[currentWaypointIndex];
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -131,37 +129,40 @@ public class MovingPlatform : ActivatableObject
     {
         other.transform.parent = null;
     }
-
-    public void GenerateWaypoints()
+    private void OnDrawGizmosSelected()
     {
-        if (waypoints.Count > 0)
+        foreach(Vector2 position in positions)
         {
-            for (int i = 0; i < waypoints.Count; i++)
-            {
-                if (waypoints[i] == null)
-                {
-                    waypoints[i] = waypointPrefab;
+            Gizmos.DrawCube(position, (Vector2) transform.localScale);
+        }
+    }
 
-                    if (waypointObjects.Count < waypoints.Count)
-                    {
-                        GameObject currentWaypoint = Instantiate(waypoints[i], transform.position, Quaternion.identity);
-                        currentWaypoint.transform.parent = transform.parent;
-                        waypointObjects.Add(currentWaypoint);
-                    }
+    public void UpdateWaypoints()
+    {
+        if(positions.Count > 0)
+        {
+            for(int i = 0; i < positions.Count; i++)
+            {
+                if(waypointDistances.Count < positions.Count)
+                {
+                    waypointDistances.Add(Vector3.zero);
                 }
             }
         }
 
-        if (waypointObjects.Count > 0)
+        if(waypointDistances.Count > positions.Count)
         {
-            for (int j = 0; j < waypointObjects.Count; j++)
+            int difference = waypointDistances.Count - positions.Count;
+
+            for(int i = 0; i < difference; i++)
             {
-                if (j == waypoints.Count)
-                {
-                    DestroyImmediate(waypointObjects[j]);
-                    waypointObjects.RemoveAt(j);
-                }
+                waypointDistances.RemoveAt(waypointDistances.Count - 1);
             }
+        }
+        
+        for(int i = 0; i < positions.Count; i++)
+        {
+            positions[i] = (Vector2) transform.position + waypointDistances[i];
         }
     }
 }

@@ -34,6 +34,13 @@ public class Bullet : MonoBehaviour
                 breakableObject.TakeDamage(damage);
             }
             Destroy(gameObject);
+
+            Button button = other.GetComponent<Button>();
+            
+            if(button != null)
+            {
+                button.Triggered();
+            }
         }
     }
 

@@ -33,38 +33,45 @@ public class Button : MonoBehaviour
 
         if (Input.GetKeyDown("q"))
         {
-            if (isLever)
+            Triggered();
+        }
+    }
+    public void Triggered()
+    {
+        if (isLever)
+        {
+            active = !active;
+            if (active)
             {
-                active = !active;
-                if (active)
-                {
-                    for (int i = 0; i < targets.Length; i++)
-                    {
-                        targets[i].Activate();
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < targets.Length; i++)
-                    {
-                        targets[i].Deactivate();
-                    }
-                }
+                Activate();
             }
             else
             {
-                for (int i = 0; i < targets.Length; i++)
-                {
-                    targets[i].Activate();
-                }
-                StartCoroutine(Deactivate());
+                Deactivate();
             }
         }
+        else
+        {
+            Activate();
+            StartCoroutine(Timer());
+        }
     }
-    private IEnumerator Deactivate()
+    private IEnumerator Timer()
     {
         yield return new WaitForSeconds(timer);
 
+        Deactivate();
+    }
+    
+    private void Activate()
+    {
+        for (int i = 0; i < targets.Length; i++)
+        {
+            targets[i].Activate();
+        }
+    }
+    private void Deactivate()
+    {
         for (int i = 0; i < targets.Length; i++)
         {
             targets[i].Deactivate();
