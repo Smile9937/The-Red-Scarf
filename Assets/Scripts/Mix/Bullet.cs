@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 20f;
     [SerializeField] private int damage = 50;
     [SerializeField] private int destroyTimer = 10;
+    [SerializeField] private float knockBack = 500;
     Rigidbody2D myRigidbody;
 
     void Start()
@@ -20,27 +21,18 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag != "Room")
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-
-            if(enemy != null)
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if(damageable != null)
             {
-                enemy.TakeDamage(damage);
-            }
-
-            BreakableObject breakableObject = other.GetComponent<BreakableObject>();
-
-            if(breakableObject != null)
-            {
-                breakableObject.TakeDamage(damage);
+                if (other.attachedRigidbody != null)
+                {
+                    Vector2 direction = other.transform.position - transform.position;
+                    direction.y = 0;
+                    other.attachedRigidbody.AddForce(direction.normalized * knockBack);
+                }
+                damageable.Damage(damage);
             }
             Destroy(gameObject);
-
-            Button button = other.GetComponent<Button>();
-            
-            if(button != null)
-            {
-                button.Triggered();
-            }
         }
     }
 

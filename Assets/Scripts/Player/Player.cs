@@ -7,6 +7,7 @@ public class Player : Character
     public override void Start()
     {
         base.Start();
+        transform.position = GameManager.Instance.currentSpawnpoint;
     }
     public override void Update()
     {
@@ -28,7 +29,7 @@ public class Player : Character
             jumpTimeCounter = jumpTime;
         }
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && canJump)
         {
             Jump();
             stoppedJumping = false;
@@ -50,5 +51,6 @@ public class Player : Character
     protected override void Die()
     {
         Debug.Log("Player Died");
+        GameManager.Instance.RespawnPlayer();
     }
 }

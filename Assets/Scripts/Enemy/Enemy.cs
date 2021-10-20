@@ -26,6 +26,6 @@ public class Enemy : Character
 
     protected override void Die()
     {
-        Debug.Log("Enemy Died");
+        Destroy(gameObject);
     }
 }

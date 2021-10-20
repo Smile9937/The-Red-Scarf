@@ -8,11 +8,11 @@ public class Hazard : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Character character = collision.gameObject.GetComponent<Character>();
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if(character != null)
+        if(damageable != null)
         {
-            character.TakeDamage(damage);
+            damageable.Damage(damage);
         }
     }
 }

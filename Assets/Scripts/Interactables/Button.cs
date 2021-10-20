@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class Button : MonoBehaviour, IDamageable
 {
-    [SerializeField] ActivatableObject[] targets;
+    [Tooltip("Only Activatable Objects")]
+    [SerializeField] GameObject[] targets;
+
     [SerializeField] bool isLever = false;
     [SerializeField] float timer;
     bool active = false;
@@ -33,10 +35,10 @@ public class Button : MonoBehaviour
 
         if (Input.GetKeyDown("q"))
         {
-            Triggered();
+            Damage(0);
         }
     }
-    public void Triggered()
+    public void Damage(int damage)
     {
         if (isLever)
         {
@@ -67,14 +69,16 @@ public class Button : MonoBehaviour
     {
         for (int i = 0; i < targets.Length; i++)
         {
-            targets[i].Activate();
+            IActivatable activatable = targets[i].GetComponent<IActivatable>(); ;
+            activatable.Activate();
         }
     }
     private void Deactivate()
     {
         for (int i = 0; i < targets.Length; i++)
         {
-            targets[i].Deactivate();
+            IActivatable activatable = targets[i].GetComponent<IActivatable>(); ;
+            activatable.Deactivate();
         }
     }
 }

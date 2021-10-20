@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-public class MovingPlatform : ActivatableObject
+public class MovingPlatform : MonoBehaviour, IActivatable
 {
     [SerializeField] private float speed;
     [SerializeField] private float delayTime;
@@ -32,12 +32,12 @@ public class MovingPlatform : ActivatableObject
 
         tolerance = speed * Time.deltaTime;
     }
-    public override void Activate()
+    public void Activate()
     {
         automatic = true;
     }
 
-    public override void Deactivate()
+    public void Deactivate()
     {
         if(moveBackWhenStopped)
         {

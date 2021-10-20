@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : ActivatableObject
+public class Door : MonoBehaviour, IActivatable
 {
-    public override void Activate()
+    public void Activate()
     {
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public override void Deactivate()
+    public void Deactivate()
     {
         transform.GetChild(0).gameObject.SetActive(true);
     }
