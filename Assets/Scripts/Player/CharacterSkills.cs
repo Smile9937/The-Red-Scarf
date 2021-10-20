@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character_Skills : MonoBehaviour
+public class CharacterSkills : MonoBehaviour
 {
     public float characterSkillMeter = 0;
     [SerializeField] bool isRage;

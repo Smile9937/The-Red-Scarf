@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room_Switch : MonoBehaviour
+public class RoomSwitch : MonoBehaviour
 {
     [SerializeField] Animator theRoomController;
     [SerializeField] int roomNumber = 0;
