@@ -7,7 +7,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     bool isSwinging = false;
     [SerializeField] GameObject swingingPoint;
     [SerializeField] Rigidbody2D characterRigidBody;
-    public DistanceJoint2D theSwingJoint;
 
     void Update()
     {
