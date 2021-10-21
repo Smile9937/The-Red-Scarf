@@ -26,7 +26,7 @@ public abstract class Character : MonoBehaviour, IDamageable
 
     [Header("Character Status")]
     [SerializeField] protected int maxHealth = 100;
-    protected int currentHealth;
+    public int currentHealth;
     [SerializeField] private float secondsOfInvincibility;
     bool isInvincible = false;
 

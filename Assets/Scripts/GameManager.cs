@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public  Vector3 currentSpawnpoint;
+    public Vector3 currentSpawnpoint;
 
     private Player player;
+
+    public bool gamePaused;
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance;} }
@@ -26,7 +29,6 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         currentSpawnpoint = player.transform.position;
     }
-
     public void SetCurrentCheckpoint(Vector3 checkpointPos)
     {
         currentSpawnpoint = checkpointPos;

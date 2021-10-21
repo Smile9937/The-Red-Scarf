@@ -21,7 +21,7 @@ public class PlayerCombat : MonoBehaviour
     float nextAttackTime = 0f;
     void Update()
     {
-        if(Time.time >= nextAttackTime)
+        if(Time.time >= nextAttackTime && !GameManager.Instance.gamePaused)
         {
             if(Input.GetKeyDown("z"))
             {
