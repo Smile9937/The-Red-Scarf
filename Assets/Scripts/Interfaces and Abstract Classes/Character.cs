@@ -40,6 +40,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     public virtual void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
         jumpTimeCounter = jumpTime;
         canJumpCounter = offGroundJumpTimer;
         currentHealth = maxHealth;

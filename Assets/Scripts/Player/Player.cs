@@ -19,6 +19,7 @@ public class Player : Character
     protected override void HandleMovement()
     {
         base.HandleMovement();
+        myAnimator.SetFloat("axisXSpeed", Mathf.Abs(direction));
         TurnAround(direction);
     }
 
@@ -28,6 +29,7 @@ public class Player : Character
         {
             jumpTimeCounter = jumpTime;
         }
+        myAnimator.SetBool("isGrounded", grounded);
 
         if (Input.GetButtonDown("Jump") && canJump)
         {
