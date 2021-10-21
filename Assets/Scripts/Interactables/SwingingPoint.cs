@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingPoint : ActivatableObject
+public class SwingingPoint : MonoBehaviour, IActivatable
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
@@ -18,12 +18,12 @@ public class SwingingPoint : ActivatableObject
         theSwingJoint.enabled = false;
     }
 
-    public override void Activate()
+    public void Activate()
     {
         isSwingable = true;
     }
 
-    public override void Deactivate()
+    public void Deactivate()
     {
         isSwingable = false;
     }
@@ -34,7 +34,7 @@ public class SwingingPoint : ActivatableObject
         {
             if (collision.GetComponent<CharacterGrapplingScarf>() && !isSwingingFrom)
             {
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(this.gameObject);
+                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(gameObject);
             }
         }
     }
