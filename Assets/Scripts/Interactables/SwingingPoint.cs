@@ -26,6 +26,7 @@ public class SwingingPoint : MonoBehaviour, IActivatable
     public void Deactivate()
     {
         isSwingable = false;
+        theSwingJoint.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

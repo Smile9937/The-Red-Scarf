@@ -45,6 +45,11 @@ public class CharacterSkills : MonoBehaviour
         }
     }
 
+    public void SetCharacterSkillMeter(float adjustment)
+    {
+        characterSkillMeter = adjustment;
+        characterSkillMeter = Mathf.Clamp(characterSkillMeter, 0, 1);
+    }
     public void AdjustCharacterSkillMeter(float adjustment)
     {
         if (isRage)
@@ -60,7 +65,7 @@ public class CharacterSkills : MonoBehaviour
     public void InterruptPassiveCharacterSkillGain(bool isInterrupted)
     {
         temporaryStopOfHandling = isInterrupted;
-        CancelInvoke();
+        CancelInvoke("ReturnPassiveSkillGain");
         Invoke("ReturnPassiveSkillGain", 2f);
     }
     private void ReturnPassiveSkillGain()
