@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingPoint : MonoBehaviour, IActivatable
+public class SwingingPoint : ActivatableObject
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
     public DistanceJoint2D theSwingJoint;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if (theSwingJoint == null)
         {
             theSwingJoint = GetComponent<DistanceJoint2D>();
@@ -18,12 +19,12 @@ public class SwingingPoint : MonoBehaviour, IActivatable
         theSwingJoint.enabled = false;
     }
 
-    public void Activate()
+    protected override void Activate()
     {
         isSwingable = true;
     }
 
-    public void Deactivate()
+    protected override void DeActivate()
     {
         isSwingable = false;
         theSwingJoint.enabled = false;

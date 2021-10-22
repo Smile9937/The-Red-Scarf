@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +5,14 @@ using UnityEngine;
 public class Button : MonoBehaviour, IDamageable
 {
     [Tooltip("Only Activatable Objects")]
-    [SerializeField] GameObject[] targets;
+    public int id;
 
-    [SerializeField] bool isLever = false;
-    [SerializeField] float timer;
-    bool active = false;
+    public bool isLever = false;
+    public float timer;
     bool playerInRange = false;
+
+    [Header("Save Data")]
+    public bool active = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,6 +28,10 @@ public class Button : MonoBehaviour, IDamageable
             playerInRange = false;
         }
     }
+    private void OnLoad()
+    {
+        Destroy(gameObject);
+    }
 
     private void Update()
     {
@@ -37,7 +42,9 @@ public class Button : MonoBehaviour, IDamageable
         {
             Damage(0);
         }
+
     }
+
     public void Damage(int damage)
     {
         if (isLever)
@@ -67,18 +74,10 @@ public class Button : MonoBehaviour, IDamageable
     
     private void Activate()
     {
-        for (int i = 0; i < targets.Length; i++)
-        {
-            IActivatable activatable = targets[i].GetComponent<IActivatable>(); ;
-            activatable.Activate();
-        }
+        GameEvents.current.Activate(id);
     }
     private void Deactivate()
     {
-        for (int i = 0; i < targets.Length; i++)
-        {
-            IActivatable activatable = targets[i].GetComponent<IActivatable>(); ;
-            activatable.Deactivate();
-        }
+        GameEvents.current.DeActivate(id);
     }
 }

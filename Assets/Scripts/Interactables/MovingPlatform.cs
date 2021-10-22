@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-public class MovingPlatform : MonoBehaviour, IActivatable
+public class MovingPlatform : ActivatableObject
 {
     [SerializeField] private float speed;
     [SerializeField] private float delayTime;
@@ -24,20 +24,21 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     [Header("On Scene Variables")]
     [SerializeField] private List<Vector2> waypointDistances;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         positions.Insert(0, transform.position);
 
         currentTarget = transform.position;
 
         tolerance = speed * Time.deltaTime;
     }
-    public void Activate()
+    protected override void Activate()
     {
         automatic = true;
     }
 
-    public void Deactivate()
+    protected override void DeActivate()
     {
         if(moveBackWhenStopped)
         {

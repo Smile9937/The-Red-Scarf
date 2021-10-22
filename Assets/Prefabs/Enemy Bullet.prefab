@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7233836941818762737}
   - component: {fileID: 7233836941818762736}
   - component: {fileID: -6377894629183829461}
-  m_Layer: 0
-  m_Name: Bullet
+  m_Layer: 12
+  m_Name: Enemy Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,3 +137,4 @@ MonoBehaviour:
   speed: 20
   damage: 50
   destroyTimer: 10
+  knockBack: 500

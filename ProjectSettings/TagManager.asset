@@ -17,9 +17,9 @@ TagManager:
   - Hazard
   - Player
   - Interactibles
-  - 
-  - 
-  - 
+  - Player Bullet
+  - Enemy Bullet
+  - Dodge Roll
   - 
   - 
   - 

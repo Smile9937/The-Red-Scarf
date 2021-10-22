@@ -37,7 +37,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     protected Rigidbody2D myRigidbody;
     protected Animator myAnimator;
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -46,7 +46,7 @@ public abstract class Character : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
 
         grounded = Physics2D.OverlapCircle(groundCheck.position, radius, ground);
@@ -72,7 +72,7 @@ public abstract class Character : MonoBehaviour, IDamageable
             canJump = false;
         }
     }
-    public virtual void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         HandleMovement();
     }
@@ -115,7 +115,7 @@ public abstract class Character : MonoBehaviour, IDamageable
         StartCoroutine(InvincibilityFrames());
     }
 
-    IEnumerator InvincibilityFrames()
+    private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
 

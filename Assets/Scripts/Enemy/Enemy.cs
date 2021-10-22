@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public override void Start()
+    [SerializeField] Bullet bullet;
+    protected override void Start()
     {
         base.Start();
+        StartCoroutine(AttackTimer());
     }
 
-    public override void Update()
+    protected override void Update()
     {
         base.Update();
+
     }
 
     protected override void HandleMovement()
@@ -27,5 +30,12 @@ public class Enemy : Character
     protected override void Die()
     {
         Destroy(gameObject);
+    }
+
+    IEnumerator AttackTimer()
+    {
+        yield return new WaitForSeconds(2f);
+        Instantiate(bullet, transform.position, Quaternion.identity);
+        StartCoroutine(AttackTimer());
     }
 }
