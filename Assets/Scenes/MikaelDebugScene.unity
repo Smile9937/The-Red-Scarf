@@ -295,6 +295,36 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1875669508}
   m_ConfineScreenEdges: 1
   m_Damping: 0.8
+--- !u!1 &200768140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200768141}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200768141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200768140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 851490150}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &491026879
 GameObject:
   m_ObjectHideFlags: 0
@@ -8032,7 +8062,7 @@ MonoBehaviour:
   startRollSpeed: 40
   rollSpeedLoss: 6
   rollSpeedThreshold: 2
-  blockPoint: {fileID: 0}
+  blockPoint: {fileID: 200768141}
   blockHeight: 1
   blockWidth: 0.5
 --- !u!4 &851490150
@@ -8049,6 +8079,7 @@ Transform:
   - {fileID: 941891670}
   - {fileID: 491026880}
   - {fileID: 970670165}
+  - {fileID: 200768141}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11298,7 +11329,7 @@ GameObject:
   - component: {fileID: 1104074806}
   m_Layer: 0
   m_Name: Room Borders (3)
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
