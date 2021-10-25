@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float knockBack = 500;
     Rigidbody2D myRigidbody;
 
+    [Header("Damage Text")]
+    [System.NonSerialized] public DamagePopUp damageText;
+
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -30,7 +33,12 @@ public class Bullet : MonoBehaviour
                     direction.y = 0;
                     other.attachedRigidbody.AddForce(direction.normalized * knockBack);
                 }
-                damageable.Damage(damage);
+                if (damageText != null && other.tag == "Enemy")
+                {
+                    Instantiate(damageText, transform.position, Quaternion.identity);
+                    damageText.SetText(damage);
+                    damageable.Damage(damage);
+                }
             }
             Destroy(gameObject);
         }

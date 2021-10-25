@@ -8,7 +8,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask targetLayers;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private DamagePopUp damageText;
 
     [Header("Attack Variables")]
     [SerializeField] private float attackRange = 0.5f;
@@ -20,10 +21,13 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpForce;
+    bool canGunJump = true;
 
     [Header("Composure Variables")]
     [SerializeField] private int startComposure;
     [SerializeField] private int gunComposureCost;
+    [SerializeField] private int composureGain;
+    [SerializeField] private float regainTimer;
     private int currentComposure;
 
     float nextMeleeAttackTime = 0f;
@@ -35,9 +39,24 @@ public class PlayerCombat : MonoBehaviour
         currentComposure = startComposure;
         player = GetComponent<Player>();
         myRigidbody = GetComponent<Rigidbody2D>();
+        StartCoroutine(RegainComposure());
+    }
+    private IEnumerator RegainComposure()
+    {
+        currentComposure += composureGain;
+        if(currentComposure > startComposure)
+        {
+            currentComposure = startComposure;
+        }
+        yield return new WaitForSeconds(regainTimer);
+        StartCoroutine(RegainComposure());
     }
     void Update()
     {
+        if(player.grounded)
+        {
+            canGunJump = true;
+        }
         if (GameManager.Instance.gamePaused || player.state != Player.State.Neutral)
             return;
 
@@ -54,14 +73,17 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            if (Time.time >= nextRangedAttackTime)
+            if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
             {
                 if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Attack)))
                 {
                     if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
-                    {
+                    {   
+                        if (canGunJump)
+                        {
+                            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                        }
                         Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
-                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                     }
                     else
                     {
@@ -76,7 +98,10 @@ public class PlayerCombat : MonoBehaviour
 
     private void Shoot(Vector3 attackPos, Quaternion rotation)
     {
-        Instantiate(bullet, attackPos, rotation);
+        currentComposure -= gunComposureCost;
+        canGunJump = false;
+        Bullet currentBullet = Instantiate(bullet, attackPos, rotation);
+        currentBullet.damageText = damageText;
     }
 
     private void MeleeAttack()
@@ -94,10 +119,13 @@ public class PlayerCombat : MonoBehaviour
                     direction.y = 0;
                     target.attachedRigidbody.AddForce(direction.normalized * knockBack);
                 }
-
-                damageable.Damage(attackDamage);
+                if(damageText != null && target.tag == "Enemy")
+                {
+                    Instantiate(damageText, transform.position, Quaternion.identity);
+                    damageText.SetText(attackDamage);                
+                    damageable.Damage(attackDamage);
+                }
             }
-
         }
     }
     private void OnDrawGizmosSelected()

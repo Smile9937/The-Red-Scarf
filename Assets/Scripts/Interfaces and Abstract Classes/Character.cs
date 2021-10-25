@@ -17,7 +17,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float radius;
     [SerializeField] protected LayerMask ground;
-    [SerializeField] protected bool grounded;
+    public bool grounded;
     [SerializeField] protected float offGroundJumpTimer = 0.1f;
     protected float jumpTimeCounter;
     protected bool stoppedJumping = true;

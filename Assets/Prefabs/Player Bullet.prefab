@@ -138,3 +138,4 @@ MonoBehaviour:
   damage: 50
   destroyTimer: 10
   knockBack: 500
+  damageText: {fileID: -937120929788230762, guid: 13c058a086d8ba6498008a458b2520b3, type: 3}
