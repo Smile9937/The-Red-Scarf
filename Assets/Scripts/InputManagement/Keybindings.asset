@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b2d98908e111243bd3703abcb2d60f, type: 3}
+  m_Name: Keybindings
+  m_EditorClassIdentifier: 
+  keybindingChecks:
+  - keybindingAction: 0
+    keyCode: 122
+  - keybindingAction: 1
+    keyCode: 120
+  - keybindingAction: 2
+    keyCode: 115
+  - keybindingAction: 3
+    keyCode: 97
+  - keybindingAction: 4
+    keyCode: 99
+  - keybindingAction: 6
+    keyCode: 275
+  - keybindingAction: 5
+    keyCode: 276
+  - keybindingAction: 7
+    keyCode: 273
+  - keybindingAction: 8
+    keyCode: 274

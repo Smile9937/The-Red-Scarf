@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public bool gamePaused;
 
+    public bool redScarf;
+
     private static GameManager instance;
     public static GameManager Instance { get { return instance;} }
     private void Awake()
@@ -36,5 +38,11 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SwapCharacter()
+    {
+        redScarf = !redScarf;
+
     }
 }

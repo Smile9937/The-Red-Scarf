@@ -12,7 +12,7 @@ public class Player : Character
         Neutral,
         Rolling,
         Blocking,
-    }
+    };
 
     [Header("Roll Variables")]
     [SerializeField] private float startRollSpeed = 200f;
@@ -42,18 +42,43 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
-        direction = Input.GetAxisRaw("Horizontal");
+        
+        if(InputManager.Instance.GetKey(KeybindingActions.Left)
+            && !InputManager.Instance.GetKey(KeybindingActions.Right))
+        {
+            direction = -1;
+        }
+        else if(Input.GetKey(KeyCode.RightArrow) &&
+            !InputManager.Instance.GetKey(KeybindingActions.Left))
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = 0;
+        }
 
         switch(state)
         {
             case State.Neutral:
                 HandleJumping();
-                HandleRolling();
-                HandleBlocking();
+                if(GameManager.Instance.redScarf)
+                {
+                    HandleRolling();
+                }else
+                {
+                    HandleBlocking();
+                }
                 break;
             case State.Blocking:
                 Block();
                 break;
+        }
+
+        //Swap Character
+        if(InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
+        {
+            GameManager.Instance.SwapCharacter();
         }
     }
     protected override void FixedUpdate()
@@ -67,7 +92,6 @@ public class Player : Character
                 Roll();
                 break;
         }
-
     }
     protected override void HandleMovement()
     {
@@ -89,19 +113,19 @@ public class Player : Character
         }
         myAnimator.SetBool("isGrounded", grounded);
 
-        if (Input.GetButtonDown("Jump") && canJump)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
         {
             Jump();
             stoppedJumping = false;
         }
 
-        if (Input.GetButton("Jump") && !stoppedJumping && jumpTimeCounter > 0)
+        if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0)
         {
             Jump();
             jumpTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (InputManager.Instance.GetKeyUp(KeybindingActions.Jump))
         {
             jumpTimeCounter = 0;
             stoppedJumping = true;
@@ -109,7 +133,7 @@ public class Player : Character
     }
     private void HandleBlocking()
     {
-        if(Input.GetKeyDown("q"))
+        if(InputManager.Instance.GetKeyDown(KeybindingActions.Dodge))
         {
             state = State.Blocking;
 
@@ -138,14 +162,14 @@ public class Player : Character
             }
         }
 
-        if(Input.GetKeyUp("q"))
+        if(InputManager.Instance.GetKeyUp(KeybindingActions.Dodge))
         {
             state = State.Neutral;
         }
     }
     private void HandleRolling()
     {
-        if (Input.GetKeyDown("e") && grounded)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && grounded)
         {
             rollSpeed = startRollSpeed;
             myRigidbody.velocity = Vector2.zero;
@@ -156,10 +180,7 @@ public class Player : Character
     {
         gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
         myCollider.size = colliderStartSize / 2;
-        Debug.Log(myRigidbody.velocity);
         myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
-
-        Debug.Log(Mathf.Sign(transform.rotation.y));
 
         rollSpeed -= rollSpeed * rollSpeedLoss * Time.deltaTime;
 

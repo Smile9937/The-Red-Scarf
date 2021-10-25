@@ -18,13 +18,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float meleeAttackRate = 2f;
     [SerializeField] private float rangeAttackRate = 1f;
 
+    [Header("Jump Variables")]
     [SerializeField] private float jumpForce;
+
+    [Header("Composure Variables")]
+    [SerializeField] private int startComposure;
+    [SerializeField] private int gunComposureCost;
+    private int currentComposure;
+
     float nextMeleeAttackTime = 0f;
     float nextRangedAttackTime = 0f;
     Player player;
     Rigidbody2D myRigidbody;
     private void Start()
     {
+        currentComposure = startComposure;
         player = GetComponent<Player>();
         myRigidbody = GetComponent<Rigidbody2D>();
     }
@@ -33,30 +41,35 @@ public class PlayerCombat : MonoBehaviour
         if (GameManager.Instance.gamePaused || player.state != Player.State.Neutral)
             return;
 
-        if (Time.time >= nextMeleeAttackTime)
+        if(GameManager.Instance.redScarf)
         {
-            if (Input.GetKeyDown("z"))
+            if (Time.time >= nextMeleeAttackTime)
             {
-                MeleeAttack();
-                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
+                {
+                    MeleeAttack();
+                    nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                }
             }
         }
-
-        if (Time.time >= nextRangedAttackTime)
+        else
         {
-            if (Input.GetKey("x"))
+            if (Time.time >= nextRangedAttackTime)
             {
-                if(Input.GetKey(KeyCode.DownArrow))
+                if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Attack)))
                 {
-                    Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
-                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
-                }
-                else
-                {
-                    Shoot(attackPoint.position, attackPoint.rotation);
-                }
+                    if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
+                    {
+                        Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
+                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                    }
+                    else
+                    {
+                        Shoot(attackPoint.position, attackPoint.rotation);
+                    }
 
-                nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                    nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                }
             }
         }
     }

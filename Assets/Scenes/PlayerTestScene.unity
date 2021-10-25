@@ -1969,6 +1969,9 @@ MonoBehaviour:
   meleeAttackRate: 2
   rangeAttackRate: 1
   jumpForce: 8
+  startComposure: 0
+  gunComposureCost: 0
+  redScarf: 0
 --- !u!95 &994797619
 Animator:
   serializedVersion: 3
@@ -2611,6 +2614,7 @@ GameObject:
   - component: {fileID: 1464546016}
   - component: {fileID: 1464546015}
   - component: {fileID: 1464546017}
+  - component: {fileID: 1464546018}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2658,6 +2662,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb12ce94a5868d469a7bcba26b7108e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1464546018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464546014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a93f330c2b90f14baa463b455f46eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keybindings: {fileID: 11400000, guid: 2968123ccd0902049b550a4566afaba8, type: 2}
 --- !u!1 &1535028926
 GameObject:
   m_ObjectHideFlags: 0
