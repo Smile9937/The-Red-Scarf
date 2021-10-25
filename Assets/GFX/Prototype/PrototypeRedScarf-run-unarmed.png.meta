@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: b3d53ab8fe70ada4790529aee66e5136
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: 6054945499567315816
+    second: PrototypeRedScarf-run-unarmed_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
+      213: 1052697977678672757
+    second: PrototypeRedScarf-run-unarmed_1
   - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
+      213: 4238145506039259604
+    second: PrototypeRedScarf-run-unarmed_2
   - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: 3467473416386020151
+    second: PrototypeRedScarf-run-unarmed_3
+  - first:
+      213: -1717905106071810755
+    second: PrototypeRedScarf-run-unarmed_4
+  - first:
+      213: 6581642393334657510
+    second: PrototypeRedScarf-run-unarmed_5
+  - first:
+      213: -86206265356959544
+    second: PrototypeRedScarf-run-unarmed_6
+  - first:
+      213: 2376463875122802432
+    second: PrototypeRedScarf-run-unarmed_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +91,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -91,7 +103,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,7 +115,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -115,85 +127,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeRedScarf-run-unarmed_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 3
         y: 0
         width: 24
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 86b5f04f9dc770450800000000000000
+      internalID: 6054945499567315816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeRedScarf-run-unarmed_1
       rect:
         serializedVersion: 2
-        x: 29
+        x: 27
         y: 0
         width: 24
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
+      spriteID: 5733f47bb3feb9e00800000000000000
+      internalID: 1052697977678672757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
+      name: PrototypeRedScarf-run-unarmed_2
       rect:
         serializedVersion: 2
-        x: 54
+        x: 50
         y: 0
         width: 24
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
+      spriteID: 4d163e112eae0da30800000000000000
+      internalID: 4238145506039259604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
+      name: PrototypeRedScarf-run-unarmed_3
       rect:
         serializedVersion: 2
-        x: 79
+        x: 72
         y: 0
         width: 24
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: 7338cc363b0fe1030800000000000000
+      internalID: 3467473416386020151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-run-unarmed_4
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 0
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3d82ca6866c828e0800000000000000
+      internalID: -1717905106071810755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-run-unarmed_5
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e13d5db2e0b65b50800000000000000
+      internalID: 6581642393334657510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-run-unarmed_6
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 0
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c04cffbbdbbdcef0800000000000000
+      internalID: -86206265356959544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-run-unarmed_7
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00f2e3aad45eaf020800000000000000
+      internalID: 2376463875122802432
       vertices: []
       indices: 
       edges: []

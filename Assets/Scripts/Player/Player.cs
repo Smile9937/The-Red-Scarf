@@ -81,6 +81,11 @@ public class Player : Character
         if (grounded)
         {
             jumpTimeCounter = jumpTime;
+            myAnimator.SetFloat("axisYSpeed", 0);
+        }
+        else
+        {
+            myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
         }
         myAnimator.SetBool("isGrounded", grounded);
 
