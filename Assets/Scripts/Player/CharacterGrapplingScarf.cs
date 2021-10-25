@@ -10,9 +10,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) || (Input.GetButtonDown("Jump") && isSwinging))
+        if (swingingPoint != null)
         {
-            ToggleIsSwinging();
+            if (Input.GetKeyDown(KeyCode.F) || (Input.GetButtonDown("Jump") && isSwinging))
+            {
+                ToggleIsSwinging();
+            }
         }
     }
 
