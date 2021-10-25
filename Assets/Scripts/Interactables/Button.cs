@@ -9,42 +9,12 @@ public class Button : MonoBehaviour, IDamageable
 
     public bool isLever = false;
     public float timer;
-    bool playerInRange = false;
 
-    [Header("Save Data")]
     public bool active = false;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
-        {
-            playerInRange = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            playerInRange = false;
-        }
-    }
     private void OnLoad()
     {
         Destroy(gameObject);
     }
-
-    private void Update()
-    {
-        if (!playerInRange)
-            return;
-
-        if (Input.GetKeyDown("q"))
-        {
-            Damage(0);
-        }
-
-    }
-
     public void Damage(int damage)
     {
         if (isLever)

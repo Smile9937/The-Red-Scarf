@@ -123,7 +123,12 @@ public class MovingPlatform : ActivatableObject
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        other.transform.parent = transform;
+        Vector3 direction = transform.position - other.transform.position;
+
+        if(direction.y < 0 && Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
+        {
+            other.transform.parent = transform;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)

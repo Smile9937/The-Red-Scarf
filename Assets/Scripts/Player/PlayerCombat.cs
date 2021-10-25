@@ -7,111 +7,63 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Transform blockPoint;
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private GameObject bullet;
 
     [Header("Attack Variables")]
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private int attackDamage = 40;
-    [SerializeField] private float blockHeight = 1f;
-    [SerializeField] private float blockWidth = 0.5f;
     [SerializeField] float knockBack = 500f;
 
     [SerializeField] private float meleeAttackRate = 2f;
     [SerializeField] private float rangeAttackRate = 1f;
-    bool blocking = false;
-    bool rolling = false;
+
+    [SerializeField] private float jumpForce;
     float nextMeleeAttackTime = 0f;
     float nextRangedAttackTime = 0f;
     Player player;
+    Rigidbody2D myRigidbody;
     private void Start()
     {
         player = GetComponent<Player>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
-        if (!GameManager.Instance.gamePaused)
+        if (GameManager.Instance.gamePaused || player.state != Player.State.Neutral)
+            return;
+
+        if (Time.time >= nextMeleeAttackTime)
         {
-            if (Time.time >= nextMeleeAttackTime && !blocking)
+            if (Input.GetKeyDown("z"))
             {
-                if (Input.GetKeyDown("z"))
+                MeleeAttack();
+                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+            }
+        }
+
+        if (Time.time >= nextRangedAttackTime)
+        {
+            if (Input.GetKey("x"))
+            {
+                if(Input.GetKey(KeyCode.DownArrow))
                 {
-                    MeleeAttack();
-                    nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                    Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                 }
-            }
-
-            if (Time.time >= nextRangedAttackTime && !blocking)
-            {
-                if (Input.GetKey("x"))
+                else
                 {
-                    Shoot();
-                    nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                    Shoot(attackPoint.position, attackPoint.rotation);
                 }
-            }
 
-            if (Input.GetKeyDown("q"))
-            {
-                blocking = true;
-
-                Collider2D[] blockTargets = Physics2D.OverlapCapsuleAll(blockPoint.position, new Vector2(blockHeight, blockWidth), CapsuleDirection2D.Vertical, 0);
-
-                foreach (Collider2D target in blockTargets)
-                {
-                    Bullet bullet = target.GetComponent<Bullet>();
-                    if (bullet != null)
-                    {
-                        Debug.Log("Perfect Block");
-                    }
-                }
-            }
-
-            if(Input.GetKeyUp("q"))
-            {
-                blocking = false;
-            }
-
-            if (blocking)
-            {
-
-                Block();
-            }
-
-            if(Input.GetKeyDown("e") && !rolling)
-            {
-                StartCoroutine(Roll());
+                nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
             }
         }
     }
 
-    private IEnumerator Roll()
+    private void Shoot(Vector3 attackPos, Quaternion rotation)
     {
-        rolling = true;
-        player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-        yield return new WaitForSeconds(1f);
-        rolling = false;
-        player.gameObject.layer = LayerMask.NameToLayer("Player");
-    }
-
-
-    private void Block()
-    {
-        Collider2D[] blockTargets = Physics2D.OverlapCapsuleAll(blockPoint.position, new Vector2(blockHeight, blockWidth), CapsuleDirection2D.Vertical, 0);
-
-        foreach (Collider2D target in blockTargets)
-        {
-            Bullet bullet = target.GetComponent<Bullet>();
-            if(bullet != null)
-            {
-                Destroy(bullet.gameObject);
-            }
-        }
-    }
-
-    private void Shoot()
-    {
-        Instantiate(bullet, attackPoint.position, attackPoint.rotation);
+        Instantiate(bullet, attackPos, rotation);
     }
 
     private void MeleeAttack()
@@ -135,7 +87,6 @@ public class PlayerCombat : MonoBehaviour
 
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

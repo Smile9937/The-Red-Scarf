@@ -1224,7 +1224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619443924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: -2.3459995, z: -10}
+  m_LocalPosition: {x: -0.00000023841858, y: -2.2159996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 418516190}
@@ -1893,9 +1893,9 @@ GameObject:
   - component: {fileID: 994797622}
   - component: {fileID: 994797618}
   - component: {fileID: 994797620}
-  - component: {fileID: 994797616}
   - component: {fileID: 994797619}
   - component: {fileID: 994797621}
+  - component: {fileID: 994797616}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1903,8 +1903,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!70 &994797616
-CapsuleCollider2D:
+--- !u!61 &994797616
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1916,9 +1916,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
-  m_Size: {x: 0.3, y: 1.583}
-  m_Direction: 0
+  m_Offset: {x: 0.0046600103, y: -0.05825019}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 2.0625}
+    newSize: {x: 1.25, y: 2.0625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3645966, y: 1.9273596}
+  m_EdgeRadius: 0
 --- !u!4 &994797617
 Transform:
   m_ObjectHideFlags: 0
@@ -1927,7 +1937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994797615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.08, z: 0}
+  m_LocalPosition: {x: 0, y: -2.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1850748554}
@@ -1949,18 +1959,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 1791802292}
-  blockPoint: {fileID: 1079477534}
   targetLayers:
     serializedVersion: 2
     m_Bits: 1152
   bullet: {fileID: 7233836941818762748, guid: 93f71f2845f6dae47af51e35887d3d8f, type: 3}
   attackRange: 0.5
   attackDamage: 40
-  blockHeight: 1
-  blockWidth: 0.7
   knockBack: 500
   meleeAttackRate: 2
   rangeAttackRate: 1
+  jumpForce: 8
 --- !u!95 &994797619
 Animator:
   serializedVersion: 3
@@ -2077,6 +2085,12 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   secondsOfInvincibility: 1
+  startRollSpeed: 20
+  rollSpeedLoss: 1
+  rollSpeedThreshold: 10
+  blockPoint: {fileID: 1079477534}
+  blockHeight: 1
+  blockWidth: 0.5
 --- !u!1 &1016014489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393477185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: -2.3459995, z: -10}
+  m_LocalPosition: {x: -0.00000023841858, y: -2.2159996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3369,7 +3383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850748553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.813, z: 0}
+  m_LocalPosition: {x: 0, y: -0.947, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 994797617}
@@ -3441,7 +3455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962104, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.48
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962104, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3780,7 +3794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dff749f544a80d47af536e296c332b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   isLever: 0
   timer: 0.1
   active: 0
