@@ -12,6 +12,7 @@ public class Player : Character
         Neutral,
         Rolling,
         Blocking,
+        Dash,
     };
 
     [Header("Roll Variables")]
@@ -71,6 +72,9 @@ public class Player : Character
                 }
                 break;
             case State.Blocking:
+                Block();
+                break;
+            case State.Dash:
                 Block();
                 break;
         }
@@ -174,6 +178,7 @@ public class Player : Character
             rollSpeed = startRollSpeed;
             myRigidbody.velocity = Vector2.zero;
             state = State.Rolling;
+            myAnimator.SetBool("isDodge", true);
         }
     }
     private void Roll()
@@ -189,6 +194,7 @@ public class Player : Character
             gameObject.layer = LayerMask.NameToLayer("Player");
             myCollider.size = colliderStartSize;
             state = State.Neutral;
+            myAnimator.SetBool("isDodge", false);
         }
     }
 

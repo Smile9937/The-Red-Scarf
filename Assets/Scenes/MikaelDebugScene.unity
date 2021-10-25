@@ -7949,8 +7949,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 2.6875}
-    newSize: {x: 1.5, y: 2.6875}
+    oldSize: {x: 1.8125, y: 2.375}
+    newSize: {x: 1.8125, y: 2.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -8002,6 +8002,8 @@ MonoBehaviour:
   meleeAttackRate: 2
   rangeAttackRate: 1
   jumpForce: 0
+  startComposure: 0
+  gunComposureCost: 0
 --- !u!114 &851490149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8027,9 +8029,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   secondsOfInvincibility: 1
-  startRollSpeed: 35
-  rollSpeedLoss: 10
-  rollSpeedThreshold: 1.5
+  startRollSpeed: 40
+  rollSpeedLoss: 6
+  rollSpeedThreshold: 2
   blockPoint: {fileID: 0}
   blockHeight: 1
   blockWidth: 0.5
@@ -8079,6 +8081,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingingPoint: {fileID: 0}
   characterRigidBody: {fileID: 851490147}
+  dashStrength: 5
+  dashDelayBeforeStart: 0.15
+  dashDuration: 0.25
 --- !u!70 &851490153
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -8140,7 +8145,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 2.6875}
+  m_Size: {x: 1.8125, y: 2.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -12031,7 +12036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231726779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.71, y: 7.12, z: -26.896328}
+  m_LocalPosition: {x: 6.94, y: -4.03, z: -26.896328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12050,7 +12055,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12293,6 +12298,7 @@ GameObject:
   - component: {fileID: 1547245705}
   - component: {fileID: 1547245707}
   - component: {fileID: 1547245708}
+  - component: {fileID: 1547245709}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -12341,6 +12347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpawnpoint: {x: 0, y: 0, z: 0}
   gamePaused: 0
+  redScarf: 1
 --- !u!114 &1547245708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12353,6 +12360,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb12ce94a5868d469a7bcba26b7108e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547245709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547245704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a93f330c2b90f14baa463b455f46eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keybindings: {fileID: 11400000, guid: 2968123ccd0902049b550a4566afaba8, type: 2}
 --- !u!1 &1581021482
 GameObject:
   m_ObjectHideFlags: 0
