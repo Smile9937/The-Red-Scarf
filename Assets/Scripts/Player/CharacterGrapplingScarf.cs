@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CharacterGrapplingScarf : MonoBehaviour
 {
+    [Header("Components")]
     bool isSwinging = false;
     bool hasStartedSwing = false;
     [SerializeField] GameObject swingingPoint;
+    [SerializeField] GameObject swingingPointAlt;
     [SerializeField] Rigidbody2D characterRigidBody;
+    [Header("Stats")]
     [SerializeField] float dashStrength = 4f;
     [SerializeField] float dashDelayBeforeStart = 0.2f;
     [SerializeField] float dashDuration = 1f;
 
     Vector2 originalLaunchPosition;
-
+    Vector2 targetLaunchPosition;
+    
     Player player;
+
     private void Start()
     {
         player = GetComponent<Player>();
@@ -35,13 +40,14 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (hasStartedSwing && isSwinging && swingingPoint != null)
         {
-            characterRigidBody.velocity = new Vector2(originalLaunchPosition.x - swingingPoint.transform.position.x, originalLaunchPosition.y - swingingPoint.transform.position.y) * Mathf.Abs(dashStrength) * -1f;
+            characterRigidBody.velocity = new Vector2(originalLaunchPosition.x - targetLaunchPosition.x, originalLaunchPosition.y - targetLaunchPosition.y) * Mathf.Abs(dashStrength) * -1f;
         }
     }
 
-    public void SetSwingingPointAsTarget(GameObject swingPoint)
+    public void SetSwingingPointAsTarget(GameObject swingPoint, GameObject swingPointB)
     {
         swingingPoint = swingPoint;
+        swingingPointAlt = swingPointB;
     }
 
     private void ToggleIsSwinging()
@@ -55,11 +61,18 @@ public class CharacterGrapplingScarf : MonoBehaviour
         if (swingingPoint != null)
         {
             Debug.Log(isSwinging);
-            swingingPoint.GetComponent<SwingingPoint>().isSwingingFrom = isSwinging;
-            //swingingPoint.GetComponent<DistanceJoint2D>().enabled = isSwinging;
+            swingingPoint.GetComponentInParent<SwingingPoint>().isSwingingFrom = isSwinging;
         }
         if (isSwinging)
         {
+            if (CheckPrimaryTarget() && swingingPoint != null)
+            {
+                targetLaunchPosition = swingingPoint.transform.position;
+            }
+            else if (swingingPointAlt != null)
+            {
+                targetLaunchPosition = swingingPointAlt.transform.position;
+            }
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
             Invoke("ToggleIsSwinging", dashDuration + dashDelayBeforeStart);
@@ -67,6 +80,22 @@ public class CharacterGrapplingScarf : MonoBehaviour
             CancelInvoke("DelayBeforeSwingStart");
             Invoke("DelayBeforeSwingStart", dashDelayBeforeStart);
         }
+    }
+
+    private bool CheckPrimaryTarget()
+    {
+        if (swingingPoint != null && swingingPointAlt == null)
+        {
+            return true;
+        }
+        else if (swingingPoint != null && swingingPointAlt != null)
+        {
+            if (Mathf.Abs(transform.position.x - swingingPoint.transform.position.x) + Mathf.Abs(transform.position.y - swingingPoint.transform.position.y) >= Mathf.Abs(transform.position.x - swingingPointAlt.transform.position.x) + Mathf.Abs(transform.position.y - swingingPointAlt.transform.position.y))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void ReturnPlayerState()

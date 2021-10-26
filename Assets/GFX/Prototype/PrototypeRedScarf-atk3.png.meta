@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 8d116a147500e6c48b4f346c00557476
+guid: c8f06fc03550f7e4c904440ea458ddab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 217664070595722095
-    second: PrototypeRedScarf-attack1_0
+      213: -2810786470291692765
+    second: PrototypeRedScarf-atk3_0
   - first:
-      213: -1890767620124965026
-    second: PrototypeRedScarf-attack1_1
+      213: -8203552220761368852
+    second: PrototypeRedScarf-atk3_1
+  - first:
+      213: -7507635374115669707
+    second: PrototypeRedScarf-atk3_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,43 +112,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-attack1_0
+      name: PrototypeRedScarf-atk3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 38.5
-        height: 33
+        width: 45
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b3938a15c450300800000000000000
-      internalID: 217664070595722095
+      spriteID: 3232ac2f8941ef8d0800000000000000
+      internalID: -2810786470291692765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-attack1_1
+      name: PrototypeRedScarf-atk3_1
       rect:
         serializedVersion: 2
-        x: 39
+        x: 45
         y: 0
-        width: 38
-        height: 33
+        width: 45
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5704a10ed4a2c5e0800000000000000
-      internalID: -1890767620124965026
+      spriteID: ce6d62138b0272e80800000000000000
+      internalID: -8203552220761368852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-atk3_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 45
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539bda687658fc790800000000000000
+      internalID: -7507635374115669707
       vertices: []
       indices: 
       edges: []

@@ -7,6 +7,8 @@ public class SwingingPoint : ActivatableObject
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
     public DistanceJoint2D theSwingJoint;
+    [SerializeField] private GameObject theFirstTarget;
+    [SerializeField] private GameObject theSecondTarget;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -36,7 +38,7 @@ public class SwingingPoint : ActivatableObject
         {
             if (collision.GetComponent<CharacterGrapplingScarf>() && !isSwingingFrom)
             {
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(gameObject);
+                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theFirstTarget, theSecondTarget);
             }
         }
     }
@@ -46,7 +48,7 @@ public class SwingingPoint : ActivatableObject
         {
             if (collision.GetComponent<CharacterGrapplingScarf>() && !isSwingingFrom)
             {
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null);
+                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, null);
             }
         }
     }
