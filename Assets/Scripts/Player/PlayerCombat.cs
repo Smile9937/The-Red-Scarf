@@ -53,12 +53,13 @@ public class PlayerCombat : MonoBehaviour
     }
     void Update()
     {
+        if (PauseMenu.Instance.gamePaused || player.state != Player.State.Neutral)
+            return;
+
         if(player.grounded)
         {
             canGunJump = true;
         }
-        if (GameManager.Instance.gamePaused || player.state != Player.State.Neutral)
-            return;
 
         if(GameManager.Instance.redScarf)
         {
@@ -123,8 +124,8 @@ public class PlayerCombat : MonoBehaviour
                 {
                     Instantiate(damageText, transform.position, Quaternion.identity);
                     damageText.SetText(attackDamage);                
-                    damageable.Damage(attackDamage);
                 }
+                damageable.Damage(attackDamage);
             }
         }
     }

@@ -8,8 +8,22 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject buttons;
     [SerializeField] private Animator backgroundDim;
-    private bool gamePaused;
+    public bool gamePaused;
 
+    private static PauseMenu instance;
+    public static PauseMenu Instance { get { return instance; } }
+
+    private void Awake()
+    {
+        if (instance != this && instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

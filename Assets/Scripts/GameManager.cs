@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 
     private Player player;
 
-    public bool gamePaused;
-
     public bool redScarf;
 
     private static GameManager instance;

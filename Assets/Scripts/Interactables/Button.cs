@@ -32,7 +32,10 @@ public class Button : MonoBehaviour, IDamageable
         else
         {
             Activate();
-            StartCoroutine(Timer());
+            if(timer > 0)
+            {
+                StartCoroutine(Timer());
+            }
         }
     }
     private IEnumerator Timer()

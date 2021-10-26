@@ -72,34 +72,12 @@ public abstract class Character : MonoBehaviour, IDamageable
             canJump = false;
         }
     }
-    protected virtual void FixedUpdate()
-    {
-        HandleMovement();
-    }
-
-    protected void Move()
-    {
-        myRigidbody.velocity = new Vector2(direction * speed, myRigidbody.velocity.y);
-    }
-
     protected void Jump()
     {
         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
     }
 
     protected abstract void HandleJumping();
-    protected virtual void HandleMovement()
-    {
-        Move();
-    }
-    protected void TurnAround(float horizontal)
-    {
-        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
-        {
-            facingRight = !facingRight;
-            transform.Rotate(0, 180, 0);
-        }
-    }
 
     public void Damage(int damage)
     {

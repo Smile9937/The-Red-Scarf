@@ -19,6 +19,7 @@ public class Player : Character
     [SerializeField] private float startRollSpeed = 200f;
     [SerializeField] private float rollSpeedLoss = 10f;
     [SerializeField] private float rollSpeedThreshold = 1.5f;
+    [SerializeField] private LayerMask rollLayer;
     private float rollSpeed;
 
     [Header("Block Variables")]
@@ -26,8 +27,10 @@ public class Player : Character
     [SerializeField] private float blockHeight = 1f;
     [SerializeField] private float blockWidth = 0.5f;
 
+    Vector2 colliderStartOffset;
     Vector2 colliderStartSize;
     BoxCollider2D myCollider;
+    CircleCollider2D rollCollider;
     private void Awake()
     {
         state = State.Neutral;
@@ -38,7 +41,8 @@ public class Player : Character
         transform.position = GameManager.Instance.currentSpawnpoint;
 
         myCollider = GetComponent<BoxCollider2D>();
-        colliderStartSize = myCollider.size;
+        rollCollider = GetComponent<CircleCollider2D>();
+        rollCollider.enabled = false;
     }
     protected override void Update()
     {
@@ -63,7 +67,8 @@ public class Player : Character
         {
             case State.Neutral:
                 HandleJumping();
-                if(GameManager.Instance.redScarf)
+                myAnimator.SetBool("isAttacking", InputManager.Instance.GetKeyDown(KeybindingActions.Attack));
+                if (GameManager.Instance.redScarf)
                 {
                     HandleRolling();
                 }else
@@ -85,7 +90,7 @@ public class Player : Character
             GameManager.Instance.SwapCharacter();
         }
     }
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
         switch(state)
         {
@@ -97,11 +102,25 @@ public class Player : Character
                 break;
         }
     }
-    protected override void HandleMovement()
+    private void HandleMovement()
     {
-        base.HandleMovement();
         myAnimator.SetFloat("axisXSpeed", Mathf.Abs(direction));
         TurnAround(direction);
+        Move();
+    }
+
+    protected void Move()
+    {
+        myRigidbody.velocity = new Vector2(direction * speed, myRigidbody.velocity.y);
+    }
+
+    private void TurnAround(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            transform.Rotate(0, 180, 0);
+        }
     }
 
     protected override void HandleJumping()
@@ -184,17 +203,23 @@ public class Player : Character
     private void Roll()
     {
         gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-        myCollider.size = colliderStartSize / 2;
+        rollCollider.enabled = true;
+        myCollider.enabled = false;
         myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
 
         rollSpeed -= rollSpeed * rollSpeedLoss * Time.deltaTime;
 
         if(rollSpeed < rollSpeedThreshold)
         {
-            gameObject.layer = LayerMask.NameToLayer("Player");
-            myCollider.size = colliderStartSize;
-            state = State.Neutral;
-            myAnimator.SetBool("isDodge", false);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
+            if (hit.collider == null)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Player");
+                myCollider.enabled = true;
+                rollCollider.enabled = false;
+                state = State.Neutral;
+                myAnimator.SetBool("isDodge", false);
+            }
         }
     }
 

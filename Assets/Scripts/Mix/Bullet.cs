@@ -37,8 +37,8 @@ public class Bullet : MonoBehaviour
                 {
                     Instantiate(damageText, transform.position, Quaternion.identity);
                     damageText.SetText(damage);
-                    damageable.Damage(damage);
                 }
+                damageable.Damage(damage);
             }
             Destroy(gameObject);
         }
