@@ -36,7 +36,7 @@ public class SwingingPoint : ActivatableObject
     {
         if (collision.tag == "Player" && isSwingable)
         {
-            if (collision.GetComponent<CharacterGrapplingScarf>() && !isSwingingFrom)
+            if (collision.GetComponent<CharacterGrapplingScarf>())
             {
                 collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theFirstTarget, theSecondTarget);
             }
@@ -46,7 +46,7 @@ public class SwingingPoint : ActivatableObject
     {
         if (collision.tag == "Player")
         {
-            if (collision.GetComponent<CharacterGrapplingScarf>() && !isSwingingFrom)
+            if (collision.GetComponent<CharacterGrapplingScarf>())
             {
                 collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, null);
             }

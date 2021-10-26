@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: 98e5106afe4ed2a478b13664e885d90b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: -5726077501346725624
+    second: PrototypeRedScarf-jump-unarmed_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
-  - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
-  - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: 7537130050072655542
+    second: PrototypeRedScarf-jump-unarmed_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +109,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeRedScarf-jump-unarmed_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
-        height: 43
+        width: 33
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 8014fdfb9d2e880b0800000000000000
+      internalID: -5726077501346725624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeRedScarf-jump-unarmed_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 33
         y: 0
-        width: 24
-        height: 43
+        width: 33
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 24
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
-      rect:
-        serializedVersion: 2
-        x: 94
-        y: 0
-        width: 24
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: 6b6b08cd8d3499860800000000000000
+      internalID: 7537130050072655542
       vertices: []
       indices: 
       edges: []

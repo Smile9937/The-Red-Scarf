@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: 699bb3ad0b941804ea756f197b37b2b1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: -7077964892702808540
+    second: PrototypeRedScarf-scarfthrow-unarmed_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
+      213: 7955584721081033726
+    second: PrototypeRedScarf-scarfthrow-unarmed_1
   - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
+      213: 3524929471681010222
+    second: PrototypeRedScarf-scarfthrow-unarmed_2
   - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: -7558704341313384704
+    second: PrototypeRedScarf-scarfthrow-unarmed_3
+  - first:
+      213: -8302587626765161128
+    second: PrototypeRedScarf-scarfthrow-unarmed_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +118,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeRedScarf-scarfthrow-unarmed_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
-        height: 43
+        width: 45
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 42663c54e6406cd90800000000000000
+      internalID: -7077964892702808540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeRedScarf-scarfthrow-unarmed_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 45
         y: 0
-        width: 24
-        height: 43
+        width: 45
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
+      spriteID: ef36f80472ae76e60800000000000000
+      internalID: 7955584721081033726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
+      name: PrototypeRedScarf-scarfthrow-unarmed_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 90
         y: 0
-        width: 24
-        height: 43
+        width: 45
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
+      spriteID: e2a1ad9bda01be030800000000000000
+      internalID: 3524929471681010222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
+      name: PrototypeRedScarf-scarfthrow-unarmed_3
       rect:
         serializedVersion: 2
-        x: 94
+        x: 135
         y: 0
-        width: 24
-        height: 43
+        width: 45
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: 00f00d503761a1790800000000000000
+      internalID: -7558704341313384704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-scarfthrow-unarmed_4
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 45
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85deb1eda8847cc80800000000000000
+      internalID: -8302587626765161128
       vertices: []
       indices: 
       edges: []

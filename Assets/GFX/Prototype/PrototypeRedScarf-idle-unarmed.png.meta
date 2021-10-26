@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: 5c657ed409a49e94b98fd658ac2ec102
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: 5110883763835233842
+    second: PrototypeRedScarf-idle-unarmed_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
+      213: -2649326502116605039
+    second: PrototypeRedScarf-idle-unarmed_1
   - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
+      213: -2293066646824014541
+    second: PrototypeRedScarf-idle-unarmed_2
   - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: 7617337807898223376
+    second: PrototypeRedScarf-idle-unarmed_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +79,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -91,7 +91,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,7 +103,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -115,85 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeRedScarf-idle-unarmed_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
+        width: 22
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 236e5bf54b18de640800000000000000
+      internalID: 5110883763835233842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeRedScarf-idle-unarmed_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 22
         y: 0
-        width: 24
+        width: 22
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
+      spriteID: 193cf434593bb3bd0800000000000000
+      internalID: -2649326502116605039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
+      name: PrototypeRedScarf-idle-unarmed_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 44
         y: 0
-        width: 24
+        width: 22
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
+      spriteID: 33d22cda8046d20e0800000000000000
+      internalID: -2293066646824014541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
+      name: PrototypeRedScarf-idle-unarmed_3
       rect:
         serializedVersion: 2
-        x: 94
+        x: 66
         y: 0
-        width: 24
+        width: 22
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: 0132dedb06836b960800000000000000
+      internalID: 7617337807898223376
       vertices: []
       indices: 
       edges: []

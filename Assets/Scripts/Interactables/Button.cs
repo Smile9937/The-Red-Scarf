@@ -11,6 +11,14 @@ public class Button : MonoBehaviour, IDamageable
     public float timer;
 
     public bool active = false;
+
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void OnLoad()
     {
         Destroy(gameObject);
@@ -20,6 +28,7 @@ public class Button : MonoBehaviour, IDamageable
         if (isLever)
         {
             active = !active;
+            animator.SetBool("isActivated", active);
             if (active)
             {
                 Activate();

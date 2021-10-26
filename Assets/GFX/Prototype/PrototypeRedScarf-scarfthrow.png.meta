@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: 705622b2abb5df142a14bcb4b0907d49
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: 8083723510411067575
+    second: PrototypeRedScarf-scarfthrow_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
+      213: 934172948872535800
+    second: PrototypeRedScarf-scarfthrow_1
   - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
+      213: -13167011294610444
+    second: PrototypeRedScarf-scarfthrow_2
   - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: -3566692093259694798
+    second: PrototypeRedScarf-scarfthrow_3
+  - first:
+      213: -7547789753726181264
+    second: PrototypeRedScarf-scarfthrow_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +118,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeRedScarf-scarfthrow_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
+        width: 45
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 7b0868c04b72f2070800000000000000
+      internalID: 8083723510411067575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeRedScarf-scarfthrow_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 45
         y: 0
-        width: 24
+        width: 45
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
+      spriteID: 8fe9358f859d6fc00800000000000000
+      internalID: 934172948872535800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
+      name: PrototypeRedScarf-scarfthrow_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 90
         y: 0
-        width: 24
+        width: 45
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
+      spriteID: 4fbf7094ca831dff0800000000000000
+      internalID: -13167011294610444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
+      name: PrototypeRedScarf-scarfthrow_3
       rect:
         serializedVersion: 2
-        x: 94
+        x: 135
         y: 0
-        width: 24
+        width: 45
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: 23dbf063070908ec0800000000000000
+      internalID: -3566692093259694798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-scarfthrow_4
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07061d9753dd04790800000000000000
+      internalID: -7547789753726181264
       vertices: []
       indices: 
       edges: []

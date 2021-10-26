@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: f185f4421fd912e419cbdbb4812efd7e
+guid: ff1f79b627782514db482efa8c14e2b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1698174014237913063
-    second: PrototypeRedScarf-idle_0
+      213: -6863405170907611498
+    second: PrototypeLever_0
   - first:
-      213: -1738501720239916295
-    second: PrototypeRedScarf-idle_1
+      213: -7474558206144813143
+    second: PrototypeLever_1
   - first:
-      213: -7307111824900253814
-    second: PrototypeRedScarf-idle_2
-  - first:
-      213: 8831361868049923489
-    second: PrototypeRedScarf-idle_3
+      213: -223071986296399569
+    second: PrototypeLever_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +76,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -91,7 +88,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,7 +100,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -115,85 +112,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_0
+      name: PrototypeLever_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 24
-        height: 43
+        width: 26
+        height: 26
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef2375c440219710800000000000000
-      internalID: 1698174014237913063
+      spriteID: 69ef8766c5940c0a0800000000000000
+      internalID: -6863405170907611498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_1
+      name: PrototypeLever_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 26
         y: 0
-        width: 24
-        height: 43
+        width: 26
+        height: 26
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fab1bb75e99fd7e0800000000000000
-      internalID: -1738501720239916295
+      spriteID: 9a7e1c5d9e8054890800000000000000
+      internalID: -7474558206144813143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-idle_2
+      name: PrototypeLever_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 52
         y: 0
-        width: 24
-        height: 43
+        width: 26
+        height: 26
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8793ce828ce79a90800000000000000
-      internalID: -7307111824900253814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PrototypeRedScarf-idle_3
-      rect:
-        serializedVersion: 2
-        x: 94
-        y: 0
-        width: 24
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1adbb0414dc4f8a70800000000000000
-      internalID: 8831361868049923489
+      spriteID: f295679d53d77ecf0800000000000000
+      internalID: -223071986296399569
       vertices: []
       indices: 
       edges: []
