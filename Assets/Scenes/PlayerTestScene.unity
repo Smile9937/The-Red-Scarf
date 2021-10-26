@@ -3996,6 +3996,14 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6016333334355679329, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}
+      propertyPath: attackSize.x
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016333334355679329, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}
+      propertyPath: attackSize.y
+      value: 2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016333334355679329, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}
       propertyPath: composureGain
       value: 2
       objectReference: {fileID: 0}
@@ -4071,5 +4079,13 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 6016333335706160103, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.736
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016333335706160103, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.092
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81442236df03874499feb8b3ad32f6ee, type: 3}

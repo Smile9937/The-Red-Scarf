@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [NonSerialized]
+    [HideInInspector]
     public State state;
     public enum State
     {
@@ -27,8 +27,6 @@ public class Player : Character
     [SerializeField] private float blockHeight = 1f;
     [SerializeField] private float blockWidth = 0.5f;
 
-    Vector2 colliderStartOffset;
-    Vector2 colliderStartSize;
     BoxCollider2D myCollider;
     CircleCollider2D rollCollider;
     private void Awake()
@@ -67,7 +65,6 @@ public class Player : Character
         {
             case State.Neutral:
                 HandleJumping();
-                myAnimator.SetBool("isAttacking", InputManager.Instance.GetKeyDown(KeybindingActions.Attack));
                 if (GameManager.Instance.redScarf)
                 {
                     HandleRolling();

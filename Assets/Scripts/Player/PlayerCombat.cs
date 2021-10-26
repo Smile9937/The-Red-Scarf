@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private DamagePopUp damageText;
 
     [Header("Attack Variables")]
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private Vector2 attackSize = new Vector2(0.5f, 5f);
     [SerializeField] private int attackDamage = 40;
     [SerializeField] float knockBack = 500f;
 
@@ -67,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
                 {
+                    player.myAnimator.SetTrigger("attackTrigger");
                     MeleeAttack();
                     nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
                 }
@@ -107,7 +108,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, targetLayers);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 90f, targetLayers);
 
         foreach(Collider2D target in hitTargets)
         {
@@ -129,10 +130,15 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
+    private void StopAttackAnimation()
+    {
+        player.myAnimator.SetBool("isAttacking", false);
+    }
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireCube(attackPoint.position, attackSize);
     }
 }

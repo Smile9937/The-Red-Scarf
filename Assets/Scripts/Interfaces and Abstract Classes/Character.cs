@@ -35,7 +35,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     private float canJumpCounter;
 
     protected Rigidbody2D myRigidbody;
-    protected Animator myAnimator;
+    public Animator myAnimator;
 
     protected virtual void Start()
     {
@@ -84,7 +84,6 @@ public abstract class Character : MonoBehaviour, IDamageable
         if (isInvincible)
             return;
         currentHealth -= damage;
-        Debug.Log("Took " + damage + " damage");
 
         if(currentHealth <= 0)
         {
