@@ -41,7 +41,8 @@ public class Button : MonoBehaviour, IDamageable
         else
         {
             Activate();
-            if(timer > 0)
+            animator.SetBool("isActivated", true);
+            if (timer > 0)
             {
                 StartCoroutine(Timer());
             }
@@ -51,6 +52,7 @@ public class Button : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(timer);
 
+        animator.SetBool("isActivated", false);
         Deactivate();
     }
     

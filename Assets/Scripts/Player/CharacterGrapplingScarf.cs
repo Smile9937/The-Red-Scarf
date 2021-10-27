@@ -16,6 +16,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float dashDelayBeforeStart = 0.2f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
+    [SerializeField] RuntimeAnimatorController originalController;
+    [SerializeField] RuntimeAnimatorController theController;
 
     float characterGravity = 1f;
 
@@ -34,11 +36,33 @@ public class CharacterGrapplingScarf : MonoBehaviour
     }
     void Update()
     {
-        if (swingingPoint != null)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf)
         {
-            if (Input.GetKeyDown(KeyCode.F) && !isSwinging)
+            animator.SetBool("isScarfThrown", true);
+            player.state = Player.State.Dash;
+            if (player.grounded)
+            {
+                characterRigidBody.velocity = Vector2.zero;
+            }
+            else
+            {
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, characterRigidBody.velocity.y);
+            }
+
+            if ((swingingPoint != null || swingingPointAlt != null) && !isSwinging && GameManager.Instance.redScarf)
             {
                 ToggleIsSwinging();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.T) && GameManager.Instance.redScarf)
+        {
+            if (animator.runtimeAnimatorController == theController && originalController != null)
+            {
+                animator.runtimeAnimatorController = originalController;
+            }
+            else if (animator.runtimeAnimatorController == originalController && theController != null)
+            {
+                animator.runtimeAnimatorController = theController;
             }
         }
     }
@@ -77,7 +101,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         if (isSwinging)
         {
-            animator.SetBool("isScarfThrown", true);
             if (CheckPrimaryTarget() && swingingPoint != null)
             {
                 targetLaunchPosition = swingingPoint.transform.position;
@@ -90,7 +113,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
-            CancelInvoke("DelayBeforeSwingStart");
             Invoke("ToggleIsSwinging", dashDuration + dashDelayBeforeStart);
             Invoke("ReturnPlayerState", dashDuration + dashDelayBeforeStart + 0.1f);
         }
@@ -123,8 +145,18 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void DelayBeforeSwingStart()
     {
-        Debug.Log("S");
-        hasStartedSwing = true;
+        if ((swingingPoint != null || swingingPointAlt != null) && !isSwinging && GameManager.Instance.redScarf)
+        {
+            ToggleIsSwinging();
+        }
+        if (targetLaunchPosition != null && isSwinging)
+        {
+            hasStartedSwing = true;
+        }
+        else
+        {
+            ReturnPlayerState();
+        }
         animator.SetBool("isScarfThrown", false);
     }
 }
