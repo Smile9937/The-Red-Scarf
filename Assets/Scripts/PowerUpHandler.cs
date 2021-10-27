@@ -18,6 +18,12 @@ public class PowerUpHandler : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        player.currentHealth += healAmount;
+        if(healAmount + player.currentHealth > player.maxHealth)
+        {
+            player.currentHealth = player.maxHealth;
+        } else
+        {
+            player.currentHealth += healAmount;
+        }
     }
 }

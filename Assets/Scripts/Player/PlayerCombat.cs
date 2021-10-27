@@ -21,7 +21,6 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpForce;
-    bool canGunJump = true;
 
     [Header("Composure Variables")]
     [SerializeField] private int startComposure;
@@ -56,11 +55,6 @@ public class PlayerCombat : MonoBehaviour
         if (PauseMenu.Instance.gamePaused || player.state != Player.State.Neutral)
             return;
 
-        if(player.grounded)
-        {
-            canGunJump = true;
-        }
-
         if(GameManager.Instance.redScarf && player.hasBaseballBat)
         {
             if (Time.time >= nextMeleeAttackTime)
@@ -81,10 +75,7 @@ public class PlayerCombat : MonoBehaviour
                 {
                     if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
                     {   
-                        if (canGunJump)
-                        {
-                            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
-                        }
+                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                         Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                     }
                     else
@@ -111,7 +102,6 @@ public class PlayerCombat : MonoBehaviour
     private void Shoot(Vector3 attackPos, Quaternion rotation)
     {
         currentComposure -= gunComposureCost;
-        canGunJump = false;
         Bullet currentBullet = Instantiate(bullet, attackPos, rotation);
         currentBullet.damageText = damageText;
     }

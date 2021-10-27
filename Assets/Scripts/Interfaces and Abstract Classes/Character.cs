@@ -6,14 +6,11 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour, IDamageable
 {
     [Header("Movement Variables")]
-    [SerializeField] protected float speed = 1.0f;
     protected float direction;
 
     protected bool facingRight = true;
 
     [Header("Jump Variables")]
-    [SerializeField] protected float jumpForce;
-    [SerializeField] protected float jumpTime;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float radius;
     [SerializeField] protected LayerMask ground;
@@ -25,7 +22,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     //[Header("Attack Variables")]
 
     [Header("Character Status")]
-    [SerializeField] protected int maxHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] private float secondsOfInvincibility;
     bool isInvincible = false;
@@ -41,7 +38,6 @@ public abstract class Character : MonoBehaviour, IDamageable
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        jumpTimeCounter = jumpTime;
         canJumpCounter = offGroundJumpTimer;
         currentHealth = maxHealth;
     }
@@ -71,10 +67,6 @@ public abstract class Character : MonoBehaviour, IDamageable
         {
             canJump = false;
         }
-    }
-    protected void Jump()
-    {
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
     }
 
     protected abstract void HandleJumping();

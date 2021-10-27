@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+
     [HideInInspector]
     public State state;
     public enum State
@@ -15,6 +16,23 @@ public class Player : Character
         Dash,
     };
 
+    [Serializable]
+    public class PlayerStats
+    {
+        public PlayerCharacterEnum playerCharacter;
+        public float speed;
+        public float jumpForce;
+        public float jumpTime;
+    }
+
+    public PlayerStats[] playerCharacters;
+
+    [HideInInspector] public PlayerStats currentCharacter;
+
+    private float speed;
+    private float jumpForce;
+    private float jumpTime;
+
     [Header("Roll Variables")]
     [SerializeField] private float startRollSpeed = 200f;
     [SerializeField] private float rollSpeedLoss = 10f;
@@ -24,27 +42,31 @@ public class Player : Character
 
     [Header("Block Variables")]
     [SerializeField] private Transform blockPoint;
-    [SerializeField] private float blockHeight = 1f;
-    [SerializeField] private float blockWidth = 0.5f;
+    [SerializeField] private Vector2 blockSize;
+    [SerializeField] private LayerMask blockLayers;
 
     [Header("Animator Controllers")]
     [SerializeField] private RuntimeAnimatorController redScarfUnarmedAnimator;
     [SerializeField] private RuntimeAnimatorController redScarfBaseballbatController;
     [SerializeField] private RuntimeAnimatorController dressAnimator;
 
-    [HideInInspector] public bool hasBaseballBat;
+    public bool hasBaseballBat;
 
     BoxCollider2D myCollider;
     CircleCollider2D rollCollider;
     protected override void Start()
     {
         base.Start();
+        GameManager.Instance.player = this;
+        GameManager.Instance.LoadPlayerStats();
+        jumpTimeCounter = jumpTime;
         transform.position = GameManager.Instance.currentSpawnpoint;
         state = State.Neutral;
         myCollider = GetComponent<BoxCollider2D>();
         rollCollider = GetComponent<CircleCollider2D>();
         rollCollider.enabled = false;
         SetAnimator();
+        SetCurrentCharacter();
     }
 
     private void SetAnimator()
@@ -52,6 +74,33 @@ public class Player : Character
         if (hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
         else if (GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfUnarmedAnimator; }
         else { myAnimator.runtimeAnimatorController = dressAnimator; }
+    }
+    public void SetCurrentCharacter()
+    {
+        if (GameManager.Instance.redScarf)
+        {
+            foreach (PlayerStats character in playerCharacters)
+            {
+                if (character.playerCharacter == PlayerCharacterEnum.RedScarf)
+                {
+                    currentCharacter = character;
+                }
+            }
+        }
+        else
+        {
+            foreach (PlayerStats character in playerCharacters)
+            {
+                if (character.playerCharacter == PlayerCharacterEnum.Dress)
+                {
+                    currentCharacter = character;
+                }
+            }
+        }
+
+        speed = currentCharacter.speed;
+        jumpForce = currentCharacter.jumpForce;
+        jumpTime = currentCharacter.jumpTime;
     }
 
     protected override void Update()
@@ -97,6 +146,7 @@ public class Player : Character
         if(InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
         {
             GameManager.Instance.SwapCharacter();
+            SetCurrentCharacter();
             SetAnimator();
         }
     }
@@ -164,13 +214,19 @@ public class Player : Character
             stoppedJumping = true;
         }
     }
+
+    private void Jump()
+    {
+        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+    }
     private void HandleBlocking()
     {
         if(InputManager.Instance.GetKeyDown(KeybindingActions.Dodge))
         {
             state = State.Blocking;
+            myRigidbody.velocity = Vector2.zero;
 
-            Collider2D[] blockTargets = Physics2D.OverlapCapsuleAll(blockPoint.position, new Vector2(blockHeight, blockWidth), CapsuleDirection2D.Vertical, 0);
+            Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
 
             foreach (Collider2D target in blockTargets)
             {
@@ -184,7 +240,7 @@ public class Player : Character
     }
     private void Block()
     {
-        Collider2D[] blockTargets = Physics2D.OverlapCapsuleAll(blockPoint.position, new Vector2(blockHeight, blockWidth), CapsuleDirection2D.Vertical, 0);
+        Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
 
         foreach (Collider2D target in blockTargets)
         {
@@ -221,24 +277,34 @@ public class Player : Character
 
         if(rollSpeed < rollSpeedThreshold)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
-            if (hit.collider == null && grounded)
-            {
-                gameObject.layer = LayerMask.NameToLayer("Player");
-                myCollider.enabled = true;
-                rollCollider.enabled = false;
-                state = State.Neutral;
-                myAnimator.SetBool("isDodge", false);
-            }
+            StopRoll();
         }
     }
 
+    private void StopRoll()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
+        if (hit.collider == null)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+            myCollider.enabled = true;
+            rollCollider.enabled = false;
+            state = State.Neutral;
+            myAnimator.SetBool("isDodge", false);
+        }
+    }
     public void GainBaseballBat()
     {
         hasBaseballBat = true;
         myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if (blockPoint == null)
+        return;
+        Gizmos.DrawWireCube(blockPoint.position, blockSize);
+    }
     protected override void Die()
     {
         Debug.Log("Player Died");

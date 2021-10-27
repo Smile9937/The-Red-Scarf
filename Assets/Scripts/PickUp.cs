@@ -11,6 +11,7 @@ public class PickUp : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             powerUp.Invoke();
+            Destroy(gameObject);
         }
     }
 }
