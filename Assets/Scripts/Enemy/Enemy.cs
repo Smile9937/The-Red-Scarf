@@ -35,6 +35,7 @@ public class Enemy : Character
     protected override void Update()
     {
         base.Update();
+        myAnimator.SetBool("isGrounded", grounded);
         if(!attackMode)
         {
             MoveAround();
@@ -104,10 +105,12 @@ public class Enemy : Character
         Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        myAnimator.SetFloat("axisXSpeed", 1f);
     }
 
     private void Attack()
     {
+        myAnimator.SetTrigger("isAttacking");
         //Start Attack Animation
         timer = intTimer;
         attackMode = true;
