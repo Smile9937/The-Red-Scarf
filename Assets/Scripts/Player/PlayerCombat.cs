@@ -61,23 +61,23 @@ public class PlayerCombat : MonoBehaviour
             canGunJump = true;
         }
 
-        if(GameManager.Instance.redScarf)
+        if(GameManager.Instance.redScarf && player.hasBaseballBat)
         {
             if (Time.time >= nextMeleeAttackTime)
             {
                 if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
                 {
-                    player.myAnimator.SetTrigger("attackTrigger");
+                    player.myAnimator.SetTrigger("isAttacking");
                     MeleeAttack();
                     nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
                 }
             }
         }
-        else
+        else if(!GameManager.Instance.redScarf)
         {
             if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
             {
-                if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Attack)))
+                if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Special)))
                 {
                     if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
                     {   
@@ -93,6 +93,16 @@ public class PlayerCombat : MonoBehaviour
                     }
 
                     nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                }
+            }
+
+            if (Time.time >= nextMeleeAttackTime)
+            {
+                if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
+                {
+                    player.myAnimator.SetTrigger("isAttacking");
+                    MeleeAttack();
+                    nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
                 }
             }
         }
@@ -129,11 +139,6 @@ public class PlayerCombat : MonoBehaviour
                 damageable.Damage(attackDamage);
             }
         }
-    }
-
-    private void StopAttackAnimation()
-    {
-        player.myAnimator.SetBool("isAttacking", false);
     }
     private void OnDrawGizmosSelected()
     {

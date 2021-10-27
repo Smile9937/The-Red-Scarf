@@ -35,7 +35,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     private float canJumpCounter;
 
     protected Rigidbody2D myRigidbody;
-    public Animator myAnimator;
+    [HideInInspector] public Animator myAnimator;
 
     protected virtual void Start()
     {

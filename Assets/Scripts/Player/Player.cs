@@ -27,21 +27,33 @@ public class Player : Character
     [SerializeField] private float blockHeight = 1f;
     [SerializeField] private float blockWidth = 0.5f;
 
+    [Header("Animator Controllers")]
+    [SerializeField] private RuntimeAnimatorController redScarfUnarmedAnimator;
+    [SerializeField] private RuntimeAnimatorController redScarfBaseballbatController;
+    [SerializeField] private RuntimeAnimatorController dressAnimator;
+
+    [HideInInspector] public bool hasBaseballBat;
+
     BoxCollider2D myCollider;
     CircleCollider2D rollCollider;
-    private void Awake()
-    {
-        state = State.Neutral;
-    }
     protected override void Start()
     {
         base.Start();
         transform.position = GameManager.Instance.currentSpawnpoint;
-
+        state = State.Neutral;
         myCollider = GetComponent<BoxCollider2D>();
         rollCollider = GetComponent<CircleCollider2D>();
         rollCollider.enabled = false;
+        SetAnimator();
     }
+
+    private void SetAnimator()
+    {
+        if (hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
+        else if (GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfUnarmedAnimator; }
+        else { myAnimator.runtimeAnimatorController = dressAnimator; }
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -85,6 +97,7 @@ public class Player : Character
         if(InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
         {
             GameManager.Instance.SwapCharacter();
+            SetAnimator();
         }
     }
     private void FixedUpdate()
@@ -209,7 +222,7 @@ public class Player : Character
         if(rollSpeed < rollSpeedThreshold)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
-            if (hit.collider == null)
+            if (hit.collider == null && grounded)
             {
                 gameObject.layer = LayerMask.NameToLayer("Player");
                 myCollider.enabled = true;
@@ -218,6 +231,12 @@ public class Player : Character
                 myAnimator.SetBool("isDodge", false);
             }
         }
+    }
+
+    public void GainBaseballBat()
+    {
+        hasBaseballBat = true;
+        myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
     }
 
     protected override void Die()
