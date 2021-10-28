@@ -78,10 +78,9 @@ public class PlayerCombat : MonoBehaviour
                         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                         Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                     }
-                    else if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
+                    else if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Up)))
                     {   
-                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
-                        Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
+                        Shoot(new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, 90));
                     }
                     else
                     {
