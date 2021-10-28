@@ -161,6 +161,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             Invoke("ReturnPlayerState", 0.1f);
         }
+        ContinueScarfAnim();
+    }
+
+    private void ContinueScarfAnim()
+    {
         animator.SetBool("isScarfThrown", false);
     }
 }
