@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7233836941818762736}
   - component: {fileID: -6377894629183829461}
   m_Layer: 12
-  m_Name: Enemy Bullet
+  m_Name: The True Final Boss Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,4 +138,4 @@ MonoBehaviour:
   damage: 10
   destroyTimer: 10
   knockBack: 500
-  bypassInvincibility: 0
+  bypassInvincibility: 1

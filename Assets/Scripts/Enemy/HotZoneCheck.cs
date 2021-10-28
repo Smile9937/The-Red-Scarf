@@ -15,7 +15,7 @@ public class HotZoneCheck : MonoBehaviour
 
     private void Update()
     {
-        if(inRange)
+        if(enemyParent.inRange)
         {
             enemyParent.Flip();
         }
@@ -24,7 +24,7 @@ public class HotZoneCheck : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            inRange = true;
+            enemyParent.inRange = true;
         }
     }
 
@@ -32,7 +32,7 @@ public class HotZoneCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            inRange = false;
+            //inRange = false;
             gameObject.SetActive(false);
             enemyParent.triggerArea.SetActive(true);
             enemyParent.inRange = false;

@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float knockBack = 500;
     Rigidbody2D myRigidbody;
 
+    [SerializeField] private bool bypassInvincibility;
+
     [Header("Damage Text")]
     [System.NonSerialized] public DamagePopUp damageText;
 
@@ -38,7 +40,7 @@ public class Bullet : MonoBehaviour
                     Instantiate(damageText, transform.position, Quaternion.identity);
                     damageText.SetText(damage);
                 }
-                damageable.Damage(damage);
+                damageable.Damage(damage, bypassInvincibility);
             }
             Destroy(gameObject);
         }

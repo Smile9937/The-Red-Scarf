@@ -6,7 +6,7 @@ public class BreakableObject : MonoBehaviour, IDamageable
 {
     [SerializeField] int health = 1;
 
-    public void Damage(int damage)
+    public void Damage(int damage, bool bypassInvincibility)
     {
         health -= damage;
 

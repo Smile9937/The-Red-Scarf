@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(int damage);
+    void Damage(int damage, bool bypassInvincibility);
 }

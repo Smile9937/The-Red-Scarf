@@ -71,14 +71,14 @@ public class PlayerCombat : MonoBehaviour
         {
             if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
             {
-                if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Special)))
+                if (InputManager.Instance.GetKey(KeybindingActions.Special))
                 {
-                    if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
+                    if(InputManager.Instance.GetKey(KeybindingActions.Down))
                     {   
                         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                         Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                     }
-                    else if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Up)))
+                    else if(InputManager.Instance.GetKey(KeybindingActions.Up))
                     {   
                         Shoot(new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, 90));
                     }
@@ -86,8 +86,6 @@ public class PlayerCombat : MonoBehaviour
                     {
                         Shoot(attackPoint.position, attackPoint.rotation);
                     }
-
-                    nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
                 }
             }
 
@@ -108,6 +106,7 @@ public class PlayerCombat : MonoBehaviour
         currentComposure -= gunComposureCost;
         Bullet currentBullet = Instantiate(bullet, attackPos, rotation);
         currentBullet.damageText = damageText;
+        nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
     }
 
     private void MeleeAttack()
@@ -130,7 +129,7 @@ public class PlayerCombat : MonoBehaviour
                     Instantiate(damageText, transform.position, Quaternion.identity);
                     damageText.SetText(attackDamage);                
                 }
-                damageable.Damage(attackDamage);
+                damageable.Damage(attackDamage, false);
             }
         }
     }

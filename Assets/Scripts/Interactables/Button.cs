@@ -23,7 +23,7 @@ public class Button : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
-    public void Damage(int damage)
+    public void Damage(int damage, bool bypassInvincibility)
     {
         if (isLever)
         {

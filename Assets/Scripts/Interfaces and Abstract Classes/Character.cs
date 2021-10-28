@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     [Header("Jump Variables")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float radius;
+    [SerializeField] protected Vector2 groundCheckSize;
     [SerializeField] protected LayerMask ground;
     public bool grounded;
     [SerializeField] protected float offGroundJumpTimer = 0.1f;
@@ -45,7 +46,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     protected virtual void Update()
     {
 
-        grounded = Physics2D.OverlapCircle(groundCheck.position, radius, ground);
+        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
 
         if(!grounded && stoppedJumping)
         {
@@ -69,11 +70,9 @@ public abstract class Character : MonoBehaviour, IDamageable
         }
     }
 
-    protected abstract void HandleJumping();
-
-    public void Damage(int damage)
+    public void Damage(int damage, bool bypassInvincibility)
     {
-        if (isInvincible)
+        if (isInvincible && !bypassInvincibility)
             return;
         currentHealth -= damage;
 
@@ -95,6 +94,6 @@ public abstract class Character : MonoBehaviour, IDamageable
     protected abstract void Die();
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(groundCheck.position, radius);
+        Gizmos.DrawCube(groundCheck.position, groundCheckSize);
     }
 }

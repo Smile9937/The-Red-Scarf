@@ -5,10 +5,20 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    public EnemyType type;
+    public enum EnemyType
+    {
+        Melee,
+        Ranged,
+    };
+
     [Header("Stats")]
     [SerializeField] private float attackDistance;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float timer;
+
+    [SerializeField] private bool movingEnemy = true;
+    private bool canMove;
 
     [Header("Components")]
     public GameObject hotZone;
@@ -18,6 +28,14 @@ public class Enemy : Character
 
     [HideInInspector] public Transform target;
     [HideInInspector] public bool inRange;
+
+    [Header("Ranged Attacks")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform rangedAttackPos;
+    [SerializeField] private float rangeAttackRate = 1f;
+    float nextRangedAttackTime = 0f;
+
+    [SerializeField] private LayerMask blockLayer;
 
     private float distance;
     private bool attackMode;
@@ -30,14 +48,24 @@ public class Enemy : Character
         base.Start();
         SelectTarget();
         intTimer = timer;
+        if(movingEnemy)
+        {
+            canMove = true;
+        }
     }
 
     protected override void Update()
     {
         base.Update();
         myAnimator.SetBool("isGrounded", grounded);
-        if(!attackMode)
+        if(!attackMode && movingEnemy && canMove)
         {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 0.5f, blockLayer);
+            if(hit.collider != null)
+            {
+                inRange = false;
+                SelectTarget();
+            }
             MoveAround();
         }
 
@@ -91,28 +119,56 @@ public class Enemy : Character
         }
         else if(attackDistance >= distance && !cooling)
         {
-            Attack();
+            switch(type)
+            {
+                case EnemyType.Melee:
+                    MeleeAttack();
+                break;
+                case EnemyType.Ranged:
+                    if(Time.time >= nextRangedAttackTime)
+                    {
+                        RangedAttack();
+                        nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                    }
+                break;
+            }
+
         }
         if(cooling)
         {
             Cooldown();
+            myAnimator.SetBool("isAttackingBool", false);
         }
     }
 
+    private void RangedAttack()
+    {
+        Instantiate(bullet, rangedAttackPos.position, transform.rotation);
+        canMove = false;
+        StartCoroutine(AttackTimer());
+    }
+
+    private IEnumerator AttackTimer()
+    {
+        yield return new WaitForSeconds(rangeAttackRate);
+        canMove = true;
+    }
     private void MoveAround()
     {
+        myRigidbody.velocity = Vector2.zero;
         Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         myAnimator.SetFloat("axisXSpeed", 1f);
     }
 
-    private void Attack()
+    private void MeleeAttack()
     {
+        myAnimator.SetBool("isAttackingBool", true);
         myAnimator.SetTrigger("isAttacking");
         timer = intTimer;
         attackMode = true;
-        TriggerCooling();
+        canMove = false;
     }
 
     private void StopAttack()
@@ -134,19 +190,15 @@ public class Enemy : Character
 
     private void TriggerCooling()
     {
+        myAnimator.SetBool("isAttackingBool", false);
         cooling = true;
+        canMove = true;
     }
 
     private bool InsideOfLimits()
     {
         return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
     }
-
-    protected override void HandleJumping()
-    {
-        
-    }
-
     protected override void Die()
     {
         Destroy(gameObject);

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player : Character
 {
-
     [HideInInspector]
     public State state;
     public enum State
@@ -14,6 +13,7 @@ public class Player : Character
         Rolling,
         Blocking,
         Dash,
+        Dead,
     };
 
     [Serializable]
@@ -106,8 +106,10 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
-        
-        if(InputManager.Instance.GetKey(KeybindingActions.Left)
+
+        myAnimator.SetBool("isGrounded", grounded);
+
+        if (InputManager.Instance.GetKey(KeybindingActions.Left)
             && !InputManager.Instance.GetKey(KeybindingActions.Right))
         {
             direction = -1;
@@ -183,7 +185,7 @@ public class Player : Character
         }
     }
 
-    protected override void HandleJumping()
+    private void HandleJumping()
     {
         if (grounded)
         {
@@ -194,7 +196,6 @@ public class Player : Character
         {
             myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
         }
-        myAnimator.SetBool("isGrounded", grounded);
 
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
         {
@@ -202,7 +203,7 @@ public class Player : Character
             stoppedJumping = false;
         }
 
-        if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0)
+        if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0 && !grounded)
         {
             Jump();
             jumpTimeCounter -= Time.deltaTime;
@@ -299,15 +300,10 @@ public class Player : Character
         myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (blockPoint == null)
-        return;
-        Gizmos.DrawWireCube(blockPoint.position, blockSize);
-    }
     protected override void Die()
     {
-        Debug.Log("Player Died");
+        state = State.Dead;
+        myRigidbody.velocity = Vector2.zero;
         myAnimator.SetBool("isDead", true);
         StartCoroutine(Respawn());
     }
@@ -316,5 +312,11 @@ public class Player : Character
     {
         yield return new WaitForSecondsRealtime(1f);
         GameManager.Instance.RespawnPlayer();
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (blockPoint == null)
+        return;
+        Gizmos.DrawWireCube(blockPoint.position, blockSize);
     }
 }
