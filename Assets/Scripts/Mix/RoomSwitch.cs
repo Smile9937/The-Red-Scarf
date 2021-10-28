@@ -5,6 +5,9 @@ using Cinemachine;
 
 public class RoomSwitch : MonoBehaviour
 {
+    [Header("Background")]
+    [SerializeField] SpriteRenderer backgroundForRoom;
+    [SerializeField] SpriteRenderer oldBackgroundForRoom;
     [Header("Which Method")]
     [SerializeField] bool useNewMethod = false;
     [Header("Normal Method")]
@@ -18,20 +21,20 @@ public class RoomSwitch : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (useNewMethod)
+            Debug.Log("0");
+            if (GameObject.FindGameObjectWithTag("Background Room"))
             {
-                theConfiner.m_BoundingShape2D = theRoomCollider;
+                if (GameObject.FindGameObjectWithTag("Background Room").GetComponent<SpriteRenderer>().enabled == true)
+                {
+                    oldBackgroundForRoom = GameObject.FindGameObjectWithTag("Background Room").GetComponent<SpriteRenderer>();
+                }
             }
-            else
+            if (backgroundForRoom != null && oldBackgroundForRoom != backgroundForRoom)
             {
-                theRoomController.SetInteger("theRoomNumber", roomNumber);
+                oldBackgroundForRoom.gameObject.SetActive(false);
+                backgroundForRoom.gameObject.SetActive(true);
+                backgroundForRoom.GetComponent<Parallax>().ActivateObject();
             }
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
             if (useNewMethod)
             {
                 theConfiner.m_BoundingShape2D = theRoomCollider;

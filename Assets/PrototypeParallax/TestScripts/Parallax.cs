@@ -36,11 +36,17 @@ public class Parallax : MonoBehaviour {
 
     // Start is called before the first frame update
     void Awake() {
+        ActivateObject();
+    }
+    
+    public void ActivateObject()
+    {
         cam = Camera.main;
         startPos = transform.position;
         zPosition = transform.position.z;
 
-        if (loopSpriteRenderer != null && infiniteLoop) {
+        if (loopSpriteRenderer != null && infiniteLoop)
+        {
             float spriteSizeX = loopSpriteRenderer.sprite.rect.width / loopSpriteRenderer.sprite.pixelsPerUnit;
             float spriteSizeY = loopSpriteRenderer.sprite.rect.height / loopSpriteRenderer.sprite.pixelsPerUnit;
 
@@ -50,11 +56,11 @@ public class Parallax : MonoBehaviour {
         }
     }
 
-
     // Update is called once per frame
     void Update() {
         Vector2 newPos = startPos + travel * parallaxFactor;
         transform.position = new Vector3(xAxis ? newPos.x : startPos.x, yAxis ? newPos.y : startPos.y, zPosition);
+        //transform.position = Vector3.Lerp(startPos, newPos, Mathf.Clamp(0.5f * Time.deltaTime);
 
         if (infiniteLoop) {
             Vector2 totalTravel = cam.transform.position - transform.position;
@@ -63,5 +69,4 @@ public class Parallax : MonoBehaviour {
             transform.position += new Vector3(screens * viewWidth, 0);
         }
     }
-
 }

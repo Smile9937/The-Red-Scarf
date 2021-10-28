@@ -119,11 +119,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 3
         width: 39
-        height: 39
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,12 +139,12 @@ TextureImporter:
       name: PrototypeDroid-Walk_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 0
+        x: 38
+        y: 3
         width: 39
-        height: 39
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,12 +160,12 @@ TextureImporter:
       name: PrototypeDroid-Walk_2
       rect:
         serializedVersion: 2
-        x: 78
-        y: 0
+        x: 76
+        y: 3
         width: 39
-        height: 39
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: PrototypeDroid-Walk_3
       rect:
         serializedVersion: 2
-        x: 117
-        y: 0
-        width: 39
-        height: 39
+        x: 115
+        y: 3
+        width: 36
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

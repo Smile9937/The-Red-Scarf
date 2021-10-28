@@ -7,7 +7,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [Header("Components")]
     bool isSwinging = false;
     bool hasStartedSwing = false;
-    [SerializeField] GameObject swingingPoint;
+    [SerializeField] public GameObject swingingPoint;
     [SerializeField] GameObject swingingPointAlt;
     [SerializeField] Rigidbody2D characterRigidBody;
     [Header("Stats")]
@@ -16,8 +16,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float dashDelayBeforeStart = 0.2f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
-    [SerializeField] RuntimeAnimatorController originalController;
-    [SerializeField] RuntimeAnimatorController theController;
 
     float characterGravity = 1f;
 
@@ -40,7 +38,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             if (player.state != Player.State.Dash)
             {
-                animator.SetBool("isScarfThrown", true);
+                animator.SetTrigger("startScarfThrow");
                 player.state = Player.State.Dash;
             }
             if (player.grounded)
@@ -49,23 +47,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             else
             {
-                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, characterRigidBody.velocity.y);
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.5f, characterRigidBody.velocity.y * 0.8f);
             }
 
             if ((swingingPoint != null || swingingPointAlt != null) && !isSwinging && GameManager.Instance.redScarf)
             {
                 ToggleIsSwinging();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.T) && GameManager.Instance.redScarf)
-        {
-            if (animator.runtimeAnimatorController == theController && originalController != null)
-            {
-                animator.runtimeAnimatorController = originalController;
-            }
-            else if (animator.runtimeAnimatorController == originalController && theController != null)
-            {
-                animator.runtimeAnimatorController = theController;
             }
         }
     }
@@ -141,8 +128,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         player.state = Player.State.Neutral;
         characterRigidBody.gravityScale = characterGravity;
-        swingingPoint = null;
-        swingingPointAlt = null;
         targetLaunchPosition = new Vector2(0,0);
         animator.SetBool("isScarfThrown", false);
     }
@@ -161,11 +146,5 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             Invoke("ReturnPlayerState", 0.1f);
         }
-        ContinueScarfAnim();
-    }
-
-    private void ContinueScarfAnim()
-    {
-        animator.SetBool("isScarfThrown", false);
     }
 }

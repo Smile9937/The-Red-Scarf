@@ -21,15 +21,15 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: -7077964892702808540, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
-    - time: 0.11666667
+    - time: 0.1
       value: {fileID: 7955584721081033726, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
-    - time: 0.2
+    - time: 0.16666667
       value: {fileID: 3524929471681010222, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
-    - time: 0.26666668
+    - time: 0.21666667
       value: {fileID: -7558704341313384704, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
-    - time: 0.35
+    - time: 0.28333333
       value: {fileID: -8302587626765161128, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
-    - time: 0.41666666
+    - time: 0.33333334
       value: {fileID: -8302587626765161128, guid: 699bb3ad0b941804ea756f197b37b2b1, type: 3}
     attribute: m_Sprite
     path: 
@@ -61,7 +61,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -80,11 +80,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.41666666
-    functionName: ContinueScarfAnim
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
