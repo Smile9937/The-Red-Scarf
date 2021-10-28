@@ -61,7 +61,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
                 {
-                    player.myAnimator.SetTrigger("isAttacking");
+                    player.myAnimator.SetTrigger("attackTrigger");
                     MeleeAttack();
                     nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
                 }
@@ -74,6 +74,11 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Special)))
                 {
                     if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
+                    {   
+                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                        Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
+                    }
+                    else if(Input.GetKey(InputManager.Instance.GetKeyForAction(KeybindingActions.Down)))
                     {   
                         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                         Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
@@ -91,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
                 {
-                    player.myAnimator.SetTrigger("isAttacking");
+                    player.myAnimator.SetTrigger("attackTrigger");
                     MeleeAttack();
                     nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
                 }

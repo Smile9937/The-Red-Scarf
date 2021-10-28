@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
     public void SwapCharacter()
     {

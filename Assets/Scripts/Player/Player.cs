@@ -260,9 +260,9 @@ public class Player : Character
     {
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && grounded)
         {
+            state = State.Rolling;
             rollSpeed = startRollSpeed;
             myRigidbody.velocity = Vector2.zero;
-            state = State.Rolling;
             myAnimator.SetBool("isDodge", true);
         }
     }
@@ -286,11 +286,11 @@ public class Player : Character
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
         if (hit.collider == null)
         {
+            myAnimator.SetBool("isDodge", false);
+            state = State.Neutral;
             gameObject.layer = LayerMask.NameToLayer("Player");
             myCollider.enabled = true;
             rollCollider.enabled = false;
-            state = State.Neutral;
-            myAnimator.SetBool("isDodge", false);
         }
     }
     public void GainBaseballBat()
@@ -308,6 +308,13 @@ public class Player : Character
     protected override void Die()
     {
         Debug.Log("Player Died");
+        myAnimator.SetBool("isDead", true);
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSecondsRealtime(1f);
         GameManager.Instance.RespawnPlayer();
     }
 }

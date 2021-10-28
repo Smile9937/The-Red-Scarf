@@ -96,7 +96,6 @@ public class Enemy : Character
         if(cooling)
         {
             Cooldown();
-            //Stop Attack Animation
         }
     }
 
@@ -111,18 +110,15 @@ public class Enemy : Character
     private void Attack()
     {
         myAnimator.SetTrigger("isAttacking");
-        //Start Attack Animation
         timer = intTimer;
         attackMode = true;
-        Debug.Log("Attacking");
-        TriggerCooling(); //Call In Animator
+        TriggerCooling();
     }
 
     private void StopAttack()
     {
         cooling = false;
         attackMode = false;
-        //stop attack animation
     }
 
     private void Cooldown()
