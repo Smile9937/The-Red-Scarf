@@ -36,10 +36,13 @@ public class CharacterGrapplingScarf : MonoBehaviour
     }
     void Update()
     {
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral)
         {
-            animator.SetBool("isScarfThrown", true);
-            player.state = Player.State.Dash;
+            if (player.state != Player.State.Dash)
+            {
+                animator.SetBool("isScarfThrown", true);
+                player.state = Player.State.Dash;
+            }
             if (player.grounded)
             {
                 characterRigidBody.velocity = Vector2.zero;
@@ -141,6 +144,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         swingingPoint = null;
         swingingPointAlt = null;
         targetLaunchPosition = new Vector2(0,0);
+        animator.SetBool("isScarfThrown", false);
     }
 
     private void DelayBeforeSwingStart()
@@ -155,7 +159,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         else
         {
-            ReturnPlayerState();
+            Invoke("ReturnPlayerState", 0.1f);
         }
         animator.SetBool("isScarfThrown", false);
     }
