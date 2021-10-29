@@ -9,6 +9,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     bool hasStartedSwing = false;
     [SerializeField] public GameObject swingingPoint;
     [SerializeField] GameObject swingingPointAlt;
+    [SerializeField] GameObject[] swingingPoints;
     [SerializeField] Rigidbody2D characterRigidBody;
     [Header("Stats")]
     [SerializeField] float dashXStrength = 1.75f;
@@ -47,10 +48,19 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             else
             {
-                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.5f, characterRigidBody.velocity.y * 0.8f);
+                float temp = characterRigidBody.velocity.y;
+                if (temp < -0.01f)
+                {
+                    temp *= -0.5f;
+                }
+                else if (temp > 0.01f)
+                {
+                    temp += 0.1f;
+                }
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.6f, temp);
             }
 
-            if ((swingingPoint != null || swingingPointAlt != null) && !isSwinging && GameManager.Instance.redScarf)
+            if ((swingingPoint != null || swingingPointAlt != null || swingingPoints[0] != null) && !isSwinging && GameManager.Instance.redScarf)
             {
                 ToggleIsSwinging();
             }
@@ -76,6 +86,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
         swingingPointAlt = swingPointB;
     }
 
+    public void SetNewSwingingPointsAsTarget(GameObject possibleTarget, int targetNumber)
+    {
+        swingingPoints[targetNumber] = possibleTarget;
+    }
+
     private void ToggleIsSwinging()
     {
         if (!isSwinging)
@@ -91,16 +106,29 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         if (isSwinging)
         {
-            if (CheckPrimaryTarget() && swingingPoint != null)
+            if (swingingPoints[0] != null)
+            {
+                SetTargets();
+                originalLaunchPosition = swingingPoint.transform.position;
+                targetLaunchPosition = swingingPointAlt.transform.position;
+            }
+            else if (CheckPrimaryTarget() && swingingPoint != null)
             {
                 targetLaunchPosition = swingingPoint.transform.position;
-                characterRigidBody.gravityScale = gravityAdjustment;
+                if (swingingPointAlt != null)
+                {
+                    originalLaunchPosition = swingingPointAlt.transform.position;
+                }
             }
             else if (swingingPointAlt != null)
             {
+                if (swingingPoint != null)
+                {
+                    originalLaunchPosition = swingingPoint.transform.position;
+                }
                 targetLaunchPosition = swingingPointAlt.transform.position;
-                characterRigidBody.gravityScale = gravityAdjustment;
             }
+            characterRigidBody.gravityScale = gravityAdjustment;
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
             Invoke("ToggleIsSwinging", dashDuration + dashDelayBeforeStart);
@@ -122,6 +150,27 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void SetTargets()
+    {
+        swingingPoint = swingingPoints[0];
+        swingingPointAlt = swingingPoints[0];
+        // Closest
+        foreach (var target in swingingPoints)
+        {
+            if (target != null)
+            {
+                if (Mathf.Abs(transform.position.x - swingingPoint.transform.position.x) + Mathf.Abs(transform.position.y - swingingPoint.transform.position.y) > Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y))
+                {
+                    swingingPoint = target;
+                }
+                if (Mathf.Abs(transform.position.x - swingingPointAlt.transform.position.x) + Mathf.Abs(transform.position.y - swingingPointAlt.transform.position.y) < Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y))
+                {
+                    swingingPointAlt = target;
+                }
+            }
+        }
     }
 
     private void ReturnPlayerState()

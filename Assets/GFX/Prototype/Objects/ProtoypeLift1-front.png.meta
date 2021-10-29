@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 7191b9ca6f6b3494f829a8c77336c721
+guid: 7439e9eb52caa2c44b9ddefb7486f833
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3115928401832468835
-    second: PrototypeRedScarf-fall_0
+      213: 4655549115660668182
+    second: ProtoypeLift1-front_0
   - first:
-      213: 471205067990559105
-    second: PrototypeRedScarf-fall_1
+      213: -8072627590795477231
+    second: ProtoypeLift1-front_1
+  - first:
+      213: 9196863415799132596
+    second: ProtoypeLift1-front_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -73,7 +76,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -85,7 +88,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -97,7 +100,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -109,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-fall_0
+      name: ProtoypeLift1-front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 34
-        height: 39
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,20 +126,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36166c06f500e3b20800000000000000
-      internalID: 3115928401832468835
+      spriteID: 61d86592145db9040800000000000000
+      internalID: 4655549115660668182
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-fall_1
+      name: ProtoypeLift1-front_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 26
         y: 0
-        width: 34
-        height: 39
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,8 +147,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 189e0f5438e0a8600800000000000000
-      internalID: 471205067990559105
+      spriteID: 11f3e9e0af348ff80800000000000000
+      internalID: -8072627590795477231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProtoypeLift1-front_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b13e72bc82d1af70800000000000000
+      internalID: 9196863415799132596
       vertices: []
       indices: 
       edges: []

@@ -30,9 +30,15 @@ public class RoomSwitch : MonoBehaviour
             }
             if (backgroundForRoom != null && oldBackgroundForRoom != backgroundForRoom)
             {
-                oldBackgroundForRoom.gameObject.SetActive(false);
+                if (oldBackgroundForRoom != null)
+                {
+                    oldBackgroundForRoom.gameObject.SetActive(false);
+                }
                 backgroundForRoom.gameObject.SetActive(true);
-                backgroundForRoom.GetComponent<Parallax>().ActivateObject();
+                if (backgroundForRoom.GetComponent<Parallax>())
+                {
+                    backgroundForRoom.GetComponent<Parallax>().ActivateObject();
+                }
             }
             if (useNewMethod)
             {
