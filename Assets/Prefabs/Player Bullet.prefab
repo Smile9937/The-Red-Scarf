@@ -138,3 +138,6 @@ MonoBehaviour:
   damage: 50
   destroyTimer: 1
   knockBack: 500
+  bypassInvincibility: 0
+  knockbackVelocity: {x: 5, y: 2}
+  knockbackLength: 0.3

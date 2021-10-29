@@ -7,10 +7,18 @@ public class Button : MonoBehaviour, IDamageable
     [Tooltip("Only Activatable Objects")]
     public int id;
 
-    public bool isLever = false;
+    public Type type;
+    public enum Type
+    {
+        Button,
+        Lever,
+        OneTimeUseLever,
+    }
     public float timer;
 
     public bool active = false;
+
+    private bool canBeUsed = true;
 
     Animator animator;
 
@@ -25,30 +33,37 @@ public class Button : MonoBehaviour, IDamageable
     }
     public void Damage(int damage, bool bypassInvincibility)
     {
-        if (isLever)
+        switch(type)
         {
-            active = !active;
-            animator.SetBool("isActivated", active);
-            if (active)
-            {
+            case Type.Button:
+                {
+                    Activate();
+                    animator.SetBool("isActivated", true);
+                    if (timer > 0)
+                    {
+                        StartCoroutine(Timer());
+                    }
+                }
+                break;
+            case Type.Lever:
+                active = !active;
+                animator.SetBool("isActivated", active);
+                if (active)
+                {
+                    Activate();
+                }
+                else
+                {
+                    Deactivate();
+                }
+                break;
+            case Type.OneTimeUseLever:
+                if (!canBeUsed) return;
+                canBeUsed = false;
+                animator.SetBool("isActivated", true);
                 Activate();
-            }
-            else
-            {
-                Deactivate();
-            }
-        }
-        else
-        {
-            Activate();
-            animator.SetBool("isActivated", true);
-            if (timer > 0)
-            {
-                StartCoroutine(Timer());
-            } else
-            {
-                Deactivate();
-            }
+                //Deactivate();
+                break;
         }
     }
     private IEnumerator Timer()

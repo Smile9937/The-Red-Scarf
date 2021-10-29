@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    [Header("Enemy Type")]
     public EnemyType type;
     public enum EnemyType
     {
@@ -18,7 +19,6 @@ public class Enemy : Character
     [SerializeField] private float timer;
 
     [SerializeField] private bool movingEnemy = true;
-    private bool canMove;
 
     [Header("Components")]
     public GameObject hotZone;
@@ -29,6 +29,12 @@ public class Enemy : Character
     [HideInInspector] public Transform target;
     [HideInInspector] public bool inRange;
 
+    [Header("Melee Attack")]
+    [SerializeField] private int meleeDamage;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float meleeRadius = 0.5f;
+    [SerializeField] private LayerMask targetLayers;
+
     [Header("Ranged Attacks")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform rangedAttackPos;
@@ -36,6 +42,13 @@ public class Enemy : Character
     float nextRangedAttackTime = 0f;
 
     [SerializeField] private LayerMask blockLayer;
+
+    [Header("Knockback Variables")]
+
+    [SerializeField] protected Vector2 knockbackVelocity;
+    [SerializeField] protected float knockbackLength;
+
+    float velocityFactor = -3;
 
     private float distance;
     private bool attackMode;
@@ -77,6 +90,24 @@ public class Enemy : Character
         if (inRange)
         {
             EnemyLogic();
+        }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if(knockbackCount <= 0)
+        {
+            canMove = true;
+            if(grounded)
+            {
+                myRigidbody.velocity = Vector2.zero;
+                velocityFactor = -3;
+            } else
+            {
+                velocityFactor -= Time.deltaTime;
+                myRigidbody.velocity = new Vector2(0, velocityFactor);
+            }
         }
     }
 
@@ -155,7 +186,6 @@ public class Enemy : Character
     }
     private void MoveAround()
     {
-        myRigidbody.velocity = Vector2.zero;
         Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
@@ -188,6 +218,26 @@ public class Enemy : Character
         }
     }
 
+    private void DealMeleeDamage()
+    {
+        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, meleeRadius, targetLayers);
+
+        foreach (Collider2D target in hitTargets)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                Character character = target.GetComponent<Character>();
+
+                if (character != null)
+                {
+                    character.KnockBack(gameObject, knockbackVelocity, knockbackLength);
+                }
+
+                damageable.Damage(meleeDamage, false);
+            }
+        }
+    }
     private void TriggerCooling()
     {
         myAnimator.SetBool("isAttackingBool", false);
@@ -202,5 +252,12 @@ public class Enemy : Character
     protected override void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, meleeRadius);
     }
 }

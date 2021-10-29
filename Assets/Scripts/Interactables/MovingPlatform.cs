@@ -11,6 +11,7 @@ public class MovingPlatform : ActivatableObject
     [SerializeField] private bool automatic;
     [SerializeField] private bool moveFromEndToStart;
     [SerializeField] private bool moveBackWhenStopped;
+    [SerializeField] private bool moveOncePerActivation;
     private float tolerance;
     private float delayStart;
     private bool moveBack;
@@ -34,7 +35,7 @@ public class MovingPlatform : ActivatableObject
         tolerance = speed * Time.deltaTime;
     }
     protected override void Activate()
-    {
+    {        
         automatic = true;
     }
 
@@ -81,7 +82,11 @@ public class MovingPlatform : ActivatableObject
     {
         if(automatic)
         {
-            if(Time.time - delayStart > delayTime)
+            if (moveOncePerActivation)
+            {
+                automatic = false;
+            }
+            if (Time.time - delayStart > delayTime)
             {
                 NextPlatform();
             }

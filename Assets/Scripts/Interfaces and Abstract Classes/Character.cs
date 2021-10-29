@@ -32,6 +32,13 @@ public abstract class Character : MonoBehaviour, IDamageable
 
     private float canJumpCounter;
 
+    protected float knockbackCount;
+    private bool knockedFromRight;
+
+    protected Vector2 knockback;
+
+    protected bool canMove;
+
     protected Rigidbody2D myRigidbody;
     [HideInInspector] public Animator myAnimator;
 
@@ -69,6 +76,21 @@ public abstract class Character : MonoBehaviour, IDamageable
             canJump = false;
         }
     }
+    protected virtual void FixedUpdate()
+    {
+        if(knockbackCount > 0)
+        {
+            canMove = false;
+            if(knockedFromRight)
+            {
+                myRigidbody.velocity = new Vector2(-knockback.x, knockback.y);
+            } else if(!knockedFromRight)
+            {
+                myRigidbody.velocity = new Vector2(knockback.x, knockback.y);
+            }
+            knockbackCount -= Time.deltaTime;
+        }
+    }
 
     public void Damage(int damage, bool bypassInvincibility)
     {
@@ -83,6 +105,20 @@ public abstract class Character : MonoBehaviour, IDamageable
         StartCoroutine(InvincibilityFrames());
     }
 
+    public void KnockBack(GameObject knockbackSource, Vector2 knockbackVelocity, float knockbackLength)
+    {
+        knockback = knockbackVelocity;
+        knockbackCount = knockbackLength;
+
+        if (transform.position.x < knockbackSource.transform.position.x)
+        {
+            knockedFromRight = true;
+        }
+        else
+        {
+            knockedFromRight = false;
+        }
+    }
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
@@ -92,6 +128,7 @@ public abstract class Character : MonoBehaviour, IDamageable
         isInvincible = false;
     }
     protected abstract void Die();
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawCube(groundCheck.position, groundCheckSize);

@@ -14,10 +14,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Attack Variables")]
     [SerializeField] private Vector2 attackSize = new Vector2(0.5f, 5f);
     [SerializeField] private int attackDamage = 40;
-    [SerializeField] float knockBack = 500f;
-
     [SerializeField] private float meleeAttackRate = 2f;
     [SerializeField] private float rangeAttackRate = 1f;
+
+    [Header("Knockback Variables")]
+    [SerializeField] private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackLength;
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpForce;
@@ -29,6 +31,15 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float regainTimer;
     private int currentComposure;
 
+    [Header("Ground Slam Variables")]
+    [SerializeField] private Vector2 groundSlamArea;
+    [SerializeField] private LayerMask groundSlamLayer;
+    [SerializeField] private int groundSlamDamage;
+    [SerializeField] private Vector2 groundSlamKnockbackVelocity;
+    [SerializeField] private float groundslamKnockbackLength;
+    [SerializeField] private float groundSlamAttackRate = 10f;
+
+    float nextGroundSlamAttackTime = 0f;
     float nextMeleeAttackTime = 0f;
     float nextRangedAttackTime = 0f;
     Player player;
@@ -52,51 +63,104 @@ public class PlayerCombat : MonoBehaviour
     }
     void Update()
     {
-        if (PauseMenu.Instance.gamePaused || player.state != Player.State.Neutral)
-            return;
-
-        if(GameManager.Instance.redScarf && player.hasBaseballBat)
+        HandleGroundSlam();
+        if (!PauseMenu.Instance.gamePaused && player.state == Player.State.Neutral)
         {
-            if (Time.time >= nextMeleeAttackTime)
+            if (GameManager.Instance.redScarf && player.hasBaseballBat)
             {
-                if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
+                HandleRedScarfMelee();
+            }
+            else if (!GameManager.Instance.redScarf)
+            {
+                HandleDressRanged();
+                HandleDressMelee();
+            }
+        }
+    }
+
+    private void HandleGroundSlam()
+    {
+        if (Time.time >= nextGroundSlamAttackTime)
+        {
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && InputManager.Instance.GetKey(KeybindingActions.Down) && !player.grounded)
+            {
+                player.state = Player.State.GroundSlam;
+                myRigidbody.velocity = new Vector2(0, -20);
+                player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
+                nextGroundSlamAttackTime = Time.time + 1f / groundSlamAttackRate;
+            }
+        }
+
+        if (player.state == Player.State.GroundSlam && player.grounded)
+        {
+            player.state = Player.State.Neutral;
+            player.gameObject.layer = LayerMask.NameToLayer("Player");
+            Collider2D[] hitTargets = Physics2D.OverlapBoxAll(transform.position, groundSlamArea, 0f, groundSlamLayer);
+
+            foreach (Collider2D target in hitTargets)
+            {
+                IDamageable damageable = target.GetComponent<IDamageable>();
+                if (damageable != null)
                 {
-                    player.myAnimator.SetTrigger("attackTrigger");
-                    MeleeAttack();
-                    nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                    damageable.Damage(groundSlamDamage, false);
+
+                    Character character = target.GetComponent<Character>();
+                    if (character != null)
+                    {
+                        character.KnockBack(gameObject, groundSlamKnockbackVelocity, groundslamKnockbackLength);
+                        Instantiate(damageText, target.transform.position, Quaternion.identity);
+                        damageText.SetText(groundSlamDamage);
+                    }
                 }
             }
         }
-        else if(!GameManager.Instance.redScarf)
+    }
+
+    private void HandleDressMelee()
+    {
+        if (Time.time >= nextMeleeAttackTime)
         {
-            if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
-                if (InputManager.Instance.GetKey(KeybindingActions.Special))
+                player.myAnimator.SetTrigger("attackTrigger");
+                MeleeAttack();
+                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+            }
+        }
+    }
+    
+    private void HandleDressRanged()
+    {
+        if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
+        {
+            if (InputManager.Instance.GetKey(KeybindingActions.Special))
+            {
+                if (InputManager.Instance.GetKey(KeybindingActions.Up))
                 {
-                    if(InputManager.Instance.GetKey(KeybindingActions.Down))
-                    {   
-                        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
-                        Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
-                    }
-                    else if(InputManager.Instance.GetKey(KeybindingActions.Up))
-                    {   
-                        Shoot(new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, 90));
-                    }
-                    else
-                    {
-                        Shoot(attackPoint.position, attackPoint.rotation);
-                    }
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                    Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
+                }
+                else if (InputManager.Instance.GetKey(KeybindingActions.Up))
+                {
+                    Shoot(new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, 90));
+                }
+                else
+                {
+                    Shoot(attackPoint.position, attackPoint.rotation);
                 }
             }
+        }
+    }
 
-            if (Time.time >= nextMeleeAttackTime)
+    private void HandleRedScarfMelee()
+    {
+        if (Time.time >= nextMeleeAttackTime)
+        {
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
-                if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
-                {
-                    player.myAnimator.SetTrigger("attackTrigger");
-                    MeleeAttack();
-                    nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
-                }
+                player.myAnimator.SetTrigger("attackTrigger");
+                MeleeAttack();
+                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
             }
         }
     }
@@ -113,26 +177,28 @@ public class PlayerCombat : MonoBehaviour
     {
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 90f, targetLayers);
 
-        foreach(Collider2D target in hitTargets)
+        foreach (Collider2D target in hitTargets)
         {
             IDamageable damageable = target.GetComponent<IDamageable>();
-            if(damageable != null)
+            if (damageable != null)
             {
-                if(target.attachedRigidbody != null)
+                Character character = target.GetComponent<Character>();
+
+                if (character != null)
                 {
-                    Vector2 direction = target.transform.position - transform.position;
-                    direction.y = 0;
-                    target.attachedRigidbody.AddForce(direction.normalized * knockBack);
+                    character.KnockBack(gameObject, knockbackVelocity, knockbackLength);
                 }
-                if(damageText != null && target.tag == "Enemy")
+
+                if (damageText != null && target.tag == "Enemy")
                 {
-                    Instantiate(damageText, transform.position, Quaternion.identity);
-                    damageText.SetText(attackDamage);                
+                    Instantiate(damageText, target.transform.position, Quaternion.identity);
+                    damageText.SetText(attackDamage);
                 }
                 damageable.Damage(attackDamage, false);
             }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

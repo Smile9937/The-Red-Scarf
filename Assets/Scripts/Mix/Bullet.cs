@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     [SerializeField] private int damage = 50;
     [SerializeField] private int destroyTimer = 10;
-    [SerializeField] private float knockBack = 500;
     Rigidbody2D myRigidbody;
 
     [SerializeField] private bool bypassInvincibility;
 
+    [Header("Knockback Variables")]
+    [SerializeField] private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackLength;
+
     [Header("Damage Text")]
-    [System.NonSerialized] public DamagePopUp damageText;
+    [NonSerialized] public DamagePopUp damageText;
 
     void Start()
     {
@@ -29,12 +33,12 @@ public class Bullet : MonoBehaviour
             IDamageable damageable = other.GetComponent<IDamageable>();
             if(damageable != null)
             {
-                if (other.attachedRigidbody != null)
+                Character character = other.GetComponent<Character>();
+                if(character != null)
                 {
-                    Vector2 direction = other.transform.position - transform.position;
-                    direction.y = 0;
-                    other.attachedRigidbody.AddForce(direction.normalized * knockBack);
+                    character.KnockBack(gameObject, knockbackVelocity, knockbackLength);
                 }
+
                 if (damageText != null && other.tag == "Enemy")
                 {
                     Instantiate(damageText, transform.position, Quaternion.identity);

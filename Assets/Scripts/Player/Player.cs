@@ -13,6 +13,7 @@ public class Player : Character
         Rolling,
         Blocking,
         Dash,
+        GroundSlam,
         Dead,
     };
 
@@ -114,7 +115,7 @@ public class Player : Character
         {
             direction = -1;
         }
-        else if(Input.GetKey(KeyCode.RightArrow) &&
+        else if(InputManager.Instance.GetKey(KeybindingActions.Right) &&
             !InputManager.Instance.GetKey(KeybindingActions.Left))
         {
             direction = 1;
@@ -152,12 +153,17 @@ public class Player : Character
             SetAnimator();
         }
     }
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         switch(state)
         {
             case State.Neutral:
-                HandleMovement();
+                if(knockbackCount <= 0)
+                {
+                    HandleMovement();
+                }
                 break;
             case State.Rolling:
                 Roll();
