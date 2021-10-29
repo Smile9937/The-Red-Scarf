@@ -51,7 +51,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 float temp = characterRigidBody.velocity.y;
                 if (temp < -0.01f)
                 {
-                    temp *= -0.5f;
+                    temp *= 0.1f;
                 }
                 else if (temp > 0.01f)
                 {
