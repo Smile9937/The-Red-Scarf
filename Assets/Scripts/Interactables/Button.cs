@@ -45,6 +45,9 @@ public class Button : MonoBehaviour, IDamageable
             if (timer > 0)
             {
                 StartCoroutine(Timer());
+            } else
+            {
+                Deactivate();
             }
         }
     }

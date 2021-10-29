@@ -21,7 +21,6 @@ public class RoomSwitch : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("0");
             if (GameObject.FindGameObjectWithTag("Background Room"))
             {
                 if (GameObject.FindGameObjectWithTag("Background Room").GetComponent<SpriteRenderer>().enabled == true)
