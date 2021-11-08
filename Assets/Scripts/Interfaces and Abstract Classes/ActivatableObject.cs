@@ -7,8 +7,8 @@ public abstract class ActivatableObject : MonoBehaviour
     [SerializeField] protected int id;
     protected virtual void Start()
     {
-        GameEvents.current.onActivate += Activate;
-        GameEvents.current.onDeActivate += DeActivate;
+        GameEvents.instance.onActivate += Activate;
+        GameEvents.instance.onDeActivate += DeActivate;
     }
 
     private void Activate(int id)
@@ -27,8 +27,8 @@ public abstract class ActivatableObject : MonoBehaviour
     }
     protected virtual void OnDestroy()
     {
-        GameEvents.current.onActivate -= Activate;
-        GameEvents.current.onDeActivate -= DeActivate;
+        GameEvents.instance.onActivate -= Activate;
+        GameEvents.instance.onDeActivate -= DeActivate;
     }
     protected abstract void Activate();
     protected abstract void DeActivate();

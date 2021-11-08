@@ -5,15 +5,17 @@ using UnityEngine;
 public class PowerUpHandler : MonoBehaviour
 {
     Player player;
+    RedScarfPlayer redScarf;
 
     private void Awake()
     {
         player = GetComponent<Player>();
+        redScarf = GetComponent<RedScarfPlayer>();
     }
 
     public void GiveBaseballBat()
     {
-        player.GainBaseballBat();
+        redScarf.GainBaseballBat();
     }
 
     public void Heal(int healAmount)

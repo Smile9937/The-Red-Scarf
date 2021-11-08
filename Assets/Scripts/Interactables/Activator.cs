@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour, IDamageable
+public class Activator : MonoBehaviour, IDamageable
 {
     [Tooltip("Only Activatable Objects")]
     public int id;
@@ -62,7 +62,6 @@ public class Button : MonoBehaviour, IDamageable
                 canBeUsed = false;
                 animator.SetBool("isActivated", true);
                 Activate();
-                //Deactivate();
                 break;
         }
     }
@@ -76,10 +75,10 @@ public class Button : MonoBehaviour, IDamageable
     
     private void Activate()
     {
-        GameEvents.current.Activate(id);
+        GameEvents.instance.Activate(id);
     }
     private void Deactivate()
     {
-        GameEvents.current.DeActivate(id);
+        GameEvents.instance.DeActivate(id);
     }
 }

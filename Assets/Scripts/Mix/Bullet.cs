@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
             IDamageable damageable = other.GetComponent<IDamageable>();
             if(damageable != null)
             {
-                Character character = other.GetComponent<Character>();
+                ICharacter character = other.GetComponent<ICharacter>();
                 if(character != null)
                 {
                     character.KnockBack(gameObject, knockbackVelocity, knockbackLength);

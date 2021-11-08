@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public bool redScarf;
 
+    private List<int> activeItems = new List<int>();
+
     [Serializable]
     public class PlayerStats
     {
@@ -37,11 +39,13 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
-            SavePlayerStats();
+            //SavePlayerStats();
         }
         currentSpawnpoint = player.transform.position;
+        GameEvents.instance.onActivate += Activate;
+        GameEvents.instance.onDeActivate += DeActivate;
     }
-    private void SavePlayerStats()
+    /*private void SavePlayerStats()
     {
         currentPlayer.playerCharacter = player.currentCharacter.playerCharacter;
         currentPlayer.speed = player.currentCharacter.speed;
@@ -57,20 +61,33 @@ public class GameManager : MonoBehaviour
         player.hasBaseballBat = hasBaseballBat;
 
         player.SetCurrentCharacter();
-    }
+    }*/
 
     public void SetCurrentCheckpoint(Vector3 checkpointPos)
     {
         currentSpawnpoint = checkpointPos;
-        SavePlayerStats();
+        //SavePlayerStats();
     }
     public void RespawnPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+        foreach(int active in activeItems)
+        {
+            GameEvents.instance.Activate(active);
+        }
     }
     public void SwapCharacter()
     {
         redScarf = !redScarf;
+    }
+
+    private void Activate(int id)
+    {
+        activeItems.Add(id);
+    }
+    private void DeActivate(int id)
+    {
+        activeItems.Remove(id);
     }
 }

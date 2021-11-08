@@ -11,15 +11,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != this && instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
+        instance = this;
     }
     public KeyCode GetKeyForAction(KeybindingActions keybindingAction)
     {

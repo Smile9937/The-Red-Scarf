@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public static GameEvents current;
+    public static GameEvents instance;
+
+    public static GameEvents Instance { get { return instance; } }
 
     private void Awake()
     {
-        current = this;
+        instance = this;
     }
 
     public event Action<int> onActivate;

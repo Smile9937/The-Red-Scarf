@@ -3,8 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character
+public class Enemy : MonoBehaviour, IDamageable, ICharacter
 {
+    [Header("Jump Variables")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Vector2 groundCheckSize;
+    [SerializeField] private LayerMask ground;
+    public bool grounded;
+    [SerializeField] private float offGroundJumpTimer = 0.1f;
+    private bool stoppedJumping = true;
+
+    [Header("Character Status")]
+    public int maxHealth = 100;
+    public int currentHealth;
+    [SerializeField] private float secondsOfInvincibility;
+    bool isInvincible = false;
+
+    private float canJumpCounter;
+
+    private float knockbackCount;
+    private bool knockedFromRight;
+
+    private Vector2 knockback;
+
+    private bool canMove;
+
+    private Rigidbody2D myRigidbody;
+    [HideInInspector] public Animator myAnimator;
+
     [Header("Enemy Type")]
     public EnemyType type;
     public enum EnemyType
@@ -41,12 +67,13 @@ public class Enemy : Character
     [SerializeField] private float rangeAttackRate = 1f;
     float nextRangedAttackTime = 0f;
 
-    [SerializeField] private LayerMask blockLayer;
+    [Header("Blocking Object")]
+    [SerializeField] private LayerMask blockingObjectLayer;
 
     [Header("Knockback Variables")]
 
-    [SerializeField] protected Vector2 knockbackVelocity;
-    [SerializeField] protected float knockbackLength;
+    [SerializeField] private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackLength;
 
     float velocityFactor = -3;
 
@@ -56,9 +83,13 @@ public class Enemy : Character
     private bool cooling;
     private float intTimer;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        canJumpCounter = offGroundJumpTimer;
+        currentHealth = maxHealth;
+
         SelectTarget();
         intTimer = timer;
         if(movingEnemy)
@@ -67,13 +98,14 @@ public class Enemy : Character
         }
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
+        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
+
         myAnimator.SetBool("isGrounded", grounded);
         if(!attackMode && movingEnemy && canMove)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 0.5f, blockLayer);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 0.5f, blockingObjectLayer);
             if(hit.collider != null)
             {
                 inRange = false;
@@ -93,10 +125,13 @@ public class Enemy : Character
         }
     }
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
-        base.FixedUpdate();
-        if(knockbackCount <= 0)
+        if (knockbackCount > 0)
+        {
+            HandleKnockback();
+        }
+        if (knockbackCount <= 0)
         {
             canMove = true;
             if(grounded)
@@ -109,6 +144,20 @@ public class Enemy : Character
                 myRigidbody.velocity = new Vector2(0, velocityFactor);
             }
         }
+    }
+
+    private void HandleKnockback()
+    {
+        canMove = false;
+        if (knockedFromRight)
+        {
+            myRigidbody.velocity = new Vector2(-knockback.x, knockback.y);
+        }
+        else if (!knockedFromRight)
+        {
+            myRigidbody.velocity = new Vector2(knockback.x, knockback.y);
+        }
+        knockbackCount -= Time.deltaTime;
     }
 
     public void SelectTarget()
@@ -227,7 +276,7 @@ public class Enemy : Character
             IDamageable damageable = target.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                Character character = target.GetComponent<Character>();
+                ICharacter character = target.GetComponent<ICharacter>();
 
                 if (character != null)
                 {
@@ -249,13 +298,49 @@ public class Enemy : Character
     {
         return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
     }
-    protected override void Die()
+    public void Die()
     {
         Destroy(gameObject);
+    }
+    public void Damage(int damage, bool bypassInvincibility)
+    {
+        if (isInvincible && !bypassInvincibility)
+            return;
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        StartCoroutine(InvincibilityFrames());
+    }
+    private IEnumerator InvincibilityFrames()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(secondsOfInvincibility);
+
+        isInvincible = false;
+    }
+
+    public void KnockBack(GameObject knockbackSource, Vector2 knockbackVelocity, float knockbackLength)
+    {
+        knockback = knockbackVelocity;
+        knockbackCount = knockbackLength;
+
+        if (transform.position.x < knockbackSource.transform.position.x)
+        {
+            knockedFromRight = true;
+        }
+        else
+        {
+            knockedFromRight = false;
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.DrawCube(groundCheck.position, groundCheckSize);
         if (attackPoint == null)
             return;
         Gizmos.DrawWireSphere(attackPoint.position, meleeRadius);

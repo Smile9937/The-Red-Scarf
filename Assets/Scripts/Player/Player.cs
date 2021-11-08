@@ -3,8 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character
+public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 {
+    [Header("Attack Variables")]
+    [SerializeField] private Vector2 attackSize = new Vector2(0.5f, 5f);
+    [SerializeField] private int attackDamage = 40;
+    [SerializeField] protected float meleeAttackRate = 2f;
+
+    protected float nextGroundSlamAttackTime = 0f;
+    protected float nextMeleeAttackTime = 0f;
+
+    [Header("Knockback Variables")]
+    [SerializeField] private Vector2 knockbackVelocity;
+    [SerializeField] private float knockbackLength;
+
+    [Header("Ground Slam Variables")]
+    [SerializeField] private Vector2 groundSlamArea;
+
+    [SerializeField] private int groundSlamDamage;
+    [SerializeField] private Vector2 groundSlamKnockbackVelocity;
+    [SerializeField] private float groundslamKnockbackLength;
+    [SerializeField] private float groundSlamAttackRate = 10f;
+
+    [Header("Movement Variables")]
+    private float direction;
+
+    private bool facingRight = true;
+
+    [Header("Jump Variables")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Vector2 groundCheckSize;
+    [SerializeField] private LayerMask ground;
+    public bool grounded;
+    [SerializeField] private float offGroundJumpTimer = 0.1f;
+    private float jumpTimeCounter;
+    private bool stoppedJumping = true;
+
+    [Header("Character Status")]
+    public int maxHealth = 100;
+    public int currentHealth;
+    [SerializeField] private float secondsOfInvincibility;
+    bool isInvincible = false;
+
+    private bool canJump = false;
+
+    private float canJumpCounter;
+
+    private float knockbackCount;
+    private bool knockedFromRight;
+
+    private Vector2 knockback;
+
     [HideInInspector]
     public State state;
     public enum State
@@ -17,107 +66,86 @@ public class Player : Character
         Dead,
     };
 
-    [Serializable]
+    /*[Serializable]
     public class PlayerStats
     {
         public PlayerCharacterEnum playerCharacter;
         public float speed;
         public float jumpForce;
         public float jumpTime;
-    }
+    }*/
 
-    public PlayerStats[] playerCharacters;
+    //public PlayerStats[] playerCharacters;
 
-    [HideInInspector] public PlayerStats currentCharacter;
+    //[HideInInspector] public PlayerStats currentCharacter;
 
-    private float speed;
-    private float jumpForce;
-    private float jumpTime;
-
-    [Header("Roll Variables")]
-    [SerializeField] private float startRollSpeed = 200f;
-    [SerializeField] private float rollSpeedLoss = 10f;
-    [SerializeField] private float rollSpeedThreshold = 1.5f;
-    [SerializeField] private LayerMask rollLayer;
-    private float rollSpeed;
-
-    [Header("Block Variables")]
-    [SerializeField] private Transform blockPoint;
-    [SerializeField] private Vector2 blockSize;
-    [SerializeField] private LayerMask blockLayers;
+    public float speed;
+    public float jumpForce;
+    public float jumpTime;
 
     [Header("Animator Controllers")]
     [SerializeField] private RuntimeAnimatorController redScarfUnarmedAnimator;
-    [SerializeField] private RuntimeAnimatorController redScarfBaseballbatController;
+    [SerializeField] protected RuntimeAnimatorController redScarfBaseballbatController;
     [SerializeField] private RuntimeAnimatorController dressAnimator;
 
-    public bool hasBaseballBat;
+    protected BoxCollider2D myCollider;
+    protected CircleCollider2D rollCollider;
+    protected Rigidbody2D myRigidbody;
+    [HideInInspector] public Animator myAnimator;
 
-    BoxCollider2D myCollider;
-    CircleCollider2D rollCollider;
-    protected override void Start()
+    [Header("Components")]
+    [SerializeField] protected Transform attackPoint;
+    [SerializeField] private LayerMask targetLayers;
+    [SerializeField] protected DamagePopUp damageText;
+    [SerializeField] private LayerMask groundSlamLayer;
+    protected virtual void Start()
     {
-        base.Start();
+        myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<BoxCollider2D>();
+        rollCollider = GetComponent<CircleCollider2D>();
+
+        canJumpCounter = offGroundJumpTimer;
+        currentHealth = maxHealth;
+
         GameManager.Instance.player = this;
-        GameManager.Instance.LoadPlayerStats();
+        //GameManager.Instance.LoadPlayerStats();
+
         jumpTimeCounter = jumpTime;
         transform.position = GameManager.Instance.currentSpawnpoint;
         state = State.Neutral;
-        myCollider = GetComponent<BoxCollider2D>();
-        rollCollider = GetComponent<CircleCollider2D>();
+
         rollCollider.enabled = false;
         SetAnimator();
-        SetCurrentCharacter();
     }
-
     private void SetAnimator()
     {
-        if (hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
+        if (GameManager.Instance.hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
         else if (GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfUnarmedAnimator; }
         else { myAnimator.runtimeAnimatorController = dressAnimator; }
     }
-    public void SetCurrentCharacter()
+
+    protected virtual void Update()
     {
-        if (GameManager.Instance.redScarf)
-        {
-            foreach (PlayerStats character in playerCharacters)
-            {
-                if (character.playerCharacter == PlayerCharacterEnum.RedScarf)
-                {
-                    currentCharacter = character;
-                }
-            }
-        }
-        else
-        {
-            foreach (PlayerStats character in playerCharacters)
-            {
-                if (character.playerCharacter == PlayerCharacterEnum.Dress)
-                {
-                    currentCharacter = character;
-                }
-            }
-        }
+        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
 
-        speed = currentCharacter.speed;
-        jumpForce = currentCharacter.jumpForce;
-        jumpTime = currentCharacter.jumpTime;
-    }
+        HandleGroundSlam();
 
-    protected override void Update()
-    {
-        base.Update();
+        CheckIfCanJump();
 
+        PlayerUI.Instance.SetHealthText(currentHealth);
         myAnimator.SetBool("isGrounded", grounded);
 
         if (InputManager.Instance.GetKey(KeybindingActions.Left)
             && !InputManager.Instance.GetKey(KeybindingActions.Right))
         {
+            Debug.Log("Pressed Left");
             direction = -1;
         }
-        else if(InputManager.Instance.GetKey(KeybindingActions.Right) &&
+        else if (InputManager.Instance.GetKey(KeybindingActions.Right) &&
             !InputManager.Instance.GetKey(KeybindingActions.Left))
         {
+            Debug.Log("Pressed Right");
             direction = 1;
         }
         else
@@ -125,51 +153,70 @@ public class Player : Character
             direction = 0;
         }
 
-        switch(state)
+        switch (state)
         {
             case State.Neutral:
                 HandleJumping();
-                if (GameManager.Instance.redScarf)
-                {
-                    HandleRolling();
-                }else
-                {
-                    HandleBlocking();
-                }
+                HandleMovement();
                 break;
             case State.Blocking:
-                Block();
                 break;
             case State.Dash:
-                Block();
+                //Block();
                 break;
         }
-
-        //Swap Character
-        if(InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
-        {
-            GameManager.Instance.SwapCharacter();
-            SetCurrentCharacter();
-            SetAnimator();
-        }
     }
-    protected override void FixedUpdate()
+
+    private void CheckIfCanJump()
     {
-        base.FixedUpdate();
-
-        switch(state)
+        if (!grounded && stoppedJumping)
         {
-            case State.Neutral:
-                if(knockbackCount <= 0)
-                {
-                    HandleMovement();
-                }
-                break;
-            case State.Rolling:
-                Roll();
-                break;
+            canJumpCounter -= Time.deltaTime;
+        }
+
+        if (grounded)
+        {
+            canJumpCounter = offGroundJumpTimer;
+            canJump = true;
+        }
+
+        if (canJumpCounter <= 0)
+        {
+            canJump = false;
+        }
+
+        if (!grounded && !stoppedJumping)
+        {
+            canJump = false;
         }
     }
+
+    protected virtual void FixedUpdate()
+    {
+        if (knockbackCount > 0)
+        {
+            HandleKnockBack();
+        }
+
+        if(state == State.Neutral && knockbackCount <= 0)
+        {
+            HandleMovement();
+        }
+    }
+
+    private void HandleKnockBack()
+    {
+        if (knockedFromRight)
+        {
+            myRigidbody.velocity = new Vector2(-knockback.x, knockback.y);
+        }
+        else if (!knockedFromRight)
+        {
+            myRigidbody.velocity = new Vector2(knockback.x, knockback.y);
+        }
+        knockbackCount -= Time.deltaTime;
+    }
+
     private void HandleMovement()
     {
         myAnimator.SetFloat("axisXSpeed", Mathf.Abs(direction));
@@ -179,6 +226,7 @@ public class Player : Character
 
     protected void Move()
     {
+        Debug.Log("Move");
         myRigidbody.velocity = new Vector2(direction * speed, myRigidbody.velocity.y);
     }
 
@@ -226,87 +274,7 @@ public class Player : Character
     {
         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
     }
-    private void HandleBlocking()
-    {
-        if(InputManager.Instance.GetKeyDown(KeybindingActions.Dodge))
-        {
-            state = State.Blocking;
-            myRigidbody.velocity = Vector2.zero;
-
-            Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
-
-            foreach (Collider2D target in blockTargets)
-            {
-                Bullet bullet = target.GetComponent<Bullet>();
-                if (bullet != null)
-                {
-                    Debug.Log("Perfect Block");
-                }
-            }
-        }
-    }
-    private void Block()
-    {
-        Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
-
-        foreach (Collider2D target in blockTargets)
-        {
-            Bullet bullet = target.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                Destroy(bullet.gameObject);
-            }
-        }
-
-        if(InputManager.Instance.GetKeyUp(KeybindingActions.Dodge))
-        {
-            state = State.Neutral;
-        }
-    }
-    private void HandleRolling()
-    {
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && grounded)
-        {
-            state = State.Rolling;
-            rollSpeed = startRollSpeed;
-            myRigidbody.velocity = Vector2.zero;
-            myAnimator.SetBool("isDodge", true);
-        }
-    }
-    private void Roll()
-    {
-        gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-        rollCollider.enabled = true;
-        myCollider.enabled = false;
-        myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
-
-        rollSpeed -= rollSpeed * rollSpeedLoss * Time.deltaTime;
-
-        if(rollSpeed < rollSpeedThreshold)
-        {
-            StopRoll();
-        }
-    }
-
-    private void StopRoll()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
-        if (hit.collider == null)
-        {
-            myAnimator.SetBool("isDodge", false);
-            state = State.Neutral;
-            gameObject.layer = LayerMask.NameToLayer("Player");
-            myCollider.enabled = true;
-            rollCollider.enabled = false;
-        }
-    }
-    public void GainBaseballBat()
-    {
-        hasBaseballBat = true;
-        myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
-    }
-
-    protected override void Die()
+    public void Die()
     {
         state = State.Dead;
         myRigidbody.velocity = Vector2.zero;
@@ -319,10 +287,109 @@ public class Player : Character
         yield return new WaitForSecondsRealtime(1f);
         GameManager.Instance.RespawnPlayer();
     }
-    private void OnDrawGizmosSelected()
+    public void Damage(int damage, bool bypassInvincibility)
     {
-        if (blockPoint == null)
-        return;
-        Gizmos.DrawWireCube(blockPoint.position, blockSize);
+        if (isInvincible && !bypassInvincibility)
+            return;
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        StartCoroutine(InvincibilityFrames());
     }
+    private IEnumerator InvincibilityFrames()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(secondsOfInvincibility);
+
+        isInvincible = false;
+    }
+
+    public void KnockBack(GameObject knockbackSource, Vector2 knockbackVelocity, float knockbackLength)
+    {
+        knockback = knockbackVelocity;
+        knockbackCount = knockbackLength;
+
+        if (transform.position.x < knockbackSource.transform.position.x)
+        {
+            knockedFromRight = true;
+        }
+        else
+        {
+            knockedFromRight = false;
+        }
+    }
+
+    protected void MeleeAttack()
+    {
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 90f, targetLayers);
+
+        foreach (Collider2D target in hitTargets)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                ICharacter character = target.GetComponent<ICharacter>();
+
+                if (character != null)
+                {
+                    character.KnockBack(gameObject, knockbackVelocity, knockbackLength);
+                }
+
+                if (damageText != null && target.tag == "Enemy")
+                {
+                    Instantiate(damageText, target.transform.position, Quaternion.identity);
+                    damageText.SetText(attackDamage);
+                }
+                damageable.Damage(attackDamage, false);
+            }
+        }
+    }
+    private void HandleGroundSlam()
+    {
+        if (Time.time >= nextGroundSlamAttackTime)
+        {
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && InputManager.Instance.GetKey(KeybindingActions.Down) && !grounded)
+            {
+                state = State.GroundSlam;
+                myRigidbody.velocity = new Vector2(0, -20);
+                gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
+                nextGroundSlamAttackTime = Time.time + 1f / groundSlamAttackRate;
+            }
+        }
+
+        if (state == State.GroundSlam && grounded)
+        {
+            state = State.Neutral;
+            gameObject.layer = LayerMask.NameToLayer("Player");
+            Collider2D[] hitTargets = Physics2D.OverlapBoxAll(transform.position, groundSlamArea, 0f, groundSlamLayer);
+
+            foreach (Collider2D target in hitTargets)
+            {
+                IDamageable damageable = target.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.Damage(groundSlamDamage, false);
+
+                    ICharacter character = target.GetComponent<ICharacter>();
+                    if (character != null)
+                    {
+                        character.KnockBack(gameObject, groundSlamKnockbackVelocity, groundslamKnockbackLength);
+                        Instantiate(damageText, target.transform.position, Quaternion.identity);
+                        damageText.SetText(groundSlamDamage);
+                    }
+                }
+            }
+        }
+    }
+    /*private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawCube(groundCheck.position, groundCheckSize);
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireCube(attackPoint.position, attackSize);
+    }*/
 }
