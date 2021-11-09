@@ -6,9 +6,7 @@ public class SwingingPoint : ActivatableObject
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
-    [SerializeField] private GameObject theFirstTarget;
-    [SerializeField] private GameObject theSecondTarget;
-    [SerializeField] private GameObject[] thePossibleTargets;
+    [SerializeField] private GameObject theTarget;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -32,22 +30,7 @@ public class SwingingPoint : ActivatableObject
         {
             if (collision.GetComponent<CharacterGrapplingScarf>())
             {
-                if (thePossibleTargets.Length > 0)
-                {
-                    int theTargetNum = 0;
-                    foreach (var target in thePossibleTargets)
-                    {
-                        if (target != null)
-                        {
-                            collision.GetComponent<CharacterGrapplingScarf>().SetNewSwingingPointsAsTarget(target, theTargetNum);
-                        }
-                        theTargetNum++;
-                    }
-                }
-                else
-                {
-                    collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theFirstTarget, theSecondTarget);
-                }
+                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theTarget);
             }
         }
     }
@@ -57,13 +40,7 @@ public class SwingingPoint : ActivatableObject
         {
             if (collision.GetComponent<CharacterGrapplingScarf>())
             {
-                int theTargetNum = thePossibleTargets.Length;
-                foreach (var target in thePossibleTargets)
-                {
-                    theTargetNum--;
-                    collision.GetComponent<CharacterGrapplingScarf>().SetNewSwingingPointsAsTarget(null, theTargetNum);
-                }
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, null);
+                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null);
             }
         }
     }

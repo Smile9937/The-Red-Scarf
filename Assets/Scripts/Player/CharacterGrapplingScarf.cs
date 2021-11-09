@@ -8,18 +8,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
     bool isSwinging = false;
     bool hasStartedSwing = false;
     [SerializeField] public GameObject swingingPoint;
-    [SerializeField] GameObject swingingPointAlt;
-    [SerializeField] GameObject[] swingingPoints;
     [SerializeField] Rigidbody2D characterRigidBody;
     [Header("Stats")]
-    [SerializeField] float dashXStrength = 1.75f;
-    [SerializeField] float dashYStrength = 3f;
-    [SerializeField] float dashDelayBeforeStart = 0.2f;
+    [SerializeField] float dashStrength = 1.5f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
     [SerializeField] float playerDistanceToStop = 0.2f;
 
     float characterGravity = 1f;
+    bool isReadyToStop = false;
 
     Vector2 originalLaunchPosition;
     Vector2 targetLaunchPosition;
@@ -42,6 +39,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 animator.SetTrigger("startScarfThrow");
                 player.state = Player.State.Dash;
+                characterRigidBody.gravityScale = gravityAdjustment;
+                Invoke("ReturnGravityAdjustments", 0.35f);
             }
             if (player.grounded)
             {
@@ -52,19 +51,19 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 float temp = characterRigidBody.velocity.y;
                 if (temp < -0.01f)
                 {
-                    temp *= 0.1f;
+                    temp *= (0.2f / characterGravity);
                 }
                 else if (temp > 0.01f)
                 {
-                    temp += 0.1f;
+                    temp += 0.1f * characterGravity;
                 }
-                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.6f, temp);
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
 
-            if ((swingingPoint != null || swingingPointAlt != null || swingingPoints[0] != null) && !isSwinging && GameManager.Instance.redScarf)
-            {
-                ToggleIsSwinging();
-            }
+            //if ((swingingPoint != null || swingingPointAlt != null || swingingPoints[0] != null) && !isSwinging && GameManager.Instance.redScarf)
+            //{
+            //    ToggleIsSwinging();
+            //}
         }
     }
 
@@ -72,26 +71,26 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (hasStartedSwing && isSwinging && swingingPoint != null)
         {
-            characterRigidBody.velocity = new Vector2((originalLaunchPosition.x - targetLaunchPosition.x) * Mathf.Abs(dashXStrength), (originalLaunchPosition.y - targetLaunchPosition.y) * Mathf.Abs(dashYStrength)) * -1f;
-            if (Mathf.Abs(originalLaunchPosition.x - targetLaunchPosition.x) <= playerDistanceToStop || Mathf.Abs(originalLaunchPosition.y - targetLaunchPosition.y) <= playerDistanceToStop)
+            if (Vector2.Distance(transform.position, swingingPoint.transform.position) > Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + playerDistanceToStop && isReadyToStop)
             {
                 ReturnPlayerState();
                 isSwinging = false;
                 CancelInvoke("ToggleIsSwinging");
                 CancelInvoke("ReturnPlayerState");
+                CancelInvoke("InvokePlayerReadyToStop");
             }
         }
     }
-
-    public void SetSwingingPointAsTarget(GameObject swingPoint, GameObject swingPointB)
+    
+    private void LaunchPlayerIntoDash()
     {
-        swingingPoint = swingPoint;
-        swingingPointAlt = swingPointB;
+        characterRigidBody.velocity = Vector2.zero;
+        characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength);
     }
 
-    public void SetNewSwingingPointsAsTarget(GameObject possibleTarget, int targetNumber)
+    public void SetSwingingPointAsTarget(GameObject swingPoint)
     {
-        swingingPoints[targetNumber] = possibleTarget;
+        swingingPoint = swingPoint;
     }
 
     private void ToggleIsSwinging()
@@ -101,6 +100,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             player.state = Player.State.Dash;
             originalLaunchPosition = transform.position;
         }
+        isReadyToStop = false;
         hasStartedSwing = false;
         isSwinging = !isSwinging;
         if (swingingPoint != null)
@@ -109,85 +109,42 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         if (isSwinging)
         {
-            if (swingingPoints[0] != null)
+            if (swingingPoint != null)
             {
-                SetTargets();
-                originalLaunchPosition = swingingPoint.transform.position;
-                targetLaunchPosition = swingingPointAlt.transform.position;
-            }
-            else if (CheckPrimaryTarget() && swingingPoint != null)
-            {
-                targetLaunchPosition = swingingPoint.transform.position;
-                if (swingingPointAlt != null)
-                {
-                    originalLaunchPosition = swingingPointAlt.transform.position;
-                }
-            }
-            else if (swingingPointAlt != null)
-            {
-                if (swingingPoint != null)
-                {
-                    originalLaunchPosition = swingingPoint.transform.position;
-                }
-                targetLaunchPosition = swingingPointAlt.transform.position;
+                targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
+                targetLaunchPosition.Normalize();
+                Debug.Log(targetLaunchPosition);
+                originalLaunchPosition = this.transform.position;
             }
             characterRigidBody.gravityScale = gravityAdjustment;
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
+            CancelInvoke("InvokePlayerReadyToStop");
+            CancelInvoke("ReturnGravityAdjustments");
+            Invoke("InvokePlayerReadyToStop", dashDuration * 0.6f);
             Invoke("ToggleIsSwinging", dashDuration);
-            Invoke("ReturnPlayerState", dashDuration * 1.05f);
+            Invoke("ReturnPlayerState", dashDuration * 1.1f);
+            LaunchPlayerIntoDash();
         }
     }
 
-    private bool CheckPrimaryTarget()
+    private void InvokePlayerReadyToStop()
     {
-        if (swingingPoint != null && swingingPointAlt == null)
-        {
-            return true;
-        }
-        else if (swingingPoint != null && swingingPointAlt != null)
-        {
-            if (Mathf.Abs(transform.position.x - swingingPoint.transform.position.x) + Mathf.Abs(transform.position.y - swingingPoint.transform.position.y) >= Mathf.Abs(transform.position.x - swingingPointAlt.transform.position.x) + Mathf.Abs(transform.position.y - swingingPointAlt.transform.position.y))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void SetTargets()
-    {
-        swingingPoint = swingingPoints[0];
-        swingingPointAlt = swingingPoints[0];
-        // Closest
-        foreach (var target in swingingPoints)
-        {
-            if (target != null)
-            {
-                if (Mathf.Abs(transform.position.x - swingingPoint.transform.position.x) + Mathf.Abs(transform.position.y - swingingPoint.transform.position.y) > Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y))
-                {
-                    swingingPoint = target;
-                }
-                if (Mathf.Abs(transform.position.x - swingingPointAlt.transform.position.x) + Mathf.Abs(transform.position.y - swingingPointAlt.transform.position.y) < Mathf.Abs(transform.position.x - target.transform.position.x) + Mathf.Abs(transform.position.y - target.transform.position.y))
-                {
-                    swingingPointAlt = target;
-                }
-            }
-        }
+        isReadyToStop = true;
     }
 
     private void ReturnPlayerState()
     {
+        isReadyToStop = false;
         player.state = Player.State.Neutral;
         characterRigidBody.gravityScale = characterGravity;
-        targetLaunchPosition = new Vector2(0,0);
         originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
         animator.SetBool("isScarfThrown", false);
     }
 
     private void DelayBeforeSwingStart()
     {
-        if ((swingingPoint != null || swingingPointAlt != null) && !isSwinging && GameManager.Instance.redScarf)
+        if (swingingPoint != null && !isSwinging && GameManager.Instance.redScarf)
         {
             ToggleIsSwinging();
         }
@@ -199,5 +156,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             Invoke("ReturnPlayerState", 0.1f);
         }
+    }
+    private void ReturnGravityAdjustments()
+    {
+        characterRigidBody.gravityScale = characterGravity;
     }
 }
