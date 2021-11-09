@@ -84,6 +84,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     
     private void LaunchPlayerIntoDash()
     {
+        animator.SetTrigger("isJump");
         characterRigidBody.velocity = Vector2.zero;
         characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength);
     }
