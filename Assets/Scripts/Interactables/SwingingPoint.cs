@@ -6,7 +6,6 @@ public class SwingingPoint : ActivatableObject
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
-    public DistanceJoint2D theSwingJoint;
     [SerializeField] private GameObject theFirstTarget;
     [SerializeField] private GameObject theSecondTarget;
     [SerializeField] private GameObject[] thePossibleTargets;
@@ -15,11 +14,6 @@ public class SwingingPoint : ActivatableObject
     protected override void Start()
     {
         base.Start();
-        if (theSwingJoint == null)
-        {
-            theSwingJoint = GetComponent<DistanceJoint2D>();
-        }
-        theSwingJoint.enabled = false;
     }
 
     protected override void Activate()
@@ -30,7 +24,6 @@ public class SwingingPoint : ActivatableObject
     protected override void DeActivate()
     {
         isSwingable = false;
-        theSwingJoint.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

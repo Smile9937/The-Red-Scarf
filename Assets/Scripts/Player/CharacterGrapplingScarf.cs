@@ -17,6 +17,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float dashDelayBeforeStart = 0.2f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
+    [SerializeField] float playerDistanceToStop = 0.2f;
 
     float characterGravity = 1f;
 
@@ -72,10 +73,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
         if (hasStartedSwing && isSwinging && swingingPoint != null)
         {
             characterRigidBody.velocity = new Vector2((originalLaunchPosition.x - targetLaunchPosition.x) * Mathf.Abs(dashXStrength), (originalLaunchPosition.y - targetLaunchPosition.y) * Mathf.Abs(dashYStrength)) * -1f;
-            if (Mathf.Approximately(Mathf.Abs(originalLaunchPosition.x - targetLaunchPosition.x) + Mathf.Abs(originalLaunchPosition.y - targetLaunchPosition.y), 0.1f))
+            if (Mathf.Abs(originalLaunchPosition.x - targetLaunchPosition.x) <= playerDistanceToStop || Mathf.Abs(originalLaunchPosition.y - targetLaunchPosition.y) <= playerDistanceToStop)
             {
                 ReturnPlayerState();
                 isSwinging = false;
+                CancelInvoke("ToggleIsSwinging");
+                CancelInvoke("ReturnPlayerState");
             }
         }
     }
@@ -131,8 +134,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
             characterRigidBody.gravityScale = gravityAdjustment;
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
-            Invoke("ToggleIsSwinging", dashDuration + dashDelayBeforeStart);
-            Invoke("ReturnPlayerState", dashDuration + dashDelayBeforeStart + 0.1f);
+            Invoke("ToggleIsSwinging", dashDuration);
+            Invoke("ReturnPlayerState", dashDuration * 1.05f);
         }
     }
 
@@ -178,6 +181,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         player.state = Player.State.Neutral;
         characterRigidBody.gravityScale = characterGravity;
         targetLaunchPosition = new Vector2(0,0);
+        originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
         animator.SetBool("isScarfThrown", false);
     }
 

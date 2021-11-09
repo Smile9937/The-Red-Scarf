@@ -1,67 +1,64 @@
 fileFormatVersion: 2
-guid: f756c1c10927c5c4287e6ab7d5242f80
+guid: 50e0d01c009585742832b1bf5aeb2c40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2440719061487571850
-    second: PrototypeTiles2_0
+      213: 1080617281013810667
+    second: newtileshit1_0
   - first:
-      213: 1001449961698165092
-    second: PrototypeTiles2_1
+      213: 3055909569856411735
+    second: newtileshit1_1
   - first:
-      213: -744471701168364682
-    second: PrototypeTiles2_2
+      213: -6226551786450439659
+    second: newtileshit1_2
   - first:
-      213: 260048820945030176
-    second: PrototypeTiles2_3
+      213: 3586081102362821313
+    second: newtileshit1_3
   - first:
-      213: 7071973875377338088
-    second: PrototypeTiles2_4
+      213: -97424300290697244
+    second: newtileshit1_4
   - first:
-      213: 6725453675472787760
-    second: PrototypeTiles2_5
+      213: -2856258359823699206
+    second: newtileshit1_5
   - first:
-      213: 1480517510488917033
-    second: PrototypeTiles2_6
+      213: -3196811866380050958
+    second: newtileshit1_6
   - first:
-      213: -2645363539630393426
-    second: PrototypeTiles2_7
+      213: -2835866821540686960
+    second: newtileshit1_7
   - first:
-      213: 4496528602788843781
-    second: PrototypeTiles2_8
+      213: 6849352899030720877
+    second: newtileshit1_8
   - first:
-      213: 5162389962608085415
-    second: PrototypeTiles2_9
+      213: -3832407208613482763
+    second: newtileshit1_9
   - first:
-      213: 860117439408478740
-    second: PrototypeTiles2_10
+      213: 2347043654929774062
+    second: newtileshit1_10
   - first:
-      213: 8588090051974007591
-    second: PrototypeTiles2_11
+      213: -4374636186278927010
+    second: newtileshit1_11
   - first:
-      213: 4516874211781827060
-    second: PrototypeTiles2_12
+      213: 4459227230614323228
+    second: newtileshit1_12
   - first:
-      213: 677130885313641800
-    second: PrototypeTiles2_13
+      213: -2818079205355422457
+    second: newtileshit1_13
   - first:
-      213: -5009291806379021183
-    second: PrototypeTiles2_14
+      213: 8978105323228414247
+    second: newtileshit1_14
   - first:
-      213: -929359556122696883
-    second: PrototypeTiles2_15
+      213: 7941077821377917361
+    second: newtileshit1_15
   - first:
-      213: 7490596166307008591
-    second: PrototypeTiles2_16
+      213: 646993820115104869
+    second: newtileshit1_16
   - first:
-      213: -4029735695482904348
-    second: PrototypeTiles2_17
+      213: 8756331359044219408
+    second: newtileshit1_17
   - first:
-      213: 3427976829213772611
-    second: PrototypeTiles2_18
-  - first:
-      213: -1292360460173147362
-    second: PrototypeTiles2_19
+      213: 7100874239316502598
+    second: newtileshit1_18
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,11 +160,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeTiles2_0
+      name: newtileshit1_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
+        x: 1
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -177,18 +174,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67c228fe1f2d02ed0800000000000000
-      internalID: -2440719061487571850
+      spriteID: be50af411bf1ffe00800000000000000
+      internalID: 1080617281013810667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_1
+      name: newtileshit1_1
       rect:
         serializedVersion: 2
         x: 19
-        y: 2
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -198,18 +195,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461095b2f6dd5ed00800000000000000
-      internalID: 1001449961698165092
+      spriteID: 75812091095c86a20800000000000000
+      internalID: 3055909569856411735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_2
+      name: newtileshit1_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
+        x: 37
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -219,18 +216,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6736782aeea1ba5f0800000000000000
-      internalID: -744471701168364682
+      spriteID: 5123c01d328d699a0800000000000000
+      internalID: -6226551786450439659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_3
+      name: newtileshit1_3
       rect:
         serializedVersion: 2
-        x: 53
-        y: 2
+        x: 55
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -240,18 +237,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02c00bc5601eb9300800000000000000
-      internalID: 260048820945030176
+      spriteID: 1c2c31243c154c130800000000000000
+      internalID: 3586081102362821313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_4
+      name: newtileshit1_4
       rect:
         serializedVersion: 2
-        x: 70
-        y: 2
+        x: 73
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -261,18 +258,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e675be45c2b42260800000000000000
-      internalID: 7071973875377338088
+      spriteID: 4e79ea47d11e5aef0800000000000000
+      internalID: -97424300290697244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_5
+      name: newtileshit1_5
       rect:
         serializedVersion: 2
-        x: 87
-        y: 2
+        x: 91
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -282,18 +279,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03996ef1c7c955d50800000000000000
-      internalID: 6725453675472787760
+      spriteID: af2f7f3a7288c58d0800000000000000
+      internalID: -2856258359823699206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_6
+      name: newtileshit1_6
       rect:
         serializedVersion: 2
-        x: 104
-        y: 2
+        x: 109
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -303,18 +300,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9240078e4dadb8410800000000000000
-      internalID: 1480517510488917033
+      spriteID: 2fdd9a28b84a2a3d0800000000000000
+      internalID: -3196811866380050958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_7
+      name: newtileshit1_7
       rect:
         serializedVersion: 2
-        x: 121
-        y: 2
+        x: 127
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -324,18 +321,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea77f8e50e7c94bd0800000000000000
-      internalID: -2645363539630393426
+      spriteID: 09350cf962af4a8d0800000000000000
+      internalID: -2835866821540686960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_8
+      name: newtileshit1_8
       rect:
         serializedVersion: 2
-        x: 138
-        y: 2
+        x: 145
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -345,18 +342,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 501dc9bc0f0e66e30800000000000000
-      internalID: 4496528602788843781
+      spriteID: d61a4081c2acd0f50800000000000000
+      internalID: 6849352899030720877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_9
+      name: newtileshit1_9
       rect:
         serializedVersion: 2
-        x: 155
-        y: 2
+        x: 163
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -366,18 +363,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a90c49c15e74a740800000000000000
-      internalID: 5162389962608085415
+      spriteID: 5fe62ffd2fd80dac0800000000000000
+      internalID: -3832407208613482763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_10
+      name: newtileshit1_10
       rect:
         serializedVersion: 2
-        x: 172
-        y: 2
+        x: 181
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -387,18 +384,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41a9f090140cfeb00800000000000000
-      internalID: 860117439408478740
+      spriteID: ee57c6cd4cf529020800000000000000
+      internalID: 2347043654929774062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_11
+      name: newtileshit1_11
       rect:
         serializedVersion: 2
-        x: 189
-        y: 2
+        x: 199
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -408,18 +405,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72b0afe86660f2770800000000000000
-      internalID: 8588090051974007591
+      spriteID: e55664ff09b2a43c0800000000000000
+      internalID: -4374636186278927010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_12
+      name: newtileshit1_12
       rect:
         serializedVersion: 2
-        x: 206
-        y: 2
+        x: 217
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -429,18 +426,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9d0680a292fae30800000000000000
-      internalID: 4516874211781827060
+      spriteID: c10048d4a8b52ed30800000000000000
+      internalID: 4459227230614323228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_13
+      name: newtileshit1_13
       rect:
         serializedVersion: 2
-        x: 223
-        y: 2
+        x: 235
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -450,18 +447,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84db09dd3f6a56900800000000000000
-      internalID: 677130885313641800
+      spriteID: 70dffdfb4eb24e8d0800000000000000
+      internalID: -2818079205355422457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_14
+      name: newtileshit1_14
       rect:
         serializedVersion: 2
-        x: 240
-        y: 2
+        x: 253
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -471,18 +468,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18ce08874ab6b7ab0800000000000000
-      internalID: -5009291806379021183
+      spriteID: 721c2133933a89c70800000000000000
+      internalID: 8978105323228414247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_15
+      name: newtileshit1_15
       rect:
         serializedVersion: 2
-        x: 257
-        y: 2
+        x: 271
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -492,18 +489,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4321bc58604a13f0800000000000000
-      internalID: -929359556122696883
+      spriteID: 1b1b6f47430643e60800000000000000
+      internalID: 7941077821377917361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_16
+      name: newtileshit1_16
       rect:
         serializedVersion: 2
-        x: 274
-        y: 2
+        x: 289
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -513,18 +510,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f40d1a0c681f3f760800000000000000
-      internalID: 7490596166307008591
+      spriteID: 56475d393759af800800000000000000
+      internalID: 646993820115104869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_17
+      name: newtileshit1_17
       rect:
         serializedVersion: 2
-        x: 291
-        y: 2
+        x: 307
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -534,39 +531,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e0a7044cb08318c0800000000000000
-      internalID: -4029735695482904348
+      spriteID: 012b17f5afcb48970800000000000000
+      internalID: 8756331359044219408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeTiles2_18
-      rect:
-        serializedVersion: 2
-        x: 308
-        y: 2
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34b8e8393ce929f20800000000000000
-      internalID: 3427976829213772611
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PrototypeTiles2_19
+      name: newtileshit1_18
       rect:
         serializedVersion: 2
         x: 325
-        y: 2
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -576,8 +552,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e138e99320d901ee0800000000000000
-      internalID: -1292360460173147362
+      spriteID: 648ae25af7f5b8260800000000000000
+      internalID: 7100874239316502598
       vertices: []
       indices: 
       edges: []

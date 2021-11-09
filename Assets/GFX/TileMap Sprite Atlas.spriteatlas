@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TileMap Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 1775741087e271748b2e0f2b41108fb9, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 5162389962608085415, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 4496528602788843781, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 6725453675472787760, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 7071973875377338088, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -2645363539630393426, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 1480517510488917033, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 1001449961698165092, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -2440719061487571850, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 260048820945030176, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -744471701168364682, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -5009291806379021183, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -929359556122696883, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 7490596166307008591, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -4029735695482904348, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 860117439408478740, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 8588090051974007591, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 4516874211781827060, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 677130885313641800, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 3427976829213772611, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: -1292360460173147362, guid: f756c1c10927c5c4287e6ab7d5242f80, type: 3}
+  - {fileID: 3106341853739790030, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
+  - {fileID: 94058731202090889, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
+  - {fileID: 7145198348311737387, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
+  - {fileID: -3708508325519384304, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
+  - {fileID: -222851517536608669, guid: 209f7ce5c8670da4b8dc7ff71a0fdeba, type: 3}
+  - {fileID: -1905017227030424370, guid: 209f7ce5c8670da4b8dc7ff71a0fdeba, type: 3}
+  - {fileID: 773724167923521807, guid: 209f7ce5c8670da4b8dc7ff71a0fdeba, type: 3}
+  - {fileID: 7365232212257072054, guid: 209f7ce5c8670da4b8dc7ff71a0fdeba, type: 3}
+  - {fileID: -3832407208613482763, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 6849352899030720877, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 646993820115104869, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 8756331359044219408, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 8978105323228414247, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 7941077821377917361, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 4459227230614323228, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -2818079205355422457, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 2347043654929774062, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -4374636186278927010, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 7100874239316502598, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 3586081102362821313, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -6226551786450439659, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 3055909569856411735, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 1080617281013810667, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -2835866821540686960, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -3196811866380050958, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -2856258359823699206, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: -97424300290697244, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
+  - {fileID: 21300000, guid: d9cd3bdcfb607494285073f0c597fe8f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - PrototypeTiles2_9
+  - PrototypeTiles2_8
+  - PrototypeTiles2_5
+  - PrototypeTiles2_4
+  - PrototypeTiles2_7
+  - PrototypeTiles2_6
+  - PrototypeTiles2_1
+  - PrototypeTiles2_0
+  - PrototypeTiles2_3
+  - PrototypeTiles2_2
+  - PrototypeTiles2_14
+  - PrototypeTiles2_15
+  - PrototypeTiles2_16
+  - PrototypeTiles2_17
+  - PrototypeTiles2_10
+  - PrototypeTiles2_11
+  - PrototypeTiles2_12
+  - PrototypeTiles2_13
+  - PrototypeTiles2_18
+  - PrototypeTiles2_19
+  - Sprite-0002_2
+  - Sprite-0002_3
+  - Sprite-0002_0
+  - Sprite-0002_1
+  - Sprite-TilesFix1_3
+  - Sprite-TilesFix1_2
+  - Sprite-TilesFix1_1
+  - Sprite-TilesFix1_0
+  - newtileshit1_9
+  - newtileshit1_8
+  - newtileshit1_16
+  - newtileshit1_17
+  - newtileshit1_14
+  - newtileshit1_15
+  - newtileshit1_12
+  - newtileshit1_13
+  - newtileshit1_10
+  - newtileshit1_11
+  - newtileshit1_18
+  - newtileshit1_3
+  - newtileshit1_2
+  - newtileshit1_1
+  - newtileshit1_0
+  - newtileshit1_7
+  - newtileshit1_6
+  - newtileshit1_5
+  - newtileshit1_4
+  - Sprite-0001
+  m_RenderDataMap: {}
+  m_Tag: TileMap Sprite Atlas
+  m_IsVariant: 0
