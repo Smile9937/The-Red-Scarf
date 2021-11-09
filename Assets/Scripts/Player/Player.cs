@@ -163,6 +163,7 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
                 break;
             case State.Dash:
                 //Block();
+                myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
                 break;
         }
     }
@@ -272,6 +273,7 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 
     private void Jump()
     {
+        myAnimator.SetTrigger("isJump");
         myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
     }
     public void Die()

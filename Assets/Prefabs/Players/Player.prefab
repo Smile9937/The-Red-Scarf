@@ -254,14 +254,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swingingPoint: {fileID: 0}
-  swingingPointAlt: {fileID: 0}
-  swingingPoints: []
   characterRigidBody: {fileID: 537526541753501222}
-  dashXStrength: 1.75
-  dashYStrength: 3
-  dashDelayBeforeStart: 0.2
+  dashStrength: 1.5
   dashDuration: 1
   gravityAdjustment: 0.5
+  playerDistanceToStop: 0.2
 --- !u!1 &537526542139599631
 GameObject:
   m_ObjectHideFlags: 0
