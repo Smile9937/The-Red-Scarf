@@ -3,27 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour, IDamageable, ICharacter
+public class Player : MonoBehaviour, IDamageable, ICharacter
 {
-    [Header("Attack Variables")]
-    [SerializeField] private Vector2 attackSize = new Vector2(0.5f, 5f);
-    [SerializeField] private int attackDamage = 40;
-    [SerializeField] protected float meleeAttackRate = 2f;
+    private float nextGroundSlamAttackTime = 0f;
 
-    protected float nextGroundSlamAttackTime = 0f;
-    protected float nextMeleeAttackTime = 0f;
-
-    [Header("Knockback Variables")]
-    [SerializeField] private Vector2 knockbackVelocity;
-    [SerializeField] private float knockbackLength;
-
-    [Header("Ground Slam Variables")]
-    [SerializeField] private Vector2 groundSlamArea;
-
-    [SerializeField] private int groundSlamDamage;
-    [SerializeField] private Vector2 groundSlamKnockbackVelocity;
-    [SerializeField] private float groundslamKnockbackLength;
-    [SerializeField] private float groundSlamAttackRate = 10f;
+    [HideInInspector]
+    public float nextMeleeAttackTime = 0f;
 
     [Header("Movement Variables")]
     private float direction;
@@ -54,7 +39,10 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 
     private Vector2 knockback;
 
-    [HideInInspector]
+    public float meleeAttackRate;
+    public bool hasBaseballBat;
+
+    //[HideInInspector]
     public State state;
     public enum State
     {
@@ -79,26 +67,35 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 
     //[HideInInspector] public PlayerStats currentCharacter;
 
-    public float speed;
-    public float jumpForce;
-    public float jumpTime;
-
     [Header("Animator Controllers")]
     [SerializeField] private RuntimeAnimatorController redScarfUnarmedAnimator;
-    [SerializeField] protected RuntimeAnimatorController redScarfBaseballbatController;
+    [SerializeField] public RuntimeAnimatorController redScarfBaseballbatController;
     [SerializeField] private RuntimeAnimatorController dressAnimator;
 
-    protected BoxCollider2D myCollider;
-    protected CircleCollider2D rollCollider;
-    protected Rigidbody2D myRigidbody;
+    [HideInInspector]
+    public BoxCollider2D myCollider;
+    [HideInInspector]
+    public CircleCollider2D rollCollider;
+    [HideInInspector]
+    public Rigidbody2D myRigidbody;
     [HideInInspector] public Animator myAnimator;
 
     [Header("Components")]
-    [SerializeField] protected Transform attackPoint;
-    [SerializeField] private LayerMask targetLayers;
-    [SerializeField] protected DamagePopUp damageText;
+    public Transform attackPoint;
+    public LayerMask targetLayers;
+    public DamagePopUp damageText;
     [SerializeField] private LayerMask groundSlamLayer;
-    protected virtual void Start()
+
+    public RedScarfPlayer redScarf;
+    public DressPlayer dress;
+
+    public PlayerStats redScarfStats;
+    public PlayerStats dressStats;
+
+    private PlayerStats currentPlayerStats;
+
+    private GameObject currentPlayer;
+    private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -111,21 +108,41 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         GameManager.Instance.player = this;
         //GameManager.Instance.LoadPlayerStats();
 
-        jumpTimeCounter = jumpTime;
+
         transform.position = GameManager.Instance.currentSpawnpoint;
         state = State.Neutral;
 
         rollCollider.enabled = false;
+        GameManager.Instance.LoadPlayerStats();
+
+        SetCurrentCharacter();
+        jumpTimeCounter = currentPlayerStats.jumpTime;
+    }
+    public void SetCurrentCharacter()
+    {
+        if (GameManager.Instance.redScarf)
+        {
+            currentPlayerStats = redScarfStats;
+            redScarf.gameObject.SetActive(true);
+            dress.gameObject.SetActive(false);
+        }
+        else
+        {
+            currentPlayerStats = dressStats;
+            dress.gameObject.SetActive(true);
+            redScarf.gameObject.SetActive(false);
+        }
+        meleeAttackRate = currentPlayerStats.meleeAttackRate;
         SetAnimator();
     }
     private void SetAnimator()
     {
-        if (GameManager.Instance.hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
+        if (hasBaseballBat && GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfBaseballbatController; }
         else if (GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfUnarmedAnimator; }
         else { myAnimator.runtimeAnimatorController = dressAnimator; }
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
 
@@ -139,13 +156,11 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         if (InputManager.Instance.GetKey(KeybindingActions.Left)
             && !InputManager.Instance.GetKey(KeybindingActions.Right))
         {
-            Debug.Log("Pressed Left");
             direction = -1;
         }
         else if (InputManager.Instance.GetKey(KeybindingActions.Right) &&
             !InputManager.Instance.GetKey(KeybindingActions.Left))
         {
-            Debug.Log("Pressed Right");
             direction = 1;
         }
         else
@@ -164,6 +179,14 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
             case State.Dash:
                 //Block();
                 break;
+        }
+
+        //Swap Character
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
+        {
+            GameManager.Instance.SwapCharacter();
+            SetCurrentCharacter();
+            SetAnimator();
         }
     }
 
@@ -191,7 +214,7 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         }
     }
 
-    protected virtual void FixedUpdate()
+    private void FixedUpdate()
     {
         if (knockbackCount > 0)
         {
@@ -224,10 +247,9 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         Move();
     }
 
-    protected void Move()
+    private void Move()
     {
-        Debug.Log("Move");
-        myRigidbody.velocity = new Vector2(direction * speed, myRigidbody.velocity.y);
+        myRigidbody.velocity = new Vector2(direction * currentPlayerStats.speed, myRigidbody.velocity.y);
     }
 
     private void TurnAround(float horizontal)
@@ -243,7 +265,7 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
     {
         if (grounded)
         {
-            jumpTimeCounter = jumpTime;
+            jumpTimeCounter = currentPlayerStats.jumpTime;
             myAnimator.SetFloat("axisYSpeed", 0);
         }
         else
@@ -272,7 +294,8 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 
     private void Jump()
     {
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+        myAnimator.SetTrigger("isJump");
+        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, currentPlayerStats.jumpForce);
     }
     public void Die()
     {
@@ -323,9 +346,9 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         }
     }
 
-    protected void MeleeAttack()
+    private void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 90f, targetLayers);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, currentPlayerStats.attackSize, 90f, targetLayers);
 
         foreach (Collider2D target in hitTargets)
         {
@@ -336,15 +359,15 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
 
                 if (character != null)
                 {
-                    character.KnockBack(gameObject, knockbackVelocity, knockbackLength);
+                    character.KnockBack(gameObject, currentPlayerStats.knockbackVelocity, currentPlayerStats.knockbackLength);
                 }
 
                 if (damageText != null && target.tag == "Enemy")
                 {
                     Instantiate(damageText, target.transform.position, Quaternion.identity);
-                    damageText.SetText(attackDamage);
+                    damageText.SetText(currentPlayerStats.attackDamage);
                 }
-                damageable.Damage(attackDamage, false);
+                damageable.Damage(currentPlayerStats.attackDamage, false);
             }
         }
     }
@@ -357,7 +380,7 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
                 state = State.GroundSlam;
                 myRigidbody.velocity = new Vector2(0, -20);
                 gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-                nextGroundSlamAttackTime = Time.time + 1f / groundSlamAttackRate;
+                nextGroundSlamAttackTime = Time.time + 1f / currentPlayerStats.groundSlamAttackRate;
             }
         }
 
@@ -365,31 +388,41 @@ public abstract class Player : MonoBehaviour, IDamageable, ICharacter
         {
             state = State.Neutral;
             gameObject.layer = LayerMask.NameToLayer("Player");
-            Collider2D[] hitTargets = Physics2D.OverlapBoxAll(transform.position, groundSlamArea, 0f, groundSlamLayer);
+            Collider2D[] hitTargets = Physics2D.OverlapBoxAll(transform.position, currentPlayerStats.groundSlamArea, 0f, groundSlamLayer);
 
             foreach (Collider2D target in hitTargets)
             {
                 IDamageable damageable = target.GetComponent<IDamageable>();
                 if (damageable != null)
                 {
-                    damageable.Damage(groundSlamDamage, false);
+                    damageable.Damage(currentPlayerStats.groundSlamDamage, false);
 
                     ICharacter character = target.GetComponent<ICharacter>();
                     if (character != null)
                     {
-                        character.KnockBack(gameObject, groundSlamKnockbackVelocity, groundslamKnockbackLength);
+                        character.KnockBack(gameObject, currentPlayerStats.groundSlamKnockbackVelocity, currentPlayerStats.groundslamKnockbackLength);
                         Instantiate(damageText, target.transform.position, Quaternion.identity);
-                        damageText.SetText(groundSlamDamage);
+                        damageText.SetText(currentPlayerStats.groundSlamDamage);
                     }
                 }
             }
         }
     }
-    /*private void OnDrawGizmosSelected()
+    public void GainBaseballBat()
+    {
+        hasBaseballBat = true;
+        myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
+    }
+
+    private void StopRoll()
+    {
+        //redScarf.StopRoll();
+    }
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawCube(groundCheck.position, groundCheckSize);
         if (attackPoint == null)
             return;
-        Gizmos.DrawWireCube(attackPoint.position, attackSize);
-    }*/
+        //Gizmos.DrawWireCube(attackPoint.position, attackSize);
+    }
 }

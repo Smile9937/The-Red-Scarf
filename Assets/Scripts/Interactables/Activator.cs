@@ -26,11 +26,6 @@ public class Activator : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
     }
-
-    private void OnLoad()
-    {
-        Destroy(gameObject);
-    }
     public void Damage(int damage, bool bypassInvincibility)
     {
         switch(type)
