@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DressPlayer : Player
+public class DressPlayer : MonoBehaviour
 {
     [Header("Block Variables")]
     [SerializeField] private Transform blockPoint;
@@ -29,34 +29,37 @@ public class DressPlayer : Player
 
     [SerializeField] private Bullet bullet;
 
-    protected override void Start()
+    [SerializeField] private Player player;
+
+    [SerializeField] private PlayerStats myStats;
+
+    private void Start()
     {
-        base.Start();
         currentComposure = startComposure;
         StartCoroutine(RegainComposure());
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
+        if(PauseMenu.Instance.gamePaused)
+        {
+            return;
+        }
         PlayerUI.Instance.SetComposureText(currentComposure);
 
-        if(state == State.Neutral)
+        if(player.state == Player.State.Neutral)
         {
             gainComposure = true;
+            HandleBlocking();
+            HandleDressRanged();
+            HandleDressMelee();
         }
-        else if (state == State.Blocking)
+        else if (player.state == Player.State.Blocking)
         {
             gainComposure = false;
             Block();
         }
-        if (!PauseMenu.Instance.gamePaused && state == State.Neutral)
-        {
-            HandleDressRanged();
-            HandleDressMelee();
-        }
-
-        }
+    }
 
     private IEnumerator RegainComposure()
     {
@@ -78,15 +81,15 @@ public class DressPlayer : Player
         {
             Debug.Log("Not enough composure");
             StopCoroutine(loseComposureCoroutine);
-            state = State.Neutral;
+            player.state = Player.State.Neutral;
         }
         else
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge))
             {
-                state = State.Blocking;
+                player.state = Player.State.Blocking;
                 loseComposureCoroutine = StartCoroutine(LoseComposure());
-                myRigidbody.velocity = Vector2.zero;
+                player.myRigidbody.velocity = Vector2.zero;
 
                 Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
 
@@ -116,7 +119,7 @@ public class DressPlayer : Player
         {
             Debug.Log("Not enough composure");
             StopCoroutine(loseComposureCoroutine);
-            state = State.Neutral;
+            player.state = Player.State.Neutral;
         }
         else
         {
@@ -134,7 +137,7 @@ public class DressPlayer : Player
             if (InputManager.Instance.GetKeyUp(KeybindingActions.Dodge))
             {
                 StopCoroutine(loseComposureCoroutine);
-                state = State.Neutral;
+                player.state = Player.State.Neutral;
             }
         }
     }
@@ -148,17 +151,42 @@ public class DressPlayer : Player
     }
     private void HandleDressMelee()
     {
-        if (Time.time >= nextMeleeAttackTime)
+        if (Time.time >= player.nextMeleeAttackTime)
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
-                myAnimator.SetTrigger("attackTrigger");
+                player.myAnimator.SetTrigger("attackTrigger");
                 //MeleeAttack() called in animation
-                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
             }
         }
     }
 
+    private void MeleeAttack()
+    {
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.targetLayers);
+
+        foreach (Collider2D target in hitTargets)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                ICharacter character = target.GetComponent<ICharacter>();
+
+                if (character != null)
+                {
+                    character.KnockBack(gameObject, myStats.knockbackVelocity, myStats.knockbackLength);
+                }
+
+                if (player.damageText != null && target.tag == "Enemy")
+                {
+                    Instantiate(player.damageText, target.transform.position, Quaternion.identity);
+                    player.damageText.SetText(myStats.attackDamage);
+                }
+                damageable.Damage(myStats.attackDamage, false);
+            }
+        }
+    }
     private void HandleDressRanged()
     {
         if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
@@ -167,7 +195,7 @@ public class DressPlayer : Player
             {
                 if (InputManager.Instance.GetKey(KeybindingActions.Down))
                 {
-                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, gunJumpForce);
+                    player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, gunJumpForce);
                     Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                 }
                 else if (InputManager.Instance.GetKey(KeybindingActions.Up))
@@ -176,7 +204,7 @@ public class DressPlayer : Player
                 }
                 else
                 {
-                    Shoot(attackPoint.position, attackPoint.rotation);
+                    Shoot(player.attackPoint.position, player.attackPoint.rotation);
                 }
             }
         }
@@ -186,7 +214,7 @@ public class DressPlayer : Player
     {
         currentComposure -= gunComposureCost;
         Bullet currentBullet = Instantiate(bullet, attackPos, rotation);
-        currentBullet.damageText = damageText;
+        currentBullet.damageText = player.damageText;
         nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
     }
 

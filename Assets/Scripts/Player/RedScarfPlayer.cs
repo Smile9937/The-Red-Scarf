@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedScarfPlayer : Player
+public class RedScarfPlayer : MonoBehaviour
 {
     [Header("Roll Variables")]
     [SerializeField] private float startRollSpeed = 200f;
@@ -11,44 +11,45 @@ public class RedScarfPlayer : Player
     [SerializeField] private LayerMask rollLayer;
     private float rollSpeed;
 
-    public bool hasBaseballBat;
+    [SerializeField] PlayerStats myStats;
 
+    [SerializeField] private Player player;
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-        if (!PauseMenu.Instance.gamePaused && state == State.Neutral && hasBaseballBat)
+        if(player.state == Player.State.Neutral)
+        {
+            HandleRolling();
+        }
+
+        if (!PauseMenu.Instance.gamePaused && player.state == Player.State.Neutral && player.hasBaseballBat)
         {
             HandleRedScarfMelee();
         }
     }
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(state == State.Neutral)
-        {
-            HandleRolling();
-        }
-        else if(state == State.Rolling)
+        if(player.state == Player.State.Rolling)
         {
             Roll();
         }
     }
     private void HandleRolling()
     {
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && grounded)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && player.grounded)
         {
-            state = State.Rolling;
+            player.state = Player.State.Rolling;
             rollSpeed = startRollSpeed;
-            myRigidbody.velocity = Vector2.zero;
-            myAnimator.SetBool("isDodge", true);
+            player.myRigidbody.velocity = Vector2.zero;
+            player.myAnimator.SetBool("isDodge", true);
         }
     }
     private void Roll()
     {
         gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-        rollCollider.enabled = true;
-        myCollider.enabled = false;
-        myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
+        player.rollCollider.enabled = true;
+        player.myCollider.enabled = false;
+        player.myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
 
         rollSpeed -= rollSpeed * rollSpeedLoss * Time.deltaTime;
 
@@ -58,32 +59,52 @@ public class RedScarfPlayer : Player
         }
     }
 
-    private void StopRoll()
+    public void StopRoll()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
         if (hit.collider == null)
         {
-            myAnimator.SetBool("isDodge", false);
-            state = State.Neutral;
+            player.myAnimator.SetBool("isDodge", false);
+            player.state = Player.State.Neutral;
             gameObject.layer = LayerMask.NameToLayer("Player");
-            myCollider.enabled = true;
-            rollCollider.enabled = false;
+            player.myCollider.enabled = true;
+            player.rollCollider.enabled = false;
         }
     }
-    public void GainBaseballBat()
+    private void MeleeAttack()
     {
-        hasBaseballBat = true;
-        myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.targetLayers);
+
+        foreach (Collider2D target in hitTargets)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                ICharacter character = target.GetComponent<ICharacter>();
+
+                if (character != null)
+                {
+                    character.KnockBack(gameObject, myStats.knockbackVelocity, myStats.knockbackLength);
+                }
+
+                if (player.damageText != null && target.tag == "Enemy")
+                {
+                    Instantiate(player.damageText, target.transform.position, Quaternion.identity);
+                    player.damageText.SetText(myStats.attackDamage);
+                }
+                damageable.Damage(myStats.attackDamage, false);
+            }
+        }
     }
     private void HandleRedScarfMelee()
     {
-        if (Time.time >= nextMeleeAttackTime)
+        if (Time.time >= player.nextMeleeAttackTime)
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
-                myAnimator.SetTrigger("attackTrigger");
+                player.myAnimator.SetTrigger("attackTrigger");
                 //MeleeAttack() called in animation
-                nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
+                player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
             }
         }
     }
