@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     [Header("General Stats")]
-    public PlayerCharacterEnum playerCharacter;
     public float speed;
     public float jumpForce;
     public float jumpTime;
