@@ -7,16 +7,29 @@ public class RedScarfPlayer : MonoBehaviour
     [Header("Roll Variables")]
     [SerializeField] private float startRollSpeed = 200f;
     [SerializeField] private float rollSpeedLoss = 10f;
-    [SerializeField] private float rollSpeedThreshold = 1.5f;
     [SerializeField] private LayerMask rollLayer;
     private float rollSpeed;
 
-    [SerializeField] PlayerStats myStats;
+    [Header("Rage Variables")]
+    [SerializeField] private int damagePerRage;
+    [SerializeField] private int speedPerRage;
+    [SerializeField] private int maxRage;
+    [SerializeField] private float timeBeforeRageLoss;
+    private int currentRageCount;
+    private int currentRageDamage;
+    private IEnumerator loseRageCoroutine;
 
+    [Header("Components")]
+    [SerializeField] PlayerStats myStats;
     [SerializeField] private Player player;
 
-    private void Update()
+    private void Start()
     {
+        PlayerUI.Instance.SetRageText(currentRageCount);
+    }
+    private void Update()
+    {        
+        HandleRage();
         if(player.state == Player.State.Neutral)
         {
             HandleRolling();
@@ -52,7 +65,7 @@ public class RedScarfPlayer : MonoBehaviour
 
     private void Roll()
     {
-        gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
+        player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
         player.rollCollider.enabled = true;
         player.myCollider.enabled = false;
         player.myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
@@ -65,6 +78,7 @@ public class RedScarfPlayer : MonoBehaviour
     {
         player.state = Player.State.ReturningToNeutral;
         player.myRigidbody.velocity = Vector2.zero;
+        player.gameObject.layer = LayerMask.NameToLayer("Player");
     }
     public void ReturnFromRolling()
     {
@@ -72,14 +86,25 @@ public class RedScarfPlayer : MonoBehaviour
         if (hit.collider == null)
         {
             player.state = Player.State.Neutral;
-            gameObject.layer = LayerMask.NameToLayer("Player");
             player.myCollider.enabled = true;
             player.rollCollider.enabled = false;
         }
         if(hit.collider != null)
         {
-            Debug.Log("Test");
             StartRoll();
+        }
+    }
+    private void HandleRedScarfMelee()
+    {
+        if (player.state == Player.State.Rolling) return;
+        if (Time.time >= player.nextMeleeAttackTime)
+        {
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
+            {
+                player.myAnimator.SetTrigger("attackTrigger");
+                //MeleeAttack() called in animation
+                player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
+            }
         }
     }
     public void MeleeAttack()
@@ -96,28 +121,39 @@ public class RedScarfPlayer : MonoBehaviour
                 if (character != null)
                 {
                     character.KnockBack(gameObject, myStats.knockbackVelocity, myStats.knockbackLength);
+                    GainRage();
                 }
 
                 if (player.damageText != null && target.tag == "Enemy")
                 {
                     Instantiate(player.damageText, target.transform.position, Quaternion.identity);
-                    player.damageText.SetText(myStats.attackDamage);
+                    player.damageText.SetText(myStats.attackDamage + currentRageDamage);
                 }
-                damageable.Damage(myStats.attackDamage, false);
+                damageable.Damage(myStats.attackDamage + currentRageDamage, false);
             }
         }
     }
-    private void HandleRedScarfMelee()
+    private void GainRage()
     {
-        if (player.state == Player.State.Rolling) return;
-        if (Time.time >= player.nextMeleeAttackTime)
+        currentRageCount++;
+        PlayerUI.Instance.SetRageText(currentRageCount);
+
+        if(loseRageCoroutine != null)
         {
-            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
-            {
-                player.myAnimator.SetTrigger("attackTrigger");
-                //MeleeAttack() called in animation
-                player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
-            }
+            StopCoroutine(loseRageCoroutine);
         }
+        loseRageCoroutine = LoseRage();
+        StartCoroutine(loseRageCoroutine);
+    }
+    private void HandleRage()
+    {
+        currentRageDamage = currentRageCount * damagePerRage;
+    }
+
+    private IEnumerator LoseRage()
+    {
+        yield return new WaitForSeconds(timeBeforeRageLoss);
+        currentRageCount = 0;
+        PlayerUI.Instance.SetRageText(currentRageCount);
     }
 }
