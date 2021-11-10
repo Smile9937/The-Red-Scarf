@@ -6,12 +6,18 @@ public class SwingingPoint : ActivatableObject
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
+    public float distanceBias = 0;
     [SerializeField] private GameObject theTarget;
+    [SerializeField] CharacterGrapplingScarf theGrapplingScarf;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        if (FindObjectOfType<CharacterGrapplingScarf>() && theGrapplingScarf == null)
+        {
+            theGrapplingScarf = FindObjectOfType<CharacterGrapplingScarf>();
+        }
     }
 
     protected override void Activate()
@@ -28,11 +34,11 @@ public class SwingingPoint : ActivatableObject
     {
         if (collision.tag == "Player" && isSwingable)
         {
-            if (collision.GetComponent<CharacterGrapplingScarf>())
+            if (theGrapplingScarf != null)
             {
-                if (collision.GetComponent<CharacterGrapplingScarf>().swingingPoint == null)
+                if (theGrapplingScarf.swingingPoint == null)
                 {
-                    collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theTarget);
+                    theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
                 }
             }
         }
@@ -41,9 +47,9 @@ public class SwingingPoint : ActivatableObject
     {
         if (collision.tag == "Player")
         {
-            if (collision.GetComponent<CharacterGrapplingScarf>())
+            if (theGrapplingScarf != null)
             {
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null);
+                theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
             }
         }
     }

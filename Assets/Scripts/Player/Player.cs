@@ -340,6 +340,9 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         knockback = knockbackVelocity;
         knockbackCount = knockbackLength;
 
+        state = State.ReturningToNeutral;
+        myAnimator.SetTrigger("isStaggered");
+
         if (transform.position.x < knockbackSource.transform.position.x)
         {
             knockedFromRight = true;
@@ -419,6 +422,12 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     {
         redScarf.ReturnFromRolling();
     }
+
+    private void ReturnFromStaggering()
+    {
+        state = State.Neutral;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawCube(groundCheck.position, groundCheckSize);

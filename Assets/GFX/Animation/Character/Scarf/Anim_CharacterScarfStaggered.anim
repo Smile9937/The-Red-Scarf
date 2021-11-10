@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anim_Unarmed_CharacterScarfDodgeEnd
+  m_Name: Anim_CharacterScarfStaggered
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 6883045035089366676, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
+      value: {fileID: -8890927280190073141, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
     - time: 0.083333336
-      value: {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
+      value: {fileID: 3997787827301115998, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
     - time: 0.16666667
-      value: {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
+      value: {fileID: -896320634071624126, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - time: 0.41666666
+      value: {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - time: 0.5833333
+      value: {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,21 +48,23 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 6883045035089366676, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
-    - {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
-    - {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
+    - {fileID: -8890927280190073141, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - {fileID: 3997787827301115998, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - {fileID: -896320634071624126, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
+    - {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.18333334
+    m_StopTime: 0.59999996
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
-    m_LoopBlend: 0
+    m_LoopTime: 1
+    m_LoopBlend: 1
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
     m_LoopBlendPositionXZ: 0
@@ -72,15 +78,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: StopRoll
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.16666667
-    functionName: ReturnFromRolling
+  - time: 0.5833333
+    functionName: ReturnFromStaggering
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
