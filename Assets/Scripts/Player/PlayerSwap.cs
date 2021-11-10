@@ -16,7 +16,7 @@ public class PlayerSwap : MonoBehaviour
         //Swap Character
         if (InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
         {
-            GameManager.Instance.SwapCharacter();
+            //GameManager.Instance.SwapCharacter();
             SetCurrentCharacter();
             //SetAnimator();
         }
