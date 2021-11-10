@@ -13,7 +13,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float dashStrength = 1.5f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
-    [SerializeField] float playerDistanceToStop = 0.2f;
+    [Header("Distance Stats")]
+    [SerializeField] float closeDistanceThrow = 3f;
+    [SerializeField] float playerDistanceToStop = 5f;
 
     float characterGravity = 1f;
     bool isReadyToStop = false;
@@ -86,7 +88,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         animator.SetTrigger("isJump");
         characterRigidBody.velocity = Vector2.zero;
-        characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength);
+        float theBonusInStrength = 1f;
+        theBonusInStrength = Mathf.Clamp(Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) / closeDistanceThrow, 0.8f, 1.1f);
+        theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
+        Debug.Log(theBonusInStrength);
+        characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
     }
 
     public void SetSwingingPointAsTarget(GameObject swingPoint)
@@ -114,7 +120,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
                 targetLaunchPosition.Normalize();
-                Debug.Log(targetLaunchPosition);
                 originalLaunchPosition = this.transform.position;
             }
             characterRigidBody.gravityScale = gravityAdjustment;

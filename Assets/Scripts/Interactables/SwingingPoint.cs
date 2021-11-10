@@ -24,13 +24,16 @@ public class SwingingPoint : ActivatableObject
         isSwingable = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && isSwingable)
         {
             if (collision.GetComponent<CharacterGrapplingScarf>())
             {
-                collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theTarget);
+                if (collision.GetComponent<CharacterGrapplingScarf>().swingingPoint == null)
+                {
+                    collision.GetComponent<CharacterGrapplingScarf>().SetSwingingPointAsTarget(theTarget);
+                }
             }
         }
     }
