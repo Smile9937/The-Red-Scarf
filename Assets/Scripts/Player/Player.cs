@@ -52,6 +52,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         Dash,
         GroundSlam,
         Dead,
+        ReturningToNeutral,
     };
 
     /*[Serializable]
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     [Header("Components")]
     public Transform attackPoint;
-    public LayerMask targetLayers;
+    public LayerMask attackLayers;
     public DamagePopUp damageText;
     [SerializeField] private LayerMask groundSlamLayer;
 
@@ -93,8 +94,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public PlayerStats dressStats;
 
     private PlayerStats currentPlayerStats;
-
-    private GameObject currentPlayer;
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -314,6 +313,10 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     {
         if (isInvincible && !bypassInvincibility)
             return;
+
+        if (state == State.Blocking)
+            return;
+
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -346,31 +349,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         }
     }
 
-    private void MeleeAttack()
-    {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(attackPoint.position, currentPlayerStats.attackSize, 90f, targetLayers);
-
-        foreach (Collider2D target in hitTargets)
-        {
-            IDamageable damageable = target.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                ICharacter character = target.GetComponent<ICharacter>();
-
-                if (character != null)
-                {
-                    character.KnockBack(gameObject, currentPlayerStats.knockbackVelocity, currentPlayerStats.knockbackLength);
-                }
-
-                if (damageText != null && target.tag == "Enemy")
-                {
-                    Instantiate(damageText, target.transform.position, Quaternion.identity);
-                    damageText.SetText(currentPlayerStats.attackDamage);
-                }
-                damageable.Damage(currentPlayerStats.attackDamage, false);
-            }
-        }
-    }
     private void HandleGroundSlam()
     {
         if (Time.time >= nextGroundSlamAttackTime)
@@ -408,15 +386,37 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
             }
         }
     }
+
+    private void MeleeAttack()
+    {
+        if(GameManager.Instance.redScarf)
+        {
+            redScarf.MeleeAttack();
+        }
+        else
+        {
+            dress.MeleeAttack();
+        }
+    }
     public void GainBaseballBat()
     {
+        state = State.Neutral;
         hasBaseballBat = true;
         myAnimator.runtimeAnimatorController = redScarfBaseballbatController;
     }
 
+    private void StopRollAnimation()
+    {
+        myAnimator.SetBool("isDodge", false);
+    }
     private void StopRoll()
     {
-        //redScarf.StopRoll();
+        redScarf.StopRoll();
+    }
+
+    private void ReturnFromRolling()
+    {
+        redScarf.ReturnFromRolling();
     }
     private void OnDrawGizmosSelected()
     {

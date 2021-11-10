@@ -36,9 +36,11 @@ public class DressPlayer : MonoBehaviour
     private void Start()
     {
         currentComposure = startComposure;
+    }
+    private void OnEnable()
+    {
         StartCoroutine(RegainComposure());
     }
-
     private void Update()
     {
         if(PauseMenu.Instance.gamePaused)
@@ -123,17 +125,7 @@ public class DressPlayer : MonoBehaviour
         }
         else
         {
-            Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
-
-            foreach (Collider2D target in blockTargets)
-            {
-                Bullet bullet = target.GetComponent<Bullet>();
-                if (bullet != null)
-                {
-                    Destroy(bullet.gameObject);
-                }
-            }
-
+            player.myRigidbody.velocity = new Vector2(0, player.myRigidbody.velocity.y);
             if (InputManager.Instance.GetKeyUp(KeybindingActions.Dodge))
             {
                 StopCoroutine(loseComposureCoroutine);
@@ -162,9 +154,9 @@ public class DressPlayer : MonoBehaviour
         }
     }
 
-    private void MeleeAttack()
+    public void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.targetLayers);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)
         {
@@ -195,7 +187,7 @@ public class DressPlayer : MonoBehaviour
             {
                 if (InputManager.Instance.GetKey(KeybindingActions.Down))
                 {
-                    player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, gunJumpForce);
+                    player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, player.myRigidbody.velocity.y + gunJumpForce);
                     Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                 }
                 else if (InputManager.Instance.GetKey(KeybindingActions.Up))

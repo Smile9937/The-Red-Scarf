@@ -35,15 +35,21 @@ public class RedScarfPlayer : MonoBehaviour
         }
     }
     private void HandleRolling()
-    {
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && player.grounded)
+    {       
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Dodge) && player.grounded && !InputManager.Instance.GetKey(KeybindingActions.Attack))
         {
-            player.state = Player.State.Rolling;
-            rollSpeed = startRollSpeed;
-            player.myRigidbody.velocity = Vector2.zero;
-            player.myAnimator.SetBool("isDodge", true);
+            StartRoll();
         }
     }
+
+    private void StartRoll()
+    {
+        player.state = Player.State.Rolling;
+        rollSpeed = startRollSpeed;
+        player.myRigidbody.velocity = Vector2.zero;
+        player.myAnimator.SetBool("isDodge", true);
+    }
+
     private void Roll()
     {
         gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
@@ -52,28 +58,33 @@ public class RedScarfPlayer : MonoBehaviour
         player.myRigidbody.velocity += new Vector2(Mathf.Sign(transform.rotation.y) * startRollSpeed * Time.deltaTime, 0);
 
         rollSpeed -= rollSpeed * rollSpeedLoss * Time.deltaTime;
-
-        if (rollSpeed < rollSpeedThreshold)
-        {
-            StopRoll();
-        }
     }
 
+
     public void StopRoll()
+    {
+        player.state = Player.State.ReturningToNeutral;
+        player.myRigidbody.velocity = Vector2.zero;
+    }
+    public void ReturnFromRolling()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1f, rollLayer);
         if (hit.collider == null)
         {
-            player.myAnimator.SetBool("isDodge", false);
             player.state = Player.State.Neutral;
             gameObject.layer = LayerMask.NameToLayer("Player");
             player.myCollider.enabled = true;
             player.rollCollider.enabled = false;
         }
+        if(hit.collider != null)
+        {
+            Debug.Log("Test");
+            StartRoll();
+        }
     }
-    private void MeleeAttack()
+    public void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.targetLayers);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)
         {
@@ -98,6 +109,7 @@ public class RedScarfPlayer : MonoBehaviour
     }
     private void HandleRedScarfMelee()
     {
+        if (player.state == Player.State.Rolling) return;
         if (Time.time >= player.nextMeleeAttackTime)
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
