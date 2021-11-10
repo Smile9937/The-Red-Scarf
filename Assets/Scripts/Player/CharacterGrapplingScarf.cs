@@ -107,7 +107,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         characterRigidBody.velocity = Vector2.zero;
         float theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.85f, 1.1f);
         theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
-        Debug.Log(theBonusInStrength);
         characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
     }
 
@@ -140,9 +139,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 originalLaunchPosition = this.transform.position;
             }
             characterRigidBody.gravityScale = gravityAdjustment;
-            float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.95f * dashDuration, 1.1f * dashDuration);
+            float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.9f * dashDuration, 1.1f * dashDuration);
             theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
-            Debug.Log("Dash: " + theDashDuration);
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("InvokePlayerReadyToStop");
