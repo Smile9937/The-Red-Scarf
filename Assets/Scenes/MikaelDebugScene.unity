@@ -4219,7 +4219,7 @@ GameObject:
   - component: {fileID: 586013015}
   - component: {fileID: 586013014}
   - component: {fileID: 586013013}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4446,7 +4446,7 @@ GameObject:
   - component: {fileID: 604943920}
   - component: {fileID: 604943919}
   - component: {fileID: 604943918}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7416,7 +7416,7 @@ GameObject:
   - component: {fileID: 928770559}
   - component: {fileID: 928770558}
   - component: {fileID: 928770557}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9177,7 +9177,7 @@ GameObject:
   - component: {fileID: 1115888962}
   - component: {fileID: 1115888961}
   - component: {fileID: 1115888960}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10910,7 +10910,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.2352581}
+  m_Offset: {x: 0.5, y: -1.2352581}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10921,7 +10921,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7, y: 3.5294838}
+  m_Size: {x: 8, y: 3.5294838}
   m_EdgeRadius: 0
 --- !u!50 &1342114092
 Rigidbody2D:
@@ -12871,7 +12871,7 @@ GameObject:
   - component: {fileID: 1583150073}
   - component: {fileID: 1583150072}
   - component: {fileID: 1583150071}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13754,7 +13754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717896627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 19, z: 1.5464789}
+  m_LocalPosition: {x: 0.5, y: 19, z: 1.5464789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 665517765}
@@ -36779,7 +36779,7 @@ GameObject:
   - component: {fileID: 2084153491}
   - component: {fileID: 2084153490}
   - component: {fileID: 2084153489}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78683,7 +78683,7 @@ GameObject:
   - component: {fileID: 2137767034}
   - component: {fileID: 2137767033}
   - component: {fileID: 2137767032}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Box (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
