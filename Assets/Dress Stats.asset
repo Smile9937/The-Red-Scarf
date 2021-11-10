@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed7c93a1ddcf434fb69c7e61408d905, type: 3}
   m_Name: Dress Stats
   m_EditorClassIdentifier: 
-  playerCharacter: 1
-  speed: 4
-  jumpForce: 5.8
-  jumpTime: 0.25
+  speed: 5.9
+  jumpForce: 7
+  jumpTime: 0.35
   attackSize: {x: 1.04, y: 2.33}
   attackDamage: 40
   meleeAttackRate: 2
-  knockbackVelocity: {x: 5, y: 3}
+  knockbackVelocity: {x: 2, y: 1}
   knockbackLength: 0.4
   groundSlamArea: {x: 4, y: 1}
   groundSlamDamage: 70

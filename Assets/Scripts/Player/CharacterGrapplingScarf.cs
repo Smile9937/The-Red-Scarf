@@ -20,19 +20,36 @@ public class CharacterGrapplingScarf : MonoBehaviour
     float characterGravity = 1f;
     bool isReadyToStop = false;
 
+    float theDistanceBias = 0;
+
     Vector2 originalLaunchPosition;
     Vector2 targetLaunchPosition;
     
     Player player;
     Animator animator;
 
-    private void Start()
+    private void Awake()
     {
-        player = GetComponent<Player>();
-        animator = GetComponent<Animator>();
+        if (GetComponent<Player>() && player == null)
+        {
+            player = GetComponent<Player>();
+        }
+        if (GetComponentInParent<Player>() && player == null)
+        {
+            player = GetComponentInParent<Player>();
+        }
+        if (GetComponent<Animator>() && animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        if (GetComponentInParent<Animator>() && animator == null)
+        {
+            animator = GetComponentInParent<Animator>();
+        }
         characterGravity = characterRigidBody.gravityScale;
         isSwinging = false;
     }
+
     void Update()
     {
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral)
@@ -88,16 +105,16 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         animator.SetTrigger("isJump");
         characterRigidBody.velocity = Vector2.zero;
-        float theBonusInStrength = 1f;
-        theBonusInStrength = Mathf.Clamp(Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) / closeDistanceThrow, 0.8f, 1.1f);
+        float theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.85f, 1.1f);
         theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
         Debug.Log(theBonusInStrength);
         characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
     }
 
-    public void SetSwingingPointAsTarget(GameObject swingPoint)
+    public void SetSwingingPointAsTarget(GameObject swingPoint, float extraDistanceBias)
     {
         swingingPoint = swingPoint;
+        theDistanceBias = extraDistanceBias;
     }
 
     private void ToggleIsSwinging()
@@ -123,13 +140,16 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 originalLaunchPosition = this.transform.position;
             }
             characterRigidBody.gravityScale = gravityAdjustment;
+            float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.95f * dashDuration, 1.1f * dashDuration);
+            theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
+            Debug.Log("Dash: " + theDashDuration);
             CancelInvoke("ToggleIsSwinging");
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("InvokePlayerReadyToStop");
             CancelInvoke("ReturnGravityAdjustments");
-            Invoke("InvokePlayerReadyToStop", dashDuration * 0.6f);
-            Invoke("ToggleIsSwinging", dashDuration);
-            Invoke("ReturnPlayerState", dashDuration * 1.1f);
+            Invoke("InvokePlayerReadyToStop", theDashDuration * 0.6f);
+            Invoke("ToggleIsSwinging", theDashDuration);
+            Invoke("ReturnPlayerState", theDashDuration * 1.1f);
             LaunchPlayerIntoDash();
         }
     }

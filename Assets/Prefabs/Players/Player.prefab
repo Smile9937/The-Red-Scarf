@@ -69,6 +69,7 @@ MonoBehaviour:
   dashStrength: 1.5
   dashDuration: 0.8
   gravityAdjustment: 0.8
+  closeDistanceThrow: 3
   playerDistanceToStop: 5
 --- !u!1 &2783837724939439507
 GameObject:
@@ -267,9 +268,9 @@ MonoBehaviour:
   myRigidbody: {fileID: 8492771728123215178}
   myAnimator: {fileID: 0}
   attackPoint: {fileID: 2783837725013596334}
-  targetLayers:
+  attackLayers:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 0
   damageText: {fileID: -937120929788230762, guid: 13c058a086d8ba6498008a458b2520b3, type: 3}
   groundSlamLayer:
     serializedVersion: 2
@@ -409,8 +410,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 361291161
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1de5a69f905d824891976b2b1067abc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
