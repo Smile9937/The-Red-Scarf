@@ -91,7 +91,7 @@ public class DressPlayer : MonoBehaviour
             {
                 player.state = Player.State.Blocking;
                 loseComposureCoroutine = StartCoroutine(LoseComposure());
-                player.myRigidbody.velocity = Vector2.zero;
+                player.myRigidbody.velocity = new Vector2(0, player.myRigidbody.velocity.y);
 
                 Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
 
