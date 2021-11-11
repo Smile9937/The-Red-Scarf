@@ -25,9 +25,9 @@ AnimationClip:
       value: {fileID: 3997787827301115998, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
     - time: 0.16666667
       value: {fileID: -896320634071624126, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
-    - time: 0.41666666
+    - time: 0.25
       value: {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
-    - time: 0.5833333
+    - time: 0.41666666
       value: {fileID: -1335198928313985669, guid: 9566631f357c93e4a8b95356165baa16, type: 3}
     attribute: m_Sprite
     path: 
@@ -58,7 +58,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.59999996
+    m_StopTime: 0.43333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,7 +78,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5833333
+  - time: 0.41666666
     functionName: ReturnFromStaggering
     data: 
     objectReferenceParameter: {fileID: 0}
