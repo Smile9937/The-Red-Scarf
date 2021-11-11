@@ -2,17 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
 public class PickUp : MonoBehaviour
 {
-    public UnityEvent powerUp;
+    public UnityEvent eventToStart;
+
+    public UnityEvent toggleEvent;
+
+    private bool toggle = true;
+
+    public Type type;
+    public enum Type
+    {
+        OneTimeUse,
+        MultiUse,
+        Toggle
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-            powerUp.Invoke();
-            Destroy(gameObject);
+            switch(type)
+            {
+                case Type.OneTimeUse:
+                    eventToStart.Invoke();
+                    Destroy(gameObject);
+                    break;
+                case Type.MultiUse:
+                    eventToStart.Invoke();
+                    break;
+                case Type.Toggle:
+                    toggle = !toggle;
+                    if(toggle)
+                    {
+                        eventToStart.Invoke();
+                    }
+                    else
+                    {
+                        toggleEvent.Invoke();
+                    }
+                    break;
+
+            }
         }
     }
 }

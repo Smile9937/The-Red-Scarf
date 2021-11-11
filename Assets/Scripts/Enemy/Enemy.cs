@@ -10,8 +10,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     [SerializeField] private Vector2 groundCheckSize;
     [SerializeField] private LayerMask ground;
     public bool grounded;
-    [SerializeField] private float offGroundJumpTimer = 0.1f;
-    private bool stoppedJumping = true;
 
     [Header("Character Status")]
     public int maxHealth = 100;
@@ -19,14 +17,10 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     [SerializeField] private float secondsOfInvincibility;
     bool isInvincible = false;
 
-    private float canJumpCounter;
-
     private float knockbackCount;
     private bool knockedFromRight;
 
     private Vector2 knockback;
-
-    private bool canMove;
 
     private Rigidbody2D myRigidbody;
     [HideInInspector] public Animator myAnimator;
@@ -38,6 +32,20 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         Melee,
         Ranged,
     };
+
+    [Header("Enemy State")]
+
+    public State state;
+    public enum State
+    {
+        Waiting,
+        Stationary,
+        Moving,
+        ChasePlayer,
+        Attacking,
+        Staggered,
+        Dead
+    }
 
     [Header("Stats")]
     [SerializeField] private float attackDistance;
@@ -52,7 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     [SerializeField] private Transform leftLimit;
     [SerializeField] private Transform rightLimit;
 
-    [HideInInspector] public Transform target;
+     public Transform target;
     [HideInInspector] public bool inRange;
 
     [Header("Melee Attack")]
@@ -78,7 +86,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     float velocityFactor = -3;
 
     private float distance;
-    private bool attackMode;
 
     private bool cooling;
     private float intTimer;
@@ -87,44 +94,39 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        canJumpCounter = offGroundJumpTimer;
         currentHealth = maxHealth;
 
         SelectTarget();
         intTimer = timer;
-        if(movingEnemy)
-        {
-            canMove = true;
-        }
+
+        CheckIfMovingEnemy();
     }
 
     private void Update()
     {
+        switch(state)
+        {
+            case State.Moving:
+                HandleMoving();
+                break;
+            case State.ChasePlayer:
+                ChasePlayer();
+                break;
+            case State.Attacking:
+                HandleAttacking();
+                break;
+            case State.Stationary:
+                if(inRange)
+                {
+                    state = State.Attacking;
+                }
+                break;
+        }
+
         grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
 
         myAnimator.SetBool("isGrounded", grounded);
-        if(!attackMode && movingEnemy && canMove)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 0.5f, blockingObjectLayer);
-            if(hit.collider != null)
-            {
-                inRange = false;
-                SelectTarget();
-            }
-            MoveAround();
-        }
-
-        if(!InsideOfLimits() && !inRange)
-        {
-            SelectTarget();
-        }
-
-        if (inRange)
-        {
-            EnemyLogic();
-        }
     }
-
     private void FixedUpdate()
     {
         if (knockbackCount > 0)
@@ -133,7 +135,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         }
         if (knockbackCount <= 0)
         {
-            canMove = true;
             if(grounded)
             {
                 myRigidbody.velocity = Vector2.zero;
@@ -145,10 +146,69 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
             }
         }
     }
+    private void HandleMoving()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 0.5f, blockingObjectLayer);
+        if (hit.collider != null)
+        {
+            inRange = false;
+            SelectTarget();
+        }
+        MoveAround();
+
+        if (!InsideOfLimits() && !inRange)
+        {
+            SelectTarget();
+        }
+
+        if (inRange)
+        {
+            state = State.ChasePlayer;
+        }
+    }
+
+    private void HandleAttacking()
+    {
+        switch (type)
+        {
+            case EnemyType.Melee:
+                MeleeAttack();
+                break;
+            case EnemyType.Ranged:
+                if (Time.time >= nextRangedAttackTime)
+                {
+                    RangedAttack();
+                    nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+                }
+                if (!movingEnemy && !inRange)
+                {
+                    state = State.Stationary;
+                }
+                else if(!inRange)
+                {
+                    state = State.Moving;
+                }
+                break;
+        }
+    }
+
+    public void PlayerDetected(Collider2D collision)
+    {
+        target = collision.transform;
+        inRange = true;
+        hotZone.SetActive(true);
+        if(movingEnemy)
+        {
+            state = State.ChasePlayer;
+        }
+        else if(!movingEnemy)
+        {
+            state = State.Stationary;
+        }
+    }
 
     private void HandleKnockback()
     {
-        canMove = false;
         if (knockedFromRight)
         {
             myRigidbody.velocity = new Vector2(-knockback.x, knockback.y);
@@ -190,29 +250,17 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         transform.eulerAngles = rotation;
     }
 
-    private void EnemyLogic()
+    private void ChasePlayer()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        if(distance > attackDistance)
+        MoveAround();
+        if(!inRange)
         {
-            StopAttack();
+            state = State.Moving;
         }
         else if(attackDistance >= distance && !cooling)
         {
-            switch(type)
-            {
-                case EnemyType.Melee:
-                    MeleeAttack();
-                break;
-                case EnemyType.Ranged:
-                    if(Time.time >= nextRangedAttackTime)
-                    {
-                        RangedAttack();
-                        nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
-                    }
-                break;
-            }
-
+            state = State.Attacking;
         }
         if(cooling)
         {
@@ -224,14 +272,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
     private void RangedAttack()
     {
         Instantiate(bullet, rangedAttackPos.position, transform.rotation);
-        canMove = false;
-        StartCoroutine(AttackTimer());
-    }
-
-    private IEnumerator AttackTimer()
-    {
-        yield return new WaitForSeconds(rangeAttackRate);
-        canMove = true;
     }
     private void MoveAround()
     {
@@ -246,21 +286,16 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         myAnimator.SetBool("isAttackingBool", true);
         myAnimator.SetTrigger("isAttacking");
         timer = intTimer;
-        attackMode = true;
-        canMove = false;
+        if(!movingEnemy)
+        {
+            state = State.Stationary;
+        }
     }
-
-    private void StopAttack()
-    {
-        cooling = false;
-        attackMode = false;
-    }
-
     private void Cooldown()
     {
         timer -= Time.deltaTime;
 
-        if(timer <= 0 && cooling && attackMode)
+        if(timer <= 0 && cooling)
         {
             cooling = false;
             timer = intTimer;
@@ -287,11 +322,23 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
             }
         }
     }
-    private void TriggerCooling()
+    private void AttackFinished()
     {
         myAnimator.SetBool("isAttackingBool", false);
         cooling = true;
-        canMove = true;
+        CheckIfMovingEnemy();
+    }
+
+    private void CheckIfMovingEnemy()
+    {
+        if (movingEnemy)
+        {
+            state = State.Moving;
+        }
+        else
+        {
+            state = State.Stationary;
+        }
     }
 
     private bool InsideOfLimits()
