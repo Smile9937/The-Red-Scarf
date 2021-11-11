@@ -47,13 +47,14 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public enum State
     {
         Neutral,
+        Attacking,
         Rolling,
         Blocking,
         Dash,
         GroundSlam,
         Dead,
-        ReturningToNeutral,
-    };
+        ReturningToNeutral
+    }
 
     /*[Serializable]
     public class PlayerStats
@@ -94,6 +95,11 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public PlayerStats dressStats;
 
     private PlayerStats currentPlayerStats;
+
+    public float speedBonus;
+    public int attackBonus;
+
+    [SerializeField] Checkpoint checkpoint;
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -116,6 +122,62 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
         SetCurrentCharacter();
         jumpTimeCounter = currentPlayerStats.jumpTime;
+    }
+
+    private void Update()
+    {
+        if(InputManager.Instance.GetKeyDown(KeybindingActions.PlaceCheckpoint))
+        {
+            Instantiate(checkpoint, transform.position, Quaternion.Euler(0, 0, 90));
+        }
+
+        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
+
+        PlayerUI.Instance.SetHealthText(currentHealth);
+        myAnimator.SetBool("isGrounded", grounded);
+
+        if (InputManager.Instance.GetKey(KeybindingActions.Left)
+            && !InputManager.Instance.GetKey(KeybindingActions.Right))
+        {
+            direction = -1;
+        }
+        else if (InputManager.Instance.GetKey(KeybindingActions.Right) &&
+            !InputManager.Instance.GetKey(KeybindingActions.Left))
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = 0;
+        }
+
+        switch (state)
+        {
+            case State.Neutral:
+                HandleJumping();
+                CheckIfCanJump();
+                HandleMovement();
+                SwapCharacter();
+                HandleGroundSlam();
+                break;
+            case State.Blocking:
+                break;
+            case State.Dash:
+                //Block();
+                break;
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (knockbackCount > 0)
+        {
+            HandleKnockBack();
+        }
+
+        if(state == State.Neutral && knockbackCount <= 0)
+        {
+            HandleMovement();
+        }
     }
     public void SetCurrentCharacter()
     {
@@ -140,47 +202,8 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         else if (GameManager.Instance.redScarf) { myAnimator.runtimeAnimatorController = redScarfUnarmedAnimator; }
         else { myAnimator.runtimeAnimatorController = dressAnimator; }
     }
-
-    private void Update()
+    private void SwapCharacter()
     {
-        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
-
-        HandleGroundSlam();
-
-        CheckIfCanJump();
-
-        PlayerUI.Instance.SetHealthText(currentHealth);
-        myAnimator.SetBool("isGrounded", grounded);
-
-        if (InputManager.Instance.GetKey(KeybindingActions.Left)
-            && !InputManager.Instance.GetKey(KeybindingActions.Right))
-        {
-            direction = -1;
-        }
-        else if (InputManager.Instance.GetKey(KeybindingActions.Right) &&
-            !InputManager.Instance.GetKey(KeybindingActions.Left))
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = 0;
-        }
-
-        switch (state)
-        {
-            case State.Neutral:
-                HandleJumping();
-                HandleMovement();
-                break;
-            case State.Blocking:
-                break;
-            case State.Dash:
-                //Block();
-                break;
-        }
-
-        //Swap Character
         if (InputManager.Instance.GetKeyDown(KeybindingActions.SwapCharacter))
         {
             GameManager.Instance.SwapCharacter();
@@ -213,19 +236,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (knockbackCount > 0)
-        {
-            HandleKnockBack();
-        }
-
-        if(state == State.Neutral && knockbackCount <= 0)
-        {
-            HandleMovement();
-        }
-    }
-
     private void HandleKnockBack()
     {
         if (knockedFromRight)
@@ -248,7 +258,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     private void Move()
     {
-        myRigidbody.velocity = new Vector2(direction * currentPlayerStats.speed, myRigidbody.velocity.y);
+        myRigidbody.velocity = new Vector2(direction * (currentPlayerStats.speed + speedBonus), myRigidbody.velocity.y);
     }
 
     private void TurnAround(float horizontal)
@@ -397,6 +407,11 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         {
             dress.MeleeAttack();
         }
+    }
+
+    private void ReturnFromAttack()
+    {
+        state = State.Neutral;
     }
     public void GainBaseballBat()
     {

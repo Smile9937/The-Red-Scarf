@@ -5,9 +5,6 @@ using UnityEngine;
 public class HotZoneCheck : MonoBehaviour
 {
     private Enemy enemyParent;
-
-    private bool inRange;
-    private Animator anim;
     private void Awake()
     {
         enemyParent = GetComponentInParent<Enemy>();
@@ -32,7 +29,6 @@ public class HotZoneCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //inRange = false;
             gameObject.SetActive(false);
             enemyParent.triggerArea.SetActive(true);
             enemyParent.inRange = false;

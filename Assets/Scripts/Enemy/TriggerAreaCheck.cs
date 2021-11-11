@@ -13,10 +13,8 @@ public class TriggerAreaCheck : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            enemyParent.PlayerDetected(collision);
             gameObject.SetActive(false);
-            enemyParent.target = collision.transform;
-            enemyParent.inRange = true;
-            enemyParent.hotZone.SetActive(true);
         }
     }
 }

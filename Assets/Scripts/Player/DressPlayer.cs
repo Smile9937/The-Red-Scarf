@@ -143,10 +143,14 @@ public class DressPlayer : MonoBehaviour
     }
     private void HandleDressMelee()
     {
+        if (player.state != Player.State.Neutral)
+            return;
         if (Time.time >= player.nextMeleeAttackTime)
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
+                player.state = Player.State.Attacking;
+                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2, player.myRigidbody.velocity.y);
                 player.myAnimator.SetTrigger("attackTrigger");
                 //MeleeAttack() called in animation
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
@@ -173,18 +177,22 @@ public class DressPlayer : MonoBehaviour
                 if (player.damageText != null && target.tag == "Enemy")
                 {
                     Instantiate(player.damageText, target.transform.position, Quaternion.identity);
-                    player.damageText.SetText(myStats.attackDamage);
+                    player.damageText.SetText(myStats.attackDamage + player.attackBonus);
                 }
-                damageable.Damage(myStats.attackDamage, false);
+                damageable.Damage(myStats.attackDamage + player.attackBonus, false);
             }
         }
     }
     private void HandleDressRanged()
     {
+        if (player.state != Player.State.Neutral)
+            return;
         if (Time.time >= nextRangedAttackTime && currentComposure >= gunComposureCost)
         {
             if (InputManager.Instance.GetKey(KeybindingActions.Special))
             {
+                player.state = Player.State.Attacking;
+                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2, player.myRigidbody.velocity.y);
                 if (InputManager.Instance.GetKey(KeybindingActions.Down))
                 {
                     player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, player.myRigidbody.velocity.y + gunJumpForce);
@@ -208,6 +216,7 @@ public class DressPlayer : MonoBehaviour
         Bullet currentBullet = Instantiate(bullet, attackPos, rotation);
         currentBullet.damageText = player.damageText;
         nextRangedAttackTime = Time.time + 1f / rangeAttackRate;
+        player.state = Player.State.Neutral;
     }
 
     /*private void OnDrawGizmosSelected()

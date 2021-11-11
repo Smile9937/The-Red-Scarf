@@ -12,12 +12,13 @@ public class RedScarfPlayer : MonoBehaviour
 
     [Header("Rage Variables")]
     [SerializeField] private int damagePerRage;
-    [SerializeField] private int speedPerRage;
+    [SerializeField] private float speedPerRage;
     [SerializeField] private int maxRage;
     [SerializeField] private float timeBeforeRageLoss;
+    [SerializeField] private int rageLossCount;
     private int currentRageCount;
     private int currentRageDamage;
-    private IEnumerator loseRageCoroutine;
+    private Coroutine loseRageCoroutine;
 
     [Header("Components")]
     [SerializeField] PlayerStats myStats;
@@ -26,9 +27,11 @@ public class RedScarfPlayer : MonoBehaviour
     private void Start()
     {
         PlayerUI.Instance.SetRageText(currentRageCount);
+        loseRageCoroutine = StartCoroutine(LoseRage());
     }
     private void Update()
     {        
+        PlayerUI.Instance.SetRageText(currentRageCount);
         HandleRage();
         if(player.state == Player.State.Neutral)
         {
@@ -96,11 +99,13 @@ public class RedScarfPlayer : MonoBehaviour
     }
     private void HandleRedScarfMelee()
     {
-        if (player.state == Player.State.Rolling) return;
+        if (player.state != Player.State.Neutral) return;
         if (Time.time >= player.nextMeleeAttackTime)
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
+                player.state = Player.State.Attacking;
+                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2 ,player.myRigidbody.velocity.y);
                 player.myAnimator.SetTrigger("attackTrigger");
                 //MeleeAttack() called in animation
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
@@ -127,33 +132,46 @@ public class RedScarfPlayer : MonoBehaviour
                 if (player.damageText != null && target.tag == "Enemy")
                 {
                     Instantiate(player.damageText, target.transform.position, Quaternion.identity);
-                    player.damageText.SetText(myStats.attackDamage + currentRageDamage);
+                    player.damageText.SetText(myStats.attackDamage + currentRageDamage + player.attackBonus);
                 }
-                damageable.Damage(myStats.attackDamage + currentRageDamage, false);
+                damageable.Damage(myStats.attackDamage + currentRageDamage + player.attackBonus, false);
             }
         }
     }
     private void GainRage()
     {
-        currentRageCount++;
-        PlayerUI.Instance.SetRageText(currentRageCount);
-
         if(loseRageCoroutine != null)
         {
             StopCoroutine(loseRageCoroutine);
         }
-        loseRageCoroutine = LoseRage();
-        StartCoroutine(loseRageCoroutine);
+        if(currentRageCount + 1 > maxRage)
+        {
+            currentRageCount = maxRage;
+        } else
+        {
+            currentRageCount++;
+        }
+        loseRageCoroutine = StartCoroutine(LoseRage());
     }
     private void HandleRage()
     {
         currentRageDamage = currentRageCount * damagePerRage;
+        player.speedBonus = currentRageCount * Mathf.Round(speedPerRage * 100) / 100;
     }
 
     private IEnumerator LoseRage()
     {
-        yield return new WaitForSeconds(timeBeforeRageLoss);
-        currentRageCount = 0;
-        PlayerUI.Instance.SetRageText(currentRageCount);
+        while (true)
+        {
+            yield return new WaitForSeconds(timeBeforeRageLoss);
+            if(currentRageCount - rageLossCount <= 0)
+            {
+                currentRageCount = 0;
+            }
+            else
+            {
+                currentRageCount -= rageLossCount;
+            }
+        }
     }
 }

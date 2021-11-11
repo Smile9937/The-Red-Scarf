@@ -31,3 +31,5 @@ MonoBehaviour:
     keyCode: 276
   - keybindingAction: 7
     keyCode: 273
+  - keybindingAction: 9
+    keyCode: 113

@@ -8,5 +8,6 @@ public enum KeybindingActions
     Left,
     Right,
     Up,
-    Down
+    Down,
+    PlaceCheckpoint
 }

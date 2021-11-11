@@ -1,0 +1,310 @@
+[LOG] System::create                           : Header version = 2.01.11. Current version = 2.01.11.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            : Initialize version=20111 (118066), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 0000025ACC94E288 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC2DE8 : node = 0000025A34A82960
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC2DE8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82A70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_2', format=5, channels=2, frequency=48000, lengthbytes=2211104, lengthpcm=7979550, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.566383.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC2DE8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A18D9DCC8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A18D9DCC8
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC2218 : node = 0000025A34A82AA0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC2218
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82BB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC2218
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A35EC2728)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A3E62AAF8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1BEDC738)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A2B2244C8 : node = 0000025A350AB0F0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A2B2244C8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A350AB200
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A2B2244C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F218
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F218
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A18D9D7B8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A18D9D7B8
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A2B2249D8 : node = 0000025A350AAE70
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A2B2249D8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A350AAF80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A2B2249D8
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A35EC2218)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1440DEE8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A22E6F218)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A3273F488 : node = 0000025A350AB230
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A3273F488
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A350AB340
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A3273F488
+[LOG] SoundI::release                          : DEMO_3 (0000025A2B2244C8)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A35B4F7C8)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A18D9D7B8)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6EEB8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6EEB8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F218
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F218
+[LOG] SoundI::release                          : DEMO_2_VERSION_2 (0000025A35EC2DE8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_2 (0000025A35B4F968)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_2 (0000025A18D9DCC8)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC3B68 : node = 0000025A34A82960
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC3B68
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82A70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC3B68
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A2B2249D8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1440E088)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A22E6EEB8)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC3808 : node = 0000025A34A82AA0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC3808
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82BB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC3808
+[LOG] SoundI::release                          : DEMO_3 (0000025A3273F488)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A1440E228)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A22E6F218)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F3C8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F3C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F578
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F578
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC4FA8 : node = 0000025A34A82BE0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC4FA8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82CF0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC4FA8
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A35EC3B68)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1440DBA8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A22E6F3C8)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A18D9D2A8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A18D9D2A8
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC4228 : node = 0000025A34A82960
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC4228
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82A70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC4228
+[LOG] SoundI::release                          : DEMO_3 (0000025A35EC3808)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A1440D868)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A22E6F578)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A20D6CA98
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A20D6CA98
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A35EC4FA8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A35B4FB08)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A18D9D2A8)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A1BEDD818 : node = 0000025A1DBF77A0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A1BEDD818
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A1DBF78B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A1BEDD818
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F218
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F218
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A1BEE19E8 : node = 0000025A1DBF73E0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A1BEE19E8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A1DBF74F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A1BEE19E8
+[LOG] SoundI::release                          : DEMO_3 (0000025A35EC4228)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A35B530D8)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A20D6CA98)
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A1BEDDED8 : node = 0000025A1DBF40A0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A1BEDDED8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A1DBF41B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_2_VERSION_1', format=5, channels=2, frequency=48000, lengthbytes=2370624, lengthpcm=8621535, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.719695.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A1BEDDED8
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A1BEDD818)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1440DBA8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A22E6F218)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6F8D8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6F8D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A22E6FA88
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A22E6FA88
+[LOG] SystemI::createSound                     : filename = Assets/Background Music Test/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000025A35EC3EC8 : node = 0000025A34A82960
+[LOG] SystemI::createSound                     : add node to async list : head = 0000025A2238EAA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A35EC3EC8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Background Music Test/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9200832
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7648
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025A34A82A70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='DEMO_3', format=5, channels=2, frequency=48000, lengthbytes=4611744, lengthpcm=16969815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.890218.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A35EC3EC8
+[LOG] SoundI::release                          : DEMO_3 (0000025A1BEE19E8)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A1440D868)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A22E6F8D8)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A1BEE0C68
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A1BEE0C68
+[LOG] SoundI::release                          : DEMO_2_VERSION_1 (0000025A1BEDDED8)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A1440DD48)
+[LOG] SoundI::release                          :     DEMO_2_VERSION_1 (0000025A22E6FA88)
+[LOG] SystemI::mixerSuspend                    : Suspending output.
+[LOG] SystemI::mixerResume                     : Resuming output.
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025A1BEE0C68
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025A1BEE0C68
+[LOG] SoundI::release                          : DEMO_3 (0000025A35EC3EC8)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A3E62C018)
+[LOG] SoundI::release                          :     DEMO_3 (0000025A1BEE0C68)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
