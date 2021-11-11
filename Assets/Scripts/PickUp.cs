@@ -11,8 +11,24 @@ public class PickUp : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-            powerUp.Invoke();
-            Destroy(gameObject);
+            if (GetComponent<Animator>())
+            {
+                GetComponent<Animator>().SetTrigger("pickUpGrabbed");
+            }
+            else
+            {
+                powerUp.Invoke();
+            }
         }
+    }
+
+    private void DestroySelf(float timeUntilDestroyed)
+    {
+        Destroy(gameObject, timeUntilDestroyed);
+    }
+
+    private void InvokePowerUp()
+    {
+        powerUp.Invoke();
     }
 }
