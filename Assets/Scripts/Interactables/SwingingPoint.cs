@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingPoint : ActivatableObject
+public class SwingingPoint : ActivatableObject, IGrabbable
 {
     public bool isSwingingFrom = false;
     public bool isSwingable = true;
@@ -50,6 +50,17 @@ public class SwingingPoint : ActivatableObject
             if (theGrapplingScarf != null)
             {
                 theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
+            }
+        }
+    }
+
+    public void IsGrabbed()
+    {
+        if (theGrapplingScarf != null)
+        {
+            if (theGrapplingScarf.swingingPoint == null)
+            {
+                theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
             }
         }
     }

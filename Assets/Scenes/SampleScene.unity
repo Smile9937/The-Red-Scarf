@@ -1561,7 +1561,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 197281422}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -1779,7 +1779,7 @@ GameObject:
   - component: {fileID: 247066669}
   - component: {fileID: 247066668}
   - component: {fileID: 247066667}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (5)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -27844,6 +27844,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingingPoint: {fileID: 0}
   characterRigidBody: {fileID: 317508112}
+  grabableLayers:
+    serializedVersion: 2
+    m_Bits: 32768
+  lengthOfScarf: 3
   dashStrength: 60
   dashDuration: 0.8
   gravityAdjustment: 0.8
@@ -29554,7 +29558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 508004071}
   - component: {fileID: 508004072}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30114,7 +30118,7 @@ GameObject:
   - component: {fileID: 522968062}
   - component: {fileID: 522968061}
   - component: {fileID: 522968060}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (8)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -30344,7 +30348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 547108150}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -30777,7 +30781,7 @@ GameObject:
   - component: {fileID: 569476501}
   - component: {fileID: 569476500}
   - component: {fileID: 569476499}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (6)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -72496,7 +72500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 622932663}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject (6)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -72688,7 +72692,7 @@ GameObject:
   - component: {fileID: 625807482}
   - component: {fileID: 625807481}
   - component: {fileID: 625807480}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (3)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -74131,7 +74135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824072128}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -74282,7 +74286,7 @@ GameObject:
   - component: {fileID: 880892853}
   - component: {fileID: 880892852}
   - component: {fileID: 880892851}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (7)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -74689,7 +74693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905761663}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -75020,7 +75024,7 @@ GameObject:
   - component: {fileID: 948905984}
   - component: {fileID: 948905983}
   - component: {fileID: 948905982}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (4)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -76415,7 +76419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1042754437}
   - component: {fileID: 1042754438}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77207,7 +77211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115392314}
   - component: {fileID: 1115392315}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78189,7 +78193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1190174215}
   - component: {fileID: 1190174216}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79524,7 +79528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479311305}
   - component: {fileID: 1479311306}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80008,7 +80012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1510466125}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -80723,7 +80727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661183543}
   - component: {fileID: 1661183544}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81461,7 +81465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1781082672}
   - component: {fileID: 1781082673}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81577,7 +81581,7 @@ GameObject:
   - component: {fileID: 1784784579}
   - component: {fileID: 1784784578}
   - component: {fileID: 1784784577}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Swinging Point (1)
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -82446,7 +82450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1876306733}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
