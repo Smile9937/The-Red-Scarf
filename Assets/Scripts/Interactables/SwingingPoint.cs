@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SwingingPoint : ActivatableObject, IGrabbable
 {
-    public bool isSwingingFrom = false;
     public bool isSwingable = true;
     public float distanceBias = 0;
     [SerializeField] private GameObject theTarget;
@@ -30,7 +29,7 @@ public class SwingingPoint : ActivatableObject, IGrabbable
         isSwingable = false;
     }
 
-    
+    /*
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && isSwingable)
@@ -54,29 +53,26 @@ public class SwingingPoint : ActivatableObject, IGrabbable
             }
         }
     }
-    
+    */
 
     public void IsGrabbed()
     {
         if (theGrapplingScarf != null)
         {
-            if (theGrapplingScarf.swingingPoint == null)
-            {
-                theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
-            }
+            theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
         }
     }
     public void HandleGrabbed()
     {
         if (theGrapplingScarf != null)
         {
-            //theGrapplingScarf.LaunchPlayerIntoDash();
+            theGrapplingScarf.LaunchPlayerIntoDash();
             return;
         }
         ReturnFromGrabbed();
     }
     public void ReturnFromGrabbed()
     {
-        //theGrapplingScarf.ReturnPlayerState();
+        theGrapplingScarf.ReturnPlayerState();
     }
 }
