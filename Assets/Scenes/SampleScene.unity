@@ -1643,7 +1643,7 @@ MonoBehaviour:
   currentSpawnpoint: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   redScarf: 1
-  hasBaseballBat: 0
+  hasBaseballBat: 1
 --- !u!114 &212717985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27692,6 +27692,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: gunJumpForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757252, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dashStrength
       value: 60
@@ -27747,7 +27751,7 @@ PrefabInstance:
     - target: {fileID: 8492771728123215174, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b68b69f3c460b6f4eb54c15f93030a66, type: 2}
+      objectReference: {fileID: 9100000, guid: f6d48bf4baf4b5148a2c114f70fdafdc, type: 2}
     - target: {fileID: 8492771728123215176, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_Name
       value: Player

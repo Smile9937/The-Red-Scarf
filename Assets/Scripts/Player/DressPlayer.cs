@@ -82,7 +82,10 @@ public class DressPlayer : MonoBehaviour
         if (currentComposure < blockComposureCost)
         {
             Debug.Log("Not enough composure");
-            StopCoroutine(loseComposureCoroutine);
+            if (loseComposureCoroutine != null)
+            {
+                StopCoroutine(loseComposureCoroutine);
+            }
             player.state = Player.State.Neutral;
         }
         else
