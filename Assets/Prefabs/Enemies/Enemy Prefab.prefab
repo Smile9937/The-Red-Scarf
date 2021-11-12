@@ -309,8 +309,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1841830603
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2115610945542559888, guid: 61744443bb19f40458c47dd6cd6bdcc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -336,18 +336,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 1121332888119830986}
-  radius: 0.1
   groundCheckSize: {x: 0, y: 0}
   ground:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
-  offGroundJumpTimer: 0.1
   maxHealth: 100
   currentHealth: 0
   secondsOfInvincibility: 0
   myAnimator: {fileID: 0}
   type: 0
+  state: 0
   attackDistance: 2
   moveSpeed: 2
   timer: 2
@@ -367,7 +366,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   rangedAttackPos: {fileID: 0}
   rangeAttackRate: 1
-  blockLayer:
+  blockingObjectLayer:
     serializedVersion: 2
     m_Bits: 0
   knockbackVelocity: {x: 0, y: 0}
