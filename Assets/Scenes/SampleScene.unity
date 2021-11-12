@@ -27688,6 +27688,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2783837725013596334, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757252, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dashStrength
       value: 60
@@ -27709,12 +27713,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: rageLossCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: rollLayer.m_Bits
       value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: timeBeforeRageLoss
-      value: 1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: hasBaseballBat
@@ -27746,11 +27754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771728123215179, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -70.71
+      value: -79.85
       objectReference: {fileID: 0}
     - target: {fileID: 8492771728123215179, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.61
+      value: -8.96
       objectReference: {fileID: 0}
     - target: {fileID: 8492771728123215179, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29392,7 +29400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464896234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -94.431076, y: -5.3319635, z: 13.137779}
+  m_LocalPosition: {x: -103.571075, y: -4.681964, z: 13.137779}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1750891886}
@@ -72940,12 +72948,12 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 2, y: 6}
-      - {x: -59.5, y: 6}
-      - {x: -59.5, y: -9.5}
+      - {x: -68, y: 6}
+      - {x: -68, y: -9.5}
       - {x: -10.5, y: -9.5}
       - {x: 3.5, y: -9.5}
-      - {x: 3.5, y: 1.5}
-      - {x: 2, y: 1.5}
+      - {x: 3.5, y: 3}
+      - {x: 2, y: 3}
 --- !u!4 &650804053
 Transform:
   m_ObjectHideFlags: 0
@@ -73665,7 +73673,6 @@ GameObject:
   m_Component:
   - component: {fileID: 778474063}
   - component: {fileID: 778474069}
-  - component: {fileID: 778474068}
   - component: {fileID: 778474067}
   - component: {fileID: 778474066}
   - component: {fileID: 778474065}
@@ -73784,35 +73791,6 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 20.5, y: -7.05}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.5, y: 0}
-      - {x: 1.5, y: 1}
-      - {x: -1.5, y: 1}
-      - {x: -1.5, y: 0}
---- !u!60 &778474068
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778474062}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -14.5, y: -7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76958,7 +76936,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 29.5, y: 0.25}
+  m_Offset: {x: 29.5, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -78040,25 +78018,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 0.25, z: 0}
   m_LookaheadTime: 0.05
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 1
   m_XDamping: 1.25
-  m_YDamping: 2
+  m_YDamping: 20
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.6
   m_CameraDistance: 5
-  m_DeadZoneWidth: 0.04
-  m_DeadZoneHeight: 0.07
+  m_DeadZoneWidth: 0.05
+  m_DeadZoneHeight: 0.5
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.75
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
-  m_BiasY: 0
+  m_BiasY: 0.10999997
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
@@ -79711,7 +79689,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -54.8, y: -6.8}
+  m_Offset: {x: -62, y: -6.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79740,7 +79718,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1, y: 0}
+  m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79752,10 +79730,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3, y: -4}
-      - {x: 3, y: 4}
-      - {x: 0, y: 4}
-      - {x: 0, y: -4}
+    - - {x: 1, y: -2}
+      - {x: 1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 0, y: -2}
 --- !u!1 &1495591982
 GameObject:
   m_ObjectHideFlags: 0
@@ -80632,10 +80610,9 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 39.5, y: 3.5}
       - {x: -19.75, y: 3.5}
-      - {x: -19.75, y: -8}
-      - {x: 17.5, y: -8}
-      - {x: 17.5, y: -8.5}
-      - {x: 39.5, y: -8.5}
+      - {x: -19.75, y: -8.5}
+      - {x: 10.5, y: -8}
+      - {x: 39.5, y: -8}
 --- !u!4 &1624245316
 Transform:
   m_ObjectHideFlags: 0
