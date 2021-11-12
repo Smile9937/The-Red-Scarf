@@ -5,4 +5,8 @@ using UnityEngine;
 public interface IGrabbable
 {
     void IsGrabbed();
+
+    void ReturnFromGrabbed();
+
+    void HandleGrabbed();
 }

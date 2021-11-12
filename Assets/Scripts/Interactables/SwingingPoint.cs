@@ -30,6 +30,7 @@ public class SwingingPoint : ActivatableObject, IGrabbable
         isSwingable = false;
     }
 
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && isSwingable)
@@ -53,6 +54,7 @@ public class SwingingPoint : ActivatableObject, IGrabbable
             }
         }
     }
+    
 
     public void IsGrabbed()
     {
@@ -63,5 +65,18 @@ public class SwingingPoint : ActivatableObject, IGrabbable
                 theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
             }
         }
+    }
+    public void HandleGrabbed()
+    {
+        if (theGrapplingScarf != null)
+        {
+            //theGrapplingScarf.LaunchPlayerIntoDash();
+            return;
+        }
+        ReturnFromGrabbed();
+    }
+    public void ReturnFromGrabbed()
+    {
+        //theGrapplingScarf.ReturnPlayerState();
     }
 }
