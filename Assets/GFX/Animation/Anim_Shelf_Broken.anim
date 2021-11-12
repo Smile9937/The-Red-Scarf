@@ -31,6 +31,8 @@ AnimationClip:
       value: {fileID: -3347741199037732837, guid: c7a358c7cf002ea41ad3fb3fb389f4ad, type: 3}
     - time: 0.6666667
       value: {fileID: -6917020896396830906, guid: c7a358c7cf002ea41ad3fb3fb389f4ad, type: 3}
+    - time: 0.71666664
+      value: {fileID: 8652590664702212760, guid: ae25d764097b9b04897759f69ab827d8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -56,12 +58,13 @@ AnimationClip:
     - {fileID: 6611869210015956758, guid: c7a358c7cf002ea41ad3fb3fb389f4ad, type: 3}
     - {fileID: -3347741199037732837, guid: c7a358c7cf002ea41ad3fb3fb389f4ad, type: 3}
     - {fileID: -6917020896396830906, guid: c7a358c7cf002ea41ad3fb3fb389f4ad, type: 3}
+    - {fileID: 8652590664702212760, guid: ae25d764097b9b04897759f69ab827d8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.7333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -82,16 +85,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.23333333
-    functionName: InvokePowerUp
+    functionName: DoEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6666667
-    functionName: DestroySelf
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.25
     intParameter: 0
     messageOptions: 0

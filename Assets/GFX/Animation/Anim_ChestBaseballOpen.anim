@@ -109,16 +109,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.75
-    functionName: InvokePowerUp
+    functionName: DoEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.2
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.9166666
-    functionName: DestroySelf
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
     intParameter: 0
     messageOptions: 0

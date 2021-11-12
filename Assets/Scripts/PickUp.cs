@@ -24,28 +24,33 @@ public class PickUp : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-            switch(type)
-            {
-                case Type.OneTimeUse:
-                    eventToStart.Invoke();
-                    Destroy(gameObject);
-                    break;
-                case Type.MultiUse:
-                    eventToStart.Invoke();
-                    break;
-                case Type.Toggle:
-                    toggle = !toggle;
-                    if(toggle)
-                    {
-                        eventToStart.Invoke();
-                    }
-                    else
-                    {
-                        toggleEvent.Invoke();
-                    }
-                    break;
+            DoEvent();
+        }
+    }
 
-            }
+    private void DoEvent()
+    {
+        switch (type)
+        {
+            case Type.OneTimeUse:
+                eventToStart.Invoke();
+                Destroy(gameObject);
+                break;
+            case Type.MultiUse:
+                eventToStart.Invoke();
+                break;
+            case Type.Toggle:
+                if (toggle)
+                {
+                    eventToStart.Invoke();
+                }
+                else
+                {
+                    toggleEvent.Invoke();
+                }
+                toggle = !toggle;
+                break;
+
         }
     }
 }
