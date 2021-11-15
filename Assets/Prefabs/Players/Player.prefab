@@ -46,10 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRollSpeed: 50
   rollSpeedLoss: 8
-  rollSpeedThreshold: 1.5
   rollLayer:
     serializedVersion: 2
     m_Bits: 4224
+  damagePerRage: 0
+  speedPerRage: 0
+  maxRage: 0
+  timeBeforeRageLoss: 0
+  rageLossCount: 0
   myStats: {fileID: 11400000, guid: 01346e2826902f246b7b8ac8e7a2b503, type: 2}
   player: {fileID: 8492771727813815868}
 --- !u!114 &8492771727277757252
@@ -187,9 +191,10 @@ MonoBehaviour:
   currentComposure: 0
   composureGain: 2
   regainTimer: 0.5
+  rangedAttackPoint: {fileID: 0}
   rangeAttackRate: 0.3
   gunComposureCost: 5
-  gunJumpForce: 0.7
+  gunJumpForce: 10
   bullet: {fileID: -6377894629183829461, guid: 93f71f2845f6dae47af51e35887d3d8f, type: 3}
   player: {fileID: 8492771727813815868}
   myStats: {fileID: 11400000, guid: 4aecf5ec1807ab3409f437ba076609d9, type: 2}
@@ -279,6 +284,9 @@ MonoBehaviour:
   dress: {fileID: 8492771727084927940}
   redScarfStats: {fileID: 11400000, guid: 01346e2826902f246b7b8ac8e7a2b503, type: 2}
   dressStats: {fileID: 11400000, guid: 4aecf5ec1807ab3409f437ba076609d9, type: 2}
+  speedBonus: 0
+  attackBonus: 0
+  checkpoint: {fileID: 0}
 --- !u!114 &8492771728123215172
 MonoBehaviour:
   m_ObjectHideFlags: 0
