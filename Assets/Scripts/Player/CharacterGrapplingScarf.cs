@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterGrapplingScarf : MonoBehaviour
 {
     [Header("Components")]
-    bool isSwinging = false;
     bool hasStartedSwing = false;
     [SerializeField] public GameObject swingingPoint;
     [SerializeField] Rigidbody2D characterRigidBody;
@@ -15,13 +14,14 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float dashStrength = 1.5f;
     [SerializeField] float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
+    [SerializeField] float airDashCooldown = 0.2f;
+    float originalAirDashCooldown;
     [Header("Distance Stats")]
     [SerializeField] float closeDistanceThrow = 3f;
     [SerializeField] float playerDistanceToStop = 5f;
 
     float characterGravity = 1f;
     bool isReadyToStop = false;
-
     float theDistanceBias = 0;
 
     Vector2 originalLaunchPosition;
@@ -29,7 +29,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     
     Player player;
     Animator animator;
-
     IGrabbable theGrabbable = null;
 
     private void Awake()
@@ -51,22 +50,30 @@ public class CharacterGrapplingScarf : MonoBehaviour
             animator = GetComponentInParent<Animator>();
         }
         characterGravity = characterRigidBody.gravityScale;
+        originalAirDashCooldown = airDashCooldown;
+        airDashCooldown = 0;
+    }
+
+    private void Start()
+    {
+        animator.SetBool("stopScarfThrow", true);
     }
 
     void Update()
     {
-        if (theGrabbable != null && (InputManager.Instance.GetKeyDown(KeybindingActions.Special) || !player.grounded))
+        if (airDashCooldown <= 0 && theGrabbable != null && (InputManager.Instance.GetKeyDown(KeybindingActions.Special) || !player.grounded))
         {
+            airDashCooldown = originalAirDashCooldown;
             theGrabbable.HandleGrabbed();
         }
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral)
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral && airDashCooldown <= 0)
         {
             if (player.state != Player.State.Dash)
             {
                 animator.SetTrigger("startScarfThrow");
                 player.state = Player.State.Dash;
                 characterRigidBody.gravityScale = gravityAdjustment;
-                Invoke("ReturnGravityAdjustments", 0.35f);
+                Invoke("ReturnGravityAdjustments", dashDuration);
             }
             if (player.grounded)
             {
@@ -87,8 +94,20 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             ScarfThrowLocation();
         }
+        if (airDashCooldown > 0)
+        {
+            if (player.grounded)
+            {
+                airDashCooldown -= Time.deltaTime * 2;
+            }
+            else
+            {
+                airDashCooldown -= Time.deltaTime;
+            }
+        }
     }
 
+    /*
     private void FixedUpdate()
     {
         if (hasStartedSwing && swingingPoint != null)
@@ -96,32 +115,53 @@ public class CharacterGrapplingScarf : MonoBehaviour
             if (Vector2.Distance(transform.position, swingingPoint.transform.position) > Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + playerDistanceToStop && isReadyToStop)
             {
                 ReturnPlayerState();
-                CancelInvoke("ToggleIsSwinging");
                 CancelInvoke("ReturnPlayerState");
                 CancelInvoke("InvokePlayerReadyToStop");
             }
         }
     }
+    */
 
     private void ScarfThrowLocation()
     {
         float length = lengthOfScarf;
         float height = lengthOfScarf * 0.8f;
+        float width = 1;
+        if (!InputManager.Instance.GetKey(KeybindingActions.Up))
+        {
+            height = 0;
+        }
+        if (InputManager.Instance.GetKey(KeybindingActions.Up) && !(InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left)))
+        {
+            length = 1;
+        }
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(Vector2.zero, new Vector2(1, 1), 90f, grabableLayers);
         Vector2 targetLocation = new Vector2(transform.position.x + Mathf.Sign(transform.rotation.y), transform.position.y);
         while (length > 0 && swingingPoint == null)
         {
-            targetLocation = new Vector2(transform.position.x + Mathf.Sign(transform.rotation.y), transform.position.y);
-            if (InputManager.Instance.GetKey(KeybindingActions.Up))
+            targetLocation = new Vector2(transform.position.x, transform.position.y);
+            if (InputManager.Instance.GetKey(KeybindingActions.Up) && !(InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left)))
+            {
                 targetLocation.y += height;
-            targetLocation.x += length * Mathf.Sign(transform.rotation.y);
+                width += 0.2f;
+            }
+            else
+            {
+                targetLocation.y += height;
+                targetLocation.x += Mathf.Sign(transform.rotation.y);
+                targetLocation.x += length * Mathf.Sign(transform.rotation.y);
+            }
+            if (InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left))
+            {
+                targetLocation.x += Mathf.Sign(transform.rotation.y);
+            }
 
-            Collider2D[] hitTargets = Physics2D.OverlapBoxAll(targetLocation, new Vector2(1, 1), 90f, grabableLayers);
+            hitTargets = Physics2D.OverlapBoxAll(targetLocation, new Vector2(width, 1), 90f, grabableLayers);
 
             foreach (Collider2D target in hitTargets)
             {
                 if (target != null)
                 {
-                    Debug.Log(target);
                     if (target.GetComponent<IGrabbable>() != null)
                     {
                         swingingPoint = target.gameObject;
@@ -130,8 +170,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("l " + length + " h " + height);
-            Debug.Log(targetLocation);
             if (length > 1 || height <= 0)
             {
                 length--;
@@ -140,39 +178,52 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 length = lengthOfScarf;
                 height -= 1;
+                if (height < 0)
+                    height = 0;
             }
         }
         if (swingingPoint == null)
         {
-            ReturnPlayerState();
+            Invoke("ReturnPlayerState", dashDuration * 1.1f);
             return;
         }
+        animator.SetBool("isScarfThrown", true);
+        animator.SetBool("stopScarfThrow", false);
         ToggleIsSwinging();
     }
     private void OnDrawGizmosSelected()
     {
         Vector2 targetLocation = new Vector2(transform.position.x + Mathf.Sign(transform.rotation.y), transform.position.y);
-        targetLocation.x += lengthOfScarf * Mathf.Sign(transform.rotation.y);
+        if (InputManager.Instance.GetKey(KeybindingActions.Up) && !(InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left)))
+        {
+            targetLocation.x -= Mathf.Sign(transform.rotation.y);
+        }
+        else
+        {
+            targetLocation.x += lengthOfScarf * Mathf.Sign(transform.rotation.y);
+        }
         if (InputManager.Instance.GetKey(KeybindingActions.Up))
             targetLocation.y += lengthOfScarf * 0.8f;
 
         Gizmos.DrawLine(transform.position, targetLocation);
-        //Gizmos.DrawWireCube(attackPoint.position, attackSize);
     }
 
     public void LaunchPlayerIntoDash()
     {
         characterRigidBody.gravityScale = gravityAdjustment;
         CancelInvoke("ReturnGravityAdjustments");
-        Invoke("ReturnGravityAdjustments", 0.35f);
-        animator.SetTrigger("isJump");
+        Invoke("ReturnGravityAdjustments", 0.6f * dashDuration);
+        animator.Play("Scarf Pull Jump");
         characterRigidBody.velocity = Vector2.zero;
         float theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.85f, 1.1f);
         theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
 
         characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
-        Invoke("ReturnPlayerState", dashDuration);
+        CancelInvoke("ReturnPlayerStateState");
+        CancelInvoke("ReturnPlayerStateStatus");
+        Invoke("ReturnPlayerStateStatus", dashDuration);
+        animator.SetBool("isScarfThrown", false);
     }
 
     public void SetSwingingPointAsTarget(GameObject swingPoint, float extraDistanceBias)
@@ -196,10 +247,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
             theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
 
             CancelInvoke("ReturnPlayerState");
-            CancelInvoke("InvokePlayerReadyToStop");
             CancelInvoke("ReturnGravityAdjustments");
             Invoke("InvokePlayerReadyToStop", theDashDuration * 0.6f);
-            Invoke("ReturnPlayerState", theDashDuration * 1.1f);
+            Invoke("ReturnPlayerState", theDashDuration * 1.25f);
         }
     }
 
@@ -210,27 +260,47 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     public void ReturnPlayerState()
     {
-        isReadyToStop = false;
-        player.state = Player.State.Neutral;
-        characterRigidBody.gravityScale = characterGravity;
-        originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
-        swingingPoint = null;
-        theGrabbable = null;
-        animator.SetBool("isScarfThrown", false);
+        ReturnPlayerStateAnim();
+        CancelInvoke("ReturnPlayerStateStatus");
+        Invoke("ReturnPlayerStateStatus", 0.2f);
+    }
+
+    private void ReturnPlayerStateStatus()
+    {
+        if (!IsInvoking("ReturnPlayerStateStatus"))
+        {
+            isReadyToStop = false;
+            player.state = Player.State.Neutral;
+            characterRigidBody.gravityScale = characterGravity;
+            originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
+            swingingPoint = null;
+            theGrabbable = null;
+            CancelInvoke("ReturnPlayerStateStatus");
+        }
+    }
+
+    private void ReturnPlayerStateAnim()
+    {
+        if (!IsInvoking("ReturnPlayerStateAnim"))
+        {
+            animator.SetBool("isScarfThrown", false);
+            animator.SetBool("stopScarfThrow", true);
+        }
     }
 
     private void DelayBeforeSwingStart()
     {
-        if (swingingPoint != null && !isSwinging && GameManager.Instance.redScarf)
+        if (swingingPoint != null && GameManager.Instance.redScarf)
         {
             ScarfThrowLocation();
         }
-        if (targetLaunchPosition != null && isSwinging)
+        if (targetLaunchPosition != null)
         {
             hasStartedSwing = true;
         }
         else
         {
+            CancelInvoke("ReturnPlayerState");
             Invoke("ReturnPlayerState", 0.1f);
         }
     }

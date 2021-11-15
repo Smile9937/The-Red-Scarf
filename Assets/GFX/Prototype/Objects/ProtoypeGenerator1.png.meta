@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: c7a358c7cf002ea41ad3fb3fb389f4ad
+guid: 59465ca6c503cc14fa986ed9194df033
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1682943482603411724
-    second: shelf1_0
+      213: 3697741504177953273
+    second: ProtoypeGenerator1_0
   - first:
-      213: 643060478456558397
-    second: shelf1_1
+      213: 1311778389374916833
+    second: ProtoypeGenerator1_1
   - first:
-      213: 5810554232031807683
-    second: shelf1_2
+      213: 2978773159682471287
+    second: ProtoypeGenerator1_2
   - first:
-      213: 6611869210015956758
-    second: shelf1_3
-  - first:
-      213: -3347741199037732837
-    second: shelf1_4
-  - first:
-      213: -6917020896396830906
-    second: shelf1_5
+      213: 5114589581769244026
+    second: ProtoypeGenerator1_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,33 +115,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shelf1_0
+      name: ProtoypeGenerator1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 42
-        height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f66d56b1dbf4a8e0800000000000000
-      internalID: -1682943482603411724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_1
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 4
-        width: 42
+        width: 56
         height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -156,41 +129,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d33fe7b191c9ce800800000000000000
-      internalID: 643060478456558397
+      spriteID: 9f9debb7e44015330800000000000000
+      internalID: 3697741504177953273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_2
+      name: ProtoypeGenerator1_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 7
-        width: 42
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c80664d94c33a050800000000000000
-      internalID: 5810554232031807683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_3
-      rect:
-        serializedVersion: 2
-        x: 126
+        x: 58
         y: 0
-        width: 42
-        height: 42
+        width: 56
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ff75ce30412cb50800000000000000
-      internalID: 6611869210015956758
+      spriteID: 1e8d9babe7f543210800000000000000
+      internalID: 1311778389374916833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_4
+      name: ProtoypeGenerator1_2
       rect:
         serializedVersion: 2
-        x: 168
+        x: 115
         y: 0
-        width: 42
-        height: 42
+        width: 56
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b186a67dd1f6a81d0800000000000000
-      internalID: -3347741199037732837
+      spriteID: 7757751186ab65920800000000000000
+      internalID: 2978773159682471287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_5
+      name: ProtoypeGenerator1_3
       rect:
         serializedVersion: 2
-        x: 210
+        x: 172
         y: 0
-        width: 42
-        height: 42
+        width: 56
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6471056842ec100a0800000000000000
-      internalID: -6917020896396830906
+      spriteID: a7df449502caaf640800000000000000
+      internalID: 5114589581769244026
       vertices: []
       indices: 
       edges: []
