@@ -22,6 +22,7 @@ public class DressPlayer : MonoBehaviour
     private bool gainComposure;
 
     [Header("Ranged Attack Variables")]
+    [SerializeField] private GameObject rangedAttackPoint = null;
     [SerializeField] private float rangeAttackRate = 1f;
     [SerializeField] private int gunComposureCost;
     [SerializeField] private float gunJumpForce;
@@ -87,6 +88,8 @@ public class DressPlayer : MonoBehaviour
                 StopCoroutine(loseComposureCoroutine);
             }
             player.state = Player.State.Neutral;
+            if (player.myAnimator.GetBool("isBlock"))
+                player.myAnimator.SetBool("isBlock", false);
         }
         else
         {
@@ -95,7 +98,9 @@ public class DressPlayer : MonoBehaviour
                 player.state = Player.State.Blocking;
                 loseComposureCoroutine = StartCoroutine(LoseComposure());
                 player.myRigidbody.velocity = new Vector2(0, player.myRigidbody.velocity.y);
-
+                if (!player.myAnimator.GetBool("isBlock"))
+                    player.myAnimator.SetBool("isBlock", true);
+                
                 Collider2D[] blockTargets = Physics2D.OverlapBoxAll(blockPoint.position, blockSize, 90f, blockLayers);
 
                 foreach (Collider2D target in blockTargets)
@@ -103,6 +108,7 @@ public class DressPlayer : MonoBehaviour
                     Bullet bullet = target.GetComponent<Bullet>();
                     if (bullet != null)
                     {
+                        player.myAnimator.SetTrigger("didBlock");
                         if (currentComposure + perfectBlockComposureGain <= startComposure)
                         {
                             currentComposure += perfectBlockComposureGain;
@@ -125,6 +131,8 @@ public class DressPlayer : MonoBehaviour
             Debug.Log("Not enough composure");
             StopCoroutine(loseComposureCoroutine);
             player.state = Player.State.Neutral;
+            if (player.myAnimator.GetBool("isBlock"))
+                player.myAnimator.SetBool("isBlock", false);
         }
         else
         {
@@ -133,6 +141,8 @@ public class DressPlayer : MonoBehaviour
             {
                 StopCoroutine(loseComposureCoroutine);
                 player.state = Player.State.Neutral;
+                if (player.myAnimator.GetBool("isBlock"))
+                    player.myAnimator.SetBool("isBlock", false);
             }
         }
     }
@@ -195,6 +205,7 @@ public class DressPlayer : MonoBehaviour
             if (InputManager.Instance.GetKey(KeybindingActions.Special))
             {
                 player.state = Player.State.Attacking;
+                player.myAnimator.SetTrigger("isShotgunUsed");
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2, player.myRigidbody.velocity.y);
                 if (InputManager.Instance.GetKey(KeybindingActions.Down))
                 {
@@ -207,7 +218,7 @@ public class DressPlayer : MonoBehaviour
                 }
                 else
                 {
-                    Shoot(player.attackPoint.position, player.attackPoint.rotation);
+                    Shoot(rangedAttackPoint.transform.position, rangedAttackPoint.transform.rotation);
                 }
             }
         }
