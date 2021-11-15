@@ -347,6 +347,7 @@ MonoBehaviour:
   myAnimator: {fileID: 0}
   type: 0
   state: 0
+  scarfActionType: 1
   attackDistance: 2
   moveSpeed: 2
   timer: 2

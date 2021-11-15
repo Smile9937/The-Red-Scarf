@@ -62,13 +62,17 @@ public class SwingingPoint : ActivatableObject, IGrabbable
             theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
         }
     }
-    public void HandleGrabbed()
+    public void HandleGrabbedTowards()
     {
         if (theGrapplingScarf != null)
         {
             theGrapplingScarf.LaunchPlayerIntoDash();
             return;
         }
+        ReturnFromGrabbed();
+    }
+    public void HandleGrabbedAway()
+    {
         ReturnFromGrabbed();
     }
     public void ReturnFromGrabbed()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterGrapplingScarf : MonoBehaviour
 {
     [Header("Components")]
-    bool hasStartedSwing = false;
     [SerializeField] public GameObject swingingPoint;
     [SerializeField] Rigidbody2D characterRigidBody;
     [SerializeField] LayerMask grabableLayers;
@@ -63,8 +62,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (airDashCooldown <= 0 && theGrabbable != null && (InputManager.Instance.GetKeyDown(KeybindingActions.Special) || !player.grounded))
         {
-            airDashCooldown = originalAirDashCooldown;
-            theGrabbable.HandleGrabbed();
+            theGrabbable.HandleGrabbedTowards();
+        }
+        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKeyDown(KeybindingActions.Right) && swingingPoint.transform.position.x > transform.position.x) || (InputManager.Instance.GetKeyDown(KeybindingActions.Left) && swingingPoint.transform.position.x < transform.position.x)))
+        {
+            theGrabbable.HandleGrabbedTowards();
+        }
+        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKeyDown(KeybindingActions.Right) && swingingPoint.transform.position.x < transform.position.x) || (InputManager.Instance.GetKeyDown(KeybindingActions.Left) && swingingPoint.transform.position.x > transform.position.x)))
+        {
+            theGrabbable.HandleGrabbedAway();
         }
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral && airDashCooldown <= 0)
         {
@@ -92,7 +98,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 }
                 characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
-            ScarfThrowLocation();
         }
         if (airDashCooldown > 0)
         {
@@ -210,6 +215,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     public void LaunchPlayerIntoDash()
     {
+        airDashCooldown = originalAirDashCooldown;
         characterRigidBody.gravityScale = gravityAdjustment;
         CancelInvoke("ReturnGravityAdjustments");
         Invoke("ReturnGravityAdjustments", 0.6f * dashDuration);
@@ -261,47 +267,35 @@ public class CharacterGrapplingScarf : MonoBehaviour
     public void ReturnPlayerState()
     {
         ReturnPlayerStateAnim();
-        CancelInvoke("ReturnPlayerStateStatus");
         Invoke("ReturnPlayerStateStatus", 0.2f);
     }
 
     private void ReturnPlayerStateStatus()
     {
-        if (!IsInvoking("ReturnPlayerStateStatus"))
-        {
-            isReadyToStop = false;
-            player.state = Player.State.Neutral;
-            characterRigidBody.gravityScale = characterGravity;
-            originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
-            swingingPoint = null;
-            theGrabbable = null;
+        if (IsInvoking("ReturnPlayerStateStatus"))
             CancelInvoke("ReturnPlayerStateStatus");
-        }
+
+        isReadyToStop = false;
+        player.state = Player.State.Neutral;
+        characterRigidBody.gravityScale = characterGravity;
+        originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
+        swingingPoint = null;
+        theGrabbable = null;
     }
 
     private void ReturnPlayerStateAnim()
     {
-        if (!IsInvoking("ReturnPlayerStateAnim"))
-        {
-            animator.SetBool("isScarfThrown", false);
-            animator.SetBool("stopScarfThrow", true);
-        }
+        if (IsInvoking("ReturnPlayerStateAnim"))
+            CancelInvoke("ReturnPlayerStateAnim");
+        animator.SetBool("isScarfThrown", false);
+        animator.SetBool("stopScarfThrow", true);
     }
 
     private void DelayBeforeSwingStart()
     {
-        if (swingingPoint != null && GameManager.Instance.redScarf)
+        if (swingingPoint == null && GameManager.Instance.redScarf)
         {
             ScarfThrowLocation();
-        }
-        if (targetLaunchPosition != null)
-        {
-            hasStartedSwing = true;
-        }
-        else
-        {
-            CancelInvoke("ReturnPlayerState");
-            Invoke("ReturnPlayerState", 0.1f);
         }
     }
     private void ReturnGravityAdjustments()

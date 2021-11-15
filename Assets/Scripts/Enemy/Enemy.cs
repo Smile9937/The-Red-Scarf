@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable, ICharacter
+public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 {
     [Header("Jump Variables")]
     [SerializeField] private Transform groundCheck;
@@ -46,6 +46,15 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         Staggered,
         Dead
     }
+
+    [Header("Enemy Scarf Interaction")]
+    public GrabbingAction scarfActionType;
+    public enum GrabbingAction
+    {
+        Thrown,
+        None,
+    };
+
 
     [Header("Stats")]
     [SerializeField] private float attackDistance;
@@ -375,14 +384,58 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter
         knockback = knockbackVelocity;
         knockbackCount = knockbackLength;
 
-        if (transform.position.x < knockbackSource.transform.position.x)
+        knockedFromRight = transform.position.x < knockbackSource.transform.position.x;
+        Debug.Log(knockedFromRight);
+    }
+
+    // Scarf Interaction
+    public void IsGrabbed()
+    {
+        switch (scarfActionType)
         {
-            knockedFromRight = true;
+            case GrabbingAction.Thrown:
+                FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(this.gameObject, -100);
+                break;
+            case GrabbingAction.None:
+                ReturnFromGrabbed();
+                break;
+            default:
+                ReturnFromGrabbed();
+                break;
         }
-        else
+    }
+    public void HandleGrabbedTowards()
+    {
+        switch (scarfActionType)
         {
-            knockedFromRight = false;
+            case GrabbingAction.Thrown:
+                FindObjectOfType<CharacterGrapplingScarf>().LaunchPlayerIntoDash();
+                break;
+            case GrabbingAction.None:
+                break;
+            default:
+                break;
         }
+        ReturnFromGrabbed();
+    }
+    public void HandleGrabbedAway()
+    {
+        switch (scarfActionType)
+        {
+            case GrabbingAction.Thrown:
+                KnockBack(this.gameObject, new Vector2(1, 5), 0.5f);
+                break;
+            case GrabbingAction.None:
+                break;
+            default:
+                break;
+        }
+        ReturnFromGrabbed();
+    }
+    public void ReturnFromGrabbed()
+    {
+        FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, 0);
+        FindObjectOfType<CharacterGrapplingScarf>().ReturnPlayerState();
     }
 
     private void OnDrawGizmosSelected()
