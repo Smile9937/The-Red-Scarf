@@ -14,7 +14,10 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null && instance != this)
+        {
+            instance = this;
+        }
         SetTextField();
     }
 

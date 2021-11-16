@@ -30,7 +30,11 @@ public class RedScarfPlayer : MonoBehaviour
         loseRageCoroutine = StartCoroutine(LoseRage());
     }
     private void Update()
-    {        
+    {
+        if (PauseMenu.Instance.gamePaused)
+        {
+            return;
+        }
         PlayerUI.Instance.SetRageText(currentRageCount);
         HandleRage();
         if(player.state == Player.State.Neutral)

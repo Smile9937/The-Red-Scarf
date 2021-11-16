@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
 
 public class PickUp : MonoBehaviour
 {
@@ -24,33 +23,32 @@ public class PickUp : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-            DoEvent();
-        }
-    }
-
-    private void DoEvent()
-    {
-        switch (type)
-        {
-            case Type.OneTimeUse:
-                eventToStart.Invoke();
-                Destroy(gameObject);
-                break;
-            case Type.MultiUse:
-                eventToStart.Invoke();
-                break;
-            case Type.Toggle:
-                if (toggle)
-                {
+            switch(type)
+            {
+                case Type.OneTimeUse:
                     eventToStart.Invoke();
-                }
-                else
-                {
-                    toggleEvent.Invoke();
-                }
-                toggle = !toggle;
-                break;
-
+                    DoNotRespawn doNotRespawn = GetComponent<DoNotRespawn>();
+                    if(doNotRespawn != null)
+                    {
+                        doNotRespawn.Collected();
+                    }
+                    Destroy(gameObject);
+                    break;
+                case Type.MultiUse:
+                    eventToStart.Invoke();
+                    break;
+                case Type.Toggle:
+                    toggle = !toggle;
+                    if(toggle)
+                    {
+                        eventToStart.Invoke();
+                    }
+                    else
+                    {
+                        toggleEvent.Invoke();
+                    }
+                    break;
+            }
         }
     }
 }

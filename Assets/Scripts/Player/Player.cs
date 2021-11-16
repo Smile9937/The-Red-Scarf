@@ -42,7 +42,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public float meleeAttackRate;
     public bool hasBaseballBat;
 
-    //[HideInInspector]
     public State state;
     public enum State
     {
@@ -55,19 +54,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         Dead,
         ReturningToNeutral
     }
-
-    /*[Serializable]
-    public class PlayerStats
-    {
-        public PlayerCharacterEnum playerCharacter;
-        public float speed;
-        public float jumpForce;
-        public float jumpTime;
-    }*/
-
-    //public PlayerStats[] playerCharacters;
-
-    //[HideInInspector] public PlayerStats currentCharacter;
 
     [Header("Animator Controllers")]
     [SerializeField] private RuntimeAnimatorController redScarfUnarmedAnimator;
@@ -100,6 +86,30 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public int attackBonus;
 
     [SerializeField] Checkpoint checkpoint;
+
+    private void OnEnable()
+    {
+        GameEvents.Instance.onSaveGame += Save;
+        GameEvents.Instance.onLoadGame += Load;
+    }
+    private void OnDisable()
+    {
+        GameEvents.Instance.onSaveGame -= Save;
+        GameEvents.Instance.onLoadGame -= Load;
+    }
+    private void Save()
+    {
+        GameManager.Instance.hasBaseballBat = hasBaseballBat;
+    }
+    private void Load()
+    {
+        hasBaseballBat = GameManager.Instance.hasBaseballBat;
+        SetCurrentCharacter();
+    }
+    private void Awake()
+    {
+        GameEvents.Instance.LoadGame();
+    }
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -111,14 +121,11 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         currentHealth = maxHealth;
 
         GameManager.Instance.player = this;
-        //GameManager.Instance.LoadPlayerStats();
-
 
         transform.position = GameManager.Instance.currentSpawnpoint;
         state = State.Neutral;
 
         rollCollider.enabled = false;
-        GameManager.Instance.LoadPlayerStats();
 
         SetCurrentCharacter();
         jumpTimeCounter = currentPlayerStats.jumpTime;
@@ -126,7 +133,12 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     private void Update()
     {
-        if(InputManager.Instance.GetKeyDown(KeybindingActions.PlaceCheckpoint))
+        if (PauseMenu.Instance.gamePaused)
+        {
+            return;
+        }
+
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.PlaceCheckpoint))
         {
             Instantiate(checkpoint, transform.position, Quaternion.Euler(0, 0, 90));
         }
