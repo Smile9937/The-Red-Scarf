@@ -12,17 +12,11 @@ public class GameManager : MonoBehaviour
 
     public bool redScarf;
 
-    /*[Serializable]
-    public class PlayerStats
-    {
-        public PlayerCharacterEnum playerCharacter;
-        public float speed;
-        public float jumpForce;
-    }
-
-    [HideInInspector] public  PlayerStats currentPlayer;*/
+    public List<int> unlockedRooms = new List<int>();
 
     public bool hasBaseballBat;
+
+    public Dictionary<int, bool> pickupCollectedDatabase = new Dictionary<int, bool>();
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -36,8 +30,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(instance);
-            //SavePlayerStats();
+            DontDestroyOnLoad(gameObject);
         }
         currentSpawnpoint = player.transform.position;
         Time.timeScale = 1;
@@ -63,7 +56,8 @@ public class GameManager : MonoBehaviour
     public void SetCurrentCheckpoint(Vector3 checkpointPos)
     {
         currentSpawnpoint = checkpointPos;
-        SavePlayerStats();
+        //SavePlayerStats();
+        GameEvents.Instance.SaveGame();
     }
     public void RespawnPlayer()
     {

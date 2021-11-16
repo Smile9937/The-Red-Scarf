@@ -70,10 +70,10 @@ public class Activator : MonoBehaviour, IDamageable
     
     private void Activate()
     {
-        GameEvents.instance.Activate(id);
+        GameEvents.Instance.Activate(id);
     }
     private void Deactivate()
     {
-        GameEvents.instance.DeActivate(id);
+        GameEvents.Instance.DeActivate(id);
     }
 }

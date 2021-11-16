@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
 
 public class PickUp : MonoBehaviour
 {
@@ -28,6 +27,11 @@ public class PickUp : MonoBehaviour
             {
                 case Type.OneTimeUse:
                     eventToStart.Invoke();
+                    DoNotRespawn doNotRespawn = GetComponent<DoNotRespawn>();
+                    if(doNotRespawn != null)
+                    {
+                        doNotRespawn.Collected();
+                    }
                     Destroy(gameObject);
                     break;
                 case Type.MultiUse:
@@ -44,7 +48,6 @@ public class PickUp : MonoBehaviour
                         toggleEvent.Invoke();
                     }
                     break;
-
             }
         }
     }

@@ -3,29 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject buttons;
     [SerializeField] private Animator backgroundDim;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject soundSettings;
+    [SerializeField] private GameObject keyBindingsSettings;
+    [SerializeField] private GameObject miniMap;
     public bool gamePaused;
+
+    private GameObject currentMenu;
+
+    [SerializeField] private Text[] keybindTexts;
+
+    private MenuEnum menuEnum;
 
     private static PauseMenu instance;
     public static PauseMenu Instance { get { return instance; } }
 
     private void Awake()
     {
-        if (instance != this && instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
+        if (instance != this && instance == null)
         {
             instance = this;
         }
     }
     private void Update()
     {
+        if (InputManager.Instance.waitingForInput)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gamePaused = !gamePaused;
@@ -39,35 +48,64 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
+    public void InvokeMenu(MenuInvoker currState)
+    {
+        if (InputManager.Instance.waitingForInput)
+            return;
+        menuEnum = currState.menuEnum;
+        switch (menuEnum)
+        {
+            case MenuEnum.CloseMenu:
+                ResumeGame();
+                break;
+            case MenuEnum.PauseMenu:
+                currentMenu.SetActive(false);
+                currentMenu = pauseMenu;
+                currentMenu.SetActive(true);
+                break;
+            case MenuEnum.OptionsMenu:
+                currentMenu.SetActive(false);
+                currentMenu = settingsMenu;
+                currentMenu.SetActive(true);
+                break;
+            case MenuEnum.SoundSettings:
+                currentMenu.SetActive(false);
+                currentMenu = soundSettings;
+                currentMenu.SetActive(true);
+                break;
+            case MenuEnum.KeybindingsSettings:
+                currentMenu.SetActive(false);
+                currentMenu = keyBindingsSettings;
+                currentMenu.SetActive(true);
+                break;
+        }
+    }
 
     private void PauseGame()
     {
+        currentMenu = pauseMenu;
         Time.timeScale = 0;
-        AudioListener.pause = true;
 
         PlayBackgroundDim(true);
     }
     private void ResumeGame()
     {
+        currentMenu.SetActive(false);
         Time.timeScale = 1;
-        AudioListener.pause = false;
 
         PlayBackgroundDim(false);
     }
     private void PlayBackgroundDim(bool menuOpen)
     {
         backgroundDim.SetBool("BackgroundDimOn", menuOpen);
-        buttons.gameObject.SetActive(menuOpen);
+        pauseMenu.SetActive(menuOpen);
+        miniMap.SetActive(menuOpen);
     }
 
     public void ContinueGame()
     {
         gamePaused = false;
         ResumeGame();
-    }
-    public void OpenSettings()
-    {
-        Debug.Log("Open Settings");
     }
     public void ReturnToMainMenu()
     {
@@ -76,5 +114,15 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ChangeKeyBindings(KeybindInvoker currentKeybind)
+    {
+        InputManager.Instance.SetKeyBind(currentKeybind);
+    }
+
+    public void SetKeyBindingsText(KeyCode keyCode, int keybindId)
+    {
+        keybindTexts[keybindId].text = keyCode.ToString();
     }
 }
