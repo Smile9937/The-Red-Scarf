@@ -173,8 +173,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 2
@@ -3882,6 +3880,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: regainTimer
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: composureGain
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: rangeAttackRate
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: rangedAttackPoint
       value: 
       objectReference: {fileID: 2009054784}
@@ -3906,12 +3916,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: rageLossCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: rollLayer.m_Bits
       value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: timeBeforeRageLoss
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dressAnimator
@@ -7883,8 +7897,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 3
@@ -13697,8 +13709,6 @@ MonoBehaviour:
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn:
   - {fileID: 1399140927}
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 1
@@ -16202,8 +16212,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 7
@@ -16839,7 +16847,7 @@ MonoBehaviour:
   currentSpawnpoint: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   redScarf: 1
-  hasBaseballBat: 0
+  hasBaseballBat: 1
 --- !u!114 &1717603609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18258,8 +18266,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 5
@@ -18486,8 +18492,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 0
@@ -18628,8 +18632,6 @@ MonoBehaviour:
   backgroundForRoom: {fileID: 0}
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn: []
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 6
@@ -60095,8 +60097,6 @@ MonoBehaviour:
   oldBackgroundForRoom: {fileID: 0}
   enemiesToRespawn:
   - {fileID: 1936710710}
-  enemiesToRespawnObj: []
-  enemiesToRespawnPos: []
   useNewMethod: 0
   theRoomController: {fileID: 1491653786}
   roomNumber: 4
@@ -60854,7 +60854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009054784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 0.84, z: 0}
+  m_LocalPosition: {x: 1.6, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1177650679}
