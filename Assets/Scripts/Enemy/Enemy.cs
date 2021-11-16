@@ -394,7 +394,9 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(this.gameObject, -100);
+                FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(this.gameObject, -1);
+                state = State.Staggered;
+                Invoke("ReturnFromGrabbed", 2f);
                 break;
             case GrabbingAction.None:
                 ReturnFromGrabbed();
@@ -410,6 +412,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         {
             case GrabbingAction.Thrown:
                 FindObjectOfType<CharacterGrapplingScarf>().LaunchPlayerIntoDash();
+                CancelInvoke("ReturnFromGrabbed");
                 break;
             case GrabbingAction.None:
                 break;
@@ -424,6 +427,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         {
             case GrabbingAction.Thrown:
                 KnockBack(this.gameObject, new Vector2(1, 5), 0.5f);
+                CancelInvoke("ReturnFromGrabbed");
                 break;
             case GrabbingAction.None:
                 break;
@@ -434,6 +438,14 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
     }
     public void ReturnFromGrabbed()
     {
+        if (movingEnemy)
+        {
+            state = State.Moving;
+        }
+        else
+        {
+            state = State.Stationary;
+        }
         FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, 0);
         FindObjectOfType<CharacterGrapplingScarf>().ReturnPlayerState();
     }
