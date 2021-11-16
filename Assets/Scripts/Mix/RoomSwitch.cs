@@ -10,7 +10,8 @@ public class RoomSwitch : MonoBehaviour
     [SerializeField] SpriteRenderer oldBackgroundForRoom;
     [Header("Enemy Spawned")]
     [SerializeField] List<GameObject> enemiesToRespawn = new List<GameObject>();
-    List<Transform> enemiesToRespawnPos = new List<Transform>();
+    private List<GameObject> enemiesToRespawnObj = new List<GameObject>();
+    private List<Vector2> enemiesToRespawnPos = new List<Vector2>();
     [Header("Which Method")]
     [SerializeField] bool useNewMethod = false;
     [Header("Normal Method")]
@@ -29,7 +30,14 @@ public class RoomSwitch : MonoBehaviour
                 if (!enemiesToRespawn.Contains(item))
                 {
                     enemiesToRespawn.Add(item);
-                    enemiesToRespawnPos.Add(item.transform);
+                }
+                if (!enemiesToRespawnObj.Contains(item.GetComponentInChildren<Enemy>().gameObject))
+                {
+                    enemiesToRespawnObj.Add(item.GetComponentInChildren<Enemy>().gameObject);
+                }
+                if (!enemiesToRespawnPos.Contains(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y)))
+                {
+                    enemiesToRespawnPos.Add(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y));
                 }
             }
         }
@@ -45,6 +53,8 @@ public class RoomSwitch : MonoBehaviour
             }
             else
             {
+                RespawnEnemies();
+                CancelInvoke("DeactivateEnemies");
                 theRoomController.SetInteger("theRoomNumber", roomNumber);
             }
             if (GameObject.FindGameObjectWithTag("Background Room"))
@@ -69,32 +79,63 @@ public class RoomSwitch : MonoBehaviour
         }
     }
 
+    
     private void OnTriggerExit2D(Collider2D collission)
     {
-        if (collission.tag == "Player")
+        if (collission.tag == "Player" && !useNewMethod)
         {
-            Invoke("RespawnEnemies", Time.deltaTime);
+            Invoke("DeactivateEnemies", Time.deltaTime + 5f);
         }
     }
 
-    private void RespawnEnemies()
+    private void DeactivateEnemies()
     {
-        if (theRoomController.GetInteger("theRoomNumber") == roomNumber)
+        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
         {
             foreach (var item in enemiesToRespawn)
             {
                 if (item != null)
                 {
-                    Debug.Log(item + " respawned!");
+                    if (item.activeSelf == true)
+                    {
+                        foreach (var itemObj in enemiesToRespawnObj)
+                        {
+                            itemObj.GetComponent<Enemy>().currentHealth = itemObj.GetComponent<Enemy>().maxHealth;
+                            foreach (var itemLoc in enemiesToRespawnPos)
+                            {
+                                if (enemiesToRespawnObj.IndexOf(itemObj) == enemiesToRespawnPos.IndexOf(itemLoc))
+                                {
+                                    itemObj.transform.position = new Vector2(itemLoc.x, itemLoc.y);
+                                }
+                            }
+                        }
+                        item.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void RespawnEnemies()
+    {
+        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
+        {
+            foreach (var item in enemiesToRespawn)
+            {
+                if (item != null)
+                {
                     if (item.activeSelf == false)
                     {
-                        item.GetComponentInChildren<Enemy>().gameObject.SetActive(true);
-                        item.GetComponentInChildren<Enemy>().currentHealth = item.GetComponentInChildren<Enemy>().maxHealth;
-                        foreach (var itemLoc in enemiesToRespawnPos)
+                        item.gameObject.SetActive(true);
+                        foreach (var itemObj in enemiesToRespawnObj)
                         {
-                            if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))
+                            itemObj.GetComponent<Enemy>().currentHealth = itemObj.GetComponent<Enemy>().maxHealth;
+                            foreach (var itemLoc in enemiesToRespawnPos)
                             {
-                                item.transform.position = itemLoc.position;
+                                if (enemiesToRespawnObj.IndexOf(itemObj) == enemiesToRespawnPos.IndexOf(itemLoc))
+                                {
+                                    itemObj.transform.position = new Vector2(itemLoc.x, itemLoc.y);
+                                }
                             }
                         }
                     }
