@@ -11,7 +11,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] float lengthOfScarf = 1f;
     [Header("Stats")]
     [SerializeField] float dashStrength = 1.5f;
-    [SerializeField] float dashDuration = 1f;
+    [SerializeField] public float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
     [SerializeField] float airDashCooldown = 0.2f;
     float originalAirDashCooldown;
@@ -242,15 +242,20 @@ public class CharacterGrapplingScarf : MonoBehaviour
             animator.Play("Scarf Pull Jump");
             characterRigidBody.velocity = Vector2.zero;
             float theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.85f, 1.1f);
+            Debug.Log(theBonusInStrength);
 
             characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
             theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.9f, 1.1f);
+            Debug.Log(theBonusInStrength);
             theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
+            Debug.Log(theBonusInStrength);
 
             //if (Vector2.Distance(originalLaunchPosition, transform.position) <= 4)
             //    CancelInvoke("ReturnPlayerStateStatus");
 
+            CancelInvoke("ReturnPlayerState");
+            CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerStateStatus", dashDuration * theBonusInStrength);
             animator.SetBool("isScarfThrown", false);
             swingingPoint = null;
@@ -292,6 +297,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
         ReturnPlayerStateAnim();
     }
 
+    public void PlayScarfPullAnimation()
+    {
+        animator.Play("Scarf Pull Jump");
+    }
+
     private void ReturnPlayerStateStatus()
     {
         if (IsInvoking("ReturnPlayerStateStatus"))
@@ -310,6 +320,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
             CancelInvoke("ReturnPlayerStateAnim");
         animator.SetBool("isScarfThrown", false);
         animator.SetBool("stopScarfThrow", true);
+        if (!IsInvoking("ReturnPlayerStateStatus"))
+            Invoke("ReturnPlayerStateStatus", 0.4f);
     }
 
     private void DelayBeforeSwingStart()

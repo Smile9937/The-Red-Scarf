@@ -99,6 +99,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
     private bool cooling;
     private float intTimer;
 
+    private CharacterGrapplingScarf theGrapplingScarf;
+
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -107,6 +109,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
         SelectTarget();
         intTimer = timer;
+
+        theGrapplingScarf = FindObjectOfType<CharacterGrapplingScarf>();
 
         CheckIfMovingEnemy();
     }
@@ -394,9 +398,9 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(this.gameObject, -1);
+                theGrapplingScarf.SetSwingingPointAsTarget(this.gameObject, -1);
                 state = State.Staggered;
-                Invoke("ReturnFromGrabbed", 2f);
+                Invoke("ReturnFromGrabbed", 1.75f);
                 break;
             case GrabbingAction.None:
                 ReturnFromGrabbed();
@@ -411,7 +415,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                FindObjectOfType<CharacterGrapplingScarf>().LaunchPlayerIntoDash();
+                theGrapplingScarf.LaunchPlayerIntoDash();
                 CancelInvoke("ReturnFromGrabbed");
                 break;
             case GrabbingAction.None:
@@ -426,7 +430,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                KnockBack(this.gameObject, new Vector2(1, 5), 0.5f);
+                KnockBack(theGrapplingScarf.gameObject, new Vector2(1, 5), 0.5f);
+                theGrapplingScarf.PlayScarfPullAnimation();
                 CancelInvoke("ReturnFromGrabbed");
                 break;
             case GrabbingAction.None:
@@ -446,8 +451,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         {
             state = State.Stationary;
         }
-        FindObjectOfType<CharacterGrapplingScarf>().SetSwingingPointAsTarget(null, 0);
-        FindObjectOfType<CharacterGrapplingScarf>().ReturnPlayerState();
+        theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
+        theGrapplingScarf.ReturnPlayerState();
     }
 
     private void OnDrawGizmosSelected()
