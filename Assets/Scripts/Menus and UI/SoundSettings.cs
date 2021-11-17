@@ -10,9 +10,9 @@ public class SoundSettings : MonoBehaviour
     private Bus SFX;
     private Bus master;
 
-    float musicVolume = 0.5f;
-    float SFXVolume = 0.5f;
-    float masterVolume = 0.5f;
+    private float musicVolume = 0.5f;
+    private float SFXVolume = 0.5f;
+    private float masterVolume = 0.5f;
     private void Awake()
     {
         music = RuntimeManager.GetBus("bus:/Master/Music");
