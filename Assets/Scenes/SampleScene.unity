@@ -1643,7 +1643,7 @@ MonoBehaviour:
   currentSpawnpoint: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   redScarf: 1
-  hasBaseballBat: 0
+  hasBaseballBat: 1
 --- !u!114 &212717985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,22 +1988,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: -1, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: -1, z: 0}
   m_LookaheadTime: 0.05
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 1
   m_XDamping: 1.25
-  m_YDamping: 2
+  m_YDamping: 1
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.55
   m_CameraDistance: 5
-  m_DeadZoneWidth: 0.7
-  m_DeadZoneHeight: 0.2
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 2
+  m_SoftZoneWidth: 1
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
@@ -2676,13 +2676,13 @@ CompositeCollider2D:
         Y: -110000000
       - X: 210000000
         Y: -80000000
-      - X: 369375008
+      - X: 379375008
         Y: -80000000
-      - X: 370000000
+      - X: 380000000
         Y: -79375000
-      - X: 370000000
+      - X: 380000000
         Y: -70625000
-      - X: 369375008
+      - X: 379375008
         Y: -70000000
       - X: 360000000
         Y: -70000000
@@ -2880,6 +2880,22 @@ CompositeCollider2D:
         Y: -40000000
       - X: -290624992
         Y: -40000000
+    - - X: 320000000
+        Y: -39375000
+      - X: 320000000
+        Y: -30625000
+      - X: 319375008
+        Y: -30000000
+      - X: 280624992
+        Y: -30000000
+      - X: 280000000
+        Y: -30625000
+      - X: 280000000
+        Y: -39375000
+      - X: 280624992
+        Y: -40000000
+      - X: 319375008
+        Y: -40000000
     - - X: 530000000
         Y: -79375000
       - X: 530000000
@@ -2920,22 +2936,6 @@ CompositeCollider2D:
         Y: -80000000
       - X: 529375008
         Y: -80000000
-    - - X: 320000000
-        Y: -39375000
-      - X: 320000000
-        Y: -30625000
-      - X: 319375008
-        Y: -30000000
-      - X: 280624992
-        Y: -30000000
-      - X: 280000000
-        Y: -30625000
-      - X: 280000000
-        Y: -39375000
-      - X: 280624992
-        Y: -40000000
-      - X: 319375008
-        Y: -40000000
     - - X: 370000000
         Y: -259375008
       - X: 370000000
@@ -3345,10 +3345,10 @@ CompositeCollider2D:
       - {x: 21, y: -10.999414}
       - {x: 21, y: -8.000586}
       - {x: 21.000586, y: -8}
-      - {x: 36.937656, y: -7.999848}
-      - {x: 37, y: -7.937285}
-      - {x: 36.999847, y: -7.0623474}
-      - {x: 36.937286, y: -7}
+      - {x: 37.937656, y: -7.999848}
+      - {x: 38, y: -7.937285}
+      - {x: 37.999847, y: -7.0623474}
+      - {x: 37.937286, y: -7}
       - {x: 36.000587, y: -7}
       - {x: 36, y: -6.9994144}
       - {x: 35.999847, y: -5.062348}
@@ -19257,6 +19257,16 @@ Tilemap:
   - first: {x: 36, y: -8, z: 0}
     second:
       serializedVersion: 2
+      m_TileIndex: 38
+      m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 37, y: -8, z: 0}
+    second:
+      serializedVersion: 2
       m_TileIndex: 36
       m_TileSpriteIndex: 36
       m_TileMatrixIndex: 0
@@ -26952,7 +26962,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: bfc43f959594d7446b1ae7214f00c58b, type: 2}
   - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: 5641b74512239c843b75dddc86e42562, type: 2}
-  - m_RefCount: 47
+  - m_RefCount: 48
     m_Data: {fileID: 11400000, guid: f549acca93fcb39499628ea2c5931063, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 6c04bd66577538d44a72ab8955843f84, type: 2}
@@ -26975,7 +26985,7 @@ Tilemap:
     m_Data: {fileID: -2818079205355422457, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
   - m_RefCount: 192
     m_Data: {fileID: 8978105323228414247, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
-  - m_RefCount: 47
+  - m_RefCount: 48
     m_Data: {fileID: -1905017227030424370, guid: 209f7ce5c8670da4b8dc7ff71a0fdeba, type: 3}
   - m_RefCount: 1450
     m_Data: {fileID: -4374636186278927010, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
@@ -27036,7 +27046,7 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {fileID: 7100874239316502598, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 2316
+  - m_RefCount: 2317
     m_Data:
       e00: 1
       e01: 0
@@ -27057,7 +27067,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 2.5263e-41, g: 2.5263e-41, b: 2.5263e-41, a: 2.5263e-41}
-  - m_RefCount: 2316
+  - m_RefCount: 2317
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 2.5263e-41, g: 2.5263e-41, b: 2.5263e-41, a: 2.5263e-41}
@@ -27692,6 +27702,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8492771727084927940, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: gunJumpForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757252, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dashStrength
       value: 60
@@ -27736,6 +27750,10 @@ PrefabInstance:
       propertyPath: attackLayers.m_Bits
       value: 1152
       objectReference: {fileID: 0}
+    - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: secondsOfInvincibility
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8492771728123215169, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -27743,7 +27761,7 @@ PrefabInstance:
     - target: {fileID: 8492771728123215174, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b68b69f3c460b6f4eb54c15f93030a66, type: 2}
+      objectReference: {fileID: 9100000, guid: f6d48bf4baf4b5148a2c114f70fdafdc, type: 2}
     - target: {fileID: 8492771728123215176, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -30510,7 +30528,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -5.5, y: 1}
+  m_Offset: {x: -18.25, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -30522,10 +30540,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: -2}
+    - - {x: 0.5, y: -3}
       - {x: 0.5, y: 2}
       - {x: 0, y: 2}
-      - {x: 0, y: -2}
+      - {x: 0, y: -3}
 --- !u!60 &565975355
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -30539,7 +30557,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1, y: -7}
+  m_Offset: {x: -2.5, y: -7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -30754,7 +30772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567949793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.44312286, y: -1.25, z: -5}
+  m_LocalPosition: {x: -0.55687714, y: -1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73732,7 +73750,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 37.75, y: 1}
+  m_Offset: {x: 35, y: -2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -73744,10 +73762,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1, y: -2}
-      - {x: 1, y: 2}
-      - {x: 0, y: 2}
-      - {x: 0, y: -2}
+    - - {x: 2, y: 0}
+      - {x: 2, y: 1}
+      - {x: -1, y: 1}
+      - {x: -1, y: 0}
 --- !u!60 &778474066
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -78928,9 +78946,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 8, y: 4}
-      - {x: -10, y: 4}
-      - {x: -10, y: -10}
-      - {x: 8, y: -11}
+      - {x: -20, y: 4}
+      - {x: -20, y: -10}
+      - {x: 8, y: -10}
 --- !u!1001 &1396808675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80198,10 +80216,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 20, y: -3.5}
+    - - {x: 20, y: -3}
       - {x: 20, y: 9}
-      - {x: -11, y: 9}
-      - {x: -11, y: -3.5}
+      - {x: -12, y: 9}
+      - {x: -12, y: -3}
 --- !u!4 &1542615788
 Transform:
   m_ObjectHideFlags: 0
@@ -80322,7 +80340,6 @@ GameObject:
   - component: {fileID: 1614614276}
   - component: {fileID: 1614614281}
   - component: {fileID: 1614614280}
-  - component: {fileID: 1614614279}
   - component: {fileID: 1614614278}
   - component: {fileID: 1614614277}
   m_Layer: 0
@@ -80381,7 +80398,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 15.1, y: 2}
+  m_Offset: {x: 5.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -80394,38 +80411,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 1, y: -2}
-      - {x: 1, y: 1}
-      - {x: 0, y: 1}
+      - {x: 1, y: 3}
+      - {x: 0, y: 3}
       - {x: 0, y: -2}
---- !u!60 &1614614279
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614614275}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 11, y: -3.25}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      - {x: -2, y: 0}
-      - {x: -2, y: -1}
 --- !u!60 &1614614280
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -80608,11 +80596,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 39.5, y: 3.5}
+    - - {x: 41, y: 3.5}
       - {x: -19.75, y: 3.5}
       - {x: -19.75, y: -8.5}
       - {x: 10.5, y: -8}
-      - {x: 39.5, y: -8}
+      - {x: 41, y: -8}
 --- !u!4 &1624245316
 Transform:
   m_ObjectHideFlags: 0
