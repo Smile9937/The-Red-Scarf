@@ -31,34 +31,41 @@ public class PickUp : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-            switch(type)
-            {
-                case Type.OneTimeUse:
-                    eventToStart.Invoke();
-                    DoNotRespawn doNotRespawn = GetComponent<DoNotRespawn>();
-                    if(doNotRespawn != null)
-                    {
-                        doNotRespawn.Collected();
-                    }
+            DoEvent();
+        }
+    }
+
+    private void DoEvent()
+    {
+        switch (type)
+        {
+            case Type.OneTimeUse:
+                eventToStart.Invoke();
+                DoNotRespawn doNotRespawn = GetComponent<DoNotRespawn>();
+                if (doNotRespawn != null)
+                {
+                    doNotRespawn.Collected();
+                }
+                if (myCollider != null)
                     myCollider.enabled = false;
+                if (mySpriteRenderer != null)
                     mySpriteRenderer.enabled = false;
-                    enabled = false;
-                    break;
-                case Type.MultiUse:
+                enabled = false;
+                break;
+            case Type.MultiUse:
+                eventToStart.Invoke();
+                break;
+            case Type.Toggle:
+                if (toggle)
+                {
                     eventToStart.Invoke();
-                    break;
-                case Type.Toggle:
-                    if(toggle)
-                    {
-                        eventToStart.Invoke();
-                    }
-                    else
-                    {
-                        toggleEvent.Invoke();
-                    }
-                    toggle = !toggle;
-                    break;
-            }
+                }
+                else
+                {
+                    toggleEvent.Invoke();
+                }
+                toggle = !toggle;
+                break;
         }
     }
 }

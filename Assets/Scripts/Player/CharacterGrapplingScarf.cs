@@ -140,6 +140,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
         float height = lengthOfScarf * 0.8f;
         float hitBoxWidth = 1;
         float hitBoxHeight = 1;
+
+        int curretNumOfTries = 0;
+        float maxNumOfTries = length * height;
         if (scarfDirection == ScarfDirectionEnum.Sideways)
         {
             height = 0;
@@ -148,9 +151,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             length = 1;
         }
+
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(Vector2.zero, new Vector2(1, 1), 90f, grabableLayers);
         Vector2 targetLocation = new Vector2(transform.position.x + Mathf.Sign(transform.rotation.y), transform.position.y);
-        while (length >= 0 && swingingPoint == null)
+
+        while (length >= 0 && swingingPoint == null && curretNumOfTries < maxNumOfTries)
         {
             targetLocation = new Vector2(transform.position.x + (0.9f * Mathf.Sign(transform.rotation.y)), transform.position.y);
             if (length == 0)
@@ -196,6 +201,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 if (height < 0)
                     height = 0;
             }
+            curretNumOfTries++;
         }
         if (swingingPoint == null)
         {
