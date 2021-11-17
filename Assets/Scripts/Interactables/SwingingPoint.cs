@@ -73,7 +73,7 @@ public class SwingingPoint : ActivatableObject, IGrabbable
     }
     public void HandleGrabbedAway()
     {
-        ReturnFromGrabbed();
+        Invoke("ReturnFromGrabbed", 0.1f);
     }
     public void ReturnFromGrabbed()
     {
