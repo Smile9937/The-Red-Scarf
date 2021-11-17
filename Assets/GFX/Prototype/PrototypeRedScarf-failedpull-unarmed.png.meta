@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: c7a358c7cf002ea41ad3fb3fb389f4ad
+guid: 82f3e1db2e022844fba0ff45777e7e1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1682943482603411724
-    second: shelf1_0
+      213: -4005735146095551726
+    second: PrototypeRedScarf-failedpull-unarmed_0
   - first:
-      213: 643060478456558397
-    second: shelf1_1
+      213: 2821284842068717293
+    second: PrototypeRedScarf-failedpull-unarmed_1
   - first:
-      213: 5810554232031807683
-    second: shelf1_2
+      213: -930487753570914699
+    second: PrototypeRedScarf-failedpull-unarmed_2
   - first:
-      213: 6611869210015956758
-    second: shelf1_3
-  - first:
-      213: -3347741199037732837
-    second: shelf1_4
-  - first:
-      213: -6917020896396830906
-    second: shelf1_5
+      213: -1543490841981307103
+    second: PrototypeRedScarf-failedpull-unarmed_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,127 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shelf1_0
+      name: PrototypeRedScarf-failedpull-unarmed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 42
-        height: 37
+        width: 28
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f66d56b1dbf4a8e0800000000000000
-      internalID: -1682943482603411724
+      spriteID: 21b5da0ab15c868c0800000000000000
+      internalID: -4005735146095551726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_1
+      name: PrototypeRedScarf-failedpull-unarmed_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 4
-        width: 42
-        height: 35
+        x: 28
+        y: 0
+        width: 28
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d33fe7b191c9ce800800000000000000
-      internalID: 643060478456558397
+      spriteID: dee23b5bd97372720800000000000000
+      internalID: 2821284842068717293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_2
+      name: PrototypeRedScarf-failedpull-unarmed_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 28
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57eed8c615e3613f0800000000000000
+      internalID: -930487753570914699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeRedScarf-failedpull-unarmed_3
       rect:
         serializedVersion: 2
         x: 84
-        y: 7
-        width: 42
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c80664d94c33a050800000000000000
-      internalID: 5810554232031807683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_3
-      rect:
-        serializedVersion: 2
-        x: 126
         y: 0
-        width: 42
-        height: 42
+        width: 28
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ff75ce30412cb50800000000000000
-      internalID: 6611869210015956758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_4
-      rect:
-        serializedVersion: 2
-        x: 168
-        y: 0
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b186a67dd1f6a81d0800000000000000
-      internalID: -3347741199037732837
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_5
-      rect:
-        serializedVersion: 2
-        x: 210
-        y: 0
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6471056842ec100a0800000000000000
-      internalID: -6917020896396830906
+      spriteID: 127b2a9c14b649ae0800000000000000
+      internalID: -1543490841981307103
       vertices: []
       indices: 
       edges: []

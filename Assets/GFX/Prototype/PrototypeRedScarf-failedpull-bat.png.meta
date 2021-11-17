@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: c7a358c7cf002ea41ad3fb3fb389f4ad
+guid: 0eda042b6e6d54140a0befb6fb4aa75b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1682943482603411724
-    second: shelf1_0
+      213: 8296929558228106713
+    second: PrototypeRedScarf-failedpull-bat_0
   - first:
-      213: 643060478456558397
-    second: shelf1_1
+      213: 6491588994814600281
+    second: PrototypeRedScarf-failedpull-bat_1
   - first:
-      213: 5810554232031807683
-    second: shelf1_2
+      213: 3427530220664871040
+    second: PrototypeRedScarf-failedpull-bat_2
   - first:
-      213: 6611869210015956758
-    second: shelf1_3
-  - first:
-      213: -3347741199037732837
-    second: shelf1_4
-  - first:
-      213: -6917020896396830906
-    second: shelf1_5
+      213: -5042455211253596194
+    second: PrototypeRedScarf-failedpull-bat_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,127 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shelf1_0
+      name: PrototypeRedScarf-failedpull-bat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 42
-        height: 37
+        width: 32
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f66d56b1dbf4a8e0800000000000000
-      internalID: -1682943482603411724
+      spriteID: 9ddff94697d942370800000000000000
+      internalID: 8296929558228106713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_1
+      name: PrototypeRedScarf-failedpull-bat_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 4
-        width: 42
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d33fe7b191c9ce800800000000000000
-      internalID: 643060478456558397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_2
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 7
-        width: 42
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c80664d94c33a050800000000000000
-      internalID: 5810554232031807683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf1_3
-      rect:
-        serializedVersion: 2
-        x: 126
+        x: 32
         y: 0
-        width: 42
-        height: 42
+        width: 32
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ff75ce30412cb50800000000000000
-      internalID: 6611869210015956758
+      spriteID: 95462cffbc1c61a50800000000000000
+      internalID: 6491588994814600281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_4
+      name: PrototypeRedScarf-failedpull-bat_2
       rect:
         serializedVersion: 2
-        x: 168
+        x: 64
         y: 0
-        width: 42
-        height: 42
+        width: 32
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b186a67dd1f6a81d0800000000000000
-      internalID: -3347741199037732837
+      spriteID: 08855ab6398019f20800000000000000
+      internalID: 3427530220664871040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf1_5
+      name: PrototypeRedScarf-failedpull-bat_3
       rect:
         serializedVersion: 2
-        x: 210
+        x: 96
         y: 0
-        width: 42
-        height: 42
+        width: 32
+        height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6471056842ec100a0800000000000000
-      internalID: -6917020896396830906
+      spriteID: edf796193b9950ab0800000000000000
+      internalID: -5042455211253596194
       vertices: []
       indices: 
       edges: []

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anim_CharacterScarfThrow
+  m_Name: Anim_CharacterScarfThrowFail
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,19 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 8083723510411067575, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.06666667
-      value: {fileID: 934172948872535800, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.11666667
-      value: {fileID: -13167011294610444, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.16666667
-      value: {fileID: -3566692093259694798, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.21666667
-      value: {fileID: -7547789753726181264, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.25
-      value: {fileID: -7547789753726181264, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - time: 0.3
       value: {fileID: 8296929558228106713, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - time: 0.06666667
+      value: {fileID: 6491588994814600281, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - time: 0.13333334
+      value: {fileID: -5042455211253596194, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - time: 0.2
+      value: {fileID: 3427530220664871040, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - time: 0.33333334
+      value: {fileID: 3427530220664871040, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,19 +48,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 8083723510411067575, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - {fileID: 934172948872535800, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - {fileID: -13167011294610444, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - {fileID: -3566692093259694798, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - {fileID: -7547789753726181264, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
-    - {fileID: -7547789753726181264, guid: 705622b2abb5df142a14bcb4b0907d49, type: 3}
     - {fileID: 8296929558228106713, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - {fileID: 6491588994814600281, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - {fileID: -5042455211253596194, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - {fileID: 3427530220664871040, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
+    - {fileID: 3427530220664871040, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.3166667
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,7 +79,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.26666668
-    functionName: DelayBeforeSwingStart
+    functionName: ReturnPlayerState
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

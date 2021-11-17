@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingPoint : ActivatableObject
+public class SwingingPoint : ActivatableObject, IGrabbable
 {
-    public bool isSwingingFrom = false;
     public bool isSwingable = true;
     public float distanceBias = 0;
     [SerializeField] private GameObject theTarget;
@@ -30,6 +29,7 @@ public class SwingingPoint : ActivatableObject
         isSwingable = false;
     }
 
+    /*
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && isSwingable)
@@ -52,5 +52,31 @@ public class SwingingPoint : ActivatableObject
                 theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
             }
         }
+    }
+    */
+
+    public void IsGrabbed()
+    {
+        if (theGrapplingScarf != null)
+        {
+            theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
+        }
+    }
+    public void HandleGrabbedTowards()
+    {
+        if (theGrapplingScarf != null)
+        {
+            theGrapplingScarf.LaunchPlayerIntoDash();
+            return;
+        }
+        ReturnFromGrabbed();
+    }
+    public void HandleGrabbedAway()
+    {
+        Invoke("ReturnFromGrabbed", 0.1f);
+    }
+    public void ReturnFromGrabbed()
+    {
+        theGrapplingScarf.ReturnPlayerState();
     }
 }
