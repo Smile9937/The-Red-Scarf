@@ -66,7 +66,8 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public CircleCollider2D rollCollider;
     [HideInInspector]
     public Rigidbody2D myRigidbody;
-    [HideInInspector] public Animator myAnimator;
+    [HideInInspector]
+    public Animator myAnimator;
 
     [Header("Components")]
     public Transform attackPoint;
@@ -87,11 +88,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     [SerializeField] Checkpoint checkpoint;
 
-    private void OnEnable()
-    {
-        GameEvents.Instance.onSaveGame += Save;
-        GameEvents.Instance.onLoadGame += Load;
-    }
     private void OnDisable()
     {
         GameEvents.Instance.onSaveGame -= Save;
@@ -108,19 +104,18 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     }
     private void Awake()
     {
-        GameEvents.Instance.LoadGame();
-    }
-    private void Start()
-    {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
         rollCollider = GetComponent<CircleCollider2D>();
 
+        GameEvents.Instance.onSaveGame += Save;
+        GameEvents.Instance.onLoadGame += Load;
+    }
+    private void Start()
+    {
         canJumpCounter = offGroundJumpTimer;
         currentHealth = maxHealth;
-
-        GameManager.Instance.player = this;
 
         transform.position = GameManager.Instance.currentSpawnpoint;
         state = State.Neutral;

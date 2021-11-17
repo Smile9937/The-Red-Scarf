@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     private GameObject currentMenu;
 
-    [SerializeField] private Text[] keybindTexts;
+    public Text[] keybindTexts;
 
     private MenuEnum menuEnum;
 

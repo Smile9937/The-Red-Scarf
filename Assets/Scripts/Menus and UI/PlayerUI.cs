@@ -18,9 +18,11 @@ public class PlayerUI : MonoBehaviour
         {
             instance = this;
         }
+    }
+    private void Update()
+    {
         SetTextField();
     }
-
     private void SetTextField()
     {
         if (GameManager.Instance.redScarf)
@@ -46,10 +48,5 @@ public class PlayerUI : MonoBehaviour
     public void SetRageText(int rage)
     {
         rageText.text = "Rage: " + rage;
-    }
-
-    private void Update()
-    {
-        SetTextField();
     }
 }

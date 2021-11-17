@@ -11,12 +11,20 @@ public class PickUp : MonoBehaviour
 
     private bool toggle = true;
 
+    Collider2D myCollider;
+    SpriteRenderer mySpriteRenderer;
+
     public Type type;
     public enum Type
     {
         OneTimeUse,
         MultiUse,
         Toggle
+    }
+    private void Awake()
+    {
+        myCollider = GetComponent<Collider2D>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,13 +40,14 @@ public class PickUp : MonoBehaviour
                     {
                         doNotRespawn.Collected();
                     }
-                    Destroy(gameObject);
+                    myCollider.enabled = false;
+                    mySpriteRenderer.enabled = false;
+                    enabled = false;
                     break;
                 case Type.MultiUse:
                     eventToStart.Invoke();
                     break;
                 case Type.Toggle:
-                    toggle = !toggle;
                     if(toggle)
                     {
                         eventToStart.Invoke();
@@ -47,6 +56,7 @@ public class PickUp : MonoBehaviour
                     {
                         toggleEvent.Invoke();
                     }
+                    toggle = !toggle;
                     break;
             }
         }
