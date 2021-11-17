@@ -209,7 +209,7 @@ public class DressPlayer : MonoBehaviour
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2, player.myRigidbody.velocity.y);
                 if (InputManager.Instance.GetKey(KeybindingActions.Down))
                 {
-                    player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, player.myRigidbody.velocity.y + gunJumpForce);
+                    player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x, Mathf.Clamp(player.myRigidbody.velocity.y, 0, 2) + gunJumpForce);
                     Shoot(new Vector2(transform.position.x, transform.position.y - 0.5f), Quaternion.Euler(0, 0, -90));
                 }
                 else if (InputManager.Instance.GetKey(KeybindingActions.Up))
@@ -218,6 +218,7 @@ public class DressPlayer : MonoBehaviour
                 }
                 else
                 {
+                    player.KnockBack(rangedAttackPoint, new Vector2(gunJumpForce * 0.5f, 0.1f), 0.2f);
                     Shoot(rangedAttackPoint.transform.position, rangedAttackPoint.transform.rotation);
                 }
             }

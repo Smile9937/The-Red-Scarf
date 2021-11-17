@@ -3925,7 +3925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: timeBeforeRageLoss
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dressAnimator
@@ -6401,11 +6401,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: automatic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
+      propertyPath: delayTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: moveFromEndToStart
@@ -6417,7 +6421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: moveOncePerActivation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4950948982855962107, guid: d032af3620c66d045807f24c073a14df, type: 3}
       propertyPath: positions.Array.data[0].x
