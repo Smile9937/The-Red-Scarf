@@ -7,14 +7,8 @@ public class DoNotRespawn : MonoBehaviour
 {
     private static int IDCounter = 0;
     public int pickUpID = -1;
-    public static Dictionary<int, bool> pickupCollectedDatabase;
-    private void Awake()
-    {
-        if (pickupCollectedDatabase == null)
-        {
-            pickupCollectedDatabase = new Dictionary<int, bool>();
-        }
-    }
+
+    private bool pickedUp;
 
     private void Reset()
     {
@@ -22,23 +16,38 @@ public class DoNotRespawn : MonoBehaviour
         IDCounter++;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (pickupCollectedDatabase.ContainsKey(pickUpID))
+        GameEvents.Instance.onSaveGame += Save;
+        GameEvents.Instance.onLoadGame += Load;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.Instance.onSaveGame -= Save;
+        GameEvents.Instance.onLoadGame -= Load;
+    }
+
+    private void Save()
+    {
+        if(pickedUp == true && !GameManager.Instance.pickupCollectedDatabase.ContainsKey(pickUpID))
         {
-            if (pickupCollectedDatabase[pickUpID])
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                pickupCollectedDatabase.Add(pickUpID, false);
-            }
+            GameManager.Instance.pickupCollectedDatabase.Add(pickUpID, true);
         }
     }
 
+    private void Load()
+    {
+        if (GameManager.Instance.pickupCollectedDatabase.ContainsKey(pickUpID))
+        {
+            if (GameManager.Instance.pickupCollectedDatabase[pickUpID])
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     public void Collected()
     {
-        pickupCollectedDatabase[pickUpID] = true;
+        pickedUp = true;
     }
 }

@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
         if(instance != this && instance != null)
         {
             Destroy(gameObject);
@@ -32,31 +31,17 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        player = FindObjectOfType<Player>();
         currentSpawnpoint = player.transform.position;
         Time.timeScale = 1;
+        if(player != null)
+        {
+            GameEvents.Instance.LoadGame();
+        }
     }
-    private void SavePlayerStats()
-    {
-        /*currentPlayer.playerCharacter = player.currentCharacter.playerCharacter;
-        currentPlayer.speed = player.currentCharacter.speed;
-        currentPlayer.jumpForce = player.currentCharacter.jumpForce;*/
-        hasBaseballBat = player.hasBaseballBat;
-    }
-
-    public void LoadPlayerStats()
-    {
-        /*player.currentCharacter.playerCharacter = currentPlayer.playerCharacter;
-        player.currentCharacter.speed = currentPlayer.speed;
-        player.currentCharacter.jumpForce = currentPlayer.jumpForce;*/
-        player.hasBaseballBat = hasBaseballBat;
-
-        player.SetCurrentCharacter();
-    }
-
     public void SetCurrentCheckpoint(Vector3 checkpointPos)
     {
         currentSpawnpoint = checkpointPos;
-        //SavePlayerStats();
         GameEvents.Instance.SaveGame();
     }
     public void RespawnPlayer()

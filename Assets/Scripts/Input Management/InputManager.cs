@@ -13,6 +13,12 @@ public class InputManager : MonoBehaviour
         .ToArray();
 
     [Serializable]
+    public class DefaultKeybinds
+    {
+        public KeybindingActions keybindingAction;
+        public KeyCode keyCode;
+    }
+    public DefaultKeybinds[] defaultKeybinds;
     public class CustomKeybinds
     {
         public KeybindingActions keybindingAction;
@@ -29,15 +35,22 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-
         if(instance == null && instance != this)
         {
             instance = this;
         }
+    }
 
-        GameEvents.Instance.onSaveGame += SaveGame;
-        GameEvents.Instance.onLoadGame += LoadGame;
+    private void Start()
+    {
+        keybinds = new CustomKeybinds[defaultKeybinds.Length];
 
+        for(int i = 0; i < defaultKeybinds.Length; i++)
+        {
+            keybinds[i] = new CustomKeybinds();
+            keybinds[i].keybindingAction = defaultKeybinds[i].keybindingAction;
+            keybinds[i].keyCode = defaultKeybinds[i].keyCode;
+        }
     }
     public KeyCode GetKeyForAction(KeybindingActions keybindingAction)
     {
@@ -96,6 +109,25 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void ResetToDefault()
+    {
+        foreach(CustomKeybinds customKeybind in keybinds)
+        {
+            foreach(DefaultKeybinds defaultKeybind in defaultKeybinds)
+            {
+                if(customKeybind.keybindingAction == defaultKeybind.keybindingAction)
+                {
+                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                        return;
+
+                    customKeybind.keyCode = defaultKeybind.keyCode;
+                    int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                }
+            }
+        }
+    }
+
     public void SetKeyBind(KeybindInvoker keybind)
     {
         waitingForInput = true;
@@ -104,26 +136,28 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         if (!waitingForInput)
-        {
             return;
-        }
 
         if(Input.anyKeyDown)
         {
             KeyCode keyCode = GetPressedKey().FirstOrDefault();
             if (keyCode == KeyCode.None)
                 return;
-            foreach (CustomKeybinds keybindingCheck in keybinds)
+
+            foreach (CustomKeybinds customKeybind in keybinds)
             {
-                if(keybindingCheck.keyCode == keyCode)
+                if(customKeybind.keyCode == keyCode)
                 {
+                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                        return;
+
                     foreach(CustomKeybinds checkDuplicate in keybinds)
                     {
                         if(currentKeybind.keyBindingsAction == checkDuplicate.keybindingAction)
                         {
-                            keybindingCheck.keyCode = checkDuplicate.keyCode;
-                            int keybindingId = Array.IndexOf(keybinds, keybindingCheck);
-                            PauseMenu.Instance.SetKeyBindingsText(keybindingCheck.keyCode, keybindingId);
+                            customKeybind.keyCode = checkDuplicate.keyCode;
+                            int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                            PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
                             
                             checkDuplicate.keyCode = keyCode;
                             int duplicateId = Array.IndexOf(keybinds, checkDuplicate);
@@ -132,26 +166,18 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-            foreach(CustomKeybinds keybindingCheck in keybinds)
+            foreach(CustomKeybinds customKeybind in keybinds)
             {
-                if (keybindingCheck.keybindingAction == currentKeybind.keyBindingsAction)
+                if (customKeybind.keybindingAction == currentKeybind.keyBindingsAction)
                 {
-                    keybindingCheck.keyCode = keyCode;
-                    int keybindingId = Array.IndexOf(keybinds, keybindingCheck);
-                    PauseMenu.Instance.SetKeyBindingsText(keybindingCheck.keyCode, keybindingId);
+                    customKeybind.keyCode = keyCode;
+                    int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
                     break;
                 }
             }
             
             waitingForInput = false;
         }
-    }
-    private void SaveGame()
-    {
-
-    }
-    private void LoadGame()
-    {
-
     }
 }
