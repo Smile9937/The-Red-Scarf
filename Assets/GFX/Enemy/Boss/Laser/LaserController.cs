@@ -20,7 +20,8 @@ public class LaserController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        theLineRenderer = GetComponent<LineRenderer>();
+        if (theLineRenderer == null)
+            theLineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -28,35 +29,50 @@ public class LaserController : MonoBehaviour
     {
         if (isActivated)
         {
+            if (!theLaserStartPlaying)
+            {
+                theLaserStartPlaying = true;
+                theLaserStart.Play(true);
+                theLaserStart.transform.position = transform.position;
+            }
             theLineRenderer.enabled = true;
 
             theTarget = theTargetLocation.transform.position - transform.position;
 
             hit = Physics2D.Raycast(transform.position, theTarget, theMaxLengthOfLaser, theLayerMasks);
-            Debug.DrawLine(transform.position, theTargetLocation.transform.position, new Color(0, 0, 1));
-            Debug.DrawRay(transform.position, theTarget, new Color(0,1,0));
-
+            
             if (hit)
             {
                 if (!theLaserEndPlaying)
                 {
                     theLaserEndPlaying = true;
+                    theLaserEnd.Play();
                 }
-                theLaserEnd.Play();
                 theLineRenderer.SetPosition(1, new Vector3(hit.point.x - transform.position.x, hit.point.y - transform.position.y, 0));
-                theLaserEnd.gameObject.transform.position = new Vector2(hit.point.x * 0.8f, hit.point.y * 0.8f);
+                theLaserEnd.gameObject.transform.position = new Vector2(hit.point.x, hit.point.y);
             }
-            else if (!hit)
+            else
             {
-                theLineRenderer.SetPosition(1, new Vector3(0, 0, 0));
-                theLaserEndPlaying = false;
-                theLaserEnd.Stop(true);
+                theLineRenderer.SetPosition(1, new Vector3(Mathf.Clamp(theTarget.x, -theMaxLengthOfLaser, theMaxLengthOfLaser), Mathf.Clamp(theTarget.y, -theMaxLengthOfLaser, theMaxLengthOfLaser), 0));
+                if (theLaserEndPlaying)
+                {
+                    theLaserEndPlaying = false;
+                    theLaserEnd.Stop(true);
+                }
             }
         }
         else
         {
-            theLaserEndPlaying = false;
-            theLaserEnd.Stop(true);
+            if (theLaserStartPlaying)
+            {
+                theLaserStartPlaying = false;
+                theLaserStart.Stop(true);
+            }
+            if (theLaserEndPlaying)
+            {
+                theLaserEndPlaying = false;
+                theLaserEnd.Stop(true);
+            }
         }
     }
 }
