@@ -10,7 +10,7 @@ public class RoomSwitch : MonoBehaviour
     [SerializeField] SpriteRenderer oldBackgroundForRoom;
     [Header("Enemy Spawned")]
     [SerializeField] List<GameObject> enemiesToRespawn = new List<GameObject>();
-    List<Transform> enemiesToRespawnPos = new List<Transform>();
+    List<Vector2> enemiesToRespawnPos = new List<Vector2>();
     [Header("Which Method")]
     [SerializeField] bool useNewMethod = false;
     [Header("Normal Method")]
@@ -29,7 +29,10 @@ public class RoomSwitch : MonoBehaviour
                 if (!enemiesToRespawn.Contains(item))
                 {
                     enemiesToRespawn.Add(item);
-                    enemiesToRespawnPos.Add(item.transform);
+                }
+                if (!enemiesToRespawnPos.Contains(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y)))
+                {
+                    enemiesToRespawnPos.Add(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y));
                 }
             }
         }
@@ -45,6 +48,7 @@ public class RoomSwitch : MonoBehaviour
             }
             else
             {
+                RespawnEnemies();
                 theRoomController.SetInteger("theRoomNumber", roomNumber);
             }
             if (GameObject.FindGameObjectWithTag("Background Room"))
@@ -66,6 +70,7 @@ public class RoomSwitch : MonoBehaviour
                     backgroundForRoom.GetComponent<Parallax>().ActivateObject();
                 }
             }
+            CancelInvoke("DespawnEnemies");
         }
     }
 
@@ -73,13 +78,14 @@ public class RoomSwitch : MonoBehaviour
     {
         if (collission.tag == "Player")
         {
-            Invoke("RespawnEnemies", Time.deltaTime);
+            CancelInvoke("DespawnEnemies");
+            Invoke("DespawnEnemies", Time.deltaTime + 2f);
         }
     }
 
     private void RespawnEnemies()
     {
-        if (theRoomController.GetInteger("theRoomNumber") == roomNumber)
+        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
         {
             foreach (var item in enemiesToRespawn)
             {
@@ -88,15 +94,38 @@ public class RoomSwitch : MonoBehaviour
                     Debug.Log(item + " respawned!");
                     if (item.activeSelf == false)
                     {
-                        item.GetComponentInChildren<Enemy>().gameObject.SetActive(true);
+                        item.gameObject.SetActive(true);
                         item.GetComponentInChildren<Enemy>().currentHealth = item.GetComponentInChildren<Enemy>().maxHealth;
                         foreach (var itemLoc in enemiesToRespawnPos)
                         {
                             if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))
                             {
-                                item.transform.position = itemLoc.position;
+                                item.GetComponentInChildren<Enemy>().gameObject.transform.position = itemLoc;
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+    private void DespawnEnemies()
+    {
+        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
+        {
+            foreach (var item in enemiesToRespawn)
+            {
+                if (item != null)
+                {
+                    if (item.activeSelf == true)
+                    {
+                        foreach (var itemLoc in enemiesToRespawnPos)
+                        {
+                            if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))
+                            {
+                                item.GetComponentInChildren<Enemy>().gameObject.transform.position = itemLoc;
+                            }
+                        }
+                        item.gameObject.SetActive(false);
                     }
                 }
             }

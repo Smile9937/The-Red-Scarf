@@ -360,7 +360,21 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
     }
     public void Die()
     {
-        Destroy(gameObject);
+        timer = 0;
+        cooling = false;
+        inRange = false;
+        hotZone.SetActive(false);
+        myAnimator.SetBool("isAttackingBool", false);
+        if (movingEnemy)
+        {
+            state = State.Moving;
+        }
+        else
+        {
+            state = State.Waiting;
+        }
+        this.transform.parent.gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
     public void Damage(int damage, bool bypassInvincibility)
     {
@@ -371,6 +385,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         if (currentHealth <= 0)
         {
             Die();
+            return;
         }
         StartCoroutine(InvincibilityFrames());
     }
@@ -400,7 +415,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
             case GrabbingAction.Thrown:
                 theGrapplingScarf.SetSwingingPointAsTarget(this.gameObject, -1);
                 state = State.Staggered;
-                Invoke("ReturnFromGrabbed", 1.75f);
+                Invoke("ReturnFromGrabbed", 1.5f);
                 break;
             case GrabbingAction.None:
                 ReturnFromGrabbed();

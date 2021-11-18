@@ -246,17 +246,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
             characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
-            theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.9f, 1.1f);
-            Debug.Log(theBonusInStrength);
-            theBonusInStrength = Mathf.Round(theBonusInStrength * 100f) / 100f;
-            Debug.Log(theBonusInStrength);
-
             //if (Vector2.Distance(originalLaunchPosition, transform.position) <= 4)
             //    CancelInvoke("ReturnPlayerStateStatus");
 
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnPlayerStateStatus");
-            Invoke("ReturnPlayerStateStatus", dashDuration * theBonusInStrength);
+            Invoke("ReturnPlayerStateStatus", dashDuration);
             animator.SetBool("isScarfThrown", false);
             swingingPoint = null;
             theGrabbable = null;
@@ -318,10 +313,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (IsInvoking("ReturnPlayerStateAnim"))
             CancelInvoke("ReturnPlayerStateAnim");
+
         animator.SetBool("isScarfThrown", false);
         animator.SetBool("stopScarfThrow", true);
         if (!IsInvoking("ReturnPlayerStateStatus"))
-            Invoke("ReturnPlayerStateStatus", 0.4f);
+            Invoke("ReturnPlayerStateStatus", 0.25f);
     }
 
     private void DelayBeforeSwingStart()

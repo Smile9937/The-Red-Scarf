@@ -69,7 +69,6 @@ public class SwingingPoint : ActivatableObject, IGrabbable
             theGrapplingScarf.LaunchPlayerIntoDash();
             return;
         }
-        ReturnFromGrabbed();
     }
     public void HandleGrabbedAway()
     {
