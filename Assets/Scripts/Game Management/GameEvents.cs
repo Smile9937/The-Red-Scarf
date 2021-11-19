@@ -39,4 +39,18 @@ public class GameEvents : MonoBehaviour
     {
         onLoadGame?.Invoke();
     }
+
+    public event Action onTripleBossMoveToStart;
+
+    public void TripleBossMoveToStart()
+    {
+        onTripleBossMoveToStart?.Invoke();
+    }
+
+    public event Action onTripleBossPatternEnd;
+
+    public void TripleBossPatternEnd()
+    {
+        onTripleBossPatternEnd?.Invoke();
+    }
 }

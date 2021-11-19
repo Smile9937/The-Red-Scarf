@@ -98,17 +98,6 @@ public class InputManager : MonoBehaviour
         }
         return false;
     }
-
-    private static IEnumerable<KeyCode> GetPressedKey()
-    {
-        if (Input.anyKeyDown)
-        {
-            for (int i = 0; i < _keyCodes.Length; i++)
-                if (Input.GetKey(_keyCodes[i]))
-                    yield return _keyCodes[i];
-        }
-    }
-
     public void ResetToDefault()
     {
         foreach(CustomKeybinds customKeybind in keybinds)
@@ -127,11 +116,30 @@ public class InputManager : MonoBehaviour
             }
         }
     }
+    public void SetText()
+    {
+        foreach (CustomKeybinds customKeybind in keybinds)
+        {
+            if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                return;
 
+            int keybindingId = Array.IndexOf(keybinds, customKeybind);
+            PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+        }
+    }
     public void SetKeyBind(KeybindInvoker keybind)
     {
         waitingForInput = true;
         currentKeybind = keybind;
+    }
+    private static IEnumerable<KeyCode> GetPressedKey()
+    {
+        if (Input.anyKeyDown)
+        {
+            for (int i = 0; i < _keyCodes.Length; i++)
+                if (Input.GetKey(_keyCodes[i]))
+                    yield return _keyCodes[i];
+        }
     }
     private void Update()
     {
