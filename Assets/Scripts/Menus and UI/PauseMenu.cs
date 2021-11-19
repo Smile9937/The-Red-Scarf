@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (InputManager.Instance.waitingForInput)
             return;
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.OpenMenu))
         {
             gamePaused = !gamePaused;
 
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
         switch (menuEnum)
         {
             case MenuEnum.CloseMenu:
-                ResumeGame();
+                ContinueGame();
                 break;
             case MenuEnum.PauseMenu:
                 currentMenu.SetActive(false);
@@ -77,6 +77,7 @@ public class PauseMenu : MonoBehaviour
                 currentMenu.SetActive(false);
                 currentMenu = keyBindingsSettings;
                 currentMenu.SetActive(true);
+                InputManager.Instance.SetText();
                 break;
         }
     }
@@ -87,6 +88,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
 
         PlayBackgroundDim(true);
+    }
+    public void ContinueGame()
+    {
+        gamePaused = false;
+        ResumeGame();
     }
     private void ResumeGame()
     {
@@ -100,12 +106,6 @@ public class PauseMenu : MonoBehaviour
         backgroundDim.SetBool("BackgroundDimOn", menuOpen);
         pauseMenu.SetActive(menuOpen);
         miniMap.SetActive(menuOpen);
-    }
-
-    public void ContinueGame()
-    {
-        gamePaused = false;
-        ResumeGame();
     }
     public void ReturnToMainMenu()
     {

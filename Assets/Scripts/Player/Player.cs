@@ -16,13 +16,15 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     private bool facingRight = true;
 
     [Header("Jump Variables")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Vector2 groundCheckSize;
+    public Transform groundCheck;
+    public Vector2 groundCheckSize;
     [SerializeField] private LayerMask ground;
     public bool grounded;
     [SerializeField] private float offGroundJumpTimer = 0.1f;
     private float jumpTimeCounter;
     private bool stoppedJumping = true;
+
+    private bool countDownCanJumpTimer;
 
     [Header("Character Status")]
     public int maxHealth = 100;
@@ -158,11 +160,11 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
             direction = 0;
         }
 
+
         switch (state)
         {
             case State.Neutral:
                 HandleJumping();
-                CheckIfCanJump();
                 HandleMovement();
                 SwapCharacter();
                 HandleGroundSlam();
@@ -174,6 +176,16 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
                 myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
                 break;
         }
+
+        if (grounded)
+        {
+            jumpTimeCounter = currentPlayerStats.jumpTime;
+        }
+        if (countDownCanJumpTimer)
+        {
+            jumpTimeCounter -= Time.deltaTime;
+        }
+        CheckIfCanJump();
     }
     private void FixedUpdate()
     {
@@ -282,8 +294,8 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     {
         if (grounded)
         {
-            jumpTimeCounter = currentPlayerStats.jumpTime;
             myAnimator.SetFloat("axisYSpeed", 0);
+            countDownCanJumpTimer = false;
         }
         else
         {
@@ -299,7 +311,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0 && !grounded)
         {
             Jump();
-            jumpTimeCounter -= Time.deltaTime;
+            countDownCanJumpTimer = true;
         }
 
         if (InputManager.Instance.GetKeyUp(KeybindingActions.Jump))

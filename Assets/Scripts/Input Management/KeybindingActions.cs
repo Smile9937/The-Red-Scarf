@@ -9,5 +9,6 @@ public enum KeybindingActions
     Right,
     Up,
     Down,
-    PlaceCheckpoint
+    PlaceCheckpoint,
+    OpenMenu
 }

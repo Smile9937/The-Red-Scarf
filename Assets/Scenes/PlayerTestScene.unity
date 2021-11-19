@@ -958,9 +958,10 @@ GameObject:
   - component: {fileID: 139801577}
   - component: {fileID: 139801576}
   - component: {fileID: 139801575}
-  m_Layer: 0
+  - component: {fileID: 139801578}
+  m_Layer: 7
   m_Name: Laser Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -977,6 +978,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee19d46953eb6604fa24e070ba53848f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {fileID: 1629839804}
+  health: 50
+  moveSpeed: 7
+  state: 0
+  pattern: 0
+  topRightLaserPosition: {fileID: 1782124037}
+  topLeftLaserPosition: {fileID: 521040604}
+  bottomRightLaserPosition: {fileID: 758825863}
+  bottomLeftLaserPosition: {fileID: 2023318947}
+  laser: {fileID: 1833872798652888765, guid: 707658b431e9ed44e8b549a91854d26b, type: 3}
+  firePoint: {fileID: 1889157481}
+  laserHitLayers:
+    serializedVersion: 2
+    m_Bits: 576
+  timeBeforeLaser: 1
+  timeBeforeEndLaser: 2
+  timeBeforeMoveWithLaser: 1
 --- !u!212 &139801576
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1036,12 +1054,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139801574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.39, y: 1.82, z: 0}
+  m_LocalPosition: {x: -9.08, y: -2.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1889157481}
   m_Father: {fileID: 1376516121}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &139801578
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139801574}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.46875
 --- !u!1 &161476106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,7 +2303,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &296211533
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2745,7 +2780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 283, y: -143}
+  m_AnchoredPosition: {x: -192.5, y: 124.6}
   m_SizeDelta: {x: 300, y: 157.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375753881
@@ -3565,6 +3600,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &521040603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 521040604}
+  m_Layer: 0
+  m_Name: Laser Boss Laser Position (Top Left)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &521040604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521040603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &524235068
 GameObject:
   m_ObjectHideFlags: 0
@@ -4111,7 +4176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619443924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: -2.2299995, z: -10}
+  m_LocalPosition: {x: -0.00000047683716, y: -2.2299995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 418516190}
@@ -4262,6 +4327,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2038239122}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &676212840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 676212841}
+  m_Layer: 0
+  m_Name: Melee Boss Start Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &676212841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676212840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.38, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &680671069
 GameObject:
@@ -4858,6 +4953,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725441566}
   m_CullTransparentMesh: 1
+--- !u!1 &758825862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 758825863}
+  m_Layer: 0
+  m_Name: Laser Boss Laser Position (Bottom Right)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &758825863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758825862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773811531
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,6 +5187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 1908997981}
   ListenerNumber: -1
+--- !u!50 &778114662 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8492771728123215178, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+  m_PrefabInstance: {fileID: 8492771727259321789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &778114663 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
@@ -5252,7 +5382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e648fb6afe56f49883e492bedd39a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: event:/SFX/Generator Sound
+  Event: event:/SFX/Generator
   intensity: 3
 --- !u!1 &804781627
 GameObject:
@@ -5630,9 +5760,10 @@ GameObject:
   - component: {fileID: 855510374}
   - component: {fileID: 855510373}
   - component: {fileID: 855510372}
-  m_Layer: 0
+  - component: {fileID: 855510375}
+  m_Layer: 7
   m_Name: Melee Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5649,6 +5780,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f71eb0beabda9428bd0231adadefba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {fileID: 676212841}
+  health: 50
+  moveSpeed: 7
+  state: 0
+  pattern: 0
 --- !u!212 &855510373
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5708,12 +5844,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855510371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.8256493, y: 0.9518495, z: 0}
+  m_LocalPosition: {x: -11.1, y: -2.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1376516121}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &855510375
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855510371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.46875
 --- !u!1 &893717714
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,7 +6720,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &976791705
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -8987,9 +9139,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406bbea2a29aa6b44ab8028728ed7692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeBoss: {fileID: 0}
-  grenadeBoss: {fileID: 0}
-  laserBoss: {fileID: 0}
+  timeUntilPatternStart: 0
+  bossPairings:
+  - boss1: 0
+    boss2: 2
+    patternIndex: 0
+  - boss1: 1
+    boss2: 3
+    patternIndex: 3
+  - boss1: 0
+    boss2: 3
+    patternIndex: 1
+  - boss1: 1
+    boss2: 2
+    patternIndex: 2
+  - boss1: 2
+    boss2: 4
+    patternIndex: 4
+  - boss1: 2
+    boss2: 5
+    patternIndex: 5
+  - boss1: 3
+    boss2: 4
+    patternIndex: 6
+  - boss1: 3
+    boss2: 5
+    patternIndex: 7
+  - boss1: 4
+    boss2: 0
+    patternIndex: 8
+  - boss1: 4
+    boss2: 1
+    patternIndex: 9
+  - boss1: 5
+    boss2: 0
+    patternIndex: 10
+  - boss1: 5
+    boss2: 1
+    patternIndex: 11
+  bossPatternIndexes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  bosses:
+  - boss: {fileID: 0}
+    alive: 1
+    turnToAttack: 0
+    readyToStartBattle: 0
+    attackOnePatternIndexes: 
+    attackTwoPatternIndexes: 
+  - boss: {fileID: 0}
+    alive: 1
+    turnToAttack: 0
+    readyToStartBattle: 0
+    attackOnePatternIndexes: 
+    attackTwoPatternIndexes: 
+  - boss: {fileID: 0}
+    alive: 1
+    turnToAttack: 0
+    readyToStartBattle: 0
+    attackOnePatternIndexes: 
+    attackTwoPatternIndexes: 
+  phase: 0
 --- !u!4 &1376516121
 Transform:
   m_ObjectHideFlags: 0
@@ -9004,6 +9212,13 @@ Transform:
   - {fileID: 855510374}
   - {fileID: 1634507586}
   - {fileID: 139801577}
+  - {fileID: 676212841}
+  - {fileID: 1765677524}
+  - {fileID: 1629839804}
+  - {fileID: 1782124037}
+  - {fileID: 521040604}
+  - {fileID: 758825863}
+  - {fileID: 2023318947}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9086,7 +9301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393477185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: -2.2299995, z: -10}
+  m_LocalPosition: {x: -0.00000047683716, y: -2.2299995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9722,6 +9937,8 @@ MonoBehaviour:
     keyCode: 275
   - keybindingAction: 9
     keyCode: 113
+  - keybindingAction: 10
+    keyCode: 27
   waitingForInput: 0
 --- !u!114 &1464546019
 MonoBehaviour:
@@ -9735,7 +9952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa97cfe8dd589944a08b0bf9a0d939a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songEnum: 0
+  songEnum: 3
 --- !u!1 &1480824999
 GameObject:
   m_ObjectHideFlags: 0
@@ -10694,6 +10911,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623619556}
   m_CullTransparentMesh: 1
+--- !u!1 &1629839803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629839804}
+  m_Layer: 0
+  m_Name: Laser Boss Start Position
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1629839804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629839803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.04, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1634507583
 GameObject:
   m_ObjectHideFlags: 0
@@ -10705,9 +10952,10 @@ GameObject:
   - component: {fileID: 1634507586}
   - component: {fileID: 1634507585}
   - component: {fileID: 1634507584}
-  m_Layer: 0
+  - component: {fileID: 1634507587}
+  m_Layer: 7
   m_Name: Grenade Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10724,6 +10972,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c54d1531c3de94b95bbde9d6b77c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {fileID: 1765677524}
+  health: 50
+  moveSpeed: 7
+  state: 0
+  pattern: 0
 --- !u!212 &1634507585
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10783,12 +11036,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634507583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.95, y: 0.9518495, z: 0}
+  m_LocalPosition: {x: -7.27, y: -2.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1376516121}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1634507587
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634507583}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.46875
 --- !u!1 &1651916892
 GameObject:
   m_ObjectHideFlags: 0
@@ -11566,6 +11835,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5714691739025889740, guid: ff8af0690dbb46d4191e092c05697c6d, type: 3}
   m_PrefabInstance: {fileID: 5714691737503069922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765677523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1765677524}
+  m_Layer: 0
+  m_Name: Grenade Boss Start Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1765677524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765677523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.61, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771886324
 GameObject:
   m_ObjectHideFlags: 0
@@ -11645,6 +11944,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771886324}
   m_CullTransparentMesh: 1
+--- !u!1 &1782124036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782124037}
+  m_Layer: 0
+  m_Name: Laser Boss Laser Position (Top Right)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1782124037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782124036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793441888
 GameObject:
   m_ObjectHideFlags: 0
@@ -12396,6 +12725,36 @@ Transform:
   m_Father: {fileID: 1918087354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1889157480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1889157481}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1889157481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889157480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 139801577}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902992273
 GameObject:
   m_ObjectHideFlags: 0
@@ -12541,7 +12900,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: event:/SFX/Generator Sound
+          m_StringArgument: event:/SFX/Generator
           m_BoolArgument: 0
         m_CallState: 2
   toggleEvent:
@@ -13047,6 +13406,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018481282}
   m_CullTransparentMesh: 1
+--- !u!1 &2023318946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023318947}
+  m_Layer: 0
+  m_Name: Laser Boss Laser Position (Bottom Left)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2023318947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023318946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1376516121}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038239120
 GameObject:
   m_ObjectHideFlags: 0
@@ -13066,7 +13455,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &2038239121
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -13253,6 +13642,137 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051488391}
   m_CullTransparentMesh: 1
+--- !u!1 &2053379368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053379371}
+  - component: {fileID: 2053379370}
+  - component: {fileID: 2053379369}
+  - component: {fileID: 2053379372}
+  m_Layer: 0
+  m_Name: Circle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2053379369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053379368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8bcbddc770234a8e705c788674ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1376516120}
+        m_TargetAssemblyTypeName: BossManager, Assembly-CSharp
+        m_MethodName: PrepareForBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  toggleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 0
+--- !u!212 &2053379370
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053379368}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &2053379371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053379368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.59, y: -2.83, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2053379372
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053379368}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2070253828
 GameObject:
   m_ObjectHideFlags: 0
@@ -14153,6 +14673,10 @@ PrefabInstance:
       propertyPath: perfectBlockComposureGain
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8492771727277757252, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: characterRigidBody
+      value: 
+      objectReference: {fileID: 778114662}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: maxRage
       value: 10

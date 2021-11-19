@@ -14,7 +14,8 @@ public class AudioLibrary : MonoBehaviour
     {
         Demo_2_2,
         Demo_2_1,
-        Demo_3
+        Demo_3,
+        TRS_LOOP_123_REV2
     }
 
     private static AudioLibrary instance;
@@ -40,6 +41,9 @@ public class AudioLibrary : MonoBehaviour
                 break;
             case SongEnum.Demo_3:
                 PlayMusic(2);
+                break;
+            case SongEnum.TRS_LOOP_123_REV2:
+                PlayMusic(3);
                 break;
         }
     }
@@ -93,6 +97,7 @@ public class AudioLibrary : MonoBehaviour
             if(GetInstantiatedEventName(currentSound) == Event)
             {
                 currentSound.setVolume(volume);
+                return;
             }
         }
     }
