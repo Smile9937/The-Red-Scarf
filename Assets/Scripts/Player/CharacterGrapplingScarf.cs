@@ -267,7 +267,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         if (swingingPoint != null)
         {
             targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
-            scarfGrabLocation = targetLaunchPosition;
             targetLaunchPosition.Normalize();
             originalLaunchPosition = this.transform.position;
             characterRigidBody.gravityScale = gravityAdjustment;
@@ -347,14 +346,13 @@ public class CharacterGrapplingScarf : MonoBehaviour
         if (theLineRenderer == null)
             return;
 
-        theLineRenderer.enabled = enabled;
-
         if (enabled)
         {
             StartCoroutine("UpdateOfRenderedScarf");
         }
         else
         {
+            theLineRenderer.enabled = false;
             StopCoroutine("UpdateOfRenderedScarf");
         }
     }
@@ -362,14 +360,19 @@ public class CharacterGrapplingScarf : MonoBehaviour
     private IEnumerator UpdateOfRenderedScarf()
     {
         int numOfChecks = 200;
-        Vector2 theAdjustmentVector = new Vector2(swingingPoint.gameObject.GetParent().transform.position.x, swingingPoint.gameObject.GetParent().transform.position.x);
+        
         while (player.state == Player.State.Dash || numOfChecks > 0)
         {
+            if (swingingPoint != null)
+                scarfGrabLocation = swingingPoint.transform.position - this.transform.position;
+
             hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 2f, scarfGrabableLayers);
             if (hit)
             {
                 theLineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, 0));
             }
+            if (!theLineRenderer.enabled)
+                theLineRenderer.enabled = enabled;
             theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
             yield return new WaitForSeconds(Mathf.Clamp(0.01f - Time.deltaTime, 0, 1));
             numOfChecks--;
