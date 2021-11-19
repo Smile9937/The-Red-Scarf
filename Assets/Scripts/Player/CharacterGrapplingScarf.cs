@@ -30,6 +30,13 @@ public class CharacterGrapplingScarf : MonoBehaviour
     IGrabbable theGrabbable = null;
 
 
+    [Header("Scarf GFX")]
+    [SerializeField] private LineRenderer theLineRenderer;
+    [SerializeField] LayerMask scarfGrabableLayers;
+    [SerializeField] Transform scarfOriginLocation;
+    Vector2 scarfGrabLocation;
+    private RaycastHit2D hit;
+
     [Header("Enemy Scarf Interaction")]
     [SerializeField] private ScarfDirectionEnum scarfDirection;
     [SerializeField] private enum ScarfDirectionEnum
@@ -212,24 +219,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         animator.SetBool("stopScarfThrow", false);
         ToggleIsSwinging();
     }
-    /*
-    private void OnDrawGizmosSelected()
-    {
-        Vector2 targetLocation = new Vector2(transform.position.x, transform.position.y);
-        Vector2 originalLocation = new Vector2(transform.position.x + (0.1f * Mathf.Sign(transform.rotation.y)), transform.position.y);
-        targetLocation.x += lengthOfScarf * Mathf.Sign(transform.rotation.y);
-        if (InputManager.Instance.GetKey(KeybindingActions.Up))
-        {
-            targetLocation.y += lengthOfScarf * 0.8f;
-            if (!(InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left)))
-            {
-                targetLocation.x = transform.position.x;
-            }
-        }
-
-        Gizmos.DrawLine(originalLocation, targetLocation);
-    }
-    */
 
     public void LaunchPlayerIntoDash()
     {
@@ -272,12 +261,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
         if (swingingPoint != null)
         {
             targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
+            scarfGrabLocation = targetLaunchPosition;
             targetLaunchPosition.Normalize();
             originalLaunchPosition = this.transform.position;
             characterRigidBody.gravityScale = gravityAdjustment;
             
             float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.9f * dashDuration, 1.1f * dashDuration);
             theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
+            
+            ActivateScarfRenderer(true);
 
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnGravityAdjustments");
@@ -316,6 +308,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
         animator.SetBool("isScarfThrown", false);
         animator.SetBool("stopScarfThrow", true);
+        ActivateScarfRenderer(false);
+
         if (!IsInvoking("ReturnPlayerStateStatus"))
             Invoke("ReturnPlayerStateStatus", 0.25f);
     }
@@ -330,5 +324,44 @@ public class CharacterGrapplingScarf : MonoBehaviour
     private void ReturnGravityAdjustments()
     {
         characterRigidBody.gravityScale = characterGravity;
+    }
+
+    // Scarf GFX
+    private void ActivateScarfRenderer(bool enabled)
+    {
+        if (theLineRenderer == null)
+            return;
+
+        theLineRenderer.enabled = enabled;
+
+        if (enabled)
+        {
+            StartCoroutine("UpdateOfRenderedScarf");
+        }
+        else
+        {
+            StopCoroutine("UpdateOfRenderedScarf");
+        }
+    }
+
+    private IEnumerator UpdateOfRenderedScarf()
+    {
+        int numOfChecks = 200;
+        Vector2 theAdjustmentVector = new Vector2(swingingPoint.gameObject.GetParent().transform.position.x, swingingPoint.gameObject.GetParent().transform.position.x);
+        while (player.state == Player.State.Dash || numOfChecks > 0)
+        {
+            hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 2f, scarfGrabableLayers);
+            if (hit)
+            {
+                theLineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, 0));
+            }
+            theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+            yield return new WaitForSeconds(Mathf.Clamp(0.01f - Time.deltaTime, 0, 1));
+            numOfChecks--;
+            if (Vector2.Distance(scarfOriginLocation.position, hit.point) > lengthOfScarf * 2f)
+                numOfChecks -= 4;
+            Debug.Log("Now is " + numOfChecks);
+        }
+        ActivateScarfRenderer(false);
     }
 }
