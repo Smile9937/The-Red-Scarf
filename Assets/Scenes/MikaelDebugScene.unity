@@ -91018,6 +91018,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: theLineRenderer
+      value: 
+      objectReference: {fileID: 370648229}
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: scarfOriginLocation
+      value: 
+      objectReference: {fileID: 1203424742}
     - target: {fileID: 8492771727277757252, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: dashStrength
       value: 60
@@ -91130,7 +91138,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
   m_PrefabInstance: {fileID: 1607576181}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607576186}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b98f8ff8de06e409166bdb184f6ff9, type: 3}
@@ -91151,41 +91159,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8492771728123215178, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
   m_PrefabInstance: {fileID: 1607576181}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1607576186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8492771728123215176, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+--- !u!114 &1607576187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
   m_PrefabInstance: {fileID: 1607576181}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1607576187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607576186}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fac0285e8eabb84c9ad70ff871a5cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swingingPoint: {fileID: 0}
-  characterRigidBody: {fileID: 1607576185}
-  grabableLayers:
-    serializedVersion: 2
-    m_Bits: 32896
-  lengthOfScarf: 3
-  dashStrength: 60
-  dashDuration: 0.8
-  gravityAdjustment: 0.8
-  airDashCooldown: 1
-  closeDistanceThrow: 4
-  playerDistanceToStop: 10
-  theLineRenderer: {fileID: 370648229}
-  scarfGrabableLayers:
-    serializedVersion: 2
-    m_Bits: 65536
-  scarfOriginLocation: {fileID: 1203424742}
-  scarfDirection: 0
 --- !u!1 &1617606933
 GameObject:
   m_ObjectHideFlags: 0
