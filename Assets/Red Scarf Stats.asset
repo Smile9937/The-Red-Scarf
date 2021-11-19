@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed7c93a1ddcf434fb69c7e61408d905, type: 3}
   m_Name: Red Scarf Stats
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 6.2
   jumpForce: 7
   jumpTime: 0.35
   attackSize: {x: 1.04, y: 2.33}

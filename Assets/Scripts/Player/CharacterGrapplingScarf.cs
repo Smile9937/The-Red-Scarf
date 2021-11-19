@@ -8,8 +8,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] public GameObject swingingPoint;
     [SerializeField] Rigidbody2D characterRigidBody;
     [SerializeField] LayerMask grabableLayers;
-    [SerializeField] float lengthOfScarf = 1f;
+    [SerializeField] LayerMask ground;
     [Header("Stats")]
+    [SerializeField] float lengthOfScarf = 1f;
     [SerializeField] float dashStrength = 1.5f;
     [SerializeField] public float dashDuration = 1f;
     [SerializeField] float gravityAdjustment = 0.5f;
@@ -24,6 +25,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     Vector2 originalLaunchPosition;
     Vector2 targetLaunchPosition;
+    private bool grounded;
 
     Player player;
     Animator animator;
@@ -77,16 +79,20 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     void Update()
     {
-        if (airDashCooldown <= 0 && theGrabbable != null && (InputManager.Instance.GetKeyDown(KeybindingActions.Special) || !player.grounded))
+        grounded = Physics2D.OverlapBox(player.groundCheck.position, player.groundCheckSize, 0, ground);
+        if (airDashCooldown <= 0 && theGrabbable != null && (InputManager.Instance.GetKeyDown(KeybindingActions.Special) || !grounded))
         {
+            CancelInvoke("StopPlayerGliding");
             theGrabbable.HandleGrabbedTowards();
         }
-        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKeyDown(KeybindingActions.Right) && swingingPoint.transform.position.x > transform.position.x) || (InputManager.Instance.GetKeyDown(KeybindingActions.Left) && swingingPoint.transform.position.x < transform.position.x)))
+        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKey(KeybindingActions.Right) && swingingPoint.transform.position.x > transform.position.x) || (InputManager.Instance.GetKey(KeybindingActions.Left) && swingingPoint.transform.position.x < transform.position.x)))
         {
+            CancelInvoke("StopPlayerGliding");
             theGrabbable.HandleGrabbedTowards();
         }
-        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKeyDown(KeybindingActions.Right) && swingingPoint.transform.position.x < transform.position.x) || (InputManager.Instance.GetKeyDown(KeybindingActions.Left) && swingingPoint.transform.position.x > transform.position.x)))
+        else if (airDashCooldown <= 0 && theGrabbable != null && ((InputManager.Instance.GetKey(KeybindingActions.Right) && swingingPoint.transform.position.x < transform.position.x) || (InputManager.Instance.GetKey(KeybindingActions.Left) && swingingPoint.transform.position.x > transform.position.x)))
         {
+            CancelInvoke("StopPlayerGliding");
             theGrabbable.HandleGrabbedAway();
         }
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral && airDashCooldown <= 0)
@@ -110,27 +116,26 @@ public class CharacterGrapplingScarf : MonoBehaviour
                     scarfDirection = ScarfDirectionEnum.Sideways;
                 }
             }
-            if (player.grounded)
+            if (grounded)
             {
-                characterRigidBody.velocity = Vector2.zero;
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.7f, 0);
+                Invoke("StopPlayerGliding", 0.5f);
+                Invoke("ToggleIsSwinging", dashDuration * 0.9f);
             }
             else
             {
                 float temp = characterRigidBody.velocity.y;
                 if (temp < -0.01f)
                 {
+                    Debug.Log("Second Jump");
                     temp *= (0.2f / characterGravity);
-                }
-                else if (temp > 0.01f)
-                {
-                    temp += 0.1f * characterGravity;
                 }
                 characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
         }
         if (airDashCooldown > 0)
         {
-            if (player.grounded)
+            if (grounded)
             {
                 airDashCooldown -= Time.deltaTime * 2;
             }
@@ -212,6 +217,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         if (swingingPoint == null)
         {
+            CancelInvoke("StopPlayerGliding");
             Invoke("ReturnPlayerState", dashDuration * 1.1f);
             return;
         }
@@ -231,7 +237,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
             animator.Play("Scarf Pull Jump");
             characterRigidBody.velocity = Vector2.zero;
             float theBonusInStrength = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow, 0.85f, 1.1f);
-            Debug.Log(theBonusInStrength);
 
             characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
@@ -240,7 +245,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnPlayerStateStatus");
-            Invoke("ReturnPlayerStateStatus", dashDuration);
+            Invoke("ReturnPlayerState", dashDuration);
+            Invoke("ReturnPlayerStateStatus", dashDuration * 1.1f);
             animator.SetBool("isScarfThrown", false);
             swingingPoint = null;
             theGrabbable = null;
@@ -320,10 +326,19 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             ScarfThrowLocation();
         }
+        if (!IsInvoking("ReturnPlayerState"))
+        {
+            Invoke("ReturnPlayerState", Mathf.Clamp(dashDuration,0.5f,3f));
+        }
     }
     private void ReturnGravityAdjustments()
     {
         characterRigidBody.gravityScale = characterGravity;
+    }
+
+    private void StopPlayerGliding()
+    {
+        characterRigidBody.velocity = Vector2.zero;
     }
 
     // Scarf GFX
@@ -360,7 +375,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
             numOfChecks--;
             if (Vector2.Distance(scarfOriginLocation.position, hit.point) > lengthOfScarf * 2f)
                 numOfChecks -= 4;
-            Debug.Log("Now is " + numOfChecks);
         }
         ActivateScarfRenderer(false);
     }
