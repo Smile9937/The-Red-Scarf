@@ -46,17 +46,17 @@ public class MainMenu : MonoBehaviour
 
     private void HandleMenuMovement()
     {
-        if (theButtonAnimator.GetInteger("menuValue") <= maxMenuValue && Input.GetKeyDown(KeyCode.DownArrow))
+        if (theButtonAnimator.GetInteger("menuValue") <= maxMenuValue && InputManager.Instance.GetKeyDown(KeybindingActions.Down))
         {
             currentMenuValue = Mathf.Clamp(currentMenuValue + 1, 0, maxMenuValue);
             SwitchWithinMenu(currentMenuValue);
         }
-        else if (theButtonAnimator.GetInteger("menuValue") > 0 && Input.GetKeyDown(KeyCode.UpArrow))
+        else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Up))
         {
             currentMenuValue = Mathf.Clamp(currentMenuValue - 1, 0, maxMenuValue);
             SwitchWithinMenu(currentMenuValue);
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
         {
             theButtonAnimator.SetTrigger("pressButton");
         }
@@ -65,17 +65,17 @@ public class MainMenu : MonoBehaviour
     {
         if (theButtonAnimator != null)
         {
-            if (theButtonAnimator.GetInteger("menuValue") <= maxOptionsMenuValue && Input.GetKeyDown(KeyCode.DownArrow))
+            if (theButtonAnimator.GetInteger("menuValue") <= maxOptionsMenuValue && InputManager.Instance.GetKeyDown(KeybindingActions.Down))
             {
                 currentOptMenuValue = Mathf.Clamp(currentOptMenuValue + 1, 0, maxOptionsMenuValue);
                 SwitchWithinMenu(currentOptMenuValue);
             }
-            else if (theButtonAnimator.GetInteger("menuValue") > 0 && Input.GetKeyDown(KeyCode.UpArrow))
+            else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Up))
             {
                 currentOptMenuValue = Mathf.Clamp(currentOptMenuValue - 1, 0, maxOptionsMenuValue);
                 SwitchWithinMenu(currentOptMenuValue);
             }
-            else if (Input.GetKeyDown(KeyCode.Space))
+            else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
                 theButtonAnimator.SetTrigger("pressButton");
             }
