@@ -7,14 +7,13 @@ public class MainMenu : MonoBehaviour
     [Header("Primary Menu")]
     [SerializeField] private Animator theButtonAnimator;
     [SerializeField] int maxMenuValue = 0;
-    [Header("Options Menu")]
-    [SerializeField] private Animator theOptionsAnimator;
     [SerializeField] int maxOptionsMenuValue = 5;
 
     int currentMenuValue = 0;
     int currentOptMenuValue = 0;
 
     [Header("Menu State")]
+    [SerializeField] int currentMenu = 0;
     private MainMenuState menuState;
     
     private enum MainMenuState
@@ -27,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        SwitchWithinMenu(0);
+        ActivateTheMenu(MainMenuState.Main);
     }
 
     private void Update()
@@ -60,29 +59,58 @@ public class MainMenu : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             theButtonAnimator.SetTrigger("pressButton");
-            if (currentMenuValue == 1)
-                ActivateTheMenu(MainMenuState.Options);
         }
     }
     private void HandleOptionsMenuMovement()
     {
-        if (theOptionsAnimator != null)
+        if (theButtonAnimator != null)
         {
-            if (theOptionsAnimator.GetInteger("menuValue") <= maxOptionsMenuValue && Input.GetKeyDown(KeyCode.DownArrow))
+            if (theButtonAnimator.GetInteger("menuValue") <= maxOptionsMenuValue && Input.GetKeyDown(KeyCode.DownArrow))
             {
                 currentOptMenuValue = Mathf.Clamp(currentOptMenuValue + 1, 0, maxOptionsMenuValue);
                 SwitchWithinMenu(currentOptMenuValue);
             }
-            else if (theOptionsAnimator.GetInteger("menuValue") > 0 && Input.GetKeyDown(KeyCode.UpArrow))
+            else if (theButtonAnimator.GetInteger("menuValue") > 0 && Input.GetKeyDown(KeyCode.UpArrow))
             {
                 currentOptMenuValue = Mathf.Clamp(currentOptMenuValue - 1, 0, maxOptionsMenuValue);
                 SwitchWithinMenu(currentOptMenuValue);
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (currentOptMenuValue <= 0)
-                    ActivateTheMenu(MainMenuState.Main);
+                theButtonAnimator.SetTrigger("pressButton");
             }
+        }
+    }
+
+    private void ReturnBoolToNormal()
+    {
+        theButtonAnimator.SetBool("isActive", false);
+        theButtonAnimator.SetBool("isOptActive", false);
+        theButtonAnimator.SetBool("isKeyActive", false);
+        Invoke("FinalReturnToNormal", 0.01f);
+    }
+
+    private void FinalReturnToNormal()
+    {
+        switch (menuState)
+        {
+            case MainMenuState.Main:
+                theButtonAnimator.SetBool("isActive", true);
+                theButtonAnimator.SetBool("isOptActive", false);
+                theButtonAnimator.SetBool("isKeyActive", false);
+                break;
+            case MainMenuState.Options:
+                theButtonAnimator.SetBool("isActive", false);
+                theButtonAnimator.SetBool("isOptActive", true);
+                theButtonAnimator.SetBool("isKeyActive", false);
+                break;
+            case MainMenuState.Keybindings:
+                theButtonAnimator.SetBool("isActive", false);
+                theButtonAnimator.SetBool("isOptActive", false);
+                theButtonAnimator.SetBool("isKeyActive", true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -94,7 +122,7 @@ public class MainMenu : MonoBehaviour
                 theButtonAnimator.SetInteger("menuValue", theState);
                 break;
             case MainMenuState.Options:
-                theOptionsAnimator.SetInteger("menuValue", theState);
+                theButtonAnimator.SetInteger("menuValue", theState);
                 break;
             default:
                 break;
@@ -106,21 +134,32 @@ public class MainMenu : MonoBehaviour
         switch (theState)
         {
             case MainMenuState.Main:
-                theButtonAnimator.SetBool("isActive", true);
-                theOptionsAnimator.SetBool("isActive", false);
+                ReturnBoolToNormal();
+                theButtonAnimator.SetBool("isInMenu", false);
                 menuState = MainMenuState.Main;
                 SwitchWithinMenu(currentMenuValue);
+                currentMenu = 0;
                 break;
             case MainMenuState.Options:
-                theButtonAnimator.SetBool("isActive", false);
-                theOptionsAnimator.SetBool("isActive", true);
+                ReturnBoolToNormal();
+                theButtonAnimator.SetBool("isInMenu", false);
                 menuState = MainMenuState.Options;
                 SwitchWithinMenu(currentOptMenuValue);
+                currentMenu = 1;
                 break;
             case MainMenuState.Keybindings:
+                ReturnBoolToNormal();
+                theButtonAnimator.SetBool("isInMenu", false);
+                currentMenu = 2;
                 break;
             default:
                 break;
         }
+    }
+
+
+    private void SetIsInMenu()
+    {
+        theButtonAnimator.SetBool("isInMenu", true);
     }
 }

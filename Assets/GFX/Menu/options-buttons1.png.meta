@@ -20,6 +20,18 @@ TextureImporter:
   - first:
       213: 5250330606803831229
     second: options-buttons1_5
+  - first:
+      213: -8886032155104475605
+    second: options-buttons1_6
+  - first:
+      213: -1748093352909465388
+    second: options-buttons1_7
+  - first:
+      213: -8475234923371098801
+    second: options-buttons1_8
+  - first:
+      213: 152596695485835810
+    second: options-buttons1_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -126,8 +138,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,10 +157,10 @@ TextureImporter:
       name: options-buttons1_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 85
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,10 +178,10 @@ TextureImporter:
       name: options-buttons1_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 170
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +199,10 @@ TextureImporter:
       name: options-buttons1_3
       rect:
         serializedVersion: 2
-        x: 144
+        x: 255
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,10 +220,10 @@ TextureImporter:
       name: options-buttons1_4
       rect:
         serializedVersion: 2
-        x: 192
+        x: 340
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +241,10 @@ TextureImporter:
       name: options-buttons1_5
       rect:
         serializedVersion: 2
-        x: 240
+        x: 425
         y: 0
-        width: 48
-        height: 56
+        width: 85
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,6 +254,90 @@ TextureImporter:
       bones: []
       spriteID: db947e39edbecd840800000000000000
       internalID: 5250330606803831229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: options-buttons1_6
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b268c4cc5d87ea480800000000000000
+      internalID: -8886032155104475605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: options-buttons1_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 0
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d81c997b568db7e0800000000000000
+      internalID: -1748093352909465388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: options-buttons1_8
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d0b7cadbae16a80800000000000000
+      internalID: -8475234923371098801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: options-buttons1_9
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 0
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22ae454d2e12e1200800000000000000
+      internalID: 152596695485835810
       vertices: []
       indices: 
       edges: []
