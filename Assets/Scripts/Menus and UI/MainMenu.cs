@@ -51,27 +51,20 @@ public class MainMenu : MonoBehaviour
 
     private void HandleMenuMovement()
     {
-        if (theButtonAnimator.GetInteger("menuValue") <= maxMenuValue && InputManager.Instance.GetKeyDown(KeybindingActions.Down) && !hasSelectedUI)
+        if (theButtonAnimator != null)
         {
-            currentMenuValue = Mathf.Clamp(currentMenuValue + 1, 0, maxMenuValue);
-            SwitchWithinMenu(currentMenuValue);
-        }
-        else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Up) && !hasSelectedUI)
-        {
-            currentMenuValue = Mathf.Clamp(currentMenuValue - 1, 0, maxMenuValue);
-            SwitchWithinMenu(currentMenuValue);
-        }
-        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
-        {
-            if (!hasSelectedUI)
+            if (theButtonAnimator.GetInteger("menuValue") <= maxMenuValue && InputManager.Instance.GetKeyDown(KeybindingActions.Down) && !hasSelectedUI)
             {
-                theButtonAnimator.SetTrigger("pressButton");
+                currentMenuValue = Mathf.Clamp(currentMenuValue + 1, 0, maxMenuValue);
+                SwitchWithinMenu(currentMenuValue);
             }
-            else
+            else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Up) && !hasSelectedUI)
             {
-                ToggleSelectedUI();
+                currentMenuValue = Mathf.Clamp(currentMenuValue - 1, 0, maxMenuValue);
+                SwitchWithinMenu(currentMenuValue);
             }
         }
+        NavigateMenu();
     }
     private void HandleOptionsMenuMovement()
     {
@@ -87,74 +80,37 @@ public class MainMenu : MonoBehaviour
                 currentOptMenuValue = Mathf.Clamp(currentOptMenuValue - 1, 0, maxOptionsMenuValue);
                 SwitchWithinMenu(currentOptMenuValue);
             }
-            else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
-            {
-                if (!hasSelectedUI)
-                {
-                    theButtonAnimator.SetTrigger("pressButton");
-                }
-                else
-                {
-                    ToggleSelectedUI();
-                }
-            }
         }
+        NavigateMenu();
     }
     private void HandleKeybindingsMenuMovement()
     {
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Left))
-        {
-            ReturnMovementBoolToNormal();
-            theButtonAnimator.SetBool("moveLeft", true);
-        }
-        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Right))
-        {
-            ReturnMovementBoolToNormal();
-            theButtonAnimator.SetBool("moveRight", true);
-        }
-        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Up))
-        {
-            ReturnMovementBoolToNormal();
-            theButtonAnimator.SetBool("moveUp", true);
-        }
-        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Down))
-        {
-            ReturnMovementBoolToNormal();
-            theButtonAnimator.SetBool("moveDown", true);
-        }
-        else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
-        {
-            if (!hasSelectedUI)
-            {
-                theButtonAnimator.SetTrigger("pressButton");
-            }
-            else
-            {
-                ToggleSelectedUI();
-            }
-        }
-        /*
+        NavigateMenu();
+    }
+    
+    private void NavigateMenu()
+    {
         if (theButtonAnimator != null)
         {
-            if (theButtonAnimator.GetInteger("menuValue") <= maxKeyBindingValue && InputManager.Instance.GetKeyDown(KeybindingActions.Down) && !hasSelectedUI)
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Left))
             {
-                currentOptMenuValue = Mathf.Clamp(currentOptMenuValue + 1, 0, maxKeyBindingValue);
-                SwitchWithinMenu(currentOptMenuValue);
+                ReturnMovementBoolToNormal();
+                theButtonAnimator.SetBool("moveLeft", true);
             }
-            else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Right) && !hasSelectedUI)
+            else if (InputManager.Instance.GetKeyDown(KeybindingActions.Right))
             {
-                currentOptMenuValue = Mathf.Clamp(currentOptMenuValue + 2, 0, maxKeyBindingValue);
-                SwitchWithinMenu(currentOptMenuValue);
+                ReturnMovementBoolToNormal();
+                theButtonAnimator.SetBool("moveRight", true);
             }
-            else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Up) && !hasSelectedUI)
+            else if (InputManager.Instance.GetKeyDown(KeybindingActions.Up))
             {
-                currentOptMenuValue = Mathf.Clamp(currentOptMenuValue - 1, 0, maxKeyBindingValue);
-                SwitchWithinMenu(currentOptMenuValue);
+                ReturnMovementBoolToNormal();
+                theButtonAnimator.SetBool("moveUp", true);
             }
-            else if (theButtonAnimator.GetInteger("menuValue") > 0 && InputManager.Instance.GetKeyDown(KeybindingActions.Left) && !hasSelectedUI)
+            else if (InputManager.Instance.GetKeyDown(KeybindingActions.Down))
             {
-                currentOptMenuValue = Mathf.Clamp(currentOptMenuValue - 2, 0, maxKeyBindingValue);
-                SwitchWithinMenu(currentOptMenuValue);
+                ReturnMovementBoolToNormal();
+                theButtonAnimator.SetBool("moveDown", true);
             }
             else if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
@@ -168,7 +124,6 @@ public class MainMenu : MonoBehaviour
                 }
             }
         }
-        */
     }
 
     private void ReturnMovementBoolToNormal()
