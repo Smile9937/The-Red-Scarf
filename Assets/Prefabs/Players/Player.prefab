@@ -46,10 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRollSpeed: 50
   rollSpeedLoss: 8
-  rollSpeedThreshold: 1.5
   rollLayer:
     serializedVersion: 2
     m_Bits: 4224
+  damagePerRage: 0
+  speedPerRage: 0
+  maxRage: 0
+  timeBeforeRageLoss: 0
+  rageLossCount: 0
   myStats: {fileID: 11400000, guid: 01346e2826902f246b7b8ac8e7a2b503, type: 2}
   player: {fileID: 8492771727813815868}
 --- !u!114 &8492771727277757252
@@ -66,11 +70,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingingPoint: {fileID: 0}
   characterRigidBody: {fileID: 0}
+  grabableLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  lengthOfScarf: 1
   dashStrength: 1.5
   dashDuration: 0.8
   gravityAdjustment: 0.8
+  airDashCooldown: 0.2
   closeDistanceThrow: 3
   playerDistanceToStop: 5
+  theLineRenderer: {fileID: 0}
+  scarfGrabableLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  scarfOriginLocation: {fileID: 0}
+  scarfDirection: 0
 --- !u!1 &2783837724939439507
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +224,7 @@ GameObject:
   - component: {fileID: 8492771728123215175}
   - component: {fileID: 8492771728123215174}
   - component: {fileID: 8492771728123215169}
+  - component: {fileID: 6815619446083841076}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -279,6 +295,9 @@ MonoBehaviour:
   dress: {fileID: 8492771727084927940}
   redScarfStats: {fileID: 11400000, guid: 01346e2826902f246b7b8ac8e7a2b503, type: 2}
   dressStats: {fileID: 11400000, guid: 4aecf5ec1807ab3409f437ba076609d9, type: 2}
+  speedBonus: 0
+  attackBonus: 0
+  checkpoint: {fileID: 0}
 --- !u!114 &8492771728123215172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +443,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6815619446083841076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492771728123215176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fac0285e8eabb84c9ad70ff871a5cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingingPoint: {fileID: 0}
+  characterRigidBody: {fileID: 8492771728123215178}
+  grabableLayers:
+    serializedVersion: 2
+    m_Bits: 32896
+  lengthOfScarf: 3
+  dashStrength: 60
+  dashDuration: 0.8
+  gravityAdjustment: 0.8
+  airDashCooldown: 1
+  closeDistanceThrow: 4
+  playerDistanceToStop: 10
+  theLineRenderer: {fileID: 0}
+  scarfGrabableLayers:
+    serializedVersion: 2
+    m_Bits: 65536
+  scarfOriginLocation: {fileID: 0}
+  scarfDirection: 0
 --- !u!1 &8492771728329687200
 GameObject:
   m_ObjectHideFlags: 0
