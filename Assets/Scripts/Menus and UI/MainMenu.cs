@@ -217,4 +217,9 @@ public class MainMenu : MonoBehaviour
     {
         theButtonAnimator.SetBool("isInMenu", true);
     }
+
+    private void ExitTheGame()
+    {
+        Application.Quit();
+    }
 }
