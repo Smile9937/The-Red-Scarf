@@ -199,9 +199,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532155892}
-  - component: {fileID: 532155891}
   - component: {fileID: 532155894}
   - component: {fileID: 532155893}
+  - component: {fileID: 532155891}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1227,11 +1227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7395406086999075978, guid: 614500dd957c54d43bf02578d477f9e7, type: 3}
       propertyPath: m_Size.x
-      value: 14.875
+      value: 3.0625
       objectReference: {fileID: 0}
     - target: {fileID: 7395406086999075978, guid: 614500dd957c54d43bf02578d477f9e7, type: 3}
       propertyPath: m_Size.y
-      value: 1.4375
+      value: 2.875
       objectReference: {fileID: 0}
     - target: {fileID: 7395406086999075978, guid: 614500dd957c54d43bf02578d477f9e7, type: 3}
       propertyPath: m_WasSpriteAssigned
