@@ -21,9 +21,9 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 6883045035089366676, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
-    - time: 0.083333336
+    - time: 0.1
       value: {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
-    - time: 0.16666667
+    - time: 0.2
       value: {fileID: -9058625273167256085, guid: 63d5bf3a4f29d15409b08fc962ab53ac, type: 3}
     attribute: m_Sprite
     path: 
@@ -52,7 +52,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.18333334
+    m_StopTime: 0.21666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,7 +79,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.16666667
+  - time: 0.2
     functionName: ReturnFromRolling
     data: 
     objectReferenceParameter: {fileID: 0}
