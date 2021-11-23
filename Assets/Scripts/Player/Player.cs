@@ -16,8 +16,8 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     private bool facingRight = true;
 
     [Header("Jump Variables")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Vector2 groundCheckSize;
+    [SerializeField] public Transform groundCheck;
+    [SerializeField] public Vector2 groundCheckSize;
     [SerializeField] private LayerMask ground;
     public bool grounded;
     [SerializeField] private float offGroundJumpTimer = 0.1f;
