@@ -18,7 +18,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     float originalAirDashCooldown;
     [Header("Distance Stats")]
     [SerializeField] float closeDistanceThrow = 3f;
-    [SerializeField] float playerDistanceToStop = 5f;
 
     float characterGravity = 1f;
     float theDistanceBias = 0;
@@ -240,9 +239,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
             characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
-            //if (Vector2.Distance(originalLaunchPosition, transform.position) <= 4)
-            //    CancelInvoke("ReturnPlayerStateStatus");
-
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerState", dashDuration);
@@ -357,27 +353,58 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateOfRenderedScarf()
+    protected IEnumerator UpdateOfRenderedScarf()
     {
         int numOfChecks = 200;
         
-        while (player.state == Player.State.Dash || numOfChecks > 0)
+        while (player.state == Player.State.Dash && numOfChecks > 0)
         {
+            if (!theLineRenderer.enabled)
+                theLineRenderer.enabled = enabled;
             if (swingingPoint != null)
+            {
                 scarfGrabLocation = swingingPoint.transform.position - this.transform.position;
+            }
+            else
+            {
+                scarfGrabLocation = this.transform.position;
+                switch (scarfDirection)
+                {
+                    case ScarfDirectionEnum.Sideways:
+                        scarfGrabLocation += new Vector2(Mathf.Sign(transform.rotation.y) * lengthOfScarf, 0);
+                        break;
+                    case ScarfDirectionEnum.UppSideways:
+                        scarfGrabLocation += new Vector2(Mathf.Sign(transform.rotation.y) * lengthOfScarf, lengthOfScarf * 0.8f);
+                        break;
+                    case ScarfDirectionEnum.Uppwards:
+                        scarfGrabLocation += new Vector2(0, lengthOfScarf * 0.8f);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-            hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 2f, scarfGrabableLayers);
+            hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 3f, scarfGrabableLayers);
             if (hit)
             {
                 theLineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, 0));
             }
-            if (!theLineRenderer.enabled)
-                theLineRenderer.enabled = enabled;
             theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
             yield return new WaitForSeconds(Mathf.Clamp(0.01f - Time.deltaTime, 0, 1));
             numOfChecks--;
-            if (Vector2.Distance(scarfOriginLocation.position, hit.point) > lengthOfScarf * 2f)
+            if (Vector2.Distance(scarfOriginLocation.position, hit.point) > lengthOfScarf * 3f)
                 numOfChecks -= 4;
+            if (swingingPoint != null)
+            {
+                if (originalLaunchPosition.x < swingingPoint.transform.position.x && swingingPoint.transform.position.x <= transform.position.x)
+                {
+                    numOfChecks = 0;
+                }
+                else if (originalLaunchPosition.x > swingingPoint.transform.position.x && swingingPoint.transform.position.x >= transform.position.x)
+                {
+                    numOfChecks = 0;
+                }
+            }
         }
         ActivateScarfRenderer(false);
     }

@@ -130,12 +130,12 @@ TextureImporter:
       name: PrototypeRedScarf-run_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 29
-        height: 33
+        width: 30
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,10 +153,10 @@ TextureImporter:
         serializedVersion: 2
         x: 29
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,10 +174,10 @@ TextureImporter:
         serializedVersion: 2
         x: 58
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,10 +195,10 @@ TextureImporter:
         serializedVersion: 2
         x: 87
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,10 +216,10 @@ TextureImporter:
         serializedVersion: 2
         x: 116
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,10 +237,10 @@ TextureImporter:
         serializedVersion: 2
         x: 145
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,10 +258,10 @@ TextureImporter:
         serializedVersion: 2
         x: 174
         y: 0
-        width: 29
-        height: 33
+        width: 29.625
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,12 +277,12 @@ TextureImporter:
       name: PrototypeRedScarf-run_7
       rect:
         serializedVersion: 2
-        x: 203
+        x: 207
         y: 0
-        width: 29
-        height: 33
+        width: 30
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
