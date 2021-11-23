@@ -265,9 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a560aa9f255bb4abfa98584528cda7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpawnpoint: {x: 0, y: 0, z: 0}
+  currentSpawnpoint: {x: -70.71, y: -9.61, z: 0}
   player: {fileID: 0}
-  redScarf: 0
+  redScarf: 1
   unlockedRooms: 
   hasBaseballBat: 0
 --- !u!114 &532155894
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_SortingLayerID: 159784049
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8418717247154023978, guid: e7c0e43ff20ba404d9efca2adeea31ef, type: 3}
+  m_Sprite: {fileID: 8873548882220953532, guid: e7c0e43ff20ba404d9efca2adeea31ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

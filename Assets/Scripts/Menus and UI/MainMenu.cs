@@ -45,6 +45,7 @@ public class MainMenu : MonoBehaviour
                 HandleKeybindingsMenuMovement();
                 break;
             default:
+                Debug.LogError("No menu was selected in Update() in ", this);
                 break;
         }
     }
@@ -167,6 +168,7 @@ public class MainMenu : MonoBehaviour
                 currentOptMenuValue = 3;
                 break;
             default:
+                Debug.LogError("No menu was selected in FinalReturnToNormal() in ", this);
                 break;
         }
     }
@@ -200,6 +202,7 @@ public class MainMenu : MonoBehaviour
                 SwitchWithinMenu(currentMenuValue);
                 break;
             default:
+                Debug.LogError("No menu was selected in ActivateTheMenu() in ", this);
                 break;
         }
     }
