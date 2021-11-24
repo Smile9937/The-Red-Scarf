@@ -47,9 +47,8 @@ public class DressPlayer : MonoBehaviour
         {
             return;
         }
-        PlayerUI.Instance.SetComposureText(currentComposure);
-
-        if(player.state == Player.State.Neutral)
+        PlayerUI.Instance.SetSpecialUI(currentComposure, 100);
+        if (player.state == Player.State.Neutral)
         {
             gainComposure = true;
             HandleBlocking();

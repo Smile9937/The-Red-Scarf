@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private Text healthText;
-    [SerializeField] private Text composureText;
-    [SerializeField] private Text rageText;
+    [Header("Health Bar")]
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Color theHealthColor;
+    [SerializeField] private Color theHealthColorLow;
+    [Header("Special Bar")]
+    [SerializeField] private Slider rageSlider;
 
     private static PlayerUI instance;
     public static PlayerUI Instance { get { return instance; } }
@@ -19,34 +23,31 @@ public class PlayerUI : MonoBehaviour
             instance = this;
         }
     }
-    private void Update()
+
+    public void SetHealthUI(int theHealth, int maxHealth)
     {
-        SetTextField();
-    }
-    private void SetTextField()
-    {
-        if (GameManager.Instance.redScarf)
+        if (theHealth != 0 || maxHealth != 0)
         {
-            rageText.gameObject.SetActive(true);
-            composureText.gameObject.SetActive(false);
+            float theAmount = (float)theHealth / (float)maxHealth;
+            healthSlider.value = theAmount;
+            healthBar.color = Color.Lerp(theHealthColorLow, theHealthColor, theAmount);
+        }
+        else if (theHealth == 0)
+        {
+            healthSlider.value = 0;
+            healthBar.color = theHealthColorLow;
+        }
+    }
+    public void SetSpecialUI(int theRage, int maxRage)
+    {
+        if (theRage == 0 || maxRage == 0)
+        {
+            rageSlider.value = 0;
         }
         else
         {
-            rageText.gameObject.SetActive(false);
-            composureText.gameObject.SetActive(true);
+            float theAmount = (float)theRage / (float)maxRage;
+            rageSlider.value = theAmount;
         }
-    }
-
-    public void SetHealthText(int health)
-    {
-        healthText.text = "Health: " + health;
-    }
-    public void SetComposureText(int composure)
-    {
-        composureText.text = "Composure: " + composure;
-    }
-    public void SetRageText(int rage)
-    {
-        rageText.text = "Rage: " + rage;
     }
 }

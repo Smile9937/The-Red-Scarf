@@ -26,7 +26,7 @@ public class RedScarfPlayer : MonoBehaviour
 
     private void Start()
     {
-        PlayerUI.Instance.SetRageText(currentRageCount);
+        PlayerUI.Instance.SetSpecialUI(currentRageCount, maxRage);
         loseRageCoroutine = StartCoroutine(LoseRage());
     }
     private void Update()
@@ -35,7 +35,7 @@ public class RedScarfPlayer : MonoBehaviour
         {
             return;
         }
-        PlayerUI.Instance.SetRageText(currentRageCount);
+        PlayerUI.Instance.SetSpecialUI(currentRageCount, maxRage);
         HandleRage();
         if(player.state == Player.State.Neutral)
         {

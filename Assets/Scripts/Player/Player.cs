@@ -143,7 +143,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
         grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
 
-        PlayerUI.Instance.SetHealthText(currentHealth);
+        PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
         myAnimator.SetBool("isGrounded", grounded);
 
         if (InputManager.Instance.GetKey(KeybindingActions.Left)
@@ -349,6 +349,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
             return;
 
         currentHealth -= damage;
+        PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
         {
