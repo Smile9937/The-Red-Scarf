@@ -29,9 +29,9 @@ AnimationClip:
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: -285709291044095510, guid: 09434f2f719d2a440a6accad8a8bbe73, type: 3}
+      value: {fileID: 21300000, guid: 86f3f211c98668b46bb23994e91e04b3, type: 3}
     - time: 0.18333334
-      value: {fileID: -285709291044095510, guid: 09434f2f719d2a440a6accad8a8bbe73, type: 3}
+      value: {fileID: 21300000, guid: 86f3f211c98668b46bb23994e91e04b3, type: 3}
     attribute: m_Sprite
     path: Options Selection
     classID: 212
@@ -76,8 +76,8 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 8285103818595923320, guid: 645b803962922d4499344b98bb916449, type: 3}
     - {fileID: 8285103818595923320, guid: 645b803962922d4499344b98bb916449, type: 3}
-    - {fileID: -285709291044095510, guid: 09434f2f719d2a440a6accad8a8bbe73, type: 3}
-    - {fileID: -285709291044095510, guid: 09434f2f719d2a440a6accad8a8bbe73, type: 3}
+    - {fileID: 21300000, guid: 86f3f211c98668b46bb23994e91e04b3, type: 3}
+    - {fileID: 21300000, guid: 86f3f211c98668b46bb23994e91e04b3, type: 3}
     - {fileID: 8873548882220953532, guid: e7c0e43ff20ba404d9efca2adeea31ef, type: 3}
     - {fileID: 8873548882220953532, guid: e7c0e43ff20ba404d9efca2adeea31ef, type: 3}
   m_AnimationClipSettings:
