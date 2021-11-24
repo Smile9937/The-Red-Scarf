@@ -117,6 +117,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
     private void Update()
     {
+        if (PauseMenu.Instance.gamePaused)
+            return;
         switch(state)
         {
             case State.Moving:

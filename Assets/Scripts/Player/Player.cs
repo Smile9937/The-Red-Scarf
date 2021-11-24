@@ -113,6 +113,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
         GameEvents.Instance.onSaveGame += Save;
         GameEvents.Instance.onLoadGame += Load;
+        GameManager.Instance.player = this;
     }
     private void Start()
     {

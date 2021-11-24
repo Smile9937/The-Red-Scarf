@@ -31,8 +31,12 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
         player = FindObjectOfType<Player>();
-        currentSpawnpoint = player.transform.position;
+        if(player)
+        {
+            currentSpawnpoint = player.transform.position;
+        }
         Time.timeScale = 1;
         if(player != null)
         {
