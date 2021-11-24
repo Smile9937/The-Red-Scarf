@@ -4,27 +4,30 @@ using UnityEngine;
 
 public abstract class TripleBoss : MonoBehaviour, IDamageable
 {
-    [SerializeField] protected Transform startPosition;
-
+    [Header("Basic Stats")]
     [SerializeField] protected int health;
 
     [SerializeField] protected float moveSpeed;
 
-    protected Transform targetPosition;
+    [SerializeField] protected Transform startPosition;
+
+    protected Vector3 targetPosition;
 
     protected TripleBossManager bossManager;
 
-    [HideInInspector]
+    //[HideInInspector]
     public State state;
     public enum State
     {
         Waiting,
         MovingToStart,
         MovingToAttackPosition,
+        Cooldown,
+        PreparingToAttack,
         Attacking
     }
 
-    [HideInInspector]
+    //[HideInInspector]
     public Pattern pattern;
     public enum Pattern
     {
@@ -82,6 +85,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     public virtual void EndPattern()
     {
+        StopAllCoroutines();
         pattern = Pattern.NoPattern;
     }
 
@@ -111,22 +115,22 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
                 }
                 break;
             case State.MovingToAttackPosition:
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition.position, moveSpeed * Time.deltaTime);
-                if(transform.position == targetPosition.position)
+                transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                if(transform.position == targetPosition)
                 {
-                    PositionReached();
+                    AttackPositionReached();
                 }
                 break;
         }
     }
 
-    protected void MoveToPosition(Transform target)
+    protected void MoveToAttackPosition(Vector3 target)
     {
         targetPosition = target;
         state = State.MovingToAttackPosition;
     }
 
-    protected virtual void PositionReached()
+    protected virtual void AttackPositionReached()
     {
 
     }
