@@ -7,6 +7,8 @@ public class Hazard : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private bool bypassInvincibility;
     [SerializeField] private float damageRate = 1f;
+    [SerializeField] private Vector2 knockback;
+    [SerializeField] private float knockbackLength;
 
     public class DamageTarget
     {
@@ -19,13 +21,17 @@ public class Hazard : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-
         if (damageable != null)
         {
+        ICharacter character = collision.gameObject.GetComponent<ICharacter>();
             DamageTarget damageTarget = new DamageTarget();
             damageTarget.damageable = damageable;
             damageTarget.canDamage = true;
             damageTargets.Add(damageTarget);
+            if(character != null)
+            {
+                character.KnockBack(gameObject, knockback, knockbackLength);
+            }
         }
     }
 

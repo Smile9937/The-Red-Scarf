@@ -185,6 +185,7 @@ public class TripleBossManager : MonoBehaviour
 
     public void BossDead(TripleBoss boss)
     {
+        GameEvents.Instance.TripleBossPatternEnd();
         for(int i = 0; i < bosses.Count; i++)
         {
             bosses[i].readyToStartBattle = false;
@@ -212,7 +213,6 @@ public class TripleBossManager : MonoBehaviour
         }
 
         PrepareForBattle();
-        GameEvents.Instance.TripleBossPatternEnd();
 
         Debug.Log("Boss Dead " + boss.name);
 

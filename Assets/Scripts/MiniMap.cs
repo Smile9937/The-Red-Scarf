@@ -51,10 +51,10 @@ public class MiniMap : MonoBehaviour
     }
     public void SaveGame()
     {
-        GameManager.Instance.unlockedRooms = unlockedRooms;
+        GameManager.Instance.unlockedRooms = new List<int>(unlockedRooms);
     }
     public void LoadGame()
     {
-        unlockedRooms = GameManager.Instance.unlockedRooms;
+        unlockedRooms = new List<int>(GameManager.Instance.unlockedRooms);
     }
 }
