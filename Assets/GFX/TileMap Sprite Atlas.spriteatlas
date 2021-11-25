@@ -23,9 +23,9 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
-      m_TextureFormat: -1
+      m_TextureFormat: 4
       m_TextureCompression: 0
       m_CompressionQuality: 50
       m_CrunchedCompression: 0
@@ -109,6 +109,8 @@ SpriteAtlas:
   - {fileID: 94058731202090889, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
   - {fileID: 7145198348311737387, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
   - {fileID: -3708508325519384304, guid: a2c9d0520c1c0c84cbe9769dc36b4a39, type: 3}
+  - {fileID: 6381090440524882456, guid: 5ea9deb3bd2978045acd4ab08f76327d, type: 3}
+  - {fileID: 537400536640725311, guid: 5ea9deb3bd2978045acd4ab08f76327d, type: 3}
   - {fileID: 8826627779237247279, guid: 2c2992c383c193b4e9ecfab8b7cd9392, type: 3}
   - {fileID: 5926519772658382135, guid: 2c2992c383c193b4e9ecfab8b7cd9392, type: 3}
   - {fileID: -7570023742388914861, guid: 2c2992c383c193b4e9ecfab8b7cd9392, type: 3}
@@ -220,6 +222,8 @@ SpriteAtlas:
   - Sprite-0002_3
   - Sprite-0002_0
   - Sprite-0002_1
+  - doorthingtiles1_0
+  - doorthingtiles1_1
   - basement-tiles1_6
   - basement-tiles1_7
   - basement-tiles1_19
