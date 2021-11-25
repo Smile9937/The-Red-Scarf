@@ -17,7 +17,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     float originalAirDashCooldown;
     [Header("Distance Stats")]
     [SerializeField] float closeDistanceThrow = 3f;
-    [SerializeField] float playerDistanceToStop = 5f;
 
     float characterGravity = 1f;
     float theDistanceBias = 0;
@@ -212,24 +211,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         animator.SetBool("stopScarfThrow", false);
         ToggleIsSwinging();
     }
-    /*
-    private void OnDrawGizmosSelected()
-    {
-        Vector2 targetLocation = new Vector2(transform.position.x, transform.position.y);
-        Vector2 originalLocation = new Vector2(transform.position.x + (0.1f * Mathf.Sign(transform.rotation.y)), transform.position.y);
-        targetLocation.x += lengthOfScarf * Mathf.Sign(transform.rotation.y);
-        if (InputManager.Instance.GetKey(KeybindingActions.Up))
-        {
-            targetLocation.y += lengthOfScarf * 0.8f;
-            if (!(InputManager.Instance.GetKey(KeybindingActions.Right) || InputManager.Instance.GetKey(KeybindingActions.Left)))
-            {
-                targetLocation.x = transform.position.x;
-            }
-        }
-
-        Gizmos.DrawLine(originalLocation, targetLocation);
-    }
-    */
 
     public void LaunchPlayerIntoDash()
     {
@@ -253,6 +234,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerStateStatus", dashDuration);
             animator.SetBool("isScarfThrown", false);
+            animator.SetBool("stopScarfThrow", true);
             swingingPoint = null;
             theGrabbable = null;
         }
