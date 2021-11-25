@@ -5,13 +5,11 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] bool isSingleUse;
-    bool hasBeenActivated;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && (!isSingleUse || !hasBeenActivated))
+        if(collision.tag == "Player")
         {
-            hasBeenActivated = true;
             GameManager.Instance.SetCurrentCheckpoint(transform.position);
         }
     }
