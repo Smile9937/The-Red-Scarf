@@ -126,8 +126,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 float temp = characterRigidBody.velocity.y;
                 if (temp < -0.01f)
                 {
-                    Debug.Log("Second Jump");
-                    temp *= (0.2f / characterGravity);
+                    temp *= (0.18f / characterGravity);
                 }
                 characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
