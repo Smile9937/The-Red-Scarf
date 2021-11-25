@@ -244,6 +244,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             Invoke("ReturnPlayerState", dashDuration);
             Invoke("ReturnPlayerStateStatus", dashDuration * 1.1f);
             animator.SetBool("isScarfThrown", false);
+            animator.SetBool("stopScarfThrow", true);
             swingingPoint = null;
             theGrabbable = null;
         }

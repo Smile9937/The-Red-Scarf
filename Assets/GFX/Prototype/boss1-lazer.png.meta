@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 37e69a27d38337342bad1947e635b009
+guid: b12f20b1115b73c4f87242bbf0cf5076
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4340451932492029087
-    second: PrototypeRedScarf-fall-unarmed_0
-  - first:
-      213: -2924415545106058837
-    second: PrototypeRedScarf-fall-unarmed_1
+      213: 7039530626456817202
+    second: boss1-lazer_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -52,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,7 +70,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -85,7 +82,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -97,7 +94,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -109,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-fall-unarmed_0
+      name: boss1-lazer_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 39
+        width: 96
+        height: 112
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,29 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9c58d039026c3c30800000000000000
-      internalID: 4340451932492029087
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PrototypeRedScarf-fall-unarmed_1
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 0
-        width: 33
-        height: 39
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ba1b2525e836a67d0800000000000000
-      internalID: -2924415545106058837
+      spriteID: 23e0177cecf61b160800000000000000
+      internalID: 7039530626456817202
       vertices: []
       indices: 
       edges: []
