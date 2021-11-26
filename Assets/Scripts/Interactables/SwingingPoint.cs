@@ -28,36 +28,10 @@ public class SwingingPoint : ActivatableObject, IGrabbable
     {
         isSwingable = false;
     }
-
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player" && isSwingable)
-        {
-            if (theGrapplingScarf != null)
-            {
-                if (theGrapplingScarf.swingingPoint == null)
-                {
-                    theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
-                }
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            if (theGrapplingScarf != null)
-            {
-                theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
-            }
-        }
-    }
-    */
-
+    
     public void IsGrabbed()
     {
-        if (theGrapplingScarf != null)
+        if (theGrapplingScarf != null && isSwingable)
         {
             theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
         }
