@@ -184,7 +184,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   explosionRadius: 1.5
-  explosionDamage: 40
+  explosionDamage: 30
   timeUntilExplosion: 2
   explosionOutline: {fileID: 783759402522904192}
 --- !u!58 &783759403534293579

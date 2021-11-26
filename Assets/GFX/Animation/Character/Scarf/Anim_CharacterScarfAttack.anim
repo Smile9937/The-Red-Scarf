@@ -21,13 +21,13 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 1187038180406645014, guid: 5cb39bff921cb8542b9c6f1881d36eaa, type: 3}
-    - time: 0.13333334
+    - time: 0.11666667
       value: {fileID: -2810786470291692765, guid: c8f06fc03550f7e4c904440ea458ddab, type: 3}
-    - time: 0.21666667
+    - time: 0.18333334
       value: {fileID: -8203552220761368852, guid: c8f06fc03550f7e4c904440ea458ddab, type: 3}
-    - time: 0.31666666
+    - time: 0.26666668
       value: {fileID: -7507635374115669707, guid: c8f06fc03550f7e4c904440ea458ddab, type: 3}
-    - time: 0.4
+    - time: 0.33333334
       value: {fileID: -7507635374115669707, guid: c8f06fc03550f7e4c904440ea458ddab, type: 3}
     attribute: m_Sprite
     path: 
@@ -58,7 +58,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.4166667
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,14 +78,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.3
+  - time: 0.25
     functionName: MeleeAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
+  - time: 0.33333334
     functionName: ReturnFromAttack
     data: 
     objectReferenceParameter: {fileID: 0}
