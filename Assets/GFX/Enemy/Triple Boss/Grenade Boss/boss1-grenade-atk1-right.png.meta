@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: a8e3c6f72bb62814a91427907334351c
+guid: 37417457a29106345989a35fa99e7337
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9168414204058797012
-    second: boss1-lazer-dive-towards-player_0
+      213: -3730375561980767129
+    second: boss1-grenade-atk1-right_0
   - first:
-      213: 3584371845989289595
-    second: boss1-lazer-dive-towards-player_1
+      213: -4475102518475791197
+    second: boss1-grenade-atk1-right_1
+  - first:
+      213: 2750061780399286931
+    second: boss1-grenade-atk1-right_2
+  - first:
+      213: 1492396878888395411
+    second: boss1-grenade-atk1-right_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -73,7 +79,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -85,7 +91,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -97,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boss1-lazer-dive-towards-player_0
+      name: boss1-grenade-atk1-right_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 66
-        height: 68
+        width: 78.75
+        height: 107
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +117,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d3029a6420cc3f70800000000000000
-      internalID: 9168414204058797012
+      spriteID: 7649655d03b0b3cc0800000000000000
+      internalID: -3730375561980767129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss1-lazer-dive-towards-player_1
+      name: boss1-grenade-atk1-right_1
       rect:
         serializedVersion: 2
-        x: 66
+        x: 78
         y: 0
-        width: 66
-        height: 68
+        width: 78.75
+        height: 107
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +138,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7e4a1ff33f3eb130800000000000000
-      internalID: 3584371845989289595
+      spriteID: 3a46bc438fd35e1c0800000000000000
+      internalID: -4475102518475791197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss1-grenade-atk1-right_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 78.75
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ae31b6e9e2a2620800000000000000
+      internalID: 2750061780399286931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss1-grenade-atk1-right_3
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 78.75
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3926b06ed0f06b410800000000000000
+      internalID: 1492396878888395411
       vertices: []
       indices: 
       edges: []

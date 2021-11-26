@@ -8,8 +8,7 @@ public class MeleeBoss : TripleBoss
     [SerializeField] private Transform swoopPositionLeft;
     [SerializeField] private Transform swoopPositionRight;
     [SerializeField] private float swoopSpeed = 0.7f;
-    [SerializeField] private float swoopTrajectoryYOffset = -8f;
-    [SerializeField] private float swoopTrajectoryXOffset = 0f;
+    [SerializeField] private Vector2 swoopTrajectoryOffset = new Vector2(0f, -8f);
     [SerializeField] private float timeUntilStartSwoop = 2f;
 
     [Header("Ground Slam Variables")]
@@ -40,6 +39,7 @@ public class MeleeBoss : TripleBoss
     private Vector3[] points;
     private float swoopLerpValue = 0;
     private float chargeCounter = 0;
+    private bool returnToPosition;
     private void Start()
     {
         cornerList = new List<Transform>(corners);
@@ -53,6 +53,20 @@ public class MeleeBoss : TripleBoss
 
         Vector3 movePosition = CenterOfVectors(cornerPositions);
         centerPosition = new Vector3(movePosition.x + centerOffset.x, movePosition.y + centerOffset.y, movePosition.z);
+    }
+    private Vector3 CenterOfVectors(List<Vector3> vectors)
+    {
+        Vector3 sum = Vector3.zero;
+        if (vectors == null || vectors.Count == 0)
+        {
+            return sum;
+        }
+
+        foreach (Vector3 vec in vectors)
+        {
+            sum += vec;
+        }
+        return sum / vectors.Count;
     }
 
     protected override void Update()
@@ -70,11 +84,19 @@ public class MeleeBoss : TripleBoss
                     case Pattern.PatternOneMirror:
                         SwoopAttack();
                         break;
-                    case Pattern.PatternTwo:
-                        transform.Translate(-Vector3.up * slamSpeed * Time.deltaTime);
-                        break;
-                    case Pattern.PatternTwoMirror:
-                        transform.Translate(-Vector3.up * slamSpeed * Time.deltaTime);
+                    case Pattern.PatternTwo: case Pattern.PatternTwoMirror:
+                        if(!returnToPosition)
+                        {
+                            transform.Translate(-Vector3.up * slamSpeed * Time.deltaTime);
+                        }
+                        else
+                        {
+                            transform.Translate(Vector3.up * slamSpeed * Time.deltaTime);
+                            if(transform.position.y >= startPosition.position.y -2)
+                            {
+                                PatternDone();
+                            }
+                        }
                         break;
                     case Pattern.PatternThree:
                         if(chargeCountReached)
@@ -107,7 +129,7 @@ public class MeleeBoss : TripleBoss
                     Bullet currentShockWave = Instantiate(shockWave, position, Quaternion.identity);
                     currentShockWave.transform.eulerAngles = Vector3.forward * i * 180;
                 }
-                PatternDone();
+                returnToPosition = true;
             }
             else if(pattern == Pattern.PatternThree)
             {
@@ -188,6 +210,7 @@ public class MeleeBoss : TripleBoss
     private IEnumerator TimeUntilStartSlam()
     {
         yield return new WaitForSeconds(timeUntilStartSlam);
+        returnToPosition = false;
         state = State.Attacking;
     }
 
@@ -212,7 +235,7 @@ public class MeleeBoss : TripleBoss
         points = new Vector3[3];
         points[0] = transform.position;
         points[2] = position;
-        points[1] = points[0] + (points[2] - points[0]) / 2 + new Vector3(swoopTrajectoryXOffset, swoopTrajectoryYOffset, 0);
+        points[1] = points[0] + (points[2] - points[0]) / 2 + (Vector3) swoopTrajectoryOffset;
         state = State.Attacking;
     }
     private void PickChargePosition()
@@ -251,20 +274,6 @@ public class MeleeBoss : TripleBoss
                 MoveToAttackPosition(centerPosition);
                 break;
         }
-    }
-    private Vector3 CenterOfVectors(List<Vector3> vectors)
-    {
-        Vector3 sum = Vector3.zero;
-        if (vectors == null || vectors.Count == 0)
-        {
-            return sum;
-        }
-
-        foreach (Vector3 vec in vectors)
-        {
-            sum += vec;
-        }
-        return sum / vectors.Count;
     }
 
 
