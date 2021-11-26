@@ -15,6 +15,14 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected TripleBossManager bossManager;
 
+    private string currentAnimation;
+
+    protected Animator myAnimator;
+
+    private Collider2D myCollider;
+
+    private Hazard hazardComponent;
+
     //[HideInInspector]
     public State state;
     public enum State
@@ -24,7 +32,8 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         MovingToAttackPosition,
         Cooldown,
         PreparingToAttack,
-        Attacking
+        Attacking,
+        Dead
     }
 
     //[HideInInspector]
@@ -41,6 +50,9 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
     private void Awake()
     {
         bossManager = GetComponentInParent<TripleBossManager>();
+        myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<Collider2D>();
+        hazardComponent = GetComponent<Hazard>();
         state = State.Waiting;
     }
 
@@ -91,11 +103,16 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected void PatternDone()
     {
+        StopAllCoroutines();
+        pattern = Pattern.NoPattern;
         MoveToStartPosition();
     }
 
     private void MoveToStartPosition()
     {
+        if (state == State.Dead)
+            return;
+
         state = State.MovingToStart;
     }
 
@@ -106,11 +123,13 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         switch(state)
         {
             case State.MovingToStart:
+                PlayAnimation("isHoverRight");
                 transform.position = Vector2.MoveTowards(transform.position, startPosition.position, moveSpeed * Time.deltaTime);
                 if(transform.position == startPosition.position)
                 {
                     state = State.Waiting;
                     pattern = Pattern.NoPattern;
+                    PlayAnimation("isIdle");
                     bossManager.ReadyToStartBattle(this);
                 }
                 break;
@@ -120,6 +139,9 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
                 {
                     AttackPositionReached();
                 }
+                break;
+            case State.Dead:
+                transform.Translate(Vector3.down * Time.deltaTime);
                 break;
         }
     }
@@ -132,7 +154,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected virtual void AttackPositionReached()
     {
-
+        PlayAnimation("isIdle");
     }
     public void Damage(int damage, bool bypassInvincibility)
     {
@@ -140,7 +162,32 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         if(health <= 0)
         {
             bossManager.BossDead(this);
-            Destroy(gameObject);
+            PlayAnimation("isDead");
+            state = State.Dead;
+            hazardComponent.enabled = false;
         }
+    }
+
+    //Called In Death Animation
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    protected void PlayAnimation(string animation)
+    {
+        if (currentAnimation == animation)
+            return;
+
+        foreach(AnimatorControllerParameter parameter in myAnimator.parameters)
+        {
+            if(parameter.name == currentAnimation)
+            {
+                myAnimator.SetBool(currentAnimation, false);
+                break;
+            }
+        }
+        currentAnimation = animation;
+        myAnimator.SetBool(currentAnimation, true);
     }
 }

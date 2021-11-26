@@ -9,7 +9,7 @@ public class Hazard : MonoBehaviour
     [SerializeField] private float damageRate = 1f;
     [SerializeField] private Vector2 knockback;
     [SerializeField] private float knockbackLength;
-
+    [SerializeField] private bool dealKnockback;
     public class DamageTarget
     {
         public IDamageable damageable;
@@ -20,15 +20,23 @@ public class Hazard : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        EnterCollider(collision.collider);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        EnterCollider(collision);
+    }
+    private void EnterCollider(Collider2D collision)
+    {
+        IDamageable damageable = collision.GetComponent<IDamageable>();
         if (damageable != null)
         {
-        ICharacter character = collision.gameObject.GetComponent<ICharacter>();
+            ICharacter character = collision.gameObject.GetComponent<ICharacter>();
             DamageTarget damageTarget = new DamageTarget();
             damageTarget.damageable = damageable;
             damageTarget.canDamage = true;
             damageTargets.Add(damageTarget);
-            if(character != null)
+            if (character != null && dealKnockback)
             {
                 character.KnockBack(gameObject, knockback, knockbackLength);
             }
@@ -37,11 +45,20 @@ public class Hazard : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        ExitCollider(collision.collider);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ExitCollider(collision);
+    }
+
+    private void ExitCollider(Collider2D collision)
+    {
+        IDamageable damageable = collision.GetComponent<IDamageable>();
 
         if (damageable != null)
         {
-            for(int i = 0; i < damageTargets.Count; i++)
+            for (int i = 0; i < damageTargets.Count; i++)
             {
                 if (damageable == damageTargets[i].damageable)
                 {
@@ -54,17 +71,27 @@ public class Hazard : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        StayInCollider(collision.collider);
+    }
 
-        if(damageable != null)
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        StayInCollider(collision);
+    }
+
+    private void StayInCollider(Collider2D collision)
+    {
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+
+        if (damageable != null)
         {
-            for(int i = 0; i < damageTargets.Count; i++)
+            for (int i = 0; i < damageTargets.Count; i++)
             {
                 if (damageTargets[i] != null)
                 {
-                    if(damageable == damageTargets[i].damageable && damageTargets[i] != null)
+                    if (damageable == damageTargets[i].damageable && damageTargets[i] != null)
                     {
-                        if(damageTargets[i].canDamage == true)
+                        if (damageTargets[i].canDamage == true)
                         {
                             damageTargets[i].canDamage = false;
                             StartCoroutine(damageTimer(damageTargets[i]));
@@ -75,6 +102,7 @@ public class Hazard : MonoBehaviour
             }
         }
     }
+
     private IEnumerator damageTimer(DamageTarget damageable)
     {
         yield return new WaitForSeconds(damageRate);

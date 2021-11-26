@@ -25,8 +25,8 @@ TagManager:
   - Dodge Roll
   - Checkpoint
   - Hooks
-  - 
-  - 
+  - Grenade
+  - Acid Spot
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 361291161
+    locked: 0
+  - name: Acid
+    uniqueID: 4108652957
     locked: 0
   - name: Foreground
     uniqueID: 159784049
