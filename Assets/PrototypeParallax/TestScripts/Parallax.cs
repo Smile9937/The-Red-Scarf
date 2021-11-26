@@ -11,7 +11,7 @@ public class Parallax : MonoBehaviour {
 
     //Instance variables
     float zPosition;
-    Vector2 startPos;
+    [SerializeField] Vector2 startPos;
 
 
     //Properties
