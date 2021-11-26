@@ -16906,6 +16906,14 @@ PrefabInstance:
       propertyPath: grenadeForces.Array.data[2].x
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8362574402228271334, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362574402228271334, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: knockbackLength
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8362574402232959519, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -16961,6 +16969,14 @@ PrefabInstance:
     - target: {fileID: 8362574402649231434, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.2399998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362574402649231439, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362574402649231439, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: knockbackLength
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8362574402805612105, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17053,6 +17069,14 @@ PrefabInstance:
     - target: {fileID: 8362574403611242183, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
       propertyPath: swoopTrajectoryOffset.y
       value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362574403611242186, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362574403611242186, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
+      propertyPath: knockbackLength
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a9af7f7c1ee5514f975bdea88a0cba0, type: 3}
@@ -38510,6 +38534,10 @@ PrefabInstance:
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: attackLayers.m_Bits
       value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: secondsOfInvincibility
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771728123215169, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: m_SortingLayer

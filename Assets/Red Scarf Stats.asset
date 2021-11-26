@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 6.2
   jumpForce: 7
   jumpTime: 0.35
-  attackSize: {x: 1.04, y: 2.33}
+  attackSize: {x: 1, y: 2.4}
   attackDamage: 40
   meleeAttackRate: 2
   knockbackVelocity: {x: 2.5, y: 1.5}
