@@ -124,16 +124,16 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             if (grounded)
             {
-                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.7f, 0);
-                Invoke("StopPlayerGliding", 0.5f);
+                characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.95f, 0);
                 Invoke("ToggleIsSwinging", dashDuration * 0.9f);
             }
             else
             {
                 float temp = characterRigidBody.velocity.y;
-                if (temp < -0.01f)
+                temp *= gravityAdjustment;
+                if (temp >= 0.01f)
                 {
-                    temp *= (0.18f / characterGravity);
+                    temp -= 0.1f * characterGravity;
                 }
                 characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
@@ -220,23 +220,27 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             curretNumOfTries++;
         }
+        CancelInvoke("ReturnPlayerState");
         if (swingingPoint == null)
         {
             CancelInvoke("StopPlayerGliding");
-            CancelInvoke("ReturnPlayerState");
             Invoke("ReturnPlayerState", dashDuration * 1.1f);
             return;
         }
         animator.SetBool("isScarfThrown", true);
         animator.SetBool("stopScarfThrow", false);
+        Invoke("StopPlayerGliding", Mathf.Clamp(Vector2.Distance(swingingPoint.transform.position, this.transform.position) * 0.02f, 0.25f, 1.5f));
         ToggleIsSwinging();
     }
 
     public void LaunchPlayerIntoDash()
     {
-        if (swingingPoint != null)
+        if (swingingPoint != null && airDashCooldown <= 0)
         {
             airDashCooldown = originalAirDashCooldown;
+            targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
+            targetLaunchPosition.Normalize();
+
             characterRigidBody.gravityScale = gravityAdjustment;
             CancelInvoke("ReturnGravityAdjustments");
             Invoke("ReturnGravityAdjustments", 0.6f * dashDuration);
@@ -265,20 +269,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void ToggleIsSwinging()
     {
+        CancelInvoke("ReturnPlayerState");
         originalLaunchPosition = transform.position;
         if (swingingPoint != null)
         {
-            targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
-            targetLaunchPosition.Normalize();
-            originalLaunchPosition = this.transform.position;
             characterRigidBody.gravityScale = gravityAdjustment;
             
             float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.9f * dashDuration, 1.1f * dashDuration);
             theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
             
-            ActivateScarfRenderer(true);
-
-            CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnGravityAdjustments");
             Invoke("ReturnPlayerState", theDashDuration * 1.25f);
         }
@@ -335,10 +334,14 @@ public class CharacterGrapplingScarf : MonoBehaviour
         characterRigidBody.gravityScale = characterGravity;
     }
 
+    
     private void StopPlayerGliding()
     {
+        if (IsInvoking("StopPlayerGliding"))
+            CancelInvoke("StopPlayerGliding");
         characterRigidBody.velocity = Vector2.zero;
     }
+    
 
     // Scarf GFX
     private void ActivateScarfRenderer(bool enabled)
@@ -369,7 +372,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
                 theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
             }
-            else
+            else if (player.state == Player.State.Dash)
             {
                 if (timeSinceUpdate <= 0.8f)
                 {
@@ -392,6 +395,14 @@ public class CharacterGrapplingScarf : MonoBehaviour
                     {
                         scarfGrabLocation = scarfOriginLocation.transform.position;
                     }
+                    else if (originalLaunchPosition.y < swingingPoint.transform.position.y && swingingPoint.transform.position.y <= transform.position.y)
+                    {
+                        scarfGrabLocation = scarfOriginLocation.transform.position;
+                    }
+                    else if (originalLaunchPosition.y > swingingPoint.transform.position.y && swingingPoint.transform.position.y >= transform.position.y)
+                    {
+                        scarfGrabLocation = scarfOriginLocation.transform.position;
+                    }
                     else
                     {
                         scarfGrabLocation = swingingPoint.transform.position;
@@ -400,22 +411,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 else
                 {
                     scarfGrabLocation = scarfOriginLocation.transform.position;
-                    /*
-                    switch (scarfDirection)
-                    {
-                        case ScarfDirectionEnum.Sideways:
-                            scarfGrabLocation += new Vector2(Mathf.Sign(transform.rotation.y) * lengthOfScarf * timeSinceUpdate, 0);
-                            break;
-                        case ScarfDirectionEnum.UppSideways:
-                            scarfGrabLocation += new Vector2(Mathf.Sign(transform.rotation.y) * lengthOfScarf * timeSinceUpdate, lengthOfScarf * 0.8f * timeSinceUpdate);
-                            break;
-                        case ScarfDirectionEnum.Uppwards:
-                            scarfGrabLocation += new Vector2(0, lengthOfScarf * 0.8f * timeSinceUpdate);
-                            break;
-                        default:
-                            break;
-                    }
-                    */
                 }
 
                 hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 3f, scarfGrabableLayers);
@@ -431,8 +426,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
                 theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
             }
+            else
+            {
+                theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+            }
             yield return new WaitForSeconds(Mathf.Clamp(0.01f - Time.deltaTime, 0, 1));
         }
-        ActivateScarfRenderer(false);
     }
 }
