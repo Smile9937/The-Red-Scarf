@@ -40088,6 +40088,22 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: dashStrength
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: ground.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: scarfDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: dashAttackBonus
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815619446083841076, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: theLineRenderer
       value: 
       objectReference: {fileID: 910047303}
@@ -40109,15 +40125,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: maxRage
-      value: 25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: speedPerRage
-      value: 0.04
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: damagePerRage
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: rageLossCount
@@ -40133,7 +40149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: timeBeforeRageLoss
-      value: 2.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: ground.m_Bits
@@ -40274,6 +40290,7 @@ MonoBehaviour:
   dashDuration: 0.8
   gravityAdjustment: 0.8
   airDashCooldown: 1
+  dashAttackBonus: 30
   closeDistanceThrow: 4
   theLineRenderer: {fileID: 910047303}
   scarfGrabableLayers:
