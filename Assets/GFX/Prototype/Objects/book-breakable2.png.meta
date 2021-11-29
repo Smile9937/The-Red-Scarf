@@ -1,28 +1,31 @@
 fileFormatVersion: 2
-guid: c70eb31ed40fbff40bf2ddc04714e70d
+guid: 05b2ac6826a7efc40b869580e16674c5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4104483875894110335
-    second: chair-breakable1_0
+      213: 3661228505337323960
+    second: book-breakable2_0
   - first:
-      213: -1543223508653092109
-    second: chair-breakable1_1
+      213: -7241419234151563740
+    second: book-breakable2_1
   - first:
-      213: 3991114547466478596
-    second: chair-breakable1_2
+      213: -4547303705922955639
+    second: book-breakable2_2
   - first:
-      213: -7238606262060211073
-    second: chair-breakable1_3
+      213: 4051086281263315460
+    second: book-breakable2_3
   - first:
-      213: -4553204358212345915
-    second: chair-breakable1_4
+      213: -8680443818261485971
+    second: book-breakable2_4
   - first:
-      213: 6802478359018237748
-    second: chair-breakable1_5
+      213: -3407762612753193100
+    second: book-breakable2_5
   - first:
-      213: 4287222812219277518
-    second: chair-breakable1_6
+      213: -8391822856227159831
+    second: book-breakable2_6
+  - first:
+      213: -4624605604777220208
+    second: book-breakable2_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,7 +104,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +116,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,13 +127,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chair-breakable1_0
+      name: book-breakable2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 14
-        height: 23
+        width: 16
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +141,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 187530f49a1f907c0800000000000000
-      internalID: -4104483875894110335
+      spriteID: 8b16a267deb4fc230800000000000000
+      internalID: 3661228505337323960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_1
+      name: book-breakable2_1
       rect:
         serializedVersion: 2
-        x: 14
+        x: 16
         y: 0
-        width: 14
-        height: 23
+        width: 16
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f253bd256e559ae0800000000000000
-      internalID: -1543223508653092109
+      spriteID: 42ef6beb29f418b90800000000000000
+      internalID: -7241419234151563740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_2
+      name: book-breakable2_2
       rect:
         serializedVersion: 2
-        x: 28
+        x: 32
         y: 0
-        width: 14
-        height: 23
+        width: 16
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40422abf889436730800000000000000
-      internalID: 3991114547466478596
+      spriteID: 98615a24f5bb4e0c0800000000000000
+      internalID: -4547303705922955639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_3
+      name: book-breakable2_3
       rect:
         serializedVersion: 2
-        x: 42
+        x: 48
         y: 0
-        width: 14
-        height: 23
+        width: 16
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,20 +204,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f74abf8d4fd4b8b90800000000000000
-      internalID: -7238606262060211073
+      spriteID: 40a782d5289583830800000000000000
+      internalID: 4051086281263315460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_4
+      name: book-breakable2_4
       rect:
         serializedVersion: 2
-        x: 56
+        x: 64
         y: 0
-        width: 14
-        height: 23
+        width: 16
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,50 +225,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cf1ef692c4cfc0c0800000000000000
-      internalID: -4553204358212345915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chair-breakable1_5
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 0
-        width: 14
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43f6095c602476e50800000000000000
-      internalID: 6802478359018237748
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chair-breakable1_6
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 0
-        width: 14
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec0084bde664f7b30800000000000000
-      internalID: 4287222812219277518
+      spriteID: d66e9c7965ed88780800000000000000
+      internalID: -8680443818261485971
       vertices: []
       indices: 
       edges: []

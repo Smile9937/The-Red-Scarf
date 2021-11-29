@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: c70eb31ed40fbff40bf2ddc04714e70d
+guid: 22f06a529a8165d408411f378d0e7848
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4104483875894110335
-    second: chair-breakable1_0
+      213: 3888518497035090614
+    second: chair-breakable2_0
   - first:
-      213: -1543223508653092109
-    second: chair-breakable1_1
+      213: -68384588206938197
+    second: chair-breakable2_1
   - first:
-      213: 3991114547466478596
-    second: chair-breakable1_2
+      213: 8549450466810749526
+    second: chair-breakable2_2
   - first:
-      213: -7238606262060211073
-    second: chair-breakable1_3
+      213: 3863976327040871625
+    second: chair-breakable2_3
   - first:
-      213: -4553204358212345915
-    second: chair-breakable1_4
+      213: -8048283459308622461
+    second: chair-breakable2_4
   - first:
-      213: 6802478359018237748
-    second: chair-breakable1_5
+      213: -8504260059181082308
+    second: chair-breakable2_5
   - first:
-      213: 4287222812219277518
-    second: chair-breakable1_6
+      213: 58560674121433359
+    second: chair-breakable2_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chair-breakable1_0
+      name: chair-breakable2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 187530f49a1f907c0800000000000000
-      internalID: -4104483875894110335
+      spriteID: 6baff4688fac6f530800000000000000
+      internalID: 3888518497035090614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_1
+      name: chair-breakable2_1
       rect:
         serializedVersion: 2
-        x: 14
+        x: 11
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f253bd256e559ae0800000000000000
-      internalID: -1543223508653092109
+      spriteID: ba760df449c0d0ff0800000000000000
+      internalID: -68384588206938197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_2
+      name: chair-breakable2_2
       rect:
         serializedVersion: 2
-        x: 28
+        x: 22
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40422abf889436730800000000000000
-      internalID: 3991114547466478596
+      spriteID: 6526d0317efb5a670800000000000000
+      internalID: 8549450466810749526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_3
+      name: chair-breakable2_3
       rect:
         serializedVersion: 2
-        x: 42
+        x: 33
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,20 +201,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f74abf8d4fd4b8b90800000000000000
-      internalID: -7238606262060211073
+      spriteID: 9cc2ac94ff99f9530800000000000000
+      internalID: 3863976327040871625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_4
+      name: chair-breakable2_4
       rect:
         serializedVersion: 2
-        x: 56
+        x: 44
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +222,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cf1ef692c4cfc0c0800000000000000
-      internalID: -4553204358212345915
+      spriteID: 38de14cd5d0ce4090800000000000000
+      internalID: -8048283459308622461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_5
+      name: chair-breakable2_5
       rect:
         serializedVersion: 2
-        x: 70
+        x: 55
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,20 +243,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43f6095c602476e50800000000000000
-      internalID: 6802478359018237748
+      spriteID: c3918fe988ccaf980800000000000000
+      internalID: -8504260059181082308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chair-breakable1_6
+      name: chair-breakable2_6
       rect:
         serializedVersion: 2
-        x: 84
+        x: 66
         y: 0
-        width: 14
-        height: 23
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,8 +264,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec0084bde664f7b30800000000000000
-      internalID: 4287222812219277518
+      spriteID: f01c0d27f9c00d000800000000000000
+      internalID: 58560674121433359
       vertices: []
       indices: 
       edges: []
