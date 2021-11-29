@@ -109,9 +109,12 @@ public class RedScarfPlayer : MonoBehaviour
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
                 player.state = Player.State.Attacking;
-                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2 ,player.myRigidbody.velocity.y);
+                float reductionInSpeed = 1.3f;
+                if (player.grounded)
+                    reductionInSpeed += 0.7f;
+
+                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / reductionInSpeed, player.myRigidbody.velocity.y);
                 player.myAnimator.SetTrigger("attackTrigger");
-                //MeleeAttack() called in animation
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
             }
         }

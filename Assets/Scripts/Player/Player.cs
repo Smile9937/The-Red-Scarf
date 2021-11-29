@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] private float secondsOfInvincibility;
-    bool isInvincible = false;
+    public bool isInvincible = false;
 
     private bool canJump = false;
 

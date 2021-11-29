@@ -136,16 +136,18 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 isDashing = false;
                 player.attackBonus += dashAttackBonus;
-                
+                player.isInvincible = true;
+
                 player.state = Player.State.Attacking;
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
-                player.myAnimator.SetTrigger("attackTrigger");
+                animator.Play("DashAttack");
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
 
                 Invoke("ReturnAttackBonus", 0.8f);
 
+                characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * 0.25f);
+
                 player.state = Player.State.Dash;
-                Invoke("ReturnPlayerState", 0.2f);
             }
         }
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral && airDashCooldown <= 0)
@@ -390,7 +392,10 @@ public class CharacterGrapplingScarf : MonoBehaviour
     }
     private void ReturnAttackBonus()
     {
+        player.isInvincible = false;
         player.attackBonus -= dashAttackBonus;
+
+        Invoke("ReturnPlayerState", 0.1f);
     }
     
     private void StopPlayerGliding()
@@ -406,7 +411,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (theLineRenderer == null)
             return;
-
     }
 
     protected void UpdateOfRenderedScarf()
