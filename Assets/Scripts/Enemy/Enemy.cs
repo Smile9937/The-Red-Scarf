@@ -406,7 +406,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         knockbackCount = knockbackLength;
 
         knockedFromRight = transform.position.x < knockbackSource.transform.position.x;
-        Debug.Log(knockedFromRight);
     }
 
     // Scarf Interaction
@@ -447,7 +446,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                KnockBack(theGrapplingScarf.gameObject, new Vector2(1, 5), 0.5f);
+                KnockBack(theGrapplingScarf.gameObject, new Vector2(1, 5), 0.25f);
                 theGrapplingScarf.PlayScarfPullAnimation();
                 CancelInvoke("ReturnFromGrabbed");
                 break;
