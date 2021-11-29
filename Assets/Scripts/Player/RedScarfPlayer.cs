@@ -124,7 +124,7 @@ public class RedScarfPlayer : MonoBehaviour
     {
         Vector2 attackArea = myStats.attackSize;
         attackArea *= new Vector2(attackAreaMultiplier, attackAreaMultiplier);
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, attackArea, 90f, player.attackLayers);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, attackArea, 0, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)
         {
