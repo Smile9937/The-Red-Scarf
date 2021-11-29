@@ -368,6 +368,9 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     public void KnockBack(GameObject knockbackSource, Vector2 knockbackVelocity, float knockbackLength)
     {
+        if (isInvincible)
+            return;
+
         knockback = knockbackVelocity;
         knockbackCount = knockbackLength;
 

@@ -140,10 +140,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
                 player.state = Player.State.Attacking;
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
+
+                redScarfPlayer.attackAreaMultiplier = 1.5f;
+
                 animator.Play("DashAttack");
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
-
-                Invoke("ReturnAttackBonus", 0.8f);
 
                 characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * 0.25f);
 
@@ -394,6 +395,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         player.isInvincible = false;
         player.attackBonus -= dashAttackBonus;
+
+        redScarfPlayer.attackAreaMultiplier = 1;
 
         Invoke("ReturnPlayerState", 0.1f);
     }

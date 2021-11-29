@@ -23,6 +23,7 @@ public class RedScarfPlayer : MonoBehaviour
     [Header("Components")]
     [SerializeField] PlayerStats myStats;
     [SerializeField] private Player player;
+    [HideInInspector] public float attackAreaMultiplier = 1;
 
     private void Start()
     {
@@ -121,7 +122,9 @@ public class RedScarfPlayer : MonoBehaviour
     }
     public void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.attackLayers);
+        Vector2 attackArea = myStats.attackSize;
+        attackArea *= new Vector2(attackAreaMultiplier, attackAreaMultiplier);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, attackArea, 90f, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)
         {
@@ -133,7 +136,7 @@ public class RedScarfPlayer : MonoBehaviour
                 if (character != null)
                 {
                     character.KnockBack(gameObject, myStats.knockbackVelocity, myStats.knockbackLength);
-                    GainRage();
+                    GainRage(maxRage / 5);
                 }
 
                 if (player.damageText != null && target.tag == "Enemy")
@@ -145,18 +148,18 @@ public class RedScarfPlayer : MonoBehaviour
             }
         }
     }
-    private void GainRage()
+    private void GainRage(int rageGain)
     {
         if(loseRageCoroutine != null)
         {
             StopCoroutine(loseRageCoroutine);
         }
-        if(currentRageCount + 1 > maxRage)
+        if(currentRageCount + rageGain > maxRage)
         {
             currentRageCount = maxRage;
         } else
         {
-            currentRageCount++;
+            currentRageCount += rageGain;
         }
         loseRageCoroutine = StartCoroutine(LoseRage());
     }

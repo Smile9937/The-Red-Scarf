@@ -259,7 +259,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &2341127
 MonoBehaviour:
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &2341128
 SpriteRenderer:
@@ -2091,7 +2091,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &115639149
 MonoBehaviour:
@@ -2105,7 +2105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &115639150
 SpriteRenderer:
@@ -4725,7 +4725,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &280354433
 MonoBehaviour:
@@ -4739,7 +4739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &280354434
 SpriteRenderer:
@@ -5686,7 +5686,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &325737172
 MonoBehaviour:
@@ -5700,7 +5700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &325737173
 SpriteRenderer:
@@ -6587,7 +6587,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &367692399
 MonoBehaviour:
@@ -6601,7 +6601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &367692400
 SpriteRenderer:
@@ -6815,7 +6815,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &393230507
 MonoBehaviour:
@@ -6829,7 +6829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &393230508
 SpriteRenderer:
@@ -11096,7 +11096,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &754430991
 MonoBehaviour:
@@ -11110,7 +11110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &754430992
 SpriteRenderer:
@@ -12442,7 +12442,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &868813410
 MonoBehaviour:
@@ -12456,7 +12456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &868813411
 SpriteRenderer:
@@ -34854,6 +34854,159 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1087035676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087035677}
+  - component: {fileID: 1087035679}
+  - component: {fileID: 1087035678}
+  - component: {fileID: 1087035680}
+  m_Layer: 10
+  m_Name: AttackBonus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1087035677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087035676}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 43.94, y: 3.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1660175655}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087035678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087035676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8bcbddc770234a8e705c788674ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1501246432}
+        m_TargetAssemblyTypeName: PowerUpHandler, Assembly-CSharp
+        m_MethodName: IncreaseAttackBonus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1087035680}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  toggleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 0
+--- !u!212 &1087035679
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087035676}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1841830603
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -246037400019430952, guid: 41530a5a80d7f8a48892bcb0464babb0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.125, y: 0.6875}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!61 &1087035680
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087035676}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5, y: 3.3125}
+    newSize: {x: 1.125, y: 0.6875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &1091353409
 GameObject:
   m_ObjectHideFlags: 0
@@ -39451,7 +39604,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1411027415
 MonoBehaviour:
@@ -39465,7 +39618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1411027416
 SpriteRenderer:
@@ -40487,7 +40640,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1490610010
 MonoBehaviour:
@@ -40501,7 +40654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1490610011
 SpriteRenderer:
@@ -40726,15 +40879,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: maxRage
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: speedPerRage
-      value: 0.2
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: damagePerRage
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: rageLossCount
@@ -40750,7 +40903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727277757253, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: timeBeforeRageLoss
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: ground.m_Bits
@@ -40865,6 +41018,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8492771728123215178, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
   m_PrefabInstance: {fileID: 1501246421}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1501246432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8492771728123215172, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+  m_PrefabInstance: {fileID: 1501246421}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52923d3ec3497b54cafefe447fa0c70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1501556606
 GameObject:
   m_ObjectHideFlags: 0
@@ -41026,7 +41190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1523503273
 MonoBehaviour:
@@ -41040,7 +41204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1523503274
 SpriteRenderer:
@@ -41680,7 +41844,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1542731428
 MonoBehaviour:
@@ -41694,7 +41858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1542731429
 SpriteRenderer:
@@ -41859,7 +42023,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1553080216
 MonoBehaviour:
@@ -41873,7 +42037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1553080217
 SpriteRenderer:
@@ -43419,6 +43583,37 @@ Transform:
   - {fileID: 755491517}
   m_Father: {fileID: 364485783}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1660175654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660175655}
+  m_Layer: 0
+  m_Name: Pickups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1660175655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660175654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1087035677}
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687630765
 GameObject:
@@ -52712,7 +52907,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1893762136
 MonoBehaviour:
@@ -52726,7 +52921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1893762137
 SpriteRenderer:
@@ -94601,7 +94796,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1959487056
 MonoBehaviour:
@@ -94615,7 +94810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1959487057
 SpriteRenderer:
@@ -95053,7 +95248,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &1992973149
 MonoBehaviour:
@@ -95067,7 +95262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &1992973150
 SpriteRenderer:
@@ -95435,7 +95630,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &2032001112
 MonoBehaviour:
@@ -95449,7 +95644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &2032001113
 SpriteRenderer:
@@ -97209,7 +97404,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99}
+  m_Size: {x: 0.9, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &2101799909
 MonoBehaviour:
@@ -97223,7 +97418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6bf3cc1ca43014ca9fc7b7963aabe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 20
   animator: {fileID: 0}
 --- !u!212 &2101799910
 SpriteRenderer:
