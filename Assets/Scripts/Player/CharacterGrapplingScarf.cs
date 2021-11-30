@@ -142,7 +142,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 player.state = Player.State.Attacking;
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
 
-                redScarfPlayer.attackAreaMultiplier = 1.1f;
+                redScarfPlayer.attackAreaMultiplier = 1.25f;
 
                 animator.Play("DashAttack");
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
@@ -173,8 +173,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 LowerPlayerSpeed();
                 float theTimeToThrow = 0.85f;
-                if (animator.GetFloat("axisXSpeed") > 0)
-                    theTimeToThrow -= 0.05f;
+                theTimeToThrow -= 0.05f * Mathf.Clamp(animator.GetFloat("axisXSpeed"), 0.5f,2);
                 Invoke("ToggleIsSwinging", dashDuration * theTimeToThrow);
             }
             else
