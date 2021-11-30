@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: 20ea120e7e4cfb84db98c44c3476f0c7
+guid: 695da5b4c15845746837856a33233876
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1002053574441208205
-    second: bg-darkness1_0
+      213: -349192883606380561
+    second: bg-darkness1-newconnectorshit1_0
   - first:
-      213: 1864189299212685886
-    second: bg-darkness1_1
+      213: 3045671855405294356
+    second: bg-darkness1-newconnectorshit1_1
   - first:
-      213: 3289559274953528915
-    second: bg-darkness1_2
+      213: -2370311539485533449
+    second: bg-darkness1-newconnectorshit1_2
   - first:
-      213: 8614368988622696542
-    second: bg-darkness1_3
+      213: -6142388814058826762
+    second: bg-darkness1-newconnectorshit1_3
   - first:
-      213: -669950163222163177
-    second: bg-darkness1_4
+      213: -6974980502966512164
+    second: bg-darkness1-newconnectorshit1_4
   - first:
-      213: 3846587581039872740
-    second: bg-darkness1_5
+      213: 1984496081474320951
+    second: bg-darkness1-newconnectorshit1_5
   - first:
-      213: 3745601812594845845
-    second: bg-darkness1_6
+      213: 1302107604735799434
+    second: bg-darkness1-newconnectorshit1_6
   - first:
-      213: 6697550136444123953
-    second: bg-darkness1_7
-  - first:
-      213: 3005488273794151262
-    second: bg-darkness1_8
+      213: -995542238091777749
+    second: bg-darkness1-newconnectorshit1_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -95,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,7 +104,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,7 +116,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg-darkness1_0
+      name: bg-darkness1-newconnectorshit1_0
       rect:
         serializedVersion: 2
         x: 1
@@ -138,20 +135,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d898a76ba6208ed00800000000000000
-      internalID: 1002053574441208205
+      spriteID: fef1c862cea672bf0800000000000000
+      internalID: -349192883606380561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_1
+      name: bg-darkness1-newconnectorshit1_1
       rect:
         serializedVersion: 2
         x: 19
@@ -159,20 +156,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3218ad6a4eeed910800000000000000
-      internalID: 1864189299212685886
+      spriteID: 41366d37a66644a20800000000000000
+      internalID: 3045671855405294356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_2
+      name: bg-darkness1-newconnectorshit1_2
       rect:
         serializedVersion: 2
         x: 37
@@ -180,20 +177,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35652335bbcd6ad20800000000000000
-      internalID: 3289559274953528915
+      spriteID: 7fa94f99636fa1fd0800000000000000
+      internalID: -2370311539485533449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_3
+      name: bg-darkness1-newconnectorshit1_3
       rect:
         serializedVersion: 2
         x: 55
@@ -201,20 +198,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e503ffa44f26c8770800000000000000
-      internalID: 8614368988622696542
+      spriteID: 6f3d0b9dae9d1caa0800000000000000
+      internalID: -6142388814058826762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_4
+      name: bg-darkness1-newconnectorshit1_4
       rect:
         serializedVersion: 2
         x: 73
@@ -222,20 +219,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7119de740ebd3b6f0800000000000000
-      internalID: -669950163222163177
+      spriteID: cd5d7650034e33f90800000000000000
+      internalID: -6974980502966512164
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_5
+      name: bg-darkness1-newconnectorshit1_5
       rect:
         serializedVersion: 2
         x: 91
@@ -243,20 +240,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ea8f4d5603d16530800000000000000
-      internalID: 3846587581039872740
+      spriteID: 73a7e6afba85a8b10800000000000000
+      internalID: 1984496081474320951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_6
+      name: bg-darkness1-newconnectorshit1_6
       rect:
         serializedVersion: 2
         x: 109
@@ -264,20 +261,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59866c5e00d0bf330800000000000000
-      internalID: 3745601812594845845
+      spriteID: a80bc97b7f3021210800000000000000
+      internalID: 1302107604735799434
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-darkness1_7
+      name: bg-darkness1-newconnectorshit1_7
       rect:
         serializedVersion: 2
         x: 127
@@ -285,35 +282,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13bfe1c2d5a72fc50800000000000000
-      internalID: 6697550136444123953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bg-darkness1_8
-      rect:
-        serializedVersion: 2
-        x: 145
-        y: 1
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e533a1849a3a5b920800000000000000
-      internalID: 3005488273794151262
+      spriteID: b2964abeb9f1f22f0800000000000000
+      internalID: -995542238091777749
       vertices: []
       indices: 
       edges: []
