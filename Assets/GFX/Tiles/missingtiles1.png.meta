@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 5fe8ee1c2319835458e649313630cab5
+guid: 44767c11643fbb941b67427a89c56084
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6565620905223772122
-    second: basement-tiles2_0
+      213: 1374508971036494602
+    second: missingtiles1_0
   - first:
-      213: 2745459762573097893
-    second: basement-tiles2_1
+      213: -4888749378610291935
+    second: missingtiles1_1
   - first:
-      213: 7856878031814121932
-    second: basement-tiles2_2
-  - first:
-      213: -2590883371114992421
-    second: basement-tiles2_3
-  - first:
-      213: -5896640825387889387
-    second: basement-tiles2_4
+      213: 5772822330861524650
+    second: missingtiles1_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -83,7 +77,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +89,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: basement-tiles2_0
+      name: missingtiles1_0
       rect:
         serializedVersion: 2
         x: 1
@@ -132,14 +126,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad7ddb95d65cd1b50800000000000000
-      internalID: 6565620905223772122
+      spriteID: a0bc73f60ac331310800000000000000
+      internalID: 1374508971036494602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basement-tiles2_1
+      name: missingtiles1_1
       rect:
         serializedVersion: 2
         x: 19
@@ -153,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ab3c45ab15d91620800000000000000
-      internalID: 2745459762573097893
+      spriteID: 12b9504875ca72cb0800000000000000
+      internalID: -4888749378610291935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basement-tiles2_2
+      name: missingtiles1_2
       rect:
         serializedVersion: 2
         x: 37
@@ -174,50 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc9d9d141fc390d60800000000000000
-      internalID: 7856878031814121932
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basement-tiles2_3
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 1
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bdc69321d455b0cd0800000000000000
-      internalID: -2590883371114992421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basement-tiles2_4
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 1
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51d40ba396cea2ea0800000000000000
-      internalID: -5896640825387889387
+      spriteID: aa6917ef25f2d1050800000000000000
+      internalID: 5772822330861524650
       vertices: []
       indices: 
       edges: []
