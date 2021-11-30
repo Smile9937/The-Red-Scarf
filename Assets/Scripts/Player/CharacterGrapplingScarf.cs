@@ -30,7 +30,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     Player player;
     RedScarfPlayer redScarfPlayer;
-    Animator animator;
+    [SerializeField] Animator animator;
     IGrabbable theGrabbable = null;
 
 
@@ -136,8 +136,9 @@ public class CharacterGrapplingScarf : MonoBehaviour
             {
                 isDashing = false;
                 player.attackBonus += dashAttackBonus;
-                player.isInvincible = true;
-
+                
+                player.gameObject.layer = LayerMask.NameToLayer("Player");
+                
                 player.state = Player.State.Attacking;
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
 
@@ -171,7 +172,10 @@ public class CharacterGrapplingScarf : MonoBehaviour
             if (grounded)
             {
                 LowerPlayerSpeed();
-                Invoke("ToggleIsSwinging", dashDuration * 0.9f);
+                float theTimeToThrow = 0.85f;
+                if (animator.GetFloat("axisXSpeed") > 0)
+                    theTimeToThrow -= 0.05f;
+                Invoke("ToggleIsSwinging", dashDuration * theTimeToThrow);
             }
             else
             {
@@ -374,7 +378,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         animator.SetBool("stopScarfThrow", true);
 
         if (!IsInvoking("ReturnPlayerStateStatus"))
-            Invoke("ReturnPlayerStateStatus", 0.25f);
+            Invoke("ReturnPlayerStateStatus", 0.2f);
     }
 
     private void DelayBeforeSwingStart()
@@ -393,7 +397,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     }
     private void ReturnAttackBonus()
     {
-        player.isInvincible = false;
+        player.gameObject.layer = LayerMask.NameToLayer("Player");
         player.attackBonus -= dashAttackBonus;
 
         redScarfPlayer.attackAreaMultiplier = 1;
