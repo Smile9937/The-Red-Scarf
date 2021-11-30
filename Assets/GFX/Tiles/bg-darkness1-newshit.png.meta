@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 209f7ce5c8670da4b8dc7ff71a0fdeba
+guid: 13ce2f7c2269af744a4883998f454d03
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7365232212257072054
-    second: Sprite-TilesFix1_0
+      213: -3696248568086124875
+    second: bg-darkness1-newshit_0
   - first:
-      213: 773724167923521807
-    second: Sprite-TilesFix1_1
+      213: 4875852362076925826
+    second: bg-darkness1-newshit_1
   - first:
-      213: -1905017227030424370
-    second: Sprite-TilesFix1_2
+      213: 761960105030476626
+    second: bg-darkness1-newshit_2
   - first:
-      213: -222851517536608669
-    second: Sprite-TilesFix1_3
+      213: 2324550231994208975
+    second: bg-darkness1-newshit_3
+  - first:
+      213: -8108415230373742232
+    second: bg-darkness1-newshit_4
+  - first:
+      213: 4282788661428836921
+    second: bg-darkness1-newshit_5
+  - first:
+      213: -8799277465900846473
+    second: bg-darkness1-newshit_6
+  - first:
+      213: -2419260232811291535
+    second: bg-darkness1-newshit_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +91,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -91,7 +103,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,7 +115,7 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -115,85 +127,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-TilesFix1_0
+      name: bg-darkness1-newshit_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 5
+        x: 1
+        y: 1
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b3e8d3acaf863660800000000000000
-      internalID: 7365232212257072054
+      spriteID: 5b62ea9c28944bcc0800000000000000
+      internalID: -3696248568086124875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-TilesFix1_1
+      name: bg-darkness1-newshit_1
       rect:
         serializedVersion: 2
-        x: 31
-        y: 5
+        x: 19
+        y: 1
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0957370802dcba00800000000000000
-      internalID: 773724167923521807
+      spriteID: 28f28d2d3e18aa340800000000000000
+      internalID: 4875852362076925826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-TilesFix1_2
+      name: bg-darkness1-newshit_2
       rect:
         serializedVersion: 2
-        x: 57
-        y: 5
+        x: 37
+        y: 1
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec41adbdce40095e0800000000000000
-      internalID: -1905017227030424370
+      spriteID: 2536c51bda6039a00800000000000000
+      internalID: 761960105030476626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-TilesFix1_3
+      name: bg-darkness1-newshit_3
       rect:
         serializedVersion: 2
-        x: 83
-        y: 5
+        x: 55
+        y: 1
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36ed29bb9b548ecf0800000000000000
-      internalID: -222851517536608669
+      spriteID: fc21198be16724020800000000000000
+      internalID: 2324550231994208975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg-darkness1-newshit_4
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 869b436ee4f197f80800000000000000
+      internalID: -8108415230373742232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg-darkness1-newshit_5
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93a598ca8958f6b30800000000000000
+      internalID: 4282788661428836921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg-darkness1-newshit_6
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77271ece3cfa2e580800000000000000
+      internalID: -8799277465900846473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg-darkness1-newshit_7
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17cdd04d2af0d6ed0800000000000000
+      internalID: -2419260232811291535
       vertices: []
       indices: 
       edges: []
