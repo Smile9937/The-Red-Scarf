@@ -49,6 +49,9 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 1374508971036494602, guid: 44767c11643fbb941b67427a89c56084, type: 3}
+  - {fileID: -4888749378610291935, guid: 44767c11643fbb941b67427a89c56084, type: 3}
+  - {fileID: 5772822330861524650, guid: 44767c11643fbb941b67427a89c56084, type: 3}
   - {fileID: -1974288671869155238, guid: 8b84e871c6ca40942b95a645dfad1c9d, type: 3}
   - {fileID: 3582509673118370864, guid: 8b84e871c6ca40942b95a645dfad1c9d, type: 3}
   - {fileID: -2726457955138782080, guid: 8b84e871c6ca40942b95a645dfad1c9d, type: 3}
@@ -219,6 +222,9 @@ SpriteAtlas:
   - {fileID: 1864189299212685886, guid: 20ea120e7e4cfb84db98c44c3476f0c7, type: 3}
   - {fileID: 3005488273794151262, guid: 20ea120e7e4cfb84db98c44c3476f0c7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - missingtiles1_0
+  - missingtiles1_1
+  - missingtiles1_2
   - OussideTile1_32
   - OussideTile1_33
   - OussideTile1_30
