@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 4096
+      m_MaxTextureSize: 8192
       m_ResizeAlgorithm: 0
       m_TextureFormat: 4
       m_TextureCompression: 0
@@ -171,6 +171,45 @@ SpriteAtlas:
   - {fileID: -2370311539485533449, guid: 695da5b4c15845746837856a33233876, type: 3}
   - {fileID: 3045671855405294356, guid: 695da5b4c15845746837856a33233876, type: 3}
   - {fileID: -349192883606380561, guid: 695da5b4c15845746837856a33233876, type: 3}
+  - {fileID: 1205308365997945218, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 601054339811108396, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 5415005785538475111, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -8478825513338120520, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -4646338825039941148, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -6866951668804543099, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -3845992258081602514, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 4086248241158389254, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -5168327685299793523, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -6542183378095368768, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 5476489465262381255, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 8603310864977328633, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -1135373273445521978, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 6537154275957439276, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -7996037705516578524, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -4372038516696106221, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 4937323144239611768, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -2903845359535764474, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 8303696270178236231, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 4531870243865093711, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 5613347289601898803, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -4871271387998665402, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 4457253123093350901, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 8676980203553434731, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 2910144791629358048, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 2934243577485704942, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 5767450235881061181, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -5712351044305738804, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -2843436886283804257, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 3248912825003363768, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 436615184028413141, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -5748655241195352374, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -8091722479556057670, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 6763744704084346517, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 7974132641964033590, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 5211416924286606504, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: 7927819666628946130, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -7915010283129857322, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
+  - {fileID: -5399847265798249841, guid: a4dce1391e90399498158b047eaf2dab, type: 3}
   - {fileID: -3832407208613482763, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
   - {fileID: 6849352899030720877, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
   - {fileID: 646993820115104869, guid: 50e0d01c009585742832b1bf5aeb2c40, type: 3}
@@ -344,6 +383,45 @@ SpriteAtlas:
   - bg-darkness1-newconnectorshit1_2
   - bg-darkness1-newconnectorshit1_1
   - bg-darkness1-newconnectorshit1_0
+  - transitiontiles1_18
+  - transitiontiles1_19
+  - transitiontiles1_12
+  - transitiontiles1_13
+  - transitiontiles1_10
+  - transitiontiles1_11
+  - transitiontiles1_16
+  - transitiontiles1_17
+  - transitiontiles1_14
+  - transitiontiles1_15
+  - transitiontiles1_34
+  - transitiontiles1_35
+  - transitiontiles1_36
+  - transitiontiles1_37
+  - transitiontiles1_27
+  - transitiontiles1_30
+  - transitiontiles1_26
+  - transitiontiles1_31
+  - transitiontiles1_25
+  - transitiontiles1_32
+  - transitiontiles1_24
+  - transitiontiles1_33
+  - transitiontiles1_23
+  - transitiontiles1_22
+  - transitiontiles1_21
+  - transitiontiles1_20
+  - transitiontiles1_38
+  - transitiontiles1_29
+  - transitiontiles1_28
+  - transitiontiles1_9
+  - transitiontiles1_8
+  - transitiontiles1_7
+  - transitiontiles1_6
+  - transitiontiles1_5
+  - transitiontiles1_4
+  - transitiontiles1_3
+  - transitiontiles1_2
+  - transitiontiles1_1
+  - transitiontiles1_0
   - newtileshit1_9
   - newtileshit1_8
   - newtileshit1_16

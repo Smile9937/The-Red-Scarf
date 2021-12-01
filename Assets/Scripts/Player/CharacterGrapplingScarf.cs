@@ -132,7 +132,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         if (isDashing)
         {
-            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && player.hasBaseballBat)
             {
                 isDashing = false;
                 player.attackBonus += dashAttackBonus;
