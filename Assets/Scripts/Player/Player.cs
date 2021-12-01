@@ -43,6 +43,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     public float meleeAttackRate;
     public bool hasBaseballBat;
+    private float oldPos;
 
     public State state;
     public enum State
@@ -113,7 +114,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
         GameEvents.Instance.onSaveGame += Save;
         GameEvents.Instance.onLoadGame += Load;
-        GameManager.Instance.player = this;
     }
     private void Start()
     {
@@ -461,6 +461,14 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     private void ReturnFromStaggering()
     {
         state = State.Neutral;
+    }
+
+    private void PlayFootstepSound()
+    {
+        if (oldPos == transform.position.x)
+            return;
+        AudioLibrary.Instance.PlaySound("event:/SFX/Footsteps");
+        oldPos = transform.position.x;
     }
 
     private void OnDrawGizmosSelected()

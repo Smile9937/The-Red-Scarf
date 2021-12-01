@@ -12,10 +12,12 @@ public class LaserBoss : TripleBoss
     [SerializeField] private Transform bottomLeftLaserPosition;
 
     [Header("Laser Variables")]
-    [SerializeField] private LineRenderer laser;
+    [SerializeField] private AnimationCurve moveWithLaserCurve;
+    [SerializeField] private float moveWithLaserSpeed;
+    [SerializeField] private LineRenderer laserPrefab;
+    [SerializeField] private LineRenderer laserOutlinePrefab;
     [SerializeField] private Transform firePointDown;
     [SerializeField] private Transform firePointRight;
-    [SerializeField] private Transform firePointLeft;
     [SerializeField] private LayerMask laserHitLayers;
     [SerializeField] private int laserDamage;
     [SerializeField] private Vector2 laserKnockback;
@@ -26,7 +28,6 @@ public class LaserBoss : TripleBoss
     [SerializeField] private float timeBeforeLaser;
     [SerializeField] private float timeBeforeEndTopLaser;
     [SerializeField] private float timeBeforeEndBottomLaser;
-    [SerializeField] private float timeBeforeMoveWithLaser;
 
     [Header("Charge Attack Variables")]
     [SerializeField] private float rotateSpeed;
@@ -39,30 +40,75 @@ public class LaserBoss : TripleBoss
     [SerializeField] private float chargeTimer;
     [SerializeField] private float stuckInGroundTimer;
 
+    [Header("Final Attack Variables")]
+    [SerializeField] private LineRenderer bouncingLaserPrefab;
+    [SerializeField] private int numberOfLasersForFinalAttack;
+    [SerializeField] private float timeUntilSummonLaser;
+    [SerializeField] private float timeUntilFinalPatternEnd;
+
+    [Header("Center of Room")]
+    [SerializeField] private Vector2 centerOffset;
+
+    private Vector3 centerPosition;
 
     private int numberOfCharges = 0;
 
-    Vector3 startLocalScale;
+    private bool laserActive;
 
-    bool laserActive;
+    private bool canDamage = true;
 
-    bool canDamage = true;
+    private bool move;
+    private Transform currentFirePoint;
 
-    bool move;
-    Transform currentFirePoint;
+    private LaserAnimator laserAnimator;
 
-    Vector2 target;
+    private Vector2 target;
 
-    Vector3 movePosition;
-    Vector3 laserTarget;
-    Player player;
+    private List<LineRenderer> bouncingLasers = new List<LineRenderer>();
+
+    private Vector3 movePosition;
+    private Vector3 laserTarget;
+    private Player player;
+    private float laserTime;
 
     private void Start()
     {
-        startLocalScale = transform.localScale;
-        player = GameManager.Instance.player;
-        laser = Instantiate(laser, Vector3.zero, Quaternion.identity);
+        player = FindObjectOfType<Player>();
+        laserPrefab = Instantiate(laserPrefab, Vector3.zero, Quaternion.identity);
+        laserOutlinePrefab = Instantiate(laserOutlinePrefab, Vector3.zero, Quaternion.identity);
+        laserAnimator = laserPrefab.GetComponent<LaserAnimator>();
+        laserOutlinePrefab.enabled = false;
+        for(int i = 0; i < numberOfLasersForFinalAttack; i++)
+        {
+            LineRenderer bouncingLaser = Instantiate(bouncingLaserPrefab, Vector3.zero, Quaternion.identity);
+            bouncingLasers.Add(bouncingLaser);
+            bouncingLaser.gameObject.SetActive(false);
+        }
         DisableLaser();
+        List<Vector3> cornerPositions = new List<Vector3>();
+
+        cornerPositions.Add(topRightLaserPosition.transform.position);
+        cornerPositions.Add(topLeftLaserPosition.transform.position);
+        cornerPositions.Add(bottomRightLaserPosition.transform.position);
+        cornerPositions.Add(bottomLeftLaserPosition.transform.position);
+
+        Vector3 movePosition = CenterOfVectors(cornerPositions);
+        centerPosition = new Vector3(movePosition.x + centerOffset.x, movePosition.y + centerOffset.y, movePosition.z);
+
+    }
+    private Vector3 CenterOfVectors(List<Vector3> vectors)
+    {
+        Vector3 sum = Vector3.zero;
+        if (vectors == null || vectors.Count == 0)
+        {
+            return sum;
+        }
+
+        foreach (Vector3 vec in vectors)
+        {
+            sum += vec;
+        }
+        return sum / vectors.Count;
     }
     protected override void Update()
     {
@@ -74,23 +120,17 @@ public class LaserBoss : TripleBoss
                 {
                     case Pattern.PatternOne:
                     case Pattern.PatternOneMirror:
-                        laserTarget = new Vector3(currentFirePoint.position.x, bottomLeftLaserPosition.position.y);
-                        SetLaserPosition(currentFirePoint, laserTarget);
                         CheckIfHit();
                         Move();
                         break;
                     case Pattern.PatternTwo:
-                        laserTarget = new Vector3(bottomRightLaserPosition.position.x, currentFirePoint.position.y);
-                        SetLaserPosition(currentFirePoint, laserTarget);
                         CheckIfHit();
                         break;
                     case Pattern.PatternTwoMirror:
-                        laserTarget = new Vector3(bottomLeftLaserPosition.position.x, currentFirePoint.position.y);
-                        SetLaserPosition(currentFirePoint, laserTarget);
                         CheckIfHit();
                         break;
                     case Pattern.PatternThree:
-                        transform.Translate(Vector3.left * chargeSpeed * Time.deltaTime);
+                        //transform.Translate(Vector3.left * chargeSpeed * Time.deltaTime);
                         //Vector2.MoveTowards(transform.position, target, chargeSpeed * Time.deltaTime);
                         break;
                 }
@@ -109,16 +149,34 @@ public class LaserBoss : TripleBoss
                 }
                 break;
             case State.PreparingToAttack:
-                RotateToPlayer(180);
+                //RotateToPlayer(180);
                 break;
         }
     }
 
+    //Called In Animator
+    private void MoveLaser()
+    {
+        switch(pattern)
+        {
+            case Pattern.PatternOne:
+                movePosition = new Vector2(Mathf.Lerp(bottomRightLaserPosition.position.x, bottomLeftLaserPosition.position.x, 0.5f), transform.position.y);
+                break;
+            case Pattern.PatternOneMirror:
+                movePosition = new Vector2(Mathf.Lerp(bottomRightLaserPosition.position.x, bottomLeftLaserPosition.position.x, 0.5f), transform.position.y);
+                break;
+        }
+        laserTime = 0;
+        move = true;
+    }
     private void Move()
     {
         if (!move)
             return;
-        transform.position = Vector2.MoveTowards(transform.position, movePosition, moveSpeed * Time.deltaTime);
+
+        transform.position = Vector2.Lerp(transform.position, movePosition, moveWithLaserCurve.Evaluate(laserTime));
+        laserTime += moveWithLaserSpeed * Time.deltaTime;
+        laserPrefab.SetPositions(new Vector3[] { new Vector3(transform.position.x, laserPrefab.GetPosition(0).y), new Vector3(transform.position.x, laserPrefab.GetPosition(1).y) });
         if (transform.position == movePosition)
         {
             move = false;
@@ -138,14 +196,15 @@ public class LaserBoss : TripleBoss
                 MoveToAttackPosition(topRightLaserPosition.position);
                 break;
             case Pattern.PatternTwo:
-                MoveToAttackPosition(bottomLeftLaserPosition.position);
+                MoveToAttackPosition(bottomRightLaserPosition.position);
                 break;
             case Pattern.PatternTwoMirror:
-                MoveToAttackPosition(bottomRightLaserPosition.position);
+                MoveToAttackPosition(bottomLeftLaserPosition.position);
                 break;
             case Pattern.PatternThree:
 
-                bool mirror = UnityEngine.Random.Range(0, 2) == 0;
+                MoveToAttackPosition(centerPosition);
+                /*bool mirror = UnityEngine.Random.Range(0, 2) == 0;
 
                 if(!mirror)
                 {
@@ -154,7 +213,7 @@ public class LaserBoss : TripleBoss
                 else
                 {
                     MoveToAttackPosition(topLeftCorner.position);
-                }
+                }*/
                 break;
         }
     }
@@ -169,13 +228,20 @@ public class LaserBoss : TripleBoss
     private void SetLaserPosition(Transform firePoint, Vector3 target)
     {
         Vector3[] positions = new Vector3[] { firePoint.position, target };
-        laser.SetPositions(positions);
+        laserPrefab.SetPositions(positions);
+    }
+    private void SetLaserOutlinePosition(Transform firePoint, Vector3 target)
+    {
+        Vector3[] positions = new Vector3[] { firePoint.position, target };
+        laserOutlinePrefab.SetPositions(positions);
     }
 
     private void EnableLaser()
     {
+        laserOutlinePrefab.enabled = false;
         laserActive = true;
-        laser.enabled = true;
+        laserPrefab.enabled = true;
+        laserAnimator.AnimateLine(currentFirePoint.position, laserTarget, 0.3f);
         if(pattern == Pattern.PatternTwo || pattern == Pattern.PatternTwoMirror)
         {
             StartCoroutine(EndLaser(timeBeforeEndBottomLaser));
@@ -183,8 +249,9 @@ public class LaserBoss : TripleBoss
     }
     private void DisableLaser()
     {
+        laserOutlinePrefab.enabled = false;
         laserActive = false;
-        laser.enabled = false;
+        laserPrefab.enabled = false;
     }
 
     protected override void AttackPositionReached()
@@ -197,38 +264,89 @@ public class LaserBoss : TripleBoss
         {
             case Pattern.PatternOne:
             case Pattern.PatternOneMirror:
+                laserOutlinePrefab.enabled = true;
                 currentFirePoint = firePointDown;
+                laserTarget = new Vector3(currentFirePoint.position.x, bottomLeftLaserPosition.position.y);
+                SetLaserOutlinePosition(currentFirePoint, laserTarget);
                 break;
             case Pattern.PatternTwo:
+                laserOutlinePrefab.enabled = true;
                 currentFirePoint = firePointRight;
+                laserTarget = new Vector3(bottomLeftLaserPosition.position.x, currentFirePoint.position.y);
+                SetLaserOutlinePosition(currentFirePoint, laserTarget);
                 break;
             case Pattern.PatternTwoMirror:
-                currentFirePoint = firePointLeft;
+                laserOutlinePrefab.enabled = true;
+                currentFirePoint = firePointRight;
+                laserTarget = new Vector3(bottomRightLaserPosition.position.x, currentFirePoint.position.y);
+                SetLaserOutlinePosition(currentFirePoint, laserTarget);
                 break;
             case Pattern.PatternThree:
-                PrepareToCharge();
+                PrepareFinalPattern();
                 break;
         }
 
         StartCoroutine(WaitToFireLaser());
     }
 
-    private void PrepareToCharge()
+    private void PrepareFinalPattern()
     {
-        PlayAnimation("isDive");
-        state = State.PreparingToAttack;
-        StartCoroutine(TimeUntilCharge());
-    }
-    private IEnumerator TimeUntilCharge()
-    {
-        yield return new WaitForSeconds(timeBeforeCharge);
-        target = player.transform.position;
-        state = State.Attacking;
         //PlayAnimation("isDive");
-        numberOfCharges++;
-        yield return new WaitForSeconds(chargeTimer);
-        PrepareToCharge();
+        state = State.PreparingToAttack;
+        StartCoroutine(FinalPattern());
     }
+    private IEnumerator FinalPattern()
+    {
+        //yield return new WaitForSeconds(timeBeforeCharge);
+        //target = player.transform.position;
+        state = State.Attacking;
+        //numberOfCharges++;
+        //yield return new WaitForSeconds(chargeTimer);
+        //PrepareToCharge();
+
+        for(int i = 0; i < bouncingLasers.Count; i++)
+        {
+            yield return new WaitForSeconds(timeUntilSummonLaser);
+            bouncingLasers[i].transform.position = Vector3.zero;
+            bouncingLasers[i].gameObject.SetActive(true);
+            bouncingLasers[i].transform.position = transform.position;
+        }
+
+        yield return new WaitForSeconds(timeUntilFinalPatternEnd);
+
+        bool mirror = UnityEngine.Random.Range(0, 2) == 0;
+
+        if(mirror)
+        {
+            pattern = Pattern.PatternTwoMirror;
+        }
+        else
+        {
+            pattern = Pattern.PatternTwo;
+        }
+        StartCurrentPattern();
+        //MoveToAttackPosition();
+    }
+    /*private LineRenderer BouncingLaser()
+    {
+        if(bouncingLasers.Count > 0)
+        {
+            for (int i = 0; i < bouncingLasers.Count; i++)
+            {
+                if (!bouncingLasers[i].gameObject.activeInHierarchy)
+                {
+                    return bouncingLasers[i];
+                }
+            }
+        }
+
+
+        LineRenderer currentLaser = Instantiate(bouncingLaserPrefab);
+        currentLaser.gameObject.SetActive(false);
+        bouncingLasers.Add(currentLaser);
+        return currentLaser;
+
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -292,6 +410,8 @@ public class LaserBoss : TripleBoss
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotateSpeed);
 
+        //transform.localScale = new Vector3(0, 0, transform.localScale.z);
+
         if(startLocalScale.x * Mathf.Sign(vectorToTarget.x) == 1)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
@@ -303,8 +423,8 @@ public class LaserBoss : TripleBoss
         if (!laserActive)
             return;
 
-        Vector2 direction = laserTarget - currentFirePoint.position;
-        RaycastHit2D hit = Physics2D.Raycast(currentFirePoint.position, direction.normalized, direction.magnitude, laserHitLayers);
+        Vector2 direction = laserPrefab.GetPosition(1) - laserPrefab.GetPosition(0);
+        RaycastHit2D hit = Physics2D.Raycast(laserPrefab.GetPosition(0), direction.normalized, direction.magnitude, laserHitLayers);
 
         if (hit.collider == null)
             return;
@@ -312,7 +432,7 @@ public class LaserBoss : TripleBoss
         if(hit.collider.CompareTag("Ground"))
         {
             Debug.Log(hit.collider.name);
-            laser.SetPosition(1, hit.point);
+            laserPrefab.SetPosition(1, hit.point);
         }
 
         if (!canDamage)
@@ -324,7 +444,7 @@ public class LaserBoss : TripleBoss
             canDamage = false;
             StartCoroutine(LaserHitCooldown());
             player.Damage(laserDamage, false);
-            player.KnockBack(laser.gameObject, laserKnockback, laserKnockBackLength);
+            player.KnockBack(laserPrefab.gameObject, laserKnockback, laserKnockBackLength);
         }
     }
     private IEnumerator LaserHitCooldown()
@@ -343,30 +463,16 @@ public class LaserBoss : TripleBoss
                 PlayAnimation("isShootDown");
                 break;
             case Pattern.PatternTwo:
-                PlayAnimation("isShootLeft");
+                PlayAnimation("isShootRight");
                 break;
             case Pattern.PatternTwoMirror:
-                PlayAnimation("isShootRight");
+                PlayAnimation("isShootLeft");
                 break;
             case Pattern.PatternThree:
                 break;
         }
     }
 
-    private void MoveLaser()
-    {
-        //yield return new WaitForSeconds(timeBeforeMoveWithLaser);
-        switch(pattern)
-        {
-            case Pattern.PatternOne:
-                movePosition = new Vector2(Mathf.Lerp(bottomRightLaserPosition.position.x, bottomLeftLaserPosition.position.x, 0.5f), transform.position.y);
-                break;
-            case Pattern.PatternOneMirror:
-                movePosition = new Vector2(Mathf.Lerp(bottomRightLaserPosition.position.x, bottomLeftLaserPosition.position.x, 0.5f), transform.position.y);
-                break;
-        }
-        move = true;
-    }
 
     private IEnumerator EndLaser(float timer)
     {

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] bool isSingleUse;
-    bool hasBeenActivated;
+    [SerializeField] private bool isSingleUse;
+    private bool hasBeenActivated;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

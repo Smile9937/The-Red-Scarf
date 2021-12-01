@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AcidSpot : MonoBehaviour
 {
+    [SerializeField] private float timeUntilAcidActivation = 0.2f;
     [SerializeField] private float timeUntilAcidDeactivation = 2f;
     private Hazard acid;
     private void Start()
@@ -14,13 +15,15 @@ public class AcidSpot : MonoBehaviour
 
     public void ActivateAcid()
     {
-        acid.gameObject.SetActive(true);
-        StartCoroutine(DeactivateAcid());
+        StartCoroutine(Activate());
     }
 
-    private IEnumerator DeactivateAcid()
+    private IEnumerator Activate()
     {
+        yield return new WaitForSeconds(timeUntilAcidActivation);
+        acid.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeUntilAcidDeactivation);
         acid.gameObject.SetActive(false);
     }
+
 }

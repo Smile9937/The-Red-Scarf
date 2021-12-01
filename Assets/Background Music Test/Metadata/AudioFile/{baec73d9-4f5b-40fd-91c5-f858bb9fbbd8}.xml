@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{baec73d9-4f5b-40fd-91c5-f858bb9fbbd8}">
+		<property name="assetPath">
+			<value>24152-Boot-light-run.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>21.780317460317459</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2c247c0f-8f29-4f5a-93a2-80f1d508e164}</destination>
+		</relationship>
+	</object>
+</objects>

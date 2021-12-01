@@ -54,6 +54,9 @@ TagManager:
   - name: Acid
     uniqueID: 4108652957
     locked: 0
+  - name: ShockWave
+    uniqueID: 3802479887
+    locked: 0
   - name: Foreground
     uniqueID: 159784049
     locked: 0

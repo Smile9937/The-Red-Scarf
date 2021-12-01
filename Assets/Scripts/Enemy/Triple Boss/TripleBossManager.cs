@@ -7,6 +7,8 @@ public class TripleBossManager : MonoBehaviour
 {
     [SerializeField] private float timeUntilPatternStart = 5f;
 
+    [SerializeField] private Transform[] startPositions;
+
     [Serializable]
     public class BossPairings
     {
@@ -19,6 +21,8 @@ public class TripleBossManager : MonoBehaviour
 
     [Header("")]
     [Header("Debug Variables")]
+
+    [SerializeField] private List<Transform> availablePositions = new List<Transform>();
 
     public List<int> bossPatternIndexes = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
     private int currentBossPatternIndex = -1;
@@ -50,7 +54,27 @@ public class TripleBossManager : MonoBehaviour
         bosses[0].boss = GetComponentInChildren<MeleeBoss>();
         bosses[1].boss = GetComponentInChildren<GrenadeBoss>();
         bosses[2].boss = GetComponentInChildren<LaserBoss>();
+        for(int i = 0; i < startPositions.Length; i++)
+        {
+            availablePositions.Add(startPositions[i]);
+        } 
         SetPatternIndexes();
+    }
+
+    public Transform GetStartPosition(TripleBoss boss)
+    {
+        int randomNum = UnityEngine.Random.Range(0, availablePositions.Count);
+        Transform position = availablePositions[randomNum];
+        availablePositions.RemoveAt(randomNum);
+        return position;
+    }
+
+    public void SetPositionAvailable(Transform position)
+    {
+        if (availablePositions.Contains(position))
+            return;
+
+        availablePositions.Add(position);
     }
 
     private void SetPatternIndexes()
@@ -98,8 +122,7 @@ public class TripleBossManager : MonoBehaviour
 
     public void ReadyToStartBattle(TripleBoss boss)
     {
-        bool readyToStart = true;
-
+        int readyCount = 0;
         for (int i = 0; i < bosses.Count; i++)
         {
             bosses[i].turnToAttack = false;
@@ -109,14 +132,15 @@ public class TripleBossManager : MonoBehaviour
                 bosses[i].readyToStartBattle = true;
             }
 
-            if(bosses[i].readyToStartBattle == false)
+            if(bosses[i].readyToStartBattle)
             {
-                readyToStart = false;
+                readyCount++;
+                if(readyCount == bosses.Count)
+                {
+                    StartCoroutine(StartPattern());
+
+                }
             }
-        }
-        if(readyToStart)
-        {
-            StartCoroutine(StartPattern());
         }
     }
 
@@ -192,6 +216,8 @@ public class TripleBossManager : MonoBehaviour
             if (bosses[i].boss == boss)
             {
                 bosses[i].alive = false;
+
+                SetPositionAvailable(bosses[i].boss.startPosition);
 
                 switch(phase)
                 {

@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 20f;
     [SerializeField] private int damage = 50;
     [SerializeField] private int destroyTimer = 10;
-    Rigidbody2D myRigidbody;
 
     [SerializeField] private bool bypassInvincibility;
 
@@ -21,9 +20,12 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        myRigidbody.velocity = transform.right * speed;
         StartCoroutine(Destroy());
+    }
+
+    private void Update()
+    {
+        transform.Translate(Vector3.right * speed * Time.deltaTime); 
     }
 
     private void OnTriggerEnter2D(Collider2D other)

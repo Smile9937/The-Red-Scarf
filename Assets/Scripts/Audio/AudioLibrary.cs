@@ -5,9 +5,9 @@ using FMODUnity;
 
 public class AudioLibrary : MonoBehaviour
 {
-    FMOD.Studio.EventInstance playMusic;
+    private FMOD.Studio.EventInstance playMusic;
 
-    List<FMOD.Studio.EventInstance> sounds = new List<FMOD.Studio.EventInstance>();
+    private List<FMOD.Studio.EventInstance> sounds = new List<FMOD.Studio.EventInstance>();
 
     public SongEnum songEnum;
     public enum SongEnum
@@ -87,7 +87,6 @@ public class AudioLibrary : MonoBehaviour
         FMOD.Studio.EventInstance currentSound = RuntimeManager.CreateInstance(Event);
         sounds.Add(currentSound);
         currentSound.start();
-        Debug.Log(GetInstantiatedEventName(currentSound));
     }
 
     public void ChangeClipVolume(string Event, float volume) {

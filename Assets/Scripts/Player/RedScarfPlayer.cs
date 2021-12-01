@@ -118,6 +118,7 @@ public class RedScarfPlayer : MonoBehaviour
     }
     public void MeleeAttack()
     {
+        AudioLibrary.Instance.PlaySound("event:/SFX/BaseballBat");
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)

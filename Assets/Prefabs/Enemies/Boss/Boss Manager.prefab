@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8362574402016009146}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8362574401902856049
 GameObject:
@@ -88,7 +88,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8362574402016009146}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8362574402016009140
 GameObject:
@@ -128,11 +128,11 @@ Transform:
   - {fileID: 8362574402872004991}
   - {fileID: 8362574403103449124}
   - {fileID: 8362574402375828992}
+  - {fileID: 8362574402530516758}
   - {fileID: 8362574403596146197}
   - {fileID: 8362574403306166363}
   - {fileID: 8362574401571138427}
   - {fileID: 8362574401943154006}
-  - {fileID: 8362574402530516758}
   - {fileID: 8362574402805612105}
   - {fileID: 8362574402430914473}
   - {fileID: 8362574402621346870}
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeUntilPatternStart: 0
+  startPositions: []
   bossPairings:
   - boss1: 0
     boss2: 2
@@ -190,6 +191,7 @@ MonoBehaviour:
   - boss1: 5
     boss2: 1
     patternIndex: 11
+  availablePositions: []
   bossPatternIndexes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
   bosses:
   - boss: {fileID: 0}
@@ -371,14 +373,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c54d1531c3de94b95bbde9d6b77c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   startPosition: {fileID: 8362574402097101431}
+  currentAnimation: 
+  time: 0
   state: 0
   pattern: 0
   grenade: {fileID: 783759403534293578, guid: 42cc9e498cfcb6b438a2697402b3c717, type: 3}
   firePoint: {fileID: 8362574403147791387}
   timeBeforeGrenade: 2
+  timeAfterGrenade: 0.5
   bottomRightCorner: {fileID: 8362574403103449124}
   bottomLeftCorner: {fileID: 8362574402375828992}
   timeBetweenGrenades: 0.4
@@ -635,7 +646,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8362574402016009146}
-  m_RootOrder: 14
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8362574402621346871
 GameObject:
@@ -769,16 +780,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee19d46953eb6604fa24e070ba53848f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   startPosition: {fileID: 8362574402232959519}
+  currentAnimation: 
+  time: 0
   state: 0
   pattern: 0
   topRightLaserPosition: {fileID: 8362574402147233190}
   topLeftLaserPosition: {fileID: 8362574402872004991}
   bottomRightLaserPosition: {fileID: 8362574403103449124}
   bottomLeftLaserPosition: {fileID: 8362574402375828992}
+  moveWithLaserCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  moveWithLaserSpeed: 0
   laser: {fileID: 1833872798652888765, guid: 707658b431e9ed44e8b549a91854d26b, type: 3}
+  laserOutline: {fileID: 0}
   firePointDown: {fileID: 8362574402509988554}
   firePointRight: {fileID: 8362574402871665949}
   firePointLeft: {fileID: 8362574401902856048}
@@ -792,7 +819,6 @@ MonoBehaviour:
   timeBeforeLaser: 1
   timeBeforeEndTopLaser: 1
   timeBeforeEndBottomLaser: 0.3
-  timeBeforeMoveWithLaser: 1
   rotateSpeed: 2
   chargeSpeed: 10
   topRightCorner: {fileID: 8362574402147233190}
@@ -1082,7 +1108,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8362574402016009146}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8362574403377174433
 GameObject:
@@ -1142,7 +1168,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8362574402016009146}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8362574403611242176
 GameObject:
@@ -1243,9 +1269,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f71eb0beabda9428bd0231adadefba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   startPosition: {fileID: 8362574403186561994}
+  currentAnimation: 
+  time: 0
   state: 0
   pattern: 0
   swoopPositionLeft: {fileID: 8362574403596146197}
@@ -1258,6 +1292,9 @@ MonoBehaviour:
   slamSpeed: 7
   timeUntilStartSlam: 1
   shockWave: {fileID: -6377894629183829461, guid: 28a71c54d77a59e40ac92d17d4c7e45c, type: 3}
+  impact: {fileID: 0}
+  impactOffset: {x: 0, y: 3}
+  stuckInGroundTimer: 2
   timeUntilCharge: 1
   numberOfCharges: 5
   chargeSpeed: 7
@@ -1269,7 +1306,7 @@ MonoBehaviour:
   - {fileID: 8362574402530516758}
   largeShockWave: {fileID: -6377894629183829461, guid: 30c81cfd12cae7641b5bb6af637b1c2f, type: 3}
   timeUntilLargeSlam: 2
-  stuckInGroundTimer: 2
+  largeWaveStuckInGroundTimer: 0
   centerOffset: {x: 0, y: 2}
 --- !u!50 &8362574403611242187
 Rigidbody2D:
