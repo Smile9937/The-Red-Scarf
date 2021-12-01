@@ -8,6 +8,7 @@ public class GrenadeBoss : TripleBoss
     [SerializeField] private Grenade grenade;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float timeBeforeGrenade;
+    [SerializeField] private float timeAfterGrenade = 0.5f;
     [SerializeField] private Transform bottomRightCorner;
     [SerializeField] private Transform bottomLeftCorner;
     [SerializeField] private float timeBetweenGrenades = 0.2f;
@@ -23,6 +24,8 @@ public class GrenadeBoss : TripleBoss
     [SerializeField] private Vector2 acidAttackTrajectoryOffset = new Vector2(0f, 1f);
     [SerializeField] private LayerMask acidLayer;
     [SerializeField] private float timeBeforeAcid;
+
+    [SerializeField] private AcidAnimationPlayer acidDropAnimation;
 
     [Header("Final Attack Variables")]
     [SerializeField] private Vector2[] largeGrenadeForces = { new Vector2(10, 10), new Vector2(15, 15), new Vector2(20, 20) };
@@ -42,6 +45,7 @@ public class GrenadeBoss : TripleBoss
         float xPosition = Mathf.Lerp(acidLocationsLeft[0].position.x, acidLocationsRight[0].position.x, 0.5f);
         float yPosition = Mathf.Lerp(acidLocationsLeft[0].position.y, acidLocationsRight[0].position.y, 0.5f);
         centerPosition = new Vector3(xPosition, yPosition + acidLocationStartOffset, transform.position.z);
+        acidDropAnimation.gameObject.SetActive(false);
     }
     protected override void StartCurrentPattern()
     {
@@ -71,11 +75,13 @@ public class GrenadeBoss : TripleBoss
         switch (pattern)
         {
             case Pattern.PatternOne:
+                transform.localScale = startLocalScale;
                 Rotate(0, 0, 0);
                 state = State.Attacking;
                 StartCoroutine(TimeBeforeGrenade(1));
                 break;
             case Pattern.PatternOneMirror:
+                transform.localScale = startLocalScale;
                 Rotate(0, 180, 0);
                 state = State.Attacking;
                 StartCoroutine(TimeBeforeGrenade(-1));
@@ -83,13 +89,15 @@ public class GrenadeBoss : TripleBoss
             case Pattern.PatternTwo:
                 if (state == State.PreparingToAttack)
                     return;
-
+                Rotate(0, 0, 0);
+                transform.localScale = startLocalScale;
                 StartCoroutine(TimeBeforeAcid(acidLocationsLeft[0].position));
                 break;
             case Pattern.PatternTwoMirror:
                 if (state == State.PreparingToAttack)
                     return;
-
+                Rotate(0, 180, 0);
+                transform.localScale = startLocalScale;
                 StartCoroutine(TimeBeforeAcid(acidLocationsRight[0].position));
                 break;
             case Pattern.PatternThree:
@@ -142,6 +150,7 @@ public class GrenadeBoss : TripleBoss
 
                 for(int i = 0; i < acidHits.Length; i++)
                 {
+                    acidDropAnimation.gameObject.SetActive(true);
                     AcidSpot acidSpot = acidHits[i].GetComponent<AcidSpot>();
                     if(acidSpot != null)
                     {
@@ -172,7 +181,7 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeGrenade);
-
+        PlayAnimation("isAttack1Right");
         for(int i = 0; i < grenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenGrenades);
@@ -181,15 +190,21 @@ public class GrenadeBoss : TripleBoss
             currentGrenade.GetComponent<Rigidbody2D>().AddForce(force);
         }
         state = State.Waiting;
-        PatternDone();
         StopAllCoroutines();
+        StartCoroutine(TimeAfterGrenade());
     }
     private IEnumerator TimeBeforeAcid(Vector3 position)
     {
         state = State.PreparingToAttack;
         yield return new WaitForSeconds(timeBeforeAcid);
+        PlayAnimation("isAttack2");
         state = State.Attacking;
         SetAcidAttackPoints(position);
+    }
+    private IEnumerator TimeAfterGrenade()
+    {
+        yield return new WaitForSeconds(timeAfterGrenade);
+        PatternDone();
     }
 
     private IEnumerator FinalAttack()
@@ -198,7 +213,7 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeFinalAttack);
-
+        PlayAnimation("isAttack3");
         for(int i = 0; i < largeGrenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenLargeGrenades);
@@ -214,13 +229,16 @@ public class GrenadeBoss : TripleBoss
 
         yield return new WaitForSeconds(timeUntilAcid);
 
-        for (int i = 0; i < acidSpots.Length; i++)
-        {
-            acidSpots[i].ActivateAcid();
-        }
-        
-        yield return new WaitForSeconds(coolDown);
+        bool mirror = Random.Range(0, 2) == 0;
 
-        StartCoroutine(FinalAttack());
+        if (mirror)
+        {
+            pattern = Pattern.PatternTwoMirror;
+        }
+        else
+        {
+            pattern = Pattern.PatternTwo;
+        }
+        StartCurrentPattern();
     }
 }

@@ -17,23 +17,28 @@ public class MeleeBoss : TripleBoss
     [SerializeField] private float slamSpeed;
     [SerializeField] private float timeUntilStartSlam;
     [SerializeField] private Bullet shockWave;
+    [SerializeField] private GameObject impact;
+    [SerializeField] private Vector2 impactOffset = new Vector2(0, 3);
+    [SerializeField] private float stuckInGroundTimer;
+
 
     [Header("Charge Variables")]
     [SerializeField] private float timeUntilCharge;
     [SerializeField] private int numberOfCharges = 5;
     [SerializeField] private float chargeSpeed;
-    [SerializeField] private List<Transform> corners = new List<Transform>();
+    [SerializeField] private List<Point> corners = new List<Point>();
 
     [Header("Large Slam Variables")]
     [SerializeField] private Bullet largeShockWave;
     [SerializeField] private float timeUntilLargeSlam;
-    [SerializeField] private float stuckInGroundTimer;
+    [SerializeField] private float largeWaveStuckInGroundTimer;
 
     [Header("Center of Room")]
     [SerializeField] private Vector2 centerOffset;
 
-    private List<Transform> cornerList = new List<Transform>();
-    private Transform currentPosition;
+    private Point currentPoint;
+    private Point lastPoint;
+    private Vector3 currentPosition;
     private bool chargeCountReached = false;
     private Vector3 centerPosition;
     private Vector3[] points;
@@ -42,13 +47,11 @@ public class MeleeBoss : TripleBoss
     private bool returnToPosition;
     private void Start()
     {
-        cornerList = new List<Transform>(corners);
-
         List<Vector3> cornerPositions = new List<Vector3>();
 
         for(int i = 0; i < corners.Count; i++)
         {
-            cornerPositions.Add(cornerList[i].position);
+            cornerPositions.Add(corners[i].transform.position);
         }
 
         Vector3 movePosition = CenterOfVectors(cornerPositions);
@@ -105,8 +108,8 @@ public class MeleeBoss : TripleBoss
                         }
                         else
                         {
-                            transform.position = Vector2.MoveTowards(transform.position, currentPosition.position, chargeSpeed * Time.deltaTime);
-                            if (transform.position == currentPosition.position)
+                            transform.position = Vector2.MoveTowards(transform.position, currentPosition, chargeSpeed * Time.deltaTime);
+                            if (transform.position == currentPosition)
                             {
                                 PickChargePosition();
                             }
@@ -123,34 +126,59 @@ public class MeleeBoss : TripleBoss
         {
             if(pattern == Pattern.PatternTwo || pattern == Pattern.PatternTwoMirror)
             {
-                for(int i = 0; i < 2; i ++)
+                for(int i = 0; i < 2; i++)
                 {
-                    Vector2 position = new Vector2(transform.position.x, transform.position.y);
+                    Vector2 position = new Vector2(transform.position.x, transform.position.y + 1);
                     Bullet currentShockWave = Instantiate(shockWave, position, Quaternion.identity);
-                    currentShockWave.transform.eulerAngles = Vector3.forward * i * 180;
+                    currentShockWave.transform.eulerAngles = Vector3.up * i * 180;
+
                 }
-                returnToPosition = true;
+                Vector2 impactPosition = collision.GetContact(0).point + impactOffset;
+
+                GameObject currentImpact = Instantiate(impact, impactPosition, Quaternion.identity);
+                Destroy(currentImpact, 0.4f);
+
+                state = State.Cooldown;
+                PlayAnimation("isDazed");
+                transform.position = collision.GetContact(0).point + new Vector2(0, 1);
+                StartCoroutine(StuckInGroundTimer());
             }
             else if(pattern == Pattern.PatternThree)
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.5f);
+                    Vector2 position = new Vector2(transform.position.x, transform.position.y + 1.5f);
                     Bullet currentShockWave = Instantiate(largeShockWave, position, Quaternion.identity);
-                    currentShockWave.transform.eulerAngles = Vector3.forward * i * 180;
+                    currentShockWave.transform.eulerAngles = Vector3.up * i * 180;
+
                 }
+                Vector2 impactPosition = collision.GetContact(0).point + impactOffset + new Vector2(0, 1.3f);
+
+                GameObject currentImpact = Instantiate(impact, impactPosition, Quaternion.identity);
+                currentImpact.transform.localScale = new Vector2(currentImpact.transform.localScale.x * 2, currentImpact.transform.localScale.x * 2);
+                Destroy(currentImpact, 0.4f);
+
+                PlayAnimation("isDazed");
                 chargeCounter = 0;
                 chargeCountReached = false;
                 state = State.Cooldown;
-                StartCoroutine(StuckInGroundTimer());
+                transform.position = collision.GetContact(0).point + new Vector2(0, 1);
+                StartCoroutine(LargeWaveStuckInGroundTimer());
             }
         }
-
     }
 
     private IEnumerator StuckInGroundTimer()
     {
         yield return new WaitForSeconds(stuckInGroundTimer);
+        PlayAnimation("isIdle");
+        state = State.Attacking;
+        returnToPosition = true;
+    }
+    private IEnumerator LargeWaveStuckInGroundTimer()
+    {
+        yield return new WaitForSeconds(largeWaveStuckInGroundTimer);
+        PlayAnimation("isIdle");
         state = State.Attacking;
         PickChargePosition();
     }
@@ -204,12 +232,14 @@ public class MeleeBoss : TripleBoss
     private IEnumerator TimeUntilStartSwoop(Vector3 position)
     {
         yield return new WaitForSeconds(timeUntilStartSwoop);
+        PlayAnimation("isAttack2");
         SetSwoopPoints(position);
     }
 
     private IEnumerator TimeUntilStartSlam()
     {
         yield return new WaitForSeconds(timeUntilStartSlam);
+        PlayAnimation("isAttack1");
         returnToPosition = false;
         state = State.Attacking;
     }
@@ -217,17 +247,20 @@ public class MeleeBoss : TripleBoss
     private IEnumerator TimeUntilCharge()
     {
         yield return new WaitForSeconds(timeUntilCharge);
-        cornerList = new List<Transform>(corners);
         chargeCounter++;
-        int randomNum = Random.Range(0, cornerList.Count);
-        currentPosition = cornerList[randomNum];
-        cornerList.Remove(currentPosition);
+
+        int randomNum = Random.Range(0, corners.Count);
+        currentPoint = corners[randomNum];
+        currentPosition = currentPoint.transform.position;
+
+        PlayAnimation("isCharge");
         state = State.Attacking;
     }
 
     private IEnumerator TimeUntilStartLargeSlam()
     {
         yield return new WaitForSeconds(timeUntilLargeSlam);
+        PlayAnimation("isAttack1");
         state = State.Attacking;
     }
     private void SetSwoopPoints(Vector3 position)
@@ -248,10 +281,10 @@ public class MeleeBoss : TripleBoss
         }
         else
         {
-            cornerList.Add(currentPosition);
-            int randomNum = Random.Range(0, cornerList.Count);
-            currentPosition = cornerList[randomNum];
-            cornerList.Remove(currentPosition);
+            lastPoint = currentPoint;
+            currentPoint = currentPoint.GetPoint(lastPoint);
+            currentPosition = currentPoint.transform.position;
+            lastPoint = currentPoint;
         }
     }
     protected override void StartCurrentPattern()
