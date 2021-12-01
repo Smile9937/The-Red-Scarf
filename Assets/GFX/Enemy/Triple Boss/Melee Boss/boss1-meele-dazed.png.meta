@@ -102,10 +102,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 106.5
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 100
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35182053}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: boss1-meele-dazed_1
       rect:
         serializedVersion: 2
-        x: 106
+        x: 111
         y: 0
-        width: 106.5
+        width: 100
         height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3204195}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

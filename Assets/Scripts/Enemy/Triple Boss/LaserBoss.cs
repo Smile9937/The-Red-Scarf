@@ -157,7 +157,8 @@ public class LaserBoss : TripleBoss
     //Called In Animator
     private void MoveLaser()
     {
-        switch(pattern)
+        firstPosition = transform.position;
+        switch (pattern)
         {
             case Pattern.PatternOne:
                 movePosition = new Vector2(Mathf.Lerp(bottomRightLaserPosition.position.x, bottomLeftLaserPosition.position.x, 0.5f), transform.position.y);
@@ -174,14 +175,18 @@ public class LaserBoss : TripleBoss
         if (!move)
             return;
 
-        transform.position = Vector2.Lerp(transform.position, movePosition, moveWithLaserCurve.Evaluate(laserTime));
-        laserTime += moveWithLaserSpeed * Time.deltaTime;
-        laserPrefab.SetPositions(new Vector3[] { new Vector3(transform.position.x, laserPrefab.GetPosition(0).y), new Vector3(transform.position.x, laserPrefab.GetPosition(1).y) });
-        if (transform.position == movePosition)
+        if (laserTime < 1f)
+        {
+            laserTime += moveWithLaserSpeed * Time.deltaTime;
+            transform.position = Vector3.Lerp(firstPosition, movePosition, laserTime);
+        }
+        else
         {
             move = false;
             StartCoroutine(EndLaser(timeBeforeEndTopLaser));
         }
+
+        laserPrefab.SetPositions(new Vector3[] { new Vector3(transform.position.x, laserPrefab.GetPosition(0).y), new Vector3(transform.position.x, laserPrefab.GetPosition(1).y) });
     }
 
     protected override void StartCurrentPattern()
@@ -442,9 +447,9 @@ public class LaserBoss : TripleBoss
         if(player != null)
         {
             canDamage = false;
-            StartCoroutine(LaserHitCooldown());
-            player.Damage(laserDamage, false);
             player.KnockBack(laserPrefab.gameObject, laserKnockback, laserKnockBackLength);
+            player.Damage(laserDamage, false);
+            StartCoroutine(LaserHitCooldown());
         }
     }
     private IEnumerator LaserHitCooldown()

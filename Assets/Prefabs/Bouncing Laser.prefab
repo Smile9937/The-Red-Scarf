@@ -151,13 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c7df9dcea4a4588f253a69d47275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 12
   laserHitLayers:
     serializedVersion: 2
     m_Bits: 576
-  damage: 30
+  damage: 10
   knockback: {x: 3, y: 2}
   knockbackLength: 0.2
   damageRate: 0.5
   length: 1
-  numberOfBouncesBeforeDisappearing: 4
+  numberOfBouncesBeforeDisappearing: 6

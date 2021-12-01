@@ -67,6 +67,11 @@ public class Activator : MonoBehaviour, IDamageable
         animator.SetBool("isActivated", false);
         Deactivate();
     }
+
+    public void ActivateFromOtherObject()
+    {
+        Activate();
+    }
     
     private void Activate()
     {

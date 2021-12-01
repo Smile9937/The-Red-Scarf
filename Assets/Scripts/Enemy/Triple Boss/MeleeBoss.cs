@@ -140,7 +140,7 @@ public class MeleeBoss : TripleBoss
 
                 state = State.Cooldown;
                 PlayAnimation("isDazed");
-                transform.position = collision.GetContact(0).point + new Vector2(0, 1);
+                transform.position = collision.GetContact(0).point + new Vector2(0, 0.75f);
                 StartCoroutine(StuckInGroundTimer());
             }
             else if(pattern == Pattern.PatternThree)

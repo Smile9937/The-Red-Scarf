@@ -27,7 +27,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected Vector3 startLocalScale;
 
-    Vector3 firstPosition;
+    protected Vector3 firstPosition;
 
     //[HideInInspector]
     public State state;

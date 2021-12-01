@@ -41,8 +41,16 @@ public class CharacterGrapplingScarf : MonoBehaviour
     Vector2 scarfGrabLocation;
     private RaycastHit2D hit;
     private bool grabbedNewLocation = false;
+    [SerializeField] private ScarfGFXState scarfGFXState;
+    [SerializeField]
+    private enum ScarfGFXState
+    {
+        GrabbedState,
+        PassedGrabbedState,
+        NoGrabState,
+    };
 
-    [Header("Enemy Scarf Interaction")]
+    [Header("Scarf Direction")]
     [SerializeField] private ScarfDirectionEnum scarfDirection;
     [SerializeField] private enum ScarfDirectionEnum
     {
@@ -421,6 +429,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     protected void UpdateOfRenderedScarf()
     {
+        switch (scarfGFXState)
+        {
+            case(ScarfGFXState.NoGrabState):
+                theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                break;
+            default:
+                break;
+        }
         if (player.state == Player.State.Dash || isDashing)
         {
             if (swingingPoint != null)
