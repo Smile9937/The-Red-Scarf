@@ -25,9 +25,9 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     [SerializeField] float time;
 
-    float speedOffset;
-
     protected Vector3 startLocalScale;
+
+    Vector3 firstPosition;
 
     //[HideInInspector]
     public State state;
@@ -114,7 +114,6 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         pattern = Pattern.NoPattern;
         MoveToStartPosition();
     }
-
     private void MoveToStartPosition()
     {
         if (state == State.Dead)
@@ -133,6 +132,13 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         PlayAnimation("isHoverRight");
         state = State.MovingToStart;
         time = 0;
+        SetFirstPosition();
+
+    }
+
+    private void SetFirstPosition()
+    {
+        firstPosition = transform.position;
     }
 
     protected virtual void Update()
@@ -143,18 +149,30 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         switch(state)
         {
             case State.MovingToStart:
-                transform.position = Vector2.MoveTowards(transform.position, startPosition.position, movementCurve.Evaluate(time));
-                if(transform.position == startPosition.position)
+                if (time < 1f)
+                {
+                    time += moveSpeed * Time.deltaTime;
+                    transform.position = Vector3.Lerp(firstPosition, startPosition.position, time);
+                }
+                else
                 {
                     state = State.Waiting;
                     pattern = Pattern.NoPattern;
                     PlayAnimation("isIdle");
                     bossManager.ReadyToStartBattle(this);
                 }
+
+                if (transform.position == startPosition.position)
+                {
+                }
                 break;
             case State.MovingToAttackPosition:
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementCurve.Evaluate(time));
-                if(transform.position == targetPosition)
+                if (time < 1f)
+                {
+                    time += moveSpeed * Time.deltaTime;
+                    transform.position = Vector3.Lerp(firstPosition, targetPosition, time);
+                }
+                else
                 {
                     AttackPositionReached();
                 }
@@ -163,9 +181,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
                 transform.Translate(Vector3.down * Time.deltaTime);
                 break;
         }
-        time += moveSpeed * Time.deltaTime;
     }
-
     protected void MoveToAttackPosition(Vector3 target)
     {
         targetPosition = target;
@@ -180,6 +196,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         PlayAnimation("isHoverRight");
         state = State.MovingToAttackPosition;
         time = 0;
+        SetFirstPosition();
     }
 
     protected virtual void AttackPositionReached()
