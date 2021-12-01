@@ -23,6 +23,7 @@ public class RedScarfPlayer : MonoBehaviour
     [Header("Components")]
     [SerializeField] PlayerStats myStats;
     [SerializeField] private Player player;
+    [HideInInspector] public float attackAreaMultiplier = 1;
 
     private void Start()
     {
@@ -109,16 +110,21 @@ public class RedScarfPlayer : MonoBehaviour
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack))
             {
                 player.state = Player.State.Attacking;
-                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / 2 ,player.myRigidbody.velocity.y);
+                float reductionInSpeed = 1.3f;
+                if (player.grounded)
+                    reductionInSpeed += 0.7f;
+
+                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x / reductionInSpeed, player.myRigidbody.velocity.y);
                 player.myAnimator.SetTrigger("attackTrigger");
-                //MeleeAttack() called in animation
                 player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
             }
         }
     }
     public void MeleeAttack()
     {
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, myStats.attackSize, 90f, player.attackLayers);
+        Vector2 attackArea = myStats.attackSize;
+        attackArea *= new Vector2(attackAreaMultiplier, attackAreaMultiplier);
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, attackArea, 0, player.attackLayers);
 
         foreach (Collider2D target in hitTargets)
         {
@@ -130,30 +136,30 @@ public class RedScarfPlayer : MonoBehaviour
                 if (character != null)
                 {
                     character.KnockBack(gameObject, myStats.knockbackVelocity, myStats.knockbackLength);
-                    GainRage();
+                    GainRage(maxRage / 5);
                 }
 
                 if (player.damageText != null && target.tag == "Enemy")
                 {
-                    Instantiate(player.damageText, target.transform.position, Quaternion.identity);
                     player.damageText.SetText(myStats.attackDamage + currentRageDamage + player.attackBonus);
+                    Instantiate(player.damageText, target.transform.position, Quaternion.identity);
                 }
                 damageable.Damage(myStats.attackDamage + currentRageDamage + player.attackBonus, false);
             }
         }
     }
-    private void GainRage()
+    private void GainRage(int rageGain)
     {
         if(loseRageCoroutine != null)
         {
             StopCoroutine(loseRageCoroutine);
         }
-        if(currentRageCount + 1 > maxRage)
+        if(currentRageCount + rageGain > maxRage)
         {
             currentRageCount = maxRage;
         } else
         {
-            currentRageCount++;
+            currentRageCount += rageGain;
         }
         loseRageCoroutine = StartCoroutine(LoseRage());
     }

@@ -91,7 +91,6 @@ public class RoomSwitch : MonoBehaviour
             {
                 if (item != null)
                 {
-                    Debug.Log(item + " respawned!");
                     if (item.activeSelf == false)
                     {
                         item.gameObject.SetActive(true);

@@ -26,4 +26,9 @@ public class PowerUpHandler : MonoBehaviour
             player.currentHealth += healAmount;
         }
     }
+
+    public void IncreaseAttackBonus(int attackAmount)
+    {
+        player.attackBonus += attackAmount;
+    }
 }

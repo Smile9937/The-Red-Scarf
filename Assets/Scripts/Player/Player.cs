@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] private float secondsOfInvincibility;
-    bool isInvincible = false;
+    public bool isInvincible = false;
 
     private bool canJump = false;
 
@@ -113,7 +113,6 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
         GameEvents.Instance.onSaveGame += Save;
         GameEvents.Instance.onLoadGame += Load;
-        GameManager.Instance.player = this;
     }
     private void Start()
     {
@@ -368,6 +367,9 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     public void KnockBack(GameObject knockbackSource, Vector2 knockbackVelocity, float knockbackLength)
     {
+        if (isInvincible)
+            return;
+
         knockback = knockbackVelocity;
         knockbackCount = knockbackLength;
 
