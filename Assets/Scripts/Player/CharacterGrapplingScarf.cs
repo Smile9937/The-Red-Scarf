@@ -137,7 +137,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 isDashing = false;
                 player.attackBonus += dashAttackBonus;
                 
-                player.gameObject.layer = LayerMask.NameToLayer("Player");
+                player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
                 
                 player.state = Player.State.Attacking;
                 player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
