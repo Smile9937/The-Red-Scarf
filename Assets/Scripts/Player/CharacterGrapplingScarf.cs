@@ -25,6 +25,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     Vector2 originalLaunchPosition;
     Vector2 targetLaunchPosition;
+    Vector2 targetLaunchPositionB;
     private bool grounded;
     private bool isDashing;
 
@@ -142,22 +143,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && player.hasBaseballBat)
             {
-                isDashing = false;
-                player.attackBonus += dashAttackBonus;
-                
-                player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
-                
-                player.state = Player.State.Attacking;
-                player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
-
-                redScarfPlayer.attackAreaMultiplier = 1.25f;
-
-                animator.Play("DashAttack");
-                player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
-
-                characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * 0.25f);
-
-                player.state = Player.State.Dash;
+                DoDashAttack();
             }
         }
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Special) && GameManager.Instance.redScarf && player.state == Player.State.Neutral && airDashCooldown <= 0)
@@ -207,6 +193,50 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
         }
         UpdateOfRenderedScarf();
+    }
+
+    private void FixedUpdate()
+    {
+        if (scarfGFXState == ScarfGFXState.GrabbedState)
+        {
+            if (originalLaunchPosition.x < targetLaunchPositionB.x && transform.position.x >= targetLaunchPositionB.x)
+            {
+                scarfGFXState = ScarfGFXState.PassedGrabbedState;
+            }
+            else if (originalLaunchPosition.x > targetLaunchPositionB.x && transform.position.x <= targetLaunchPositionB.x)
+            {
+                scarfGFXState = ScarfGFXState.PassedGrabbedState;
+            }
+            else if (originalLaunchPosition.y < targetLaunchPositionB.y && transform.position.y >= targetLaunchPositionB.y)
+            {
+                scarfGFXState = ScarfGFXState.PassedGrabbedState;
+            }
+            else if (originalLaunchPosition.y > targetLaunchPositionB.y && transform.position.y <= targetLaunchPositionB.y)
+            {
+                scarfGFXState = ScarfGFXState.PassedGrabbedState;
+            }
+        }
+    }
+
+    private void DoDashAttack()
+    {
+        isDashing = false;
+        scarfGFXState = ScarfGFXState.PassedGrabbedState;
+        player.attackBonus += dashAttackBonus;
+
+        player.gameObject.layer = LayerMask.NameToLayer("Dodge Roll");
+
+        player.state = Player.State.Attacking;
+        player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
+
+        redScarfPlayer.attackAreaMultiplier = 1.25f;
+
+        animator.Play("DashAttack");
+        player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
+
+        characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * 0.25f);
+
+        player.state = Player.State.Dash;
     }
 
     private void ScarfThrowLocation()
@@ -307,6 +337,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             isDashing = true;
             airDashCooldown = originalAirDashCooldown;
             targetLaunchPosition = swingingPoint.transform.position - this.transform.position;
+            targetLaunchPositionB = swingingPoint.transform.position;
             targetLaunchPosition.Normalize();
 
             characterRigidBody.gravityScale = gravityAdjustment;
@@ -340,6 +371,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         originalLaunchPosition = transform.position;
         if (swingingPoint != null)
         {
+            scarfGFXState = ScarfGFXState.GrabbedState;
             characterRigidBody.gravityScale = gravityAdjustment;
             
             float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.9f * dashDuration, 1.1f * dashDuration);
@@ -374,6 +406,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         theGrabbable = null;
         isDashing = false;
         grabbedNewLocation = false;
+        scarfGFXState = ScarfGFXState.NoGrabState;
     }
 
     private void ReturnPlayerStateAnim()
@@ -432,49 +465,43 @@ public class CharacterGrapplingScarf : MonoBehaviour
         switch (scarfGFXState)
         {
             case(ScarfGFXState.NoGrabState):
-                theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
-                theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
                 break;
-            default:
-                break;
-        }
-        if (player.state == Player.State.Dash || isDashing)
-        {
-            if (swingingPoint != null)
-            {
-                grabbedNewLocation = true;
-                scarfGrabLocation = swingingPoint.transform.position;
-            }
-
-            hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 3f, scarfGrabableLayers);
-
-            if (hit)
-            {
-                theLineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, 0));
-            }
-            else
-            {
-                if (Vector2.Distance(transform.position, originalLaunchPosition) >= 3)
+            case (ScarfGFXState.GrabbedState):
+                if (swingingPoint != null)
                 {
-                    theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
-                    grabbedNewLocation = false;
+                    grabbedNewLocation = true;
+                    scarfGrabLocation = swingingPoint.transform.position;
                 }
-                else if (grabbedNewLocation)
+
+                hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 3f, scarfGrabableLayers);
+
+                if (hit)
                 {
-                    theLineRenderer.SetPosition(1, new Vector3(scarfGrabLocation.x, scarfGrabLocation.y, 0));
+                    theLineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, 0));
                 }
                 else
                 {
-                    theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                    if (Vector2.Distance(transform.position, originalLaunchPosition) >= 3)
+                    {
+                        theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                        grabbedNewLocation = false;
+                    }
+                    else if (grabbedNewLocation)
+                    {
+                        theLineRenderer.SetPosition(1, new Vector3(scarfGrabLocation.x, scarfGrabLocation.y, 0));
+                    }
+                    else
+                    {
+                        theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                    }
                 }
-            }
 
-            theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
-        }
-        else 
-        {
-            theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
-            theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                break;
+            default:
+                theLineRenderer.SetPosition(0, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                theLineRenderer.SetPosition(1, new Vector3(scarfOriginLocation.position.x, scarfOriginLocation.position.y, 0));
+                break;
         }
     }
 }

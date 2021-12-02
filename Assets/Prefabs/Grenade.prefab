@@ -155,8 +155,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1841830603
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4214544667808144387, guid: 57ed02d0db861b7479d941be251b457f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -185,7 +185,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   explosionRadius: 1.2
-  explosionDamage: 20
+  explosionDamage: 30
   explosionKnockback: {x: 3, y: 3.2}
   knockbackLength: 0.1
   timeUntilExplosion: 2

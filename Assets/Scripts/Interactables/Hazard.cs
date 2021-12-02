@@ -10,6 +10,8 @@ public class Hazard : MonoBehaviour
     [SerializeField] private Vector2 knockback;
     [SerializeField] private float knockbackLength;
     [SerializeField] private bool dealKnockback;
+    [SerializeField] private bool useTriggerCollider = true;
+    
     public class DamageTarget
     {
         public IDamageable damageable;
@@ -49,6 +51,8 @@ public class Hazard : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (!useTriggerCollider)
+            return;
         ExitCollider(collision);
     }
 
@@ -76,6 +80,8 @@ public class Hazard : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!useTriggerCollider)
+            return;
         StayInCollider(collision);
     }
 
