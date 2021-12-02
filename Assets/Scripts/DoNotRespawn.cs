@@ -42,7 +42,14 @@ public class DoNotRespawn : MonoBehaviour
         {
             if (GameManager.Instance.pickupCollectedDatabase[pickUpID])
             {
-                Destroy(gameObject);
+                if (GetComponent<PickUp>()) // New code
+                {  // New Code
+                    GetComponent<PickUp>().DoEvent(); // New code
+                }  // New code
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

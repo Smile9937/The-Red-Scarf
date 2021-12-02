@@ -406,7 +406,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         theGrabbable = null;
         isDashing = false;
         grabbedNewLocation = false;
-        scarfGFXState = ScarfGFXState.NoGrabState;
+        scarfGFXState = ScarfGFXState.PassedGrabbedState;
     }
 
     private void ReturnPlayerStateAnim()

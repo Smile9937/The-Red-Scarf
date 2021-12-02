@@ -168,7 +168,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
                 HandleJumping();
                 HandleMovement();
                 SwapCharacter();
-                HandleGroundSlam();
+                //HandleGroundSlam();
                 break;
             case State.Blocking:
                 break;
@@ -176,6 +176,9 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
                 //Block();
                 myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
                 break;
+            //case State.GroundSlam:
+                //HandleGroundSlam();
+                //break;
         }
 
         if (grounded)

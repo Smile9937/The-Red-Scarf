@@ -35,7 +35,7 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    private void DoEvent()
+    public void DoEvent()
     {
         switch (type)
         {
