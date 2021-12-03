@@ -11,6 +11,8 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     [SerializeField] protected float moveSpeed;
 
+    [SerializeField] private Vector2 returnTrajectoryOffset = new Vector2(0f, -8f);
+
     public Transform startPosition;
 
     protected Vector3 targetPosition;
@@ -29,6 +31,12 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected Vector3 firstPosition;
 
+    private Vector3[] positions;
+
+    private const string HOVER_RIGHT = "HoverRight";
+    protected const string IDLE = "Idle";
+    private const string DEAD = "Death";
+
     //[HideInInspector]
     public State state;
     public enum State
@@ -36,6 +44,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         Waiting,
         MovingToStart,
         MovingToAttackPosition,
+        MovingUp,
         Cooldown,
         PreparingToAttack,
         Attacking,
@@ -129,10 +138,12 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         {
             transform.localScale = new Vector3(-startLocalScale.x, transform.localScale.y, transform.localScale.z);
         }
-        PlayAnimation("isHoverRight");
+        PlayAnimation(HOVER_RIGHT);
         state = State.MovingToStart;
         time = 0;
         SetFirstPosition();
+
+        SetReturnPoints(startPosition.position);
 
     }
 
@@ -149,22 +160,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         switch(state)
         {
             case State.MovingToStart:
-                if (time < 1f)
-                {
-                    time += moveSpeed * Time.deltaTime;
-                    transform.position = Vector3.Lerp(firstPosition, startPosition.position, time);
-                }
-                else
-                {
-                    state = State.Waiting;
-                    pattern = Pattern.NoPattern;
-                    PlayAnimation("isIdle");
-                    bossManager.ReadyToStartBattle(this);
-                }
-
-                if (transform.position == startPosition.position)
-                {
-                }
+                ReturnToStart();
                 break;
             case State.MovingToAttackPosition:
                 if (time < 1f)
@@ -182,6 +178,46 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
                 break;
         }
     }
+
+    private void SetReturnPoints(Vector3 position)
+    {
+        positions = new Vector3[3];
+        positions[0] = transform.position;
+        positions[2] = position;
+
+        Vector2 trajectoryOffset = new Vector2();
+
+        if(positions[0].x > positions[2].x)
+        {
+            trajectoryOffset = new Vector2(-returnTrajectoryOffset.x, returnTrajectoryOffset.y);
+        }
+        else
+        {
+            trajectoryOffset = new Vector2(returnTrajectoryOffset.x, returnTrajectoryOffset.y);
+        }
+
+        positions[1] = positions[0] + (positions[2] - positions[0]) / 2 + (Vector3)trajectoryOffset;
+        state = State.MovingToStart;
+    }
+
+    private void ReturnToStart()
+    {
+        if (time < 1f)
+        {
+            time += moveSpeed * Time.deltaTime;
+            Vector3 m1 = Vector3.Lerp(positions[0], positions[1], time);
+            Vector3 m2 = Vector3.Lerp(positions[1], positions[2], time);
+            transform.position = Vector3.Lerp(m1, m2, time);
+        }
+        else
+        {
+            state = State.Waiting;
+            pattern = Pattern.NoPattern;
+            PlayAnimation(IDLE);
+            bossManager.ReadyToStartBattle(this);
+        }
+    }
+
     protected void MoveToAttackPosition(Vector3 target)
     {
         targetPosition = target;
@@ -193,7 +229,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         {
             transform.localScale = new Vector3(-startLocalScale.x, transform.localScale.y, transform.localScale.z);
         }
-        PlayAnimation("isHoverRight");
+        PlayAnimation(HOVER_RIGHT);
         state = State.MovingToAttackPosition;
         time = 0;
         SetFirstPosition();
@@ -201,7 +237,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected virtual void AttackPositionReached()
     {
-        PlayAnimation("isIdle");
+        PlayAnimation(IDLE);
     }
 
     public void Damage(int damage, bool bypassInvincibility)
@@ -212,8 +248,14 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
             hazardComponent.enabled = false;
             state = State.Dead;
             bossManager.BossDead(this);
-            PlayAnimation("isDead");
+            OnDeath();
+            PlayAnimation(DEAD);
         }
+    }
+
+    protected virtual void OnDeath()
+    {
+
     }
 
     //Called In Death Animation
@@ -222,20 +264,13 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    protected void PlayAnimation(string animation)
+    protected void PlayAnimation(string newAnimation)
     {
-        if (currentAnimation == animation)
+        if (currentAnimation == newAnimation)
             return;
 
-        foreach (AnimatorControllerParameter parameter in myAnimator.parameters)
-        {
-            if(parameter.name == currentAnimation)
-            {
-                myAnimator.SetBool(currentAnimation, false);
-                break;
-            }
-        }
-        currentAnimation = animation;
-        myAnimator.SetBool(currentAnimation, true);
+        myAnimator.Play(newAnimation);
+
+        currentAnimation = newAnimation;
     }
 }

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 2980350876063719952, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+  - {fileID: 2282336467906167152, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+  - {fileID: -5558544874872062255, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+  - {fileID: -1993999366931961193, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+  - {fileID: 3269529116293825254, guid: 01f4e0bc9bbe02f4fb2fa9c9b98199de, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - lazers1-active_1
+  - lazers1-active_0
+  - lazers1-active_3
+  - lazers1-active_2
+  - lazers1-active_4
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0

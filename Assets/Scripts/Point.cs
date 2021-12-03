@@ -12,7 +12,6 @@ public class Point : MonoBehaviour
         pointList.AddRange(points);
         if(lastPoint != null)
         {
-            Debug.Log(lastPoint);
             pointList.Remove(lastPoint);
         }
 

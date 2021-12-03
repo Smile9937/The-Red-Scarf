@@ -16,8 +16,14 @@ public class PauseMenu : MonoBehaviour
     public bool gamePaused;
 
     private GameObject currentMenu;
+    [Serializable]
+    public class KeyText
+    {
+        public KeybindingActions keybindingsAction;
+        public Text text;
+    }
 
-    public Text[] keybindTexts;
+    public KeyText[] keyTexts;
 
     private MenuEnum menuEnum;
 
@@ -109,7 +115,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuScene");
     }
     public void QuitGame()
     {
@@ -121,8 +127,15 @@ public class PauseMenu : MonoBehaviour
         InputManager.Instance.SetKeyBind(currentKeybind);
     }
 
-    public void SetKeyBindingsText(KeyCode keyCode, int keybindId)
+    public void SetKeyBindingsText(KeybindingActions keybindingsAction, KeyCode keyCode)
     {
-        keybindTexts[keybindId].text = keyCode.ToString();
+        foreach(KeyText keyText in keyTexts)
+        {
+            if(keyText.keybindingsAction == keybindingsAction)
+            {
+                keyText.text.text = keyCode.ToString();
+                return;
+            }
+        }
     }
 }

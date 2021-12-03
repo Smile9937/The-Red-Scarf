@@ -71,6 +71,11 @@ public class LaserBoss : TripleBoss
     private Player player;
     private float laserTime;
 
+    private const string SHOOT_DOWN = "ShootDown";
+    private const string SHOOT_LEFT = "ShootLeft";
+    private const string SHOOT_RIGHT = "ShootRight";
+    private const string STUCK = "Stuck";
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -365,7 +370,7 @@ public class LaserBoss : TripleBoss
 
                 state = State.Cooldown;
                 Rotate(0);
-                PlayAnimation("isStuck");
+                PlayAnimation(STUCK);
 
                 StopAllCoroutines();
                 StartCoroutine(StuckInGroundTimer());
@@ -465,13 +470,13 @@ public class LaserBoss : TripleBoss
         {
             case Pattern.PatternOne:
             case Pattern.PatternOneMirror:
-                PlayAnimation("isShootDown");
+                PlayAnimation(SHOOT_DOWN);
                 break;
             case Pattern.PatternTwo:
-                PlayAnimation("isShootRight");
+                PlayAnimation(SHOOT_RIGHT);
                 break;
             case Pattern.PatternTwoMirror:
-                PlayAnimation("isShootLeft");
+                PlayAnimation(SHOOT_LEFT);
                 break;
             case Pattern.PatternThree:
                 break;
@@ -485,5 +490,16 @@ public class LaserBoss : TripleBoss
         DisableLaser();
         Rotate(0);
         PatternDone();
+    }
+
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        Destroy(laserPrefab.gameObject);
+        Destroy(laserOutlinePrefab.gameObject);
+        foreach(LineRenderer lineRenderer in bouncingLasers)
+        {
+            Destroy(lineRenderer.gameObject);
+        }
     }
 }
