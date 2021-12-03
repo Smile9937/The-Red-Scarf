@@ -9,6 +9,7 @@ public class DoNotRespawn : MonoBehaviour
     public int pickUpID = -1;
 
     private bool pickedUp;
+    [SerializeField] private bool checkForPickUpScript = false; // New Bool
 
     private void Reset()
     {
@@ -42,7 +43,7 @@ public class DoNotRespawn : MonoBehaviour
         {
             if (GameManager.Instance.pickupCollectedDatabase[pickUpID])
             {
-                if (GetComponent<PickUp>()) // New code
+                if (GetComponent<PickUp>() && checkForPickUpScript) // New code
                 {  // New Code
                     GetComponent<PickUp>().DoEvent(); // New code
                 }  // New code

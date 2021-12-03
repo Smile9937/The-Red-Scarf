@@ -9,6 +9,13 @@ public class SoundEffect : MonoBehaviour
     public string Event = "";
 
     [SerializeField] private float intensity;
+
+    //Backup for Respawn
+    private void Start()
+    {
+        AudioLibrary.Instance.ChangeClipVolume(Event, 0);
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if(other.CompareTag("Player"))

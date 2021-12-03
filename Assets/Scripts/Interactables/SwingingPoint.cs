@@ -8,6 +8,10 @@ public class SwingingPoint : ActivatableObject, IGrabbable
     public float distanceBias = 0;
     [SerializeField] private GameObject theTarget;
     [SerializeField] CharacterGrapplingScarf theGrapplingScarf;
+    [SerializeField] SpriteRenderer theSpriteRenderer = null;
+    [SerializeField] Sprite unGrabbedSprite;
+    [SerializeField] Sprite grabbedSprite;
+    bool hasSpriteToUse = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -16,6 +20,11 @@ public class SwingingPoint : ActivatableObject, IGrabbable
         if (FindObjectOfType<CharacterGrapplingScarf>() && theGrapplingScarf == null)
         {
             theGrapplingScarf = FindObjectOfType<CharacterGrapplingScarf>();
+        }
+        if (theSpriteRenderer != null && unGrabbedSprite != null && grabbedSprite != null)
+        {
+            hasSpriteToUse = true;
+            theSpriteRenderer.sprite = unGrabbedSprite;
         }
     }
 
@@ -34,6 +43,8 @@ public class SwingingPoint : ActivatableObject, IGrabbable
         if (theGrapplingScarf != null && isSwingable)
         {
             theGrapplingScarf.SetSwingingPointAsTarget(theTarget, distanceBias);
+            if (hasSpriteToUse)
+                theSpriteRenderer.sprite = grabbedSprite;
         }
     }
     public void HandleGrabbedTowards()
@@ -41,15 +52,23 @@ public class SwingingPoint : ActivatableObject, IGrabbable
         if (theGrapplingScarf != null)
         {
             theGrapplingScarf.LaunchPlayerIntoDash();
+            Invoke("ReturnSwingingPointSprite",0.1f);
             return;
         }
     }
     public void HandleGrabbedAway()
     {
         Invoke("ReturnFromGrabbed", 0.1f);
+        Invoke("ReturnSwingingPointSprite", 0.1f);
     }
     public void ReturnFromGrabbed()
     {
         theGrapplingScarf.ReturnPlayerState();
+    }
+
+    public void ReturnSwingingPointSprite()
+    {
+        if (hasSpriteToUse)
+            theSpriteRenderer.sprite = unGrabbedSprite;
     }
 }

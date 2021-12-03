@@ -389,6 +389,12 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
             Die();
             return;
         }
+        else // New code
+        {
+            myAnimator.SetTrigger("isDamaged");
+            state = State.Staggered;
+        }
+
         StartCoroutine(InvincibilityFrames());
     }
     private IEnumerator InvincibilityFrames()
