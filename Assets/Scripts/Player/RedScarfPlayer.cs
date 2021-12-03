@@ -15,6 +15,7 @@ public class RedScarfPlayer : MonoBehaviour
     [SerializeField] private float speedPerRage;
     [SerializeField] private int maxRage;
     [SerializeField] private float timeBeforeRageLoss;
+    [SerializeField] private float timeBetweenRageLoss;
     [SerializeField] private int rageLossCount;
     private int currentRageCount;
     private int currentRageDamage;
@@ -168,7 +169,8 @@ public class RedScarfPlayer : MonoBehaviour
         {
             currentRageCount += rageGain;
         }
-        loseRageCoroutine = StartCoroutine(LoseRage());
+        //loseRageCoroutine = StartCoroutine(LoseRage());
+        StartCoroutine(DelayBeforeLoseRage());
     }
     private void HandleRage()
     {
@@ -176,11 +178,20 @@ public class RedScarfPlayer : MonoBehaviour
         player.speedBonus = currentRageCount * Mathf.Round(speedPerRage * 100) / 100;
     }
 
+    private IEnumerator DelayBeforeLoseRage() // New code
+    {
+        if (loseRageCoroutine != null)
+            StopCoroutine(loseRageCoroutine);
+
+        yield return new WaitForSeconds(timeBeforeRageLoss);
+        loseRageCoroutine = StartCoroutine(LoseRage());
+    }
+
     private IEnumerator LoseRage()
     {
         while (true)
         {
-            yield return new WaitForSeconds(timeBeforeRageLoss);
+            yield return new WaitForSeconds(timeBetweenRageLoss);
             if(currentRageCount - rageLossCount <= 0)
             {
                 currentRageCount = 0;

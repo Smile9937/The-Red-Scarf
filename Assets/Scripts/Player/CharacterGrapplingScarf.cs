@@ -202,33 +202,30 @@ public class CharacterGrapplingScarf : MonoBehaviour
             if (originalLaunchPosition.x < targetLaunchPositionB.x && transform.position.x >= targetLaunchPositionB.x)
             {
                 scarfGFXState = ScarfGFXState.PassedGrabbedState;
+                ReturnHookedPointGFX();
             }
             else if (originalLaunchPosition.x > targetLaunchPositionB.x && transform.position.x <= targetLaunchPositionB.x)
             {
                 scarfGFXState = ScarfGFXState.PassedGrabbedState;
+                ReturnHookedPointGFX();
             }
             else if (originalLaunchPosition.y < targetLaunchPositionB.y && transform.position.y >= targetLaunchPositionB.y)
             {
                 scarfGFXState = ScarfGFXState.PassedGrabbedState;
+                ReturnHookedPointGFX();
             }
             else if (originalLaunchPosition.y > targetLaunchPositionB.y && transform.position.y <= targetLaunchPositionB.y)
             {
                 scarfGFXState = ScarfGFXState.PassedGrabbedState;
+                ReturnHookedPointGFX();
             }
         }
     }
 
     private void DoDashAttack()
     {
-        if (swingingPoint != null)
-        {
-            SwingingPoint theSwingingPoint = swingingPoint.GetComponent<SwingingPoint>();
-
-            if (theSwingingPoint != null)
-                theSwingingPoint.ReturnSwingingPointSprite();
-        }
-
         isDashing = false;
+        ReturnHookedPointGFX();
         scarfGFXState = ScarfGFXState.PassedGrabbedState;
         player.attackBonus += dashAttackBonus;
 
@@ -361,10 +358,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerStateStatus", dashDuration * 1.1f);
 
-            SwingingPoint theSwingingPoint = swingingPoint.GetComponent<SwingingPoint>();
-
-            if (theSwingingPoint != null)
-                theSwingingPoint.ReturnSwingingPointSprite();
+            ReturnHookedPointGFX();
 
             swingingPoint = null;
             theGrabbable = null;
@@ -472,6 +466,17 @@ public class CharacterGrapplingScarf : MonoBehaviour
     {
         if (theLineRenderer == null)
             return;
+    }
+
+    private void ReturnHookedPointGFX()
+    {
+        if (swingingPoint != null)
+        {
+            SwingingPoint theSwingingPoint = swingingPoint.GetComponent<SwingingPoint>();
+
+            if (theSwingingPoint != null)
+                theSwingingPoint.ReturnSwingingPointSprite();
+        }
     }
 
     protected void UpdateOfRenderedScarf()
