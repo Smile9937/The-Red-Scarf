@@ -45,6 +45,11 @@ public class MeleeBoss : TripleBoss
     private float swoopLerpValue = 0;
     private float chargeCounter = 0;
     private bool returnToPosition;
+
+    private const string DAZED = "Dazed";
+    private const string ATTACK1 = "Attack1";
+    private const string ATTACK2 = "Attack2";
+    private const string CHARGE = "Charge";
     private void Start()
     {
         List<Vector3> cornerPositions = new List<Vector3>();
@@ -139,7 +144,7 @@ public class MeleeBoss : TripleBoss
                 Destroy(currentImpact, 0.4f);
 
                 state = State.Cooldown;
-                PlayAnimation("isDazed");
+                PlayAnimation(DAZED);
                 transform.position = collision.GetContact(0).point + new Vector2(0, 1);
                 StartCoroutine(StuckInGroundTimer());
             }
@@ -158,7 +163,7 @@ public class MeleeBoss : TripleBoss
                 currentImpact.transform.localScale = new Vector2(currentImpact.transform.localScale.x * 2, currentImpact.transform.localScale.x * 2);
                 Destroy(currentImpact, 0.4f);
 
-                PlayAnimation("isDazed");
+                PlayAnimation(DAZED);
                 chargeCounter = 0;
                 chargeCountReached = false;
                 state = State.Cooldown;
@@ -171,14 +176,14 @@ public class MeleeBoss : TripleBoss
     private IEnumerator StuckInGroundTimer()
     {
         yield return new WaitForSeconds(stuckInGroundTimer);
-        PlayAnimation("isIdle");
+        PlayAnimation(IDLE);
         state = State.Attacking;
         returnToPosition = true;
     }
     private IEnumerator LargeWaveStuckInGroundTimer()
     {
         yield return new WaitForSeconds(largeWaveStuckInGroundTimer);
-        PlayAnimation("isIdle");
+        PlayAnimation(IDLE);
         state = State.Attacking;
         PickChargePosition();
     }
@@ -232,14 +237,14 @@ public class MeleeBoss : TripleBoss
     private IEnumerator TimeUntilStartSwoop(Vector3 position)
     {
         yield return new WaitForSeconds(timeUntilStartSwoop);
-        PlayAnimation("isAttack2");
+        PlayAnimation(ATTACK2);
         SetSwoopPoints(position);
     }
 
     private IEnumerator TimeUntilStartSlam()
     {
         yield return new WaitForSeconds(timeUntilStartSlam);
-        PlayAnimation("isAttack1");
+        PlayAnimation(ATTACK1);
         returnToPosition = false;
         state = State.Attacking;
     }
@@ -253,14 +258,14 @@ public class MeleeBoss : TripleBoss
         currentPoint = corners[randomNum];
         currentPosition = currentPoint.transform.position;
 
-        PlayAnimation("isCharge");
+        PlayAnimation(CHARGE);
         state = State.Attacking;
     }
 
     private IEnumerator TimeUntilStartLargeSlam()
     {
         yield return new WaitForSeconds(timeUntilLargeSlam);
-        PlayAnimation("isAttack1");
+        PlayAnimation(ATTACK1);
         state = State.Attacking;
     }
     private void SetSwoopPoints(Vector3 position)

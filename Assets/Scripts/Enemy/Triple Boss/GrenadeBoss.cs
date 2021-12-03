@@ -40,6 +40,13 @@ public class GrenadeBoss : TripleBoss
     private Vector3[] points;
     private float acidLerpValue = 0;
 
+    List<Grenade> grenades = new List<Grenade>();
+
+    private const string ATTACK1 = "Attack1Right";
+    private const string ATTACK2 = "Attack2";
+    private const string ATTACK3 = "Attack3";
+
+
     private void Start()
     {
         float xPosition = Mathf.Lerp(acidLocationsLeft[0].position.x, acidLocationsRight[0].position.x, 0.5f);
@@ -181,11 +188,12 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeGrenade);
-        PlayAnimation("isAttack1Right");
+        PlayAnimation(ATTACK1);
         for(int i = 0; i < grenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenGrenades);
             Grenade currentGrenade = Instantiate(grenade, firePoint.position, Quaternion.identity);
+            grenades.Add(currentGrenade);
             Vector2 force = new Vector2(grenadeForces[i].x * 9.82f * forceMultiplier, grenadeForces[i].y * 9.82f);
             currentGrenade.GetComponent<Rigidbody2D>().AddForce(force);
         }
@@ -197,7 +205,7 @@ public class GrenadeBoss : TripleBoss
     {
         state = State.PreparingToAttack;
         yield return new WaitForSeconds(timeBeforeAcid);
-        PlayAnimation("isAttack2");
+        PlayAnimation(ATTACK2);
         state = State.Attacking;
         SetAcidAttackPoints(position);
     }
@@ -213,16 +221,18 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeFinalAttack);
-        PlayAnimation("isAttack3");
+        PlayAnimation(ATTACK3);
         for(int i = 0; i < largeGrenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenLargeGrenades);
 
             Grenade currentGrenade = Instantiate(largeGrenade, transform.position, Quaternion.identity);
+            grenades.Add(currentGrenade);
             Vector2 force = new Vector2(largeGrenadeForces[i].x * 9.82f, grenadeForces[i].y * 9.82f);
             currentGrenade.GetComponent<Rigidbody2D>().AddForce(force);
 
             Grenade currentGrenade2 = Instantiate(largeGrenade, transform.position, Quaternion.identity);
+            grenades.Add(currentGrenade);
             Vector2 negativeForce = new Vector2(-largeGrenadeForces[i].x * 9.82f, grenadeForces[i].y * 9.82f);
             currentGrenade2.GetComponent<Rigidbody2D>().AddForce(negativeForce);
         }
@@ -240,5 +250,14 @@ public class GrenadeBoss : TripleBoss
             pattern = Pattern.PatternTwo;
         }
         StartCurrentPattern();
+    }
+
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        foreach(Grenade grenade in grenades)
+        {
+            Destroy(grenade.gameObject);
+        }
     }
 }
