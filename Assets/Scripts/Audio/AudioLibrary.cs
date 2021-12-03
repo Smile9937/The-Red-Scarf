@@ -27,6 +27,10 @@ public class AudioLibrary : MonoBehaviour
         {
             instance = this;
         }
+        foreach(FMOD.Studio.EventInstance sound in sounds)
+        {
+            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
     }
     private void Start()
     {

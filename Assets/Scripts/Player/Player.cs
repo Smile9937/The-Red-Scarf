@@ -99,10 +99,12 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     private void Save()
     {
         GameManager.Instance.hasBaseballBat = hasBaseballBat;
+        GameManager.Instance.playerAtkBonus = attackBonus;
     }
     private void Load()
     {
         hasBaseballBat = GameManager.Instance.hasBaseballBat;
+        attackBonus = GameManager.Instance.playerAtkBonus;
         SetCurrentCharacter();
     }
     private void Awake()

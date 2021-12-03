@@ -220,6 +220,14 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void DoDashAttack()
     {
+        if (swingingPoint != null)
+        {
+            SwingingPoint theSwingingPoint = swingingPoint.GetComponent<SwingingPoint>();
+
+            if (theSwingingPoint != null)
+                theSwingingPoint.ReturnSwingingPointSprite();
+        }
+
         isDashing = false;
         scarfGFXState = ScarfGFXState.PassedGrabbedState;
         player.attackBonus += dashAttackBonus;
@@ -352,6 +360,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
             CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerStateStatus", dashDuration * 1.1f);
+
+            SwingingPoint theSwingingPoint = swingingPoint.GetComponent<SwingingPoint>();
+
+            if (theSwingingPoint != null)
+                theSwingingPoint.ReturnSwingingPointSprite();
+
             swingingPoint = null;
             theGrabbable = null;
             animator.SetBool("isScarfThrown", false);

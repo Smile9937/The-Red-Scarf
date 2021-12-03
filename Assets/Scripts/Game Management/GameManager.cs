@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public bool hasBaseballBat;
 
+    public int playerAtkBonus;
+
     public Dictionary<int, bool> pickupCollectedDatabase = new Dictionary<int, bool>();
 
     private static GameManager instance;
