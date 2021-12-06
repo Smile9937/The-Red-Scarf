@@ -108,10 +108,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 79
+        width: 109
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.37477094, y: 0.67664224}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -127,12 +127,12 @@ TextureImporter:
       name: boss1-lazer-shoot-right_1
       rect:
         serializedVersion: 2
-        x: 79
+        x: 109
         y: 0
-        width: 79
+        width: 109
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.37571323, y: 0.6770884}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,12 +148,12 @@ TextureImporter:
       name: boss1-lazer-shoot-right_2
       rect:
         serializedVersion: 2
-        x: 158
+        x: 218
         y: 0
-        width: 79
+        width: 109
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.34841457, y: 0.6754637}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,12 +169,12 @@ TextureImporter:
       name: boss1-lazer-shoot-right_3
       rect:
         serializedVersion: 2
-        x: 237
+        x: 327
         y: 0
-        width: 79
+        width: 109
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.35109746, y: 0.6754637}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

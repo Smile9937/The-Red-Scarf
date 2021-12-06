@@ -28,6 +28,14 @@ public class InputManager : MonoBehaviour
 
     public CustomKeybinds[] keybinds;
 
+    [Serializable]
+    public class KeyCodeImages
+    {
+        public Sprite sprite;
+        public KeyCode keyCode;
+    }
+    public KeyCodeImages[] keyCodeImages;
+
     public bool waitingForInput;
     KeybindInvoker currentKeybind;
 

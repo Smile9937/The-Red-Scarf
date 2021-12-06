@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: a8e3c6f72bb62814a91427907334351c
+guid: 6407c95bdad826c41af7a4ab8c970e60
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9168414204058797012
-    second: boss1-lazer-dive-towards-player_0
+      213: -1992880857700443513
+    second: boss1-lazer-hitground_0
   - first:
-      213: 3584371845989289595
-    second: boss1-lazer-dive-towards-player_1
+      213: 8183693183432545178
+    second: boss1-lazer-hitground_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,43 +97,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boss1-lazer-dive-towards-player_0
+      name: boss1-lazer-hitground_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 66
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 61
+      alignment: 9
+      pivot: {x: 0.3978288, y: 0.35589957}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d3029a6420cc3f70800000000000000
-      internalID: 9168414204058797012
+      spriteID: 78ad61d2b6dd754e0800000000000000
+      internalID: -1992880857700443513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss1-lazer-dive-towards-player_1
+      name: boss1-lazer-hitground_1
       rect:
         serializedVersion: 2
-        x: 66
+        x: 89
         y: 0
-        width: 66
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 61
+      alignment: 9
+      pivot: {x: 0.40804592, y: 0.368322}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7e4a1ff33f3eb130800000000000000
-      internalID: 3584371845989289595
+      spriteID: a93584d5791529170800000000000000
+      internalID: 8183693183432545178
       vertices: []
       indices: 
       edges: []

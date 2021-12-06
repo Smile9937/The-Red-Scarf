@@ -49,11 +49,14 @@ public class TripleBossManager : MonoBehaviour
         PlayerWin
     }
 
+    TripleBossIntroAnimation introAnimation;
+
     private void Start()
     {
         bosses[0].boss = GetComponentInChildren<MeleeBoss>();
         bosses[1].boss = GetComponentInChildren<GrenadeBoss>();
         bosses[2].boss = GetComponentInChildren<LaserBoss>();
+        introAnimation = GetComponentInChildren<TripleBossIntroAnimation>();
         for(int i = 0; i < startPositions.Length; i++)
         {
             availablePositions.Add(startPositions[i]);
@@ -113,6 +116,11 @@ public class TripleBossManager : MonoBehaviour
                 bosses[2].attackTwoPatternIndexes.Add(bossPairings[i].patternIndex);
             }
         }
+    }
+
+    public void StartBossFight()
+    {
+        introAnimation.StartAnimation();
     }
 
     public void PrepareForBattle()
