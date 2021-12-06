@@ -272,6 +272,7 @@ MonoBehaviour:
   redScarf: 1
   unlockedRooms: 
   hasBaseballBat: 0
+  playerAtkBonus: 0
 --- !u!114 &532155894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +354,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 159784049
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 8873548882220953532, guid: e7c0e43ff20ba404d9efca2adeea31ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -869,7 +870,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1356088371
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

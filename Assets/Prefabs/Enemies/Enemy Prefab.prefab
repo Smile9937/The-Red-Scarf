@@ -343,7 +343,7 @@ MonoBehaviour:
   grounded: 0
   maxHealth: 100
   currentHealth: 0
-  secondsOfInvincibility: 0
+  secondsOfInvincibility: 0.5
   myAnimator: {fileID: 0}
   type: 0
   state: 0
