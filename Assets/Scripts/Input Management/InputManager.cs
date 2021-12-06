@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -106,12 +107,19 @@ public class InputManager : MonoBehaviour
             {
                 if(customKeybind.keybindingAction == defaultKeybind.keybindingAction)
                 {
-                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
-                        return;
+                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                        if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                            return;
 
                     customKeybind.keyCode = defaultKeybind.keyCode;
                     int keybindingId = Array.IndexOf(keybinds, customKeybind);
-                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    if (SceneManager.GetActiveScene().buildIndex == 0)
+                    {
+
+                    } else
+                    {
+                        PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    }
                 }
             }
         }
@@ -156,8 +164,9 @@ public class InputManager : MonoBehaviour
             {
                 if(customKeybind.keyCode == keyCode)
                 {
-                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
-                        return;
+                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                        if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                            return;
 
                     foreach(CustomKeybinds checkDuplicate in keybinds)
                     {
@@ -165,11 +174,23 @@ public class InputManager : MonoBehaviour
                         {
                             customKeybind.keyCode = checkDuplicate.keyCode;
                             int keybindingId = Array.IndexOf(keybinds, customKeybind);
-                            PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                            if (SceneManager.GetActiveScene().buildIndex == 0)
+                            {
+
+                            } else
+                            {
+                                PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                            }
                             
                             checkDuplicate.keyCode = keyCode;
                             int duplicateId = Array.IndexOf(keybinds, checkDuplicate);
-                            PauseMenu.Instance.SetKeyBindingsText(checkDuplicate.keyCode, duplicateId);
+                            if (SceneManager.GetActiveScene().buildIndex == 0)
+                            {
+
+                            } else
+                            {
+                                PauseMenu.Instance.SetKeyBindingsText(checkDuplicate.keyCode, duplicateId);
+                            }
                         }
                     }
                 }
@@ -180,7 +201,13 @@ public class InputManager : MonoBehaviour
                 {
                     customKeybind.keyCode = keyCode;
                     int keybindingId = Array.IndexOf(keybinds, customKeybind);
-                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    if (SceneManager.GetActiveScene().buildIndex == 0)
+                    {
+
+                    } else
+                    {
+                        PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    }
                     break;
                 }
             }

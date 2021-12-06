@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: 1295407045aadc048852bb1c2960ebe0
+guid: 5e99b601c7bdc5341ae4be8a8f4cabf7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3004844103722732625
-    second: PrototypeRedScarf-ded_0
+      213: 1218406116414584518
+    second: buttons_pausemenu1_0
   - first:
-      213: 8081442883718158233
-    second: PrototypeRedScarf-ded_1
+      213: -5482244669050662884
+    second: buttons_pausemenu1_1
   - first:
-      213: 1885994601215647838
-    second: PrototypeRedScarf-ded_2
+      213: 1553974200578136023
+    second: buttons_pausemenu1_2
   - first:
-      213: -7959788198496359508
-    second: PrototypeRedScarf-ded_3
+      213: 4679582101440691517
+    second: buttons_pausemenu1_3
   - first:
-      213: 838768236893521118
-    second: PrototypeRedScarf-ded_4
+      213: -6451466987752715563
+    second: buttons_pausemenu1_4
+  - first:
+      213: -2739636007408405617
+    second: buttons_pausemenu1_5
+  - first:
+      213: -8472651801420917648
+    second: buttons_pausemenu1_6
+  - first:
+      213: 8234529412518796379
+    second: buttons_pausemenu1_7
+  - first:
+      213: -2741068868586966330
+    second: buttons_pausemenu1_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -83,7 +95,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +107,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,7 +119,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_0
+      name: buttons_pausemenu1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa3fd204536ac46d0800000000000000
-      internalID: -3004844103722732625
+      spriteID: 6c6fd0158e5a8e010800000000000000
+      internalID: 1218406116414584518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_1
+      name: buttons_pausemenu1_1
       rect:
         serializedVersion: 2
-        x: 31
+        x: 49
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +165,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99711a44c7d072070800000000000000
-      internalID: 8081442883718158233
+      spriteID: c10d47905872be3b0800000000000000
+      internalID: -5482244669050662884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_2
+      name: buttons_pausemenu1_2
       rect:
         serializedVersion: 2
-        x: 62
+        x: 98
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5063cde8166c2a10800000000000000
-      internalID: 1885994601215647838
+      spriteID: 7d7d4975d43d09510800000000000000
+      internalID: 1553974200578136023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_3
+      name: buttons_pausemenu1_3
       rect:
         serializedVersion: 2
-        x: 93
+        x: 147
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cab27456ec6298190800000000000000
-      internalID: -7959788198496359508
+      spriteID: d3df5a5b02731f040800000000000000
+      internalID: 4679582101440691517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_4
+      name: buttons_pausemenu1_4
       rect:
         serializedVersion: 2
-        x: 124
+        x: 196
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +228,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed44be87447e3ab00800000000000000
-      internalID: 838768236893521118
+      spriteID: 5da07dab4f8c776a0800000000000000
+      internalID: -6451466987752715563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_pausemenu1_5
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f837d84019bdaf9d0800000000000000
+      internalID: -2739636007408405617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_pausemenu1_6
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0749bbe93181b6a80800000000000000
+      internalID: -8472651801420917648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_pausemenu1_7
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5c50bd4fdce64270800000000000000
+      internalID: 8234529412518796379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_pausemenu1_8
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c2fdf60364c5f9d0800000000000000
+      internalID: -2741068868586966330
       vertices: []
       indices: 
       edges: []
