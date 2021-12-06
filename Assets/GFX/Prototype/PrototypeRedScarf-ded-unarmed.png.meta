@@ -123,10 +123,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 41
-        height: 38
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: PrototypeRedScarf-ded-unarmed_1
       rect:
         serializedVersion: 2
-        x: 41
+        x: 31
         y: 0
-        width: 41
-        height: 38
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: PrototypeRedScarf-ded-unarmed_2
       rect:
         serializedVersion: 2
-        x: 82
+        x: 62
         y: 0
-        width: 41
-        height: 38
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: PrototypeRedScarf-ded-unarmed_3
       rect:
         serializedVersion: 2
-        x: 123
+        x: 93
         y: 0
-        width: 41
-        height: 38
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: PrototypeRedScarf-ded-unarmed_4
       rect:
         serializedVersion: 2
-        x: 164
+        x: 124
         y: 0
-        width: 41
-        height: 38
-      alignment: 9
-      pivot: {x: 0.5, y: 0.6}
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -1,22 +1,61 @@
 fileFormatVersion: 2
-guid: 1295407045aadc048852bb1c2960ebe0
+guid: 67915c8c25909ab468d2ff2d0e540803
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3004844103722732625
-    second: PrototypeRedScarf-ded_0
+      213: 7082297633125586623
+    second: buttons_mainmenu2_0
   - first:
-      213: 8081442883718158233
-    second: PrototypeRedScarf-ded_1
+      213: -8119947479731088090
+    second: buttons_mainmenu2_1
   - first:
-      213: 1885994601215647838
-    second: PrototypeRedScarf-ded_2
+      213: 3715071081999631645
+    second: buttons_mainmenu2_2
   - first:
-      213: -7959788198496359508
-    second: PrototypeRedScarf-ded_3
+      213: 3446071295064803037
+    second: buttons_mainmenu2_3
   - first:
-      213: 838768236893521118
-    second: PrototypeRedScarf-ded_4
+      213: -126605677715345312
+    second: buttons_mainmenu2_4
+  - first:
+      213: -6784818747751872885
+    second: buttons_mainmenu2_5
+  - first:
+      213: 810041350870818700
+    second: buttons_mainmenu2_6
+  - first:
+      213: 3143251469594481806
+    second: buttons_mainmenu2_7
+  - first:
+      213: 8044432821114164455
+    second: buttons_mainmenu2_8
+  - first:
+      213: -6673993761643825918
+    second: buttons_mainmenu2_9
+  - first:
+      213: -1602209912311667249
+    second: buttons_mainmenu2_10
+  - first:
+      213: -3407890191985863731
+    second: buttons_mainmenu2_11
+  - first:
+      213: 4480151726985737632
+    second: buttons_mainmenu2_12
+  - first:
+      213: 6599822038136390081
+    second: buttons_mainmenu2_13
+  - first:
+      213: -2896738551972587895
+    second: buttons_mainmenu2_14
+  - first:
+      213: 1814580920572514816
+    second: buttons_mainmenu2_15
+  - first:
+      213: 4755411756480755423
+    second: buttons_mainmenu2_16
+  - first:
+      213: -9086194885126461111
+    second: buttons_mainmenu2_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -83,7 +122,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +134,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,7 +146,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,13 +157,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_0
+      name: buttons_mainmenu2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa3fd204536ac46d0800000000000000
-      internalID: -3004844103722732625
+      spriteID: fb65a087c20694260800000000000000
+      internalID: 7082297633125586623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_1
+      name: buttons_mainmenu2_1
       rect:
         serializedVersion: 2
-        x: 31
+        x: 49
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99711a44c7d072070800000000000000
-      internalID: 8081442883718158233
+      spriteID: 625dccbd9c6205f80800000000000000
+      internalID: -8119947479731088090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_2
+      name: buttons_mainmenu2_2
       rect:
         serializedVersion: 2
-        x: 62
+        x: 98
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5063cde8166c2a10800000000000000
-      internalID: 1885994601215647838
+      spriteID: d150aed37759e8330800000000000000
+      internalID: 3715071081999631645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_3
+      name: buttons_mainmenu2_3
       rect:
         serializedVersion: 2
-        x: 93
+        x: 147
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cab27456ec6298190800000000000000
-      internalID: -7959788198496359508
+      spriteID: dd60205b597e2df20800000000000000
+      internalID: 3446071295064803037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrototypeRedScarf-ded_4
+      name: buttons_mainmenu2_4
       rect:
         serializedVersion: 2
-        x: 124
+        x: 196
         y: 0
-        width: 31
-        height: 45
+        width: 49
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +255,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed44be87447e3ab00800000000000000
-      internalID: 838768236893521118
+      spriteID: 060ba319ec43e3ef0800000000000000
+      internalID: -126605677715345312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_mainmenu2_5
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86c6d2eb4b77d1a0800000000000000
+      internalID: -6784818747751872885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_mainmenu2_6
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f580c1158dd3b00800000000000000
+      internalID: 810041350870818700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_mainmenu2_7
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8457e4de821f9b20800000000000000
+      internalID: 3143251469594481806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_mainmenu2_8
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 0
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e4d002970193af60800000000000000
+      internalID: 8044432821114164455
       vertices: []
       indices: 
       edges: []

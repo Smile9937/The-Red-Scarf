@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -115,11 +116,19 @@ public class InputManager : MonoBehaviour
             {
                 if(customKeybind.keybindingAction == defaultKeybind.keybindingAction)
                 {
-                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keyTexts.Length)
-                        return;
+                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                        if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                            return;
 
                     customKeybind.keyCode = defaultKeybind.keyCode;
-                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
+                    int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                    if (SceneManager.GetActiveScene().buildIndex == 0)
+                    {
+
+                    } else
+                    {
+                        PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    }
                 }
             }
         }
@@ -162,18 +171,33 @@ public class InputManager : MonoBehaviour
             {
                 if(customKeybind.keyCode == keyCode)
                 {
-                    if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keyTexts.Length)
-                        return;
+                    if (SceneManager.GetActiveScene().buildIndex != 0)
+                        if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keybindTexts.Length)
+                            return;
 
                     foreach(CustomKeybinds checkDuplicate in keybinds)
                     {
                         if(currentKeybind.keyBindingsAction == checkDuplicate.keybindingAction)
                         {
                             customKeybind.keyCode = checkDuplicate.keyCode;
-                            PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
+                            int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                            if (SceneManager.GetActiveScene().buildIndex == 0)
+                            {
 
+                            } else
+                            {
+                                PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                            }
+                            
                             checkDuplicate.keyCode = keyCode;
-                            PauseMenu.Instance.SetKeyBindingsText(checkDuplicate.keybindingAction, checkDuplicate.keyCode);
+                            int duplicateId = Array.IndexOf(keybinds, checkDuplicate);
+                            if (SceneManager.GetActiveScene().buildIndex == 0)
+                            {
+
+                            } else
+                            {
+                                PauseMenu.Instance.SetKeyBindingsText(checkDuplicate.keyCode, duplicateId);
+                            }
                         }
                     }
                 }
@@ -183,8 +207,14 @@ public class InputManager : MonoBehaviour
                 if (customKeybind.keybindingAction == currentKeybind.keyBindingsAction)
                 {
                     customKeybind.keyCode = keyCode;
-                    PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
+                    int keybindingId = Array.IndexOf(keybinds, customKeybind);
+                    if (SceneManager.GetActiveScene().buildIndex == 0)
+                    {
 
+                    } else
+                    {
+                        PauseMenu.Instance.SetKeyBindingsText(customKeybind.keyCode, keybindingId);
+                    }
                     break;
                 }
             }
