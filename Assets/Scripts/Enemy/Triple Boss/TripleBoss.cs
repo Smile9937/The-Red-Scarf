@@ -19,7 +19,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected TripleBossManager bossManager;
 
-    public string currentAnimation;
+    private string currentAnimation;
 
     protected Animator myAnimator;
 

@@ -30,7 +30,7 @@ AnimationClip:
     - time: 0.3
       value: {fileID: -5042455211253596194, guid: 0eda042b6e6d54140a0befb6fb4aa75b, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Squash and Stretch/Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -41,7 +41,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 2728594789
       attribute: 0
       script: {fileID: 0}
       typeID: 212

@@ -102,10 +102,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 74
+        width: 92
         height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.41424412, y: 0.67970634}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: boss1-lazer-hover-left_1
       rect:
         serializedVersion: 2
-        x: 74
+        x: 92
         y: 0
-        width: 74
+        width: 92
         height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.41424426, y: 0.6840894}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

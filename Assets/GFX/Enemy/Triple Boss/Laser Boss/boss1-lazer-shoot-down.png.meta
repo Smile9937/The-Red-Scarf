@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: -4515238841436291476
     second: boss1-lazer-shoot-down_7
+  - first:
+      213: 1677070312368219600
+    second: boss1-lazer-shoot-down_8
+  - first:
+      213: -7297970055324447163
+    second: boss1-lazer-shoot-down_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -120,10 +126,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49999988, y: 0.6594661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,12 +145,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_1
       rect:
         serializedVersion: 2
-        x: 72
+        x: 134
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5034211, y: 0.66195774}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,12 +166,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_2
       rect:
         serializedVersion: 2
-        x: 144
+        x: 268
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49999976, y: 0.6644494}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,12 +187,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_3
       rect:
         serializedVersion: 2
-        x: 216
+        x: 402
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5017106, y: 0.6594661}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,12 +208,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_4
       rect:
         serializedVersion: 2
-        x: 288
+        x: 536
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4982892, y: 0.6644494}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,12 +229,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_5
       rect:
         serializedVersion: 2
-        x: 360
+        x: 670
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.50171036, y: 0.66195774}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,12 +250,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_6
       rect:
         serializedVersion: 2
-        x: 432
+        x: 804
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49999908, y: 0.65448266}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,12 +271,12 @@ TextureImporter:
       name: boss1-lazer-shoot-down_7
       rect:
         serializedVersion: 2
-        x: 504
+        x: 938
         y: 0
-        width: 72
+        width: 134
         height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.50171036, y: 0.6544828}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,6 +284,48 @@ TextureImporter:
       bones: []
       spriteID: c6eb42c4236a651c0800000000000000
       internalID: -4515238841436291476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss1-lazer-shoot-down_8
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 0
+        width: 134
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5017099, y: 0.68687433}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d5af084096264710800000000000000
+      internalID: 1677070312368219600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss1-lazer-shoot-down_9
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 0
+        width: 134
+        height: 92
+      alignment: 9
+      pivot: {x: 0.49999908, y: 0.6843827}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ec2f6a6e668ba90800000000000000
+      internalID: -7297970055324447163
       vertices: []
       indices: 
       edges: []
