@@ -143,9 +143,7 @@ public class RedScarfPlayer : MonoBehaviour
                 TripleBoss boss = target.GetComponent<TripleBoss>();
 
                 if (boss != null)
-                {
                     GainRage(maxRage / 5);
-                }
 
                 if (player.damageText != null && target.tag == "Enemy")
                 {

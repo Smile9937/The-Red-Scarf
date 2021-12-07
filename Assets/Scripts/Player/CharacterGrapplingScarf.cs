@@ -8,6 +8,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] public GameObject swingingPoint;
     [SerializeField] Rigidbody2D characterRigidBody;
     [SerializeField] LayerMask grabableLayers;
+    [SerializeField] LayerMask scarfBlockLayers;
     [SerializeField] LayerMask ground;
     [Header("Stats")]
     [SerializeField] float lengthOfScarf = 1f;
@@ -166,18 +167,13 @@ public class CharacterGrapplingScarf : MonoBehaviour
             if (grounded)
             {
                 LowerPlayerSpeed();
-                float theTimeToThrow = 0.85f;
-                theTimeToThrow -= 0.05f * Mathf.Clamp(animator.GetFloat("axisXSpeed"), 0.5f,2);
-                Invoke("ToggleIsSwinging", dashDuration * theTimeToThrow);
             }
             else
             {
                 float temp = characterRigidBody.velocity.y;
                 temp *= gravityAdjustment;
                 if (temp >= 0.01f)
-                {
                     temp -= 0.1f * characterGravity;
-                }
                 characterRigidBody.velocity = new Vector2(characterRigidBody.velocity.x * 0.8f, temp);
             }
         }
@@ -295,8 +291,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
                     if (target.GetComponent<IGrabbable>() != null)
                     {
                         swingingPoint = target.gameObject;
-                        theGrabbable = target.GetComponent<IGrabbable>();
-                        target.GetComponent<IGrabbable>().IsGrabbed();
                     }
                 }
             }
@@ -314,11 +308,27 @@ public class CharacterGrapplingScarf : MonoBehaviour
             curretNumOfTries++;
         }
         CancelInvoke("ReturnPlayerState");
+
         if (swingingPoint == null)
         {
             animator.SetBool("stopScarfThrow", true);
             Invoke("ReturnPlayerState", dashDuration * 1.1f);
             return;
+        }
+        else
+        {
+            Vector2 theDirectionCheck = swingingPoint.transform.position - scarfOriginLocation.transform.position;
+            theDirectionCheck.Normalize();
+            RaycastHit2D hit = Physics2D.Raycast(scarfOriginLocation.position, theDirectionCheck, lengthOfScarf * 3f, scarfBlockLayers);
+            RaycastHit2D hit2 = Physics2D.Raycast(scarfOriginLocation.position, theDirectionCheck, lengthOfScarf * 3f, grabableLayers);
+            if (hit.collider != null && hit.collider.gameObject != hit2.collider.gameObject)
+            {
+                animator.SetBool("stopScarfThrow", true);
+                Invoke("ReturnPlayerState", dashDuration * 1.1f);
+                return;
+            }
+            theGrabbable = swingingPoint.GetComponent<IGrabbable>();
+            theGrabbable.IsGrabbed();
         }
         animator.SetBool("isScarfThrown", true);
         if (grounded)

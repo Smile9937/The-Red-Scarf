@@ -16,12 +16,16 @@ public class RoomSwitch : MonoBehaviour
     [Header("Normal Method")]
     [SerializeField] Animator theRoomController;
     [SerializeField] int roomNumber = 0;
+    [SerializeField] int fullRoomNumber = 0;
     [Header("New Method")]
     [SerializeField] CinemachineConfiner theConfiner;
     [SerializeField] PolygonCollider2D theRoomCollider;
 
+    RoomMaster theRoomMaster;
+
     private void Awake()
     {
+        theRoomMaster = FindObjectOfType<RoomMaster>();
         foreach (var item in enemiesToRespawn)
         {
             if (item != null)
@@ -50,6 +54,7 @@ public class RoomSwitch : MonoBehaviour
             {
                 RespawnEnemies();
                 theRoomController.SetInteger("theRoomNumber", roomNumber);
+                theRoomMaster.currentPlayerRoomLoc = fullRoomNumber;
             }
             if (GameObject.FindGameObjectWithTag("Background Room"))
             {
@@ -76,7 +81,7 @@ public class RoomSwitch : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collission)
     {
-        if (collission.tag == "Player")
+        if (collission.tag == "Player" && theRoomMaster.currentPlayerRoomLoc != fullRoomNumber)
         {
             CancelInvoke("DespawnEnemies");
             Invoke("DespawnEnemies", Time.deltaTime + 2f);
@@ -85,7 +90,7 @@ public class RoomSwitch : MonoBehaviour
 
     private void RespawnEnemies()
     {
-        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
+        if (theRoomMaster.currentPlayerRoomLoc != fullRoomNumber)
         {
             foreach (var item in enemiesToRespawn)
             {
