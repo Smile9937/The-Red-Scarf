@@ -81,10 +81,8 @@ public class MainMenuTravelPoints : MonoBehaviour
         theSpriteRenderer.sprite = selectedSprite;
         yield return new WaitForSeconds(0.3f);
         state = ButtonState.Selectable;
-        theMainTravel.isInTransition = false;
         theMainTravel.SetSelectedMenuPosition();
     }
-
 
     private IEnumerator UpdateButtonPressed()
     {

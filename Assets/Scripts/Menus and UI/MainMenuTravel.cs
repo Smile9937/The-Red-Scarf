@@ -79,6 +79,10 @@ public class MainMenuTravel : MonoBehaviour
         currentPosition = selectedPosition;
         currentPosition.SetMenuPosition();
     }
+    public void ReturnMenuControl()
+    {
+        isInTransition = false;
+    }
 
     public void SetMenuPositions(MainMenuTravelPoints left, MainMenuTravelPoints upper, MainMenuTravelPoints right, MainMenuTravelPoints downwards, MainMenuTravelPoints selected)
     {
