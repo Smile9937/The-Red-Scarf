@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class MainMenuTravelPoints : MonoBehaviour
@@ -17,11 +18,13 @@ public class MainMenuTravelPoints : MonoBehaviour
     [SerializeField] SpriteRenderer theSpriteRenderer;
 
     [SerializeField] bool isSceneChanging = false;
+    [SerializeField] Slider theSlider;
 
     public ButtonState state;
     public enum ButtonState
     {
         Selectable,
+        Slider,
         Button,
         KeyBinder,
         Selected,
@@ -54,15 +57,12 @@ public class MainMenuTravelPoints : MonoBehaviour
                 StartCoroutine("UpdateSelectablePressed");
                 theMainTravel.isInTransition = true;
                 break;
-            case ButtonState.Selected:
-                StopAllCoroutines();
-                SetMenuPosition();
-                UnSetMenuPosition();
-                state = ButtonState.Selectable;
-                theMainTravel.isInTransition = false;
-                break;
             case ButtonState.Button:
                 StartCoroutine("UpdateButtonPressed");
+                theMainTravel.isInTransition = true;
+                break;
+            case ButtonState.Slider:
+                StartCoroutine("UpdateSliderSelected");
                 theMainTravel.isInTransition = true;
                 break;
             case ButtonState.KeyBinder:
@@ -95,5 +95,31 @@ public class MainMenuTravelPoints : MonoBehaviour
         if (!isSceneChanging)
             theMainTravel.isInTransition = false;
         theObjectToInteractWith.Invoke();
+        state = ButtonState.Button;
+    }
+
+    private IEnumerator UpdateSliderSelected()
+    {
+        while (!InputManager.Instance.GetKey(KeybindingActions.Attack) && !InputManager.Instance.GetKey(KeybindingActions.Special))
+        {
+            if (InputManager.Instance.GetKey(KeybindingActions.Right))
+            {
+                theSlider.value += 0.01f;
+                yield return new WaitForSeconds(Time.deltaTime + 0.1f);
+            }
+            else if (InputManager.Instance.GetKey(KeybindingActions.Left))
+            {
+                theSlider.value -= 0.01f;
+                yield return new WaitForSeconds(Time.deltaTime + 0.1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(Time.deltaTime + 0.01f);
+            }
+        }
+        theSpriteRenderer.sprite = activatedSprite;
+        SetMenuPosition();
+        UnSetMenuPosition();
+        StopAllCoroutines();
     }
 }

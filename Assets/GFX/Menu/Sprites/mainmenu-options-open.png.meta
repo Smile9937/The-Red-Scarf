@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: -1532850627083603084
     second: mainmenu-options-open_4
+  - first:
+      213: 8022220426021844606
+    second: mainmenu-options-open_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,10 +124,10 @@ TextureImporter:
       name: mainmenu-options-open_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 96
-        height: 50
+        x: 0
+        y: 0
+        width: 94
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +145,10 @@ TextureImporter:
       name: mainmenu-options-open_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 1
-        width: 96
-        height: 50
+        x: 94
+        y: 0
+        width: 94
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +166,10 @@ TextureImporter:
       name: mainmenu-options-open_2
       rect:
         serializedVersion: 2
-        x: 197
-        y: 1
-        width: 96
-        height: 50
+        x: 188
+        y: 0
+        width: 94
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +187,10 @@ TextureImporter:
       name: mainmenu-options-open_3
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1
-        width: 96
-        height: 50
+        x: 282
+        y: 0
+        width: 94
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +208,10 @@ TextureImporter:
       name: mainmenu-options-open_4
       rect:
         serializedVersion: 2
-        x: 393
-        y: 1
-        width: 96
-        height: 50
+        x: 376
+        y: 0
+        width: 94
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,6 +221,27 @@ TextureImporter:
       bones: []
       spriteID: 47372fed9783abae0800000000000000
       internalID: -1532850627083603084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainmenu-options-open_5
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 0
+        width: 94
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e763ae259f6a45f60800000000000000
+      internalID: 8022220426021844606
       vertices: []
       indices: 
       edges: []
