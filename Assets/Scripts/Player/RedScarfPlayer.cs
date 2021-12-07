@@ -170,6 +170,7 @@ public class RedScarfPlayer : MonoBehaviour
             currentRageCount += rageGain;
         }
         //loseRageCoroutine = StartCoroutine(LoseRage());
+        StopAllCoroutines();
         StartCoroutine(DelayBeforeLoseRage());
     }
     private void HandleRage()
@@ -180,9 +181,6 @@ public class RedScarfPlayer : MonoBehaviour
 
     private IEnumerator DelayBeforeLoseRage() // New code
     {
-        if (loseRageCoroutine != null)
-            StopCoroutine(loseRageCoroutine);
-
         yield return new WaitForSeconds(timeBeforeRageLoss);
         loseRageCoroutine = StartCoroutine(LoseRage());
     }
@@ -195,6 +193,7 @@ public class RedScarfPlayer : MonoBehaviour
             if(currentRageCount - rageLossCount <= 0)
             {
                 currentRageCount = 0;
+                StopAllCoroutines();
             }
             else
             {
