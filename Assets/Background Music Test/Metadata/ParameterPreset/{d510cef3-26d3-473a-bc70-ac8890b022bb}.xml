@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{d510cef3-26d3-473a-bc70-ac8890b022bb}">
+		<property name="name">
+			<value>Laser</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a5064592-bbdb-4949-b1d8-18dc0cb652bf}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{843910b8-dfa4-49fc-b1ce-5aa9524039fb}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{843910b8-dfa4-49fc-b1ce-5aa9524039fb}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Start</value>
+			<value>Middle</value>
+			<value>End</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

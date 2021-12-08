@@ -21,11 +21,21 @@ public class Activator : MonoBehaviour, IDamageable
     private bool canBeUsed = true;
 
     Animator animator;
-
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
+    private void OnEnable()
+    {
+        GameEvents.Instance.onSaveGame += Save;
+        GameEvents.Instance.onLoadGame += Load;
+    }
+    private void OnDisable()
+    {
+        GameEvents.Instance.onSaveGame -= Save;
+        GameEvents.Instance.onLoadGame -= Load;
+    }
+
     public void Damage(int damage, bool bypassInvincibility)
     {
         switch(type)
@@ -54,6 +64,7 @@ public class Activator : MonoBehaviour, IDamageable
                 break;
             case Type.OneTimeUseLever:
                 if (!canBeUsed) return;
+                active = true;
                 canBeUsed = false;
                 animator.SetBool("isActivated", true);
                 Activate();
@@ -80,5 +91,33 @@ public class Activator : MonoBehaviour, IDamageable
     private void Deactivate()
     {
         GameEvents.Instance.DeActivate(id);
+    }
+
+    private void Save()
+    {
+        if (active)
+        {
+            if (GameManager.Instance.activatorLocations.Contains(transform.position))
+                return;
+
+            GameManager.Instance.activatorLocations.Add(transform.position);
+        }
+        else
+        {
+            if (!GameManager.Instance.activatorLocations.Contains(transform.position))
+                return;
+
+            GameManager.Instance.activatorLocations.Remove(transform.position);
+        }
+    }
+    private void Load()
+    {
+        foreach(Vector3 position in GameManager.Instance.activatorLocations)
+        {
+            if(position == transform.position)
+            {
+                Damage(0, false);
+            }
+        }
     }
 }

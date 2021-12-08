@@ -6,7 +6,6 @@ using System;
 public class TripleBossManager : MonoBehaviour
 {
     [SerializeField] private float timeUntilPatternStart = 5f;
-
     [SerializeField] private Transform[] startPositions;
 
     [Serializable]

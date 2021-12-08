@@ -9,7 +9,6 @@ public class LaserAnimator : MonoBehaviour
 
     [SerializeField] private Texture[] textures;
     [SerializeField] private float fps = 60f;
-
     [SerializeField] private float animationSpeed;
 
     private float fpsCounter;

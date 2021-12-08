@@ -5,10 +5,15 @@ using UnityEngine;
 public abstract class ActivatableObject : MonoBehaviour
 {
     [SerializeField] protected int id;
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         GameEvents.Instance.onActivate += Activate;
         GameEvents.Instance.onDeActivate += DeActivate;
+    }
+
+    protected virtual void Start()
+    {
+        
     }
 
     private void Activate(int id)

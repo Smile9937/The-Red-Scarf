@@ -188,14 +188,15 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeGrenade);
-        PlayAnimation(ATTACK1);
         for(int i = 0; i < grenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenGrenades);
+            PlayAnimation(ATTACK1);
             Grenade currentGrenade = Instantiate(grenade, firePoint.position, Quaternion.identity);
             grenades.Add(currentGrenade);
             Vector2 force = new Vector2(grenadeForces[i].x * 9.82f * forceMultiplier, grenadeForces[i].y * 9.82f);
             currentGrenade.GetComponent<Rigidbody2D>().AddForce(force);
+            PlayGrenadeLaunchSound();
         }
         state = State.Waiting;
         StopAllCoroutines();
@@ -221,10 +222,10 @@ public class GrenadeBoss : TripleBoss
             yield return null;
 
         yield return new WaitForSeconds(timeBeforeFinalAttack);
-        PlayAnimation(ATTACK3);
         for(int i = 0; i < largeGrenadeForces.Length; i++)
         {
             yield return new WaitForSeconds(timeBetweenLargeGrenades);
+            PlayAnimation(ATTACK3);
 
             Grenade currentGrenade = Instantiate(largeGrenade, transform.position, Quaternion.identity);
             grenades.Add(currentGrenade);
@@ -252,12 +253,21 @@ public class GrenadeBoss : TripleBoss
         StartCurrentPattern();
     }
 
+    private void PlayGrenadeLaunchSound()
+    {
+        soundPlayer.PlaySound(1);
+        //AudioLibrary.Instance.PlayOneShot("event:/SFX/GrenadeLaunch");
+    }
+
     protected override void OnDeath()
     {
         base.OnDeath();
         foreach(Grenade grenade in grenades)
         {
-            Destroy(grenade.gameObject);
+            if(grenade != null)
+            {
+                Destroy(grenade.gameObject);
+            }
         }
     }
 }

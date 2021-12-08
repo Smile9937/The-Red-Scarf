@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class AudioLibrary : MonoBehaviour
 {
-    private FMOD.Studio.EventInstance playMusic;
+    private EventInstance playMusic;
 
-    private List<FMOD.Studio.EventInstance> sounds = new List<FMOD.Studio.EventInstance>();
+    public List<EventInstance> sounds = new List<EventInstance>();
 
     public SongEnum songEnum;
     public enum SongEnum
@@ -27,13 +28,7 @@ public class AudioLibrary : MonoBehaviour
         {
             instance = this;
         }
-        foreach(FMOD.Studio.EventInstance sound in sounds)
-        {
-            sound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        }
-    }
-    private void Start()
-    {
+
         playMusic = RuntimeManager.CreateInstance("event:/Music/Background Music");
         switch(songEnum)
         {
@@ -51,18 +46,17 @@ public class AudioLibrary : MonoBehaviour
                 break;
         }
     }
-
-    bool IsPlaying(FMOD.Studio.EventInstance instance)
+    bool IsPlaying(EventInstance instance)
     {
-        FMOD.Studio.PLAYBACK_STATE state;
+        PLAYBACK_STATE state;
         instance.getPlaybackState(out state);
-        return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
+        return state != PLAYBACK_STATE.STOPPED;
     }
 
-    public string GetInstantiatedEventName(FMOD.Studio.EventInstance instance)
+    public string GetInstantiatedEventName(EventInstance instance)
     {
         string result;
-        FMOD.Studio.EventDescription description;
+        EventDescription description;
 
         instance.getDescription(out description);
         description.getPath(out result);
@@ -86,16 +80,24 @@ public class AudioLibrary : MonoBehaviour
         playMusic.setParameterByName("Current Music", musicTrack);
     }
 
-    public void PlaySound(string Event)
+    public bool SoundExists(string Event)
     {
-        FMOD.Studio.EventInstance currentSound = RuntimeManager.CreateInstance(Event);
-        sounds.Add(currentSound);
-        currentSound.start();
+        foreach(EventInstance currentSound in sounds)
+        {
+            if (GetInstantiatedEventName(currentSound) == Event)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void ChangeClipVolume(string Event, float volume) {
+    public void ChangeClipVolume(string Event, float volume)
+    {
+        if (!SoundExists(Event))
+            return;
 
-        foreach(FMOD.Studio.EventInstance currentSound in sounds)
+        foreach(EventInstance currentSound in sounds)
         {
             if(GetInstantiatedEventName(currentSound) == Event)
             {
