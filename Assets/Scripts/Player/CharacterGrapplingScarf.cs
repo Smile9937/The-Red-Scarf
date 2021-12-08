@@ -41,6 +41,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
     [SerializeField] LayerMask scarfGrabableLayers;
     [SerializeField] Transform scarfOriginLocation;
     Vector2 scarfGrabLocation;
+    Vector2 scarfGrabDirection;
     private RaycastHit2D hit;
     private bool grabbedNewLocation = false;
     [SerializeField] private ScarfGFXState scarfGFXState;
@@ -307,12 +308,12 @@ public class CharacterGrapplingScarf : MonoBehaviour
             }
             curretNumOfTries++;
         }
-        CancelInvoke("ReturnPlayerState");
 
         if (swingingPoint == null)
         {
+            CancelInvoke("ReturnPlayerState");
             animator.SetBool("stopScarfThrow", true);
-            Invoke("ReturnPlayerState", dashDuration * 1.1f);
+            Invoke("ReturnPlayerState", dashDuration * 0.9f);
             return;
         }
         else
@@ -324,6 +325,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject != hit2.collider.gameObject)
             {
                 animator.SetBool("stopScarfThrow", true);
+                CancelInvoke("ReturnPlayerState");
                 Invoke("ReturnPlayerState", dashDuration * 1.1f);
                 return;
             }
@@ -337,6 +339,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         grabbedNewLocation = true;
         scarfGrabLocation = swingingPoint.transform.position;
+        scarfGrabDirection = swingingPoint.transform.position - transform.position;
+        scarfGrabDirection.Normalize();
         ToggleIsSwinging();
     }
 
@@ -447,7 +451,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         }
         
          CancelInvoke("ReturnPlayerState");
-         Invoke("ReturnPlayerState", Mathf.Clamp(dashDuration,0.5f,3f));
+         Invoke("ReturnPlayerState", Mathf.Clamp(dashDuration * 2f,0.5f,3f));
     }
     private void ReturnGravityAdjustments()
     {
@@ -500,9 +504,11 @@ public class CharacterGrapplingScarf : MonoBehaviour
                 {
                     grabbedNewLocation = true;
                     scarfGrabLocation = swingingPoint.transform.position;
+                    scarfGrabDirection = swingingPoint.transform.position - scarfOriginLocation.transform.position;
+                    scarfGrabDirection.Normalize();
                 }
 
-                hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabLocation, lengthOfScarf * 3f, scarfGrabableLayers);
+                hit = Physics2D.Raycast(scarfOriginLocation.position, scarfGrabDirection, lengthOfScarf * 3f, scarfGrabableLayers);
 
                 if (hit)
                 {
