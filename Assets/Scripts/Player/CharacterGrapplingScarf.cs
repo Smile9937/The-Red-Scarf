@@ -311,9 +311,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
         if (swingingPoint == null)
         {
-            CancelInvoke("ReturnPlayerState");
             animator.SetBool("stopScarfThrow", true);
-            Invoke("ReturnPlayerState", dashDuration * 0.9f);
             return;
         }
         else
@@ -322,12 +320,13 @@ public class CharacterGrapplingScarf : MonoBehaviour
             theDirectionCheck.Normalize();
             RaycastHit2D hit = Physics2D.Raycast(scarfOriginLocation.position, theDirectionCheck, lengthOfScarf * 3f, scarfBlockLayers);
             RaycastHit2D hit2 = Physics2D.Raycast(scarfOriginLocation.position, theDirectionCheck, lengthOfScarf * 3f, grabableLayers);
-            if (hit.collider != null && hit.collider.gameObject != hit2.collider.gameObject)
+            if (hit.collider != null && hit2.collider != null)
             {
-                animator.SetBool("stopScarfThrow", true);
-                CancelInvoke("ReturnPlayerState");
-                Invoke("ReturnPlayerState", dashDuration * 1.1f);
-                return;
+                if (hit.collider.gameObject != hit2.collider.gameObject)
+                {
+                    animator.SetBool("stopScarfThrow", true);
+                    return;
+                }
             }
             theGrabbable = swingingPoint.GetComponent<IGrabbable>();
             theGrabbable.IsGrabbed();
@@ -368,7 +367,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
             characterRigidBody.AddForce(targetLaunchPosition * 9.82f * dashStrength * theBonusInStrength);
 
-            CancelInvoke("ReturnPlayerState");
             CancelInvoke("ReturnPlayerStateStatus");
             Invoke("ReturnPlayerStateStatus", dashDuration * 1.1f);
 
@@ -389,7 +387,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void ToggleIsSwinging()
     {
-        CancelInvoke("ReturnPlayerState");
         originalLaunchPosition = transform.position;
         if (swingingPoint != null)
         {
@@ -398,17 +395,15 @@ public class CharacterGrapplingScarf : MonoBehaviour
             
             float theDashDuration = Mathf.Clamp((Vector2.Distance(originalLaunchPosition, swingingPoint.transform.position) + theDistanceBias) / closeDistanceThrow + 0.05f, 0.9f * dashDuration, 1.1f * dashDuration);
             theDashDuration = Mathf.Round(theDashDuration * 100f) / 100f;
-            
+
             CancelInvoke("ReturnGravityAdjustments");
-            Invoke("ReturnPlayerState", theDashDuration * 1.25f);
         }
     }
 
     public void ReturnPlayerState()
     {
-        if (IsInvoking("ReturnPlayerState"))
-            CancelInvoke("ReturnPlayerState");
         ReturnPlayerStateAnim();
+        Invoke("ReturnPlayerStateStatus", 0.25f);
     }
 
     public void PlayScarfPullAnimation()
@@ -418,9 +413,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void ReturnPlayerStateStatus()
     {
-        if (IsInvoking("ReturnPlayerStateStatus"))
-            CancelInvoke("ReturnPlayerStateStatus");
-
         player.state = Player.State.Neutral;
         characterRigidBody.gravityScale = characterGravity;
         originalLaunchPosition = new Vector2(transform.position.x, transform.position.y);
@@ -433,14 +425,8 @@ public class CharacterGrapplingScarf : MonoBehaviour
 
     private void ReturnPlayerStateAnim()
     {
-        if (IsInvoking("ReturnPlayerStateAnim"))
-            CancelInvoke("ReturnPlayerStateAnim");
-
         animator.SetBool("isScarfThrown", false);
         animator.SetBool("stopScarfThrow", true);
-
-        if (!IsInvoking("ReturnPlayerStateStatus"))
-            Invoke("ReturnPlayerStateStatus", 0.2f);
     }
 
     private void DelayBeforeSwingStart()
@@ -449,9 +435,6 @@ public class CharacterGrapplingScarf : MonoBehaviour
         {
             ScarfThrowLocation();
         }
-        
-         CancelInvoke("ReturnPlayerState");
-         Invoke("ReturnPlayerState", Mathf.Clamp(dashDuration * 2f,0.5f,3f));
     }
     private void ReturnGravityAdjustments()
     {
