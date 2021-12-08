@@ -53,4 +53,11 @@ public class GameEvents : MonoBehaviour
     {
         onTripleBossPatternEnd?.Invoke();
     }
+
+    public event Action onPlayerRespawn;
+
+    public void PlayerRespawn()
+    {
+        onPlayerRespawn?.Invoke();
+    }
 }

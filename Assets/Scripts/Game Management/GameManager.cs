@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<int, bool> pickupCollectedDatabase = new Dictionary<int, bool>();
 
+    public List<Vector3> activatorLocations = new List<Vector3>();
+
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     private void Awake()
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
     }
     public void RespawnPlayer()
     {
+        GameEvents.Instance.PlayerRespawn();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void SwapCharacter()

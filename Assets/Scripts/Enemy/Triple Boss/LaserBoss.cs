@@ -76,6 +76,7 @@ public class LaserBoss : TripleBoss
     private const string SHOOT_RIGHT = "ShootRight";
     private const string STUCK = "Stuck";
 
+    private const string LASERPARAMETER = "Laser";
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -89,7 +90,7 @@ public class LaserBoss : TripleBoss
             bouncingLasers.Add(bouncingLaser);
             bouncingLaser.gameObject.SetActive(false);
         }
-        DisableLaser();
+        DisableLaserPrefab();
         List<Vector3> cornerPositions = new List<Vector3>();
 
         cornerPositions.Add(topRightLaserPosition.transform.position);
@@ -196,7 +197,7 @@ public class LaserBoss : TripleBoss
 
     protected override void StartCurrentPattern()
     {
-        DisableLaser();
+        DisableLaserPrefab();
         switch(pattern)
         {
             case Pattern.PatternOne:
@@ -231,7 +232,7 @@ public class LaserBoss : TripleBoss
     public override void EndPattern()
     {
         base.EndPattern();
-        DisableLaser();
+        DisableLaserPrefab();
         Rotate(0);
     }
 
@@ -248,6 +249,7 @@ public class LaserBoss : TripleBoss
 
     private void EnableLaser()
     {
+        soundPlayer.ChangeSoundParameter(2, LASERPARAMETER, 1);
         laserOutlinePrefab.enabled = false;
         laserActive = true;
         laserPrefab.enabled = true;
@@ -258,6 +260,13 @@ public class LaserBoss : TripleBoss
         }
     }
     private void DisableLaser()
+    {
+        soundPlayer.ChangeSoundParameter(2, LASERPARAMETER, 2);
+        soundPlayer.StopSound(2);
+        DisableLaserPrefab();
+    }
+
+    private void DisableLaserPrefab()
     {
         laserOutlinePrefab.enabled = false;
         laserActive = false;
@@ -275,18 +284,21 @@ public class LaserBoss : TripleBoss
             case Pattern.PatternOne:
             case Pattern.PatternOneMirror:
                 laserOutlinePrefab.enabled = true;
+                StartLaserSound();
                 currentFirePoint = firePointDown;
                 laserTarget = new Vector3(currentFirePoint.position.x, bottomLeftLaserPosition.position.y);
                 SetLaserOutlinePosition(currentFirePoint, laserTarget);
                 break;
             case Pattern.PatternTwo:
                 laserOutlinePrefab.enabled = true;
+                StartLaserSound();
                 currentFirePoint = firePointRight;
                 laserTarget = new Vector3(bottomLeftLaserPosition.position.x, currentFirePoint.position.y);
                 SetLaserOutlinePosition(currentFirePoint, laserTarget);
                 break;
             case Pattern.PatternTwoMirror:
                 laserOutlinePrefab.enabled = true;
+                StartLaserSound();
                 currentFirePoint = firePointRight;
                 laserTarget = new Vector3(bottomRightLaserPosition.position.x, currentFirePoint.position.y);
                 SetLaserOutlinePosition(currentFirePoint, laserTarget);
@@ -297,6 +309,12 @@ public class LaserBoss : TripleBoss
         }
 
         StartCoroutine(WaitToFireLaser());
+    }
+
+    private void StartLaserSound()
+    {
+        soundPlayer.ChangeSoundParameter(2, LASERPARAMETER, 0);
+        soundPlayer.PlaySound(2);
     }
 
     private void PrepareFinalPattern()

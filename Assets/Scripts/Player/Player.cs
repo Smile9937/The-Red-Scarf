@@ -26,6 +26,8 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     private bool countDownCanJumpTimer;
 
+    private bool previouslyGrounded;
+
     [Header("Character Status")]
     public int maxHealth = 100;
     public int currentHealth;
@@ -91,6 +93,17 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     [SerializeField] Checkpoint checkpoint;
 
+    [SerializeField] private Animator squashAndStretch;
+
+    private const string SQUASH = "Squash";
+    private const string STRETCH = "Stretch";
+    private const string STRETCH_RETURN = "StretchReturn";
+    private const string BIG_SQUASH = "BigSquash";
+
+    private string currentSquashAndStretchAnimation;
+
+    public SoundPlayer soundPlayer;
+
     private void OnDisable()
     {
         GameEvents.Instance.onSaveGame -= Save;
@@ -113,6 +126,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
         rollCollider = GetComponent<CircleCollider2D>();
+        soundPlayer = GetComponent<SoundPlayer>();
 
         GameEvents.Instance.onSaveGame += Save;
         GameEvents.Instance.onLoadGame += Load;
@@ -311,6 +325,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
         {
             Jump();
+            PlaySquashAndStretchAnimation(STRETCH);
             stoppedJumping = false;
         }
 
@@ -325,6 +340,13 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
             jumpTimeCounter = 0;
             stoppedJumping = true;
         }
+
+        if(grounded && !previouslyGrounded)
+        {
+            PlaySquashAndStretchAnimation(SQUASH);
+        }
+
+        previouslyGrounded = grounded;
     }
 
     private void Jump()
@@ -473,8 +495,19 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     {
         if (oldPos == transform.position.x)
             return;
-        AudioLibrary.Instance.PlaySound("event:/SFX/Footsteps");
+        soundPlayer.PlaySound(0);
+        //AudioLibrary.Instance.PlayOneShot("event:/SFX/Footsteps");
         oldPos = transform.position.x;
+    }
+
+    protected void PlaySquashAndStretchAnimation(string newAnimation)
+    {
+        if (currentSquashAndStretchAnimation == newAnimation)
+            return;
+
+        squashAndStretch.Play(newAnimation);
+
+        currentSquashAndStretchAnimation = newAnimation;
     }
 
     private void OnDrawGizmosSelected()

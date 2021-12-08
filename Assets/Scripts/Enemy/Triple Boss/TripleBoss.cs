@@ -4,38 +4,28 @@ using UnityEngine;
 
 public abstract class TripleBoss : MonoBehaviour, IDamageable
 {
-    [SerializeField] AnimationCurve movementCurve;
-
     [Header("Basic Stats")]
     [SerializeField] protected int health;
-
     [SerializeField] protected float moveSpeed;
-
     [SerializeField] private Vector2 returnTrajectoryOffset = new Vector2(0f, -8f);
-
-    public Transform startPosition;
-
-    protected Vector3 targetPosition;
-
-    protected TripleBossManager bossManager;
-
-    private string currentAnimation;
-
-    protected Animator myAnimator;
-
-    private Hazard hazardComponent;
-
     [SerializeField] float time;
 
+    public Transform startPosition;
+    protected TripleBossManager bossManager;
+    protected Animator myAnimator;
+    private Hazard hazardComponent;
+
     protected Vector3 startLocalScale;
-
     protected Vector3 firstPosition;
-
+    protected Vector3 targetPosition;
     private Vector3[] positions;
 
     private const string HOVER_RIGHT = "HoverRight";
     protected const string IDLE = "Idle";
     private const string DEAD = "Death";
+    private string currentAnimation;
+
+    protected SoundPlayer soundPlayer;
 
     //[HideInInspector]
     public State state;
@@ -69,6 +59,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         hazardComponent = GetComponent<Hazard>();
         state = State.Waiting;
         startLocalScale = transform.localScale;
+        soundPlayer = GetComponent<SoundPlayer>();
     }
 
     private void OnEnable()
@@ -220,6 +211,8 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     protected void MoveToAttackPosition(Vector3 target)
     {
+        soundPlayer.PlaySound(0);
+        //AudioLibrary.Instance.PlaySound("event:/SFX/Hovercraft");
         targetPosition = target;
         if(transform.position.x > targetPosition.x)
         {
@@ -242,10 +235,13 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
 
     public void Damage(int damage, bool bypassInvincibility)
     {
+        if (state == State.Dead)
+            return;
+
         health -= damage;
         if(health <= 0)
         {
-            hazardComponent.enabled = false;
+            Destroy(hazardComponent);
             state = State.Dead;
             bossManager.BossDead(this);
             OnDeath();

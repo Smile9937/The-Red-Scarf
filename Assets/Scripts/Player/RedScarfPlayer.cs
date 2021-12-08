@@ -25,7 +25,6 @@ public class RedScarfPlayer : MonoBehaviour
     [SerializeField] PlayerStats myStats;
     [SerializeField] private Player player;
     [HideInInspector] public float attackAreaMultiplier = 1;
-
     private void Start()
     {
         PlayerUI.Instance.SetSpecialUI(currentRageCount, maxRage);
@@ -123,6 +122,7 @@ public class RedScarfPlayer : MonoBehaviour
     }
     public void MeleeAttack()
     {
+        player.soundPlayer.PlaySound(1);
         Vector2 attackArea = myStats.attackSize;
         attackArea *= new Vector2(attackAreaMultiplier, attackAreaMultiplier);
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(player.attackPoint.position, attackArea, 0, player.attackLayers);
