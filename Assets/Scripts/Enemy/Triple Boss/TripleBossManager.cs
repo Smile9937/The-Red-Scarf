@@ -120,6 +120,10 @@ public class TripleBossManager : MonoBehaviour
     public void StartBossFight()
     {
         introAnimation.StartAnimation();
+        foreach (BossStatus boss in bosses)
+        {
+            boss.boss.StartUpBossUI();
+        }
     }
 
     public void PrepareForBattle()
