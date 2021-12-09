@@ -123,6 +123,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         pattern = Pattern.NoPattern;
         MoveToStartPosition();
     }
+
     private void MoveToStartPosition()
     {
         if (state == State.Dead)
@@ -144,7 +145,6 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         SetFirstPosition();
 
         SetReturnPoints(startPosition.position);
-
     }
 
     private void SetFirstPosition()
@@ -239,17 +239,21 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
     {
         PlayAnimation(IDLE);
     }
+    
+    [SerializeField] BossHealthUI theBossHealthUI;
 
     public void Damage(int damage, bool bypassInvincibility)
     {
         health -= damage;
-        if(health <= 0)
+        SetTheHealthOfBossUI();
+        if (health <= 0)
         {
             hazardComponent.enabled = false;
             state = State.Dead;
             bossManager.BossDead(this);
             OnDeath();
             PlayAnimation(DEAD);
+            RemoveFromHealthBarUI();
         }
     }
 
@@ -272,5 +276,35 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         myAnimator.Play(newAnimation);
 
         currentAnimation = newAnimation;
+    }
+
+    // Beyond Here is Mikael's Code, above is Simon's
+    public int GetBossHealth()
+    {
+        return health;
+    }
+
+    public virtual void StartUpBossUI()
+    {
+        if (theBossHealthUI != null)
+        {
+            theBossHealthUI.StartUpUIHealth();
+        }
+    }
+
+    protected virtual void SetTheHealthOfBossUI()
+    {
+        if (theBossHealthUI != null)
+        {
+            theBossHealthUI.SetBossHealthBar();
+        }
+    }
+    private void RemoveFromHealthBarUI()
+    {
+        if (theBossHealthUI != null)
+        {
+            theBossHealthUI.theBossesUsed.Remove(this);
+            theBossHealthUI = null;
+        }
     }
 }

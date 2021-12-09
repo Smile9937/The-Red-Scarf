@@ -26,7 +26,7 @@ public class MainMenuTravel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentPosition.state == MainMenuTravelPoints.ButtonState.KeyBinder && isInTransition && !theInputManager.waitingForInput)
+        if ((currentPosition.state == MainMenuTravelPoints.ButtonState.KeyBinder || currentPosition.state == MainMenuTravelPoints.ButtonState.Selectable) && isInTransition && !theInputManager.waitingForInput)
         {
             Debug.Log("EXIT");
             isInTransition = false;
@@ -65,7 +65,7 @@ public class MainMenuTravel : MonoBehaviour
         }
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && !doneInputThisUpdate)
         {
-            if (selectedPosition != null || currentPosition.state == MainMenuTravelPoints.ButtonState.Button || currentPosition.state == MainMenuTravelPoints.ButtonState.KeyBinder)
+            if (selectedPosition != null || !(currentPosition.state == MainMenuTravelPoints.ButtonState.Selectable))
             {
                 currentPosition.ActivateMenuPosition();
             }
