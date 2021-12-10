@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8066653693485063398}
   - component: {fileID: 8066653693485063399}
   - component: {fileID: 8066653693485063397}
+  - component: {fileID: 5920391530295787183}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -103,18 +104,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 8066653694254390595}
-  radius: 0.1
   groundCheckSize: {x: 0, y: 0}
   ground:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
-  offGroundJumpTimer: 0.1
   maxHealth: 100
   currentHealth: 0
   secondsOfInvincibility: 0
   myAnimator: {fileID: 0}
   type: 1
+  state: 0
+  scarfActionType: 0
   attackDistance: 7
   moveSpeed: 2
   timer: 2
@@ -125,12 +126,20 @@ MonoBehaviour:
   rightLimit: {fileID: 8066653693914776141}
   target: {fileID: 0}
   inRange: 0
+  meleeDamage: 0
+  attackPoint: {fileID: 0}
+  meleeRadius: 0.5
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
   bullet: {fileID: 7233836941818762748, guid: 100b272391406dd43acc1554c0542f5b, type: 3}
   rangedAttackPos: {fileID: 8066653693707931862}
   rangeAttackRate: 1
-  blockLayer:
+  blockingObjectLayer:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 0
+  knockbackVelocity: {x: 0, y: 0}
+  knockbackLength: 0
 --- !u!70 &8066653693485063398
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -187,6 +196,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5920391530295787183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8066653693485063395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/RobotHit
+  - event:/SFX/RobotIdle
 --- !u!1 &8066653693707931863
 GameObject:
   m_ObjectHideFlags: 0
