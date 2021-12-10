@@ -99,12 +99,16 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
     private bool cooling;
     private float intTimer;
 
+    private int idleNoiseCounter = 0;
+
     private CharacterGrapplingScarf theGrapplingScarf;
+    private SoundPlayer soundPlayer;
 
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        soundPlayer = GetComponent<SoundPlayer>();
         currentHealth = maxHealth;
 
         SelectTarget();
@@ -383,7 +387,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         if (isInvincible && !bypassInvincibility)
             return;
         currentHealth -= damage;
-
+        soundPlayer.PlaySound(0);
         if (currentHealth <= 0)
         {
             Die();
@@ -475,6 +479,17 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         }
         theGrapplingScarf.SetSwingingPointAsTarget(null, 0);
         theGrapplingScarf.ReturnPlayerState();
+    }
+
+    private void PlayIdleNoise()
+    {
+        idleNoiseCounter++;
+
+        if(idleNoiseCounter == 3)
+        {
+            soundPlayer.PlaySound(1);
+            idleNoiseCounter = 0;
+        }
     }
 
     private void OnDrawGizmosSelected()

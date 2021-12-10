@@ -32,6 +32,11 @@ public class InputImages : MonoBehaviour
         if (instance == null && instance != this)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
     public void SetKeybindImages()
@@ -41,6 +46,9 @@ public class InputImages : MonoBehaviour
 
     public void ChangeActive(KeybindingActions keybindingAction, bool active)
     {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            return;
+
         foreach(InputSprite sprite in inputSprites)
         {
             if(sprite.keybindingAction == keybindingAction)
@@ -66,6 +74,9 @@ public class InputImages : MonoBehaviour
 
     public void SetKeyBindingsImage(KeybindingActions keybindingAction, KeyCode keyCode)
     {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            return;
+
         foreach(InputSprite sprite in inputSprites)
         {
             if(sprite.keybindingAction == keybindingAction)
