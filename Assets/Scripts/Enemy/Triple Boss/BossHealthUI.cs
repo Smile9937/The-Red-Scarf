@@ -9,6 +9,7 @@ public class BossHealthUI : MonoBehaviour
     [SerializeField] private Slider theSlider;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image borderHealthBar;
+    [SerializeField] private Image borderBGBar;
     bool hasBeenSetUp = false;
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class BossHealthUI : MonoBehaviour
         theSlider.value = 1;
         healthBar.color = new Color(healthBar.color.r, healthBar.color.g, healthBar.color.b, 0);
         borderHealthBar.color = new Color(borderHealthBar.color.r, borderHealthBar.color.g, borderHealthBar.color.b, 0);
+        borderBGBar.color = new Color(borderBGBar.color.r, borderBGBar.color.g, borderBGBar.color.b, 0);
     }
 
     public void StartUpUIHealth()
@@ -32,17 +34,17 @@ public class BossHealthUI : MonoBehaviour
         if (hasBeenSetUp)
             yield return null;
 
-        float percentageOfProgress = 0;
         hasBeenSetUp = true;
+        borderHealthBar.color = new Color(borderHealthBar.color.r, borderHealthBar.color.g, borderHealthBar.color.b, 1);
+        borderBGBar.color = new Color(borderBGBar.color.r, borderBGBar.color.g, borderBGBar.color.b, 1);
+        healthBar.color = new Color(healthBar.color.r, healthBar.color.g, healthBar.color.b, 0.75f);
         while (theSlider.value < theSlider.maxValue)
         {
-            theSlider.value += theSlider.maxValue / 20;
             yield return new WaitForSeconds(0.1f);
-            healthBar.color += new Color(healthBar.color.r, healthBar.color.g, healthBar.color.b, percentageOfProgress);
-            borderHealthBar.color = new Color(borderHealthBar.color.r, borderHealthBar.color.g, borderHealthBar.color.b, percentageOfProgress);
-            percentageOfProgress += 0.2f;
-            Mathf.Clamp(percentageOfProgress, 0, 1);
+            healthBar.color += new Color(0, 0, 0, 0.01f);
+            theSlider.value += theSlider.maxValue / 25;
         }
+        borderBGBar.color = new Color(borderBGBar.color.r, borderBGBar.color.g, borderBGBar.color.b, 0.35f);
     }
 
 

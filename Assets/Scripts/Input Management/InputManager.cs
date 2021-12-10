@@ -121,6 +121,7 @@ public class InputManager : MonoBehaviour
                     {
                         PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
                     }
+                    GameEvents.Instance.KeyChange();
                 }
             }
         }
@@ -140,6 +141,7 @@ public class InputManager : MonoBehaviour
             {
                 PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
             }
+            GameEvents.Instance.KeyChange();
         }
     }
     public void SetKeyBind(KeybindInvoker keybind)
@@ -216,6 +218,7 @@ public class InputManager : MonoBehaviour
                 }
             }
             waitingForInput = false;
+            GameEvents.Instance.KeyChange();
         }
     }
 }

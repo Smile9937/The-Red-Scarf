@@ -16,6 +16,7 @@ public class MeleeBoss : TripleBoss
     [SerializeField] private Transform slamPositionRight;
     [SerializeField] private float slamSpeed;
     [SerializeField] private float timeUntilStartSlam;
+    [SerializeField] private Vector2 bossObjectOffset = new Vector2(0, 1);
     [SerializeField] private Bullet shockWave;
     [SerializeField] private GameObject impact;
     [SerializeField] private Vector2 impactOffset = new Vector2(0, 3);
@@ -147,7 +148,7 @@ public class MeleeBoss : TripleBoss
 
                 state = State.Cooldown;
                 PlayAnimation(DAZED);
-                transform.position = collision.GetContact(0).point + new Vector2(0, 1);
+                transform.position = collision.GetContact(0).point + bossObjectOffset;
                 StartCoroutine(StuckInGroundTimer());
             }
             else if(pattern == Pattern.PatternThree)
@@ -170,7 +171,7 @@ public class MeleeBoss : TripleBoss
                 chargeCounter = 0;
                 chargeCountReached = false;
                 state = State.Cooldown;
-                transform.position = collision.GetContact(0).point + new Vector2(0, 1);
+                transform.position = collision.GetContact(0).point + bossObjectOffset;
                 StartCoroutine(LargeWaveStuckInGroundTimer());
             }
         }

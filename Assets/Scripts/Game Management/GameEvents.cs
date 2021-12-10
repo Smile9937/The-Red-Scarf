@@ -60,4 +60,11 @@ public class GameEvents : MonoBehaviour
     {
         onPlayerRespawn?.Invoke();
     }
+
+    public event Action onKeyChange;
+
+    public void KeyChange()
+    {
+        onKeyChange?.Invoke();
+    }
 }
