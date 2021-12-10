@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{058238a9-02d7-455f-8756-5c68fb134f1b}">
+		<property name="assetPath">
+			<value>Acid_Splash6.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.86668934240362816</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2c247c0f-8f29-4f5a-93a2-80f1d508e164}</destination>
+		</relationship>
+	</object>
+</objects>

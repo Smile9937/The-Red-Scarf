@@ -20,6 +20,9 @@ public class MainMenuTravelPoints : MonoBehaviour
     [SerializeField] bool isSceneChanging = false;
     [SerializeField] Slider theSlider;
 
+    [SerializeField] private bool changeKeyBind;
+    [SerializeField] private KeybindingActions highlightText;
+
     public ButtonState state;
     public enum ButtonState
     {
@@ -40,6 +43,10 @@ public class MainMenuTravelPoints : MonoBehaviour
 
     public void UnSetMenuPosition()
     {
+        if(changeKeyBind)
+        {
+            InputImages.Instance.ChangeActive(highlightText, false);
+        }
         theSpriteRenderer.sprite = deactivatedSprite;
     }
 
@@ -67,6 +74,10 @@ public class MainMenuTravelPoints : MonoBehaviour
                 break;
             case ButtonState.KeyBinder:
                 theSpriteRenderer.sprite = selectedSprite;
+                if (changeKeyBind)
+                {
+                    InputImages.Instance.ChangeActive(highlightText, true);
+                }
                 theMainTravel.isInTransition = true;
                 theObjectToInteractWith.Invoke();
                 break;
@@ -98,17 +109,17 @@ public class MainMenuTravelPoints : MonoBehaviour
 
     private IEnumerator UpdateSliderSelected()
     {
-        while (!InputManager.Instance.GetKey(KeybindingActions.Attack) && !InputManager.Instance.GetKey(KeybindingActions.Special))
+        while (!InputManager.Instance.GetKey(KeybindingActions.Special))
         {
             if (InputManager.Instance.GetKey(KeybindingActions.Right))
             {
                 theSlider.value += 0.01f;
-                yield return new WaitForSeconds(Time.deltaTime + 0.1f);
+                yield return new WaitForSeconds(0.1f);
             }
             else if (InputManager.Instance.GetKey(KeybindingActions.Left))
             {
                 theSlider.value -= 0.01f;
-                yield return new WaitForSeconds(Time.deltaTime + 0.1f);
+                yield return new WaitForSeconds(0.1f);
             }
             else
             {
@@ -117,7 +128,7 @@ public class MainMenuTravelPoints : MonoBehaviour
         }
         theSpriteRenderer.sprite = activatedSprite;
         SetMenuPosition();
-        UnSetMenuPosition();
+        theMainTravel.isInTransition = false;
         StopAllCoroutines();
     }
 }

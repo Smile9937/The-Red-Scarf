@@ -3338,16 +3338,25 @@ MonoBehaviour:
   keyBindingsSettings: {fileID: 4668985337115754523}
   miniMap: {fileID: 4668985337853878915}
   gamePaused: 0
-  keybindTexts:
-  - {fileID: 4668985336905511090}
-  - {fileID: 4668985336513339371}
-  - {fileID: 4668985337666100476}
-  - {fileID: 4668985336062784293}
-  - {fileID: 4668985336935423513}
-  - {fileID: 4668985338165464581}
-  - {fileID: 4668985338035576696}
-  - {fileID: 4668985336382297818}
-  - {fileID: 4668985336546102218}
+  keyTexts:
+  - keybindingsAction: 1
+    text: {fileID: 4668985336905511090}
+  - keybindingsAction: 0
+    text: {fileID: 4668985336513339371}
+  - keybindingsAction: 2
+    text: {fileID: 4668985337666100476}
+  - keybindingsAction: 3
+    text: {fileID: 4668985336062784293}
+  - keybindingsAction: 5
+    text: {fileID: 4668985336382297818}
+  - keybindingsAction: 6
+    text: {fileID: 4668985336546102218}
+  - keybindingsAction: 7
+    text: {fileID: 4668985338165464581}
+  - keybindingsAction: 8
+    text: {fileID: 4668985338035576696}
+  - keybindingsAction: 4
+    text: {fileID: 4668985336935423513}
 --- !u!114 &4668985336891148722
 MonoBehaviour:
   m_ObjectHideFlags: 0
