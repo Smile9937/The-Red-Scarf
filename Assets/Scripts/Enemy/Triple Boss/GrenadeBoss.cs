@@ -146,11 +146,13 @@ public class GrenadeBoss : TripleBoss
             transform.position = Vector2.MoveTowards(transform.position, position, acidAttackMoveSpeed * Time.deltaTime);
             if(transform.position == position)
             {
+                soundPlayer.StopSound(3);
                 acidLerpValue = 0;
                 PatternDone();
             }
             else
             {
+                soundPlayer.PlaySound(3);
                 Vector3 acidPosition = new Vector3(transform.position.x, transform.position.y - acidSize.y, transform.position.z);
 
                 Collider2D[] acidHits = Physics2D.OverlapBoxAll(acidPosition, acidSize, 0, acidLayer);
@@ -255,7 +257,7 @@ public class GrenadeBoss : TripleBoss
 
     private void PlayGrenadeLaunchSound()
     {
-        soundPlayer.PlaySound(1);
+        soundPlayer.PlaySound(2);
         //AudioLibrary.Instance.PlayOneShot("event:/SFX/GrenadeLaunch");
     }
 

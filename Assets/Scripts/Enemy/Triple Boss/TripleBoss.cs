@@ -241,6 +241,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
             return;
 
         health -= damage;
+        soundPlayer.PlaySound(1);
         SetTheHealthOfBossUI();
         if (health <= 0)
         {

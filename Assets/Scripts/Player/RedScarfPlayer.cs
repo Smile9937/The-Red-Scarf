@@ -147,8 +147,8 @@ public class RedScarfPlayer : MonoBehaviour
 
                 if (player.damageText != null && target.tag == "Enemy")
                 {
-                    player.damageText.SetText(myStats.attackDamage + currentRageDamage + player.attackBonus);
-                    Instantiate(player.damageText, target.transform.position, Quaternion.identity);
+                    DamagePopUp currentDamagePopup = Instantiate(player.damageText, target.transform.position, Quaternion.identity);
+                    currentDamagePopup.SetText(myStats.attackDamage + currentRageDamage + player.attackBonus, myStats.attackDamage + player.attackBonus);
                 }
                 damageable.Damage(myStats.attackDamage + currentRageDamage + player.attackBonus, false);
             }

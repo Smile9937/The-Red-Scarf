@@ -109,6 +109,7 @@ public class MeleeBoss : TripleBoss
                     case Pattern.PatternThree:
                         if(chargeCountReached)
                         {
+                            soundPlayer.StopSound(2);
                             transform.Translate(-Vector3.up * slamSpeed * Time.deltaTime);
                         }
                         else
@@ -131,7 +132,8 @@ public class MeleeBoss : TripleBoss
         {
             if(pattern == Pattern.PatternTwo || pattern == Pattern.PatternTwoMirror)
             {
-                for(int i = 0; i < 2; i++)
+                soundPlayer.PlaySound(3);
+                for (int i = 0; i < 2; i++)
                 {
                     Vector2 position = new Vector2(transform.position.x, transform.position.y + 1);
                     Bullet currentShockWave = Instantiate(shockWave, position, Quaternion.identity);
@@ -150,6 +152,7 @@ public class MeleeBoss : TripleBoss
             }
             else if(pattern == Pattern.PatternThree)
             {
+                soundPlayer.PlaySound(3);
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 position = new Vector2(transform.position.x, transform.position.y + 1.5f);
@@ -198,6 +201,7 @@ public class MeleeBoss : TripleBoss
         }
         else
         {
+            soundPlayer.StopSound(2);
             swoopLerpValue = 0;
             PatternDone();
         }
@@ -238,6 +242,7 @@ public class MeleeBoss : TripleBoss
     {
         yield return new WaitForSeconds(timeUntilStartSwoop);
         PlayAnimation(ATTACK2);
+        soundPlayer.PlaySound(2);
         SetSwoopPoints(position);
     }
 
@@ -259,6 +264,7 @@ public class MeleeBoss : TripleBoss
         currentPosition = currentPoint.transform.position;
 
         PlayAnimation(CHARGE);
+        soundPlayer.PlaySound(2);
         state = State.Attacking;
     }
 

@@ -22,6 +22,7 @@ public class MainMenuTravelPoints : MonoBehaviour
 
     [SerializeField] private bool changeKeyBind;
     [SerializeField] private KeybindingActions highlightText;
+    private SoundPlayer soundPlayer;
 
     public ButtonState state;
     public enum ButtonState
@@ -38,6 +39,7 @@ public class MainMenuTravelPoints : MonoBehaviour
     private void Start()
     {
         theSpriteRenderer = GetComponent<SpriteRenderer>();
+        soundPlayer = GetComponent<SoundPlayer>();
         UnSetMenuPosition();
     }
 
@@ -58,6 +60,10 @@ public class MainMenuTravelPoints : MonoBehaviour
 
     public void ActivateMenuPosition()
     {
+        if(soundPlayer != null)
+        {
+            soundPlayer.PlaySound(0);
+        }
         switch (state)
         {
             case ButtonState.Selectable:

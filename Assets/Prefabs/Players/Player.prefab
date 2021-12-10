@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8492771728123215174}
   - component: {fileID: 8492771728123215169}
   - component: {fileID: 6815619446083841076}
+  - component: {fileID: 624245510606880649}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -238,7 +239,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0.18, y: 0.2}
   ground:
     serializedVersion: 2
-    m_Bits: 131136
+    m_Bits: 525504
   grounded: 0
   offGroundJumpTimer: 0.1
   maxHealth: 100
@@ -455,6 +456,24 @@ MonoBehaviour:
   scarfOriginLocation: {fileID: 0}
   scarfGFXState: 0
   scarfDirection: 1
+--- !u!114 &624245510606880649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492771728123215176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/Footsteps
+  - event:/SFX/BaseballBat
+  - event:/SFX/Hurt
+  - event:/SFX/Jump
+  - event:/SFX/PlayerDeath
 --- !u!1 &8492771728329687200
 GameObject:
   m_ObjectHideFlags: 0

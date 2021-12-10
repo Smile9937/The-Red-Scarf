@@ -744,6 +744,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5004248450138659534, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 151820749}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &151820751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5004248450138659533, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
+  m_PrefabInstance: {fileID: 151820749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &151820752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151820751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1001 &188798489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1196,12 +1215,31 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5004248450138659535, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 230487956}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 230487959}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17701fe5a9ea31f489f22209e4f9116d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &230487959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5004248450138659533, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
+  m_PrefabInstance: {fileID: 230487956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &230487960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230487959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1 &260917059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3411,7 +3449,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5004248450138659535, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 151820749}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 151820751}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17701fe5a9ea31f489f22209e4f9116d, type: 3}
@@ -3741,6 +3779,7 @@ GameObject:
   - component: {fileID: 1088545280}
   - component: {fileID: 1088545282}
   - component: {fileID: 1088545281}
+  - component: {fileID: 1088545283}
   m_Layer: 0
   m_Name: ButtonExit
   m_TagString: Untagged
@@ -3843,6 +3882,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1088545283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088545279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!212 &1100022803 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5004248450138659568, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
@@ -4235,6 +4288,7 @@ GameObject:
   - component: {fileID: 1295654183}
   - component: {fileID: 1295654182}
   - component: {fileID: 1295654181}
+  - component: {fileID: 1295654184}
   m_Layer: 0
   m_Name: ButtonOptions
   m_TagString: Untagged
@@ -4349,6 +4403,20 @@ Transform:
   m_Father: {fileID: 1330416269}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1295654184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295654180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1 &1330416268
 GameObject:
   m_ObjectHideFlags: 0
@@ -5985,7 +6053,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5004248450138659535, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 1837623597}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1837623600}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17701fe5a9ea31f489f22209e4f9116d, type: 3}
@@ -5996,6 +6064,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5004248450138659534, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 1837623597}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1837623600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5004248450138659533, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
+  m_PrefabInstance: {fileID: 1837623597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1837623601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837623600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1 &1842528861
 GameObject:
   m_ObjectHideFlags: 0
@@ -6401,6 +6488,7 @@ GameObject:
   - component: {fileID: 2013379836}
   - component: {fileID: 2013379838}
   - component: {fileID: 2013379837}
+  - component: {fileID: 2013379839}
   m_Layer: 0
   m_Name: ButtonPlay
   m_TagString: Untagged
@@ -6515,6 +6603,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2013379839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013379835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1001 &2075127835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6874,12 +6976,31 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5004248450138659535, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
   m_PrefabInstance: {fileID: 2092265541}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2092265544}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17701fe5a9ea31f489f22209e4f9116d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2092265544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5004248450138659533, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
+  m_PrefabInstance: {fileID: 2092265541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2092265545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092265544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/MenuButton
 --- !u!1001 &5004248450042010704
 PrefabInstance:
   m_ObjectHideFlags: 0

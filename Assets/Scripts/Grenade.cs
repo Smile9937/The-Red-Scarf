@@ -12,14 +12,17 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int timeUntilExplosion;
     [SerializeField] private GameObject explosionOutline;
 
+    private bool hit;
     private Animator myAnimator;
     private Rigidbody2D myRigidbody;
+    private SoundPlayer soundPlayer;
 
     private void Start()
     {
         explosionOutline.SetActive(false);
         myAnimator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
+        soundPlayer = GetComponent<SoundPlayer>();
     }
 
     private void FixedUpdate()
@@ -29,8 +32,11 @@ public class Grenade : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (hit)
+            return;
         if (collision.gameObject.CompareTag("Ground"))
         {
+            hit = true;
             myAnimator.SetTrigger("isLanded");
             explosionOutline.SetActive(true);
             explosionOutline.transform.localScale = new Vector2(explosionRadius, explosionRadius);
@@ -47,7 +53,7 @@ public class Grenade : MonoBehaviour
     private void Explode()
     {
         Collider2D[] explosionHits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, hitLayers);
-
+        soundPlayer.PlaySound(0);
         for (int i = 0; i < explosionHits.Length; i++)
         {
             Player player = explosionHits[i].GetComponent<Player>();

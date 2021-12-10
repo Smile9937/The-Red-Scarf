@@ -325,6 +325,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
         {
             Jump();
+            soundPlayer.PlaySound(3);
             PlaySquashAndStretchAnimation(STRETCH);
             stoppedJumping = false;
         }
@@ -356,7 +357,9 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     }
     public void Die()
     {
+        Time.timeScale = 0.3f;
         state = State.Dead;
+        soundPlayer.PlaySound(4);
         myRigidbody.velocity = Vector2.zero;
         myAnimator.SetBool("isDead", true);
         StartCoroutine(Respawn());
@@ -372,17 +375,20 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         if (isInvincible && !bypassInvincibility)
             return;
 
-        if (state == State.Blocking)
+        if (state == State.Blocking || state == State.Dead)
             return;
-
-        currentHealth -= damage;
-        PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
         {
             Die();
         }
-        StartCoroutine(InvincibilityFrames());
+        else
+        {
+            soundPlayer.PlaySound(2);
+            currentHealth -= damage;
+            PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
+            StartCoroutine(InvincibilityFrames());
+        }
     }
     private IEnumerator InvincibilityFrames()
     {
@@ -442,7 +448,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
                     {
                         character.KnockBack(gameObject, currentPlayerStats.groundSlamKnockbackVelocity, currentPlayerStats.groundslamKnockbackLength);
                         Instantiate(damageText, target.transform.position, Quaternion.identity);
-                        damageText.SetText(currentPlayerStats.groundSlamDamage);
+                        damageText.SetText(currentPlayerStats.groundSlamDamage, currentPlayerStats.groundSlamDamage);
                     }
                 }
             }
