@@ -8,10 +8,12 @@ public class BreakableObject : MonoBehaviour, IDamageable
     [SerializeField] Animator animator = null;
     private SoundPlayer soundPlayer;
     private SpriteRenderer spriteRenderer;
+    private Collider2D myCollider;
     private void Start()
     {
         soundPlayer = GetComponent<SoundPlayer>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        myCollider = GetComponent<Collider2D>();
     }
     public void Damage(int damage, bool bypassInvincibility)
     {
@@ -38,6 +40,7 @@ public class BreakableObject : MonoBehaviour, IDamageable
     private void DestroySelf()
     {
         spriteRenderer.enabled = false;
+        myCollider.enabled = false;
         StartCoroutine(WaitForSound());
     }
     private IEnumerator WaitForSound()
