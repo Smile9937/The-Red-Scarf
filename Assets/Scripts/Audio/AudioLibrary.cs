@@ -50,7 +50,7 @@ public class AudioLibrary : MonoBehaviour
     {
         PLAYBACK_STATE state;
         instance.getPlaybackState(out state);
-        return state != PLAYBACK_STATE.STOPPED;
+        return state != PLAYBACK_STATE.STOPPED && state != PLAYBACK_STATE.STOPPING;
     }
 
     public string GetInstantiatedEventName(EventInstance instance)
@@ -66,7 +66,7 @@ public class AudioLibrary : MonoBehaviour
 
     }
 
-    private void PlayMusic(int musicTrack)
+    public void PlayMusic(int musicTrack)
     {
         if (!IsPlaying(playMusic))
         {
@@ -75,8 +75,14 @@ public class AudioLibrary : MonoBehaviour
         }
     }
 
+    public void StopMusic()
+    {
+        playMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     public void ChangeMusicParameter(int musicTrack)
     {
+        PlayMusic(musicTrack);
         playMusic.setParameterByName("Current Music", musicTrack);
     }
 

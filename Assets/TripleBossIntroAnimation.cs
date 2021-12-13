@@ -22,6 +22,7 @@ public class TripleBossIntroAnimation : MonoBehaviour
     //Called In Animator
     private void IntroFinished()
     {
+        bossManager.IntroFinished();
         bossManager.PrepareForBattle();
 
         TripleBoss[] tripleBosses = GetComponentsInChildren<TripleBoss>();

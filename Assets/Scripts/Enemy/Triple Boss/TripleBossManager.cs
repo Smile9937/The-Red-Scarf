@@ -63,7 +63,7 @@ public class TripleBossManager : MonoBehaviour
         SetPatternIndexes();
     }
 
-    public Transform GetStartPosition(TripleBoss boss)
+    public Transform GetStartPosition()
     {
         int randomNum = UnityEngine.Random.Range(0, availablePositions.Count);
         Transform position = availablePositions[randomNum];
@@ -124,6 +124,11 @@ public class TripleBossManager : MonoBehaviour
         {
             boss.boss.StartUpBossUI();
         }
+    }
+
+    public void IntroFinished()
+    {
+        AudioLibrary.Instance.ChangeMusicParameter(4);
     }
 
     public void PrepareForBattle()
@@ -256,6 +261,7 @@ public class TripleBossManager : MonoBehaviour
         if (phase == Phase.PlayerWin)
         {
             Debug.Log("All Bosses Dead");
+            AudioLibrary.Instance.StopMusic();
         }
     }
 }

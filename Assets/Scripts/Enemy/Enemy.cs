@@ -213,6 +213,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
     public void PlayerDetected(Collider2D collision)
     {
+        if (state == State.Attacking || state == State.Staggered)
+            return;
         target = collision.transform;
         inRange = true;
         hotZone.SetActive(true);
@@ -241,6 +243,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
     public void SelectTarget()
     {
+        if (state == State.Attacking || state == State.Staggered)
+            return;
         float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
         float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
 
@@ -257,6 +261,8 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
     public void Flip()
     {
+        if (state == State.Attacking || state == State.Staggered)
+            return;
         Vector3 rotation = transform.eulerAngles;
         if(transform.position.x > target.position.x)
         {
@@ -371,6 +377,13 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         inRange = false;
         hotZone.SetActive(false);
         myAnimator.SetBool("isAttackingBool", false);
+        myAnimator.Play("Ded");
+        //Destroy(gameObject);
+        state = State.Dead;
+    }
+
+    private void DisableGameObject()
+    {
         if (movingEnemy)
         {
             state = State.Moving;
@@ -379,8 +392,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         {
             state = State.Waiting;
         }
-        this.transform.parent.gameObject.SetActive(false);
-        //Destroy(gameObject);
+        transform.parent.gameObject.SetActive(false);
     }
     public void Damage(int damage, bool bypassInvincibility)
     {
@@ -424,7 +436,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
         switch (scarfActionType)
         {
             case GrabbingAction.Thrown:
-                theGrapplingScarf.SetSwingingPointAsTarget(this.gameObject, -1);
+                theGrapplingScarf.SetSwingingPointAsTarget(gameObject, -1);
                 state = State.Staggered;
                 Invoke("ReturnFromGrabbed", 1.5f);
                 break;
