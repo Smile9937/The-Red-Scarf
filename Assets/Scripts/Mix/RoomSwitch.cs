@@ -11,6 +11,7 @@ public class RoomSwitch : MonoBehaviour
     [Header("Enemy Spawned")]
     [SerializeField] List<GameObject> enemiesToRespawn = new List<GameObject>();
     List<Vector2> enemiesToRespawnPos = new List<Vector2>();
+    List<TriggerAreaCheck> theTriggerArea = new List<TriggerAreaCheck>();
     [Header("Which Method")]
     [SerializeField] bool useNewMethod = false;
     [Header("Normal Method")]
@@ -33,6 +34,7 @@ public class RoomSwitch : MonoBehaviour
                 if (!enemiesToRespawn.Contains(item))
                 {
                     enemiesToRespawn.Add(item);
+                    theTriggerArea.Add(item.GetComponentInChildren<TriggerAreaCheck>());
                 }
                 if (!enemiesToRespawnPos.Contains(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y)))
                 {
@@ -52,9 +54,9 @@ public class RoomSwitch : MonoBehaviour
             }
             else
             {
-                RespawnEnemies();
                 theRoomController.SetInteger("theRoomNumber", roomNumber);
                 theRoomMaster.currentPlayerRoomLoc = fullRoomNumber;
+                RespawnEnemies();
                 //Invoke("DespawnEnemies", Time.deltaTime + 2f);
             }
             if (GameObject.FindGameObjectWithTag("Background Room"))
@@ -87,13 +89,13 @@ public class RoomSwitch : MonoBehaviour
             Invoke("DespawnEnemies", Time.deltaTime + 2f);
         }
     }
-    
 
 
     private void RespawnEnemies()
     {
         if (theRoomMaster.currentPlayerRoomLoc == fullRoomNumber)
         {
+            CancelInvoke("DespawnEnemies");
             foreach (var item in enemiesToRespawn)
             {
                 if (item != null)
@@ -102,7 +104,9 @@ public class RoomSwitch : MonoBehaviour
                     {
                         item.gameObject.SetActive(true);
                         item.GetComponentInChildren<Enemy>().currentHealth = item.GetComponentInChildren<Enemy>().maxHealth;
-                        item.GetComponentInChildren<TriggerAreaCheck>().gameObject.SetActive(true);
+                        //item.GetComponentInChildren<TriggerAreaCheck>().gameObject.SetActive(true);
+                        //item.GetComponentInChildren<Enemy>().gameObject.transform.position = enemiesToRespawnPos[enemiesToRespawn.IndexOf(item)];
+                        theTriggerArea[enemiesToRespawn.IndexOf(item)].enabled = true;
                         foreach (var itemLoc in enemiesToRespawnPos)
                         {
                             if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))

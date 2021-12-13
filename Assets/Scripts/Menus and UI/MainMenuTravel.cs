@@ -63,7 +63,7 @@ public class MainMenuTravel : MonoBehaviour
             currentPosition.SetMenuPosition();
             doneInputThisUpdate = true;
         }
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Attack) && !doneInputThisUpdate)
+        if ((InputManager.Instance.GetKeyDown(KeybindingActions.Attack) || InputManager.Instance.GetKeyDown(KeybindingActions.Jump)) && !doneInputThisUpdate)
         {
             if (selectedPosition != null || !(currentPosition.state == MainMenuTravelPoints.ButtonState.Selectable))
             {

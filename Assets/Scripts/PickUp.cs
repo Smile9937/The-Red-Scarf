@@ -11,6 +11,8 @@ public class PickUp : MonoBehaviour
 
     private bool toggle = true;
 
+    [SerializeField] bool isActivatedFromOther = false;
+
     Collider2D myCollider;
     SpriteRenderer mySpriteRenderer;
 
@@ -28,6 +30,9 @@ public class PickUp : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isActivatedFromOther)
+            return;
+
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {

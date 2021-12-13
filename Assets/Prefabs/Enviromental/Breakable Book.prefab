@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8959762204904477175}
   - component: {fileID: 8959762204904477130}
   - component: {fileID: 8959762204904477131}
+  - component: {fileID: -6470581315290651654}
   m_Layer: 19
   m_Name: Breakable Book
   m_TagString: Untagged
@@ -161,6 +162,7 @@ MonoBehaviour:
   toggleEvent:
     m_PersistentCalls:
       m_Calls: []
+  isActivatedFromOther: 1
   type: 2
 --- !u!61 &8959762204904477131
 BoxCollider2D:
@@ -188,3 +190,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.875, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &-6470581315290651654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959762204904477133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/WoodHit
+  - event:/SFX/WoodBreak

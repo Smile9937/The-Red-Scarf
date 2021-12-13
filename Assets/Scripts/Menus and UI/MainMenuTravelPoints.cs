@@ -115,7 +115,7 @@ public class MainMenuTravelPoints : MonoBehaviour
 
     private IEnumerator UpdateSliderSelected()
     {
-        while (!InputManager.Instance.GetKey(KeybindingActions.Special))
+        while (!InputManager.Instance.GetKey(KeybindingActions.Special) && !InputManager.Instance.GetKeyDown(KeybindingActions.Jump))
         {
             if (InputManager.Instance.GetKey(KeybindingActions.Right))
             {

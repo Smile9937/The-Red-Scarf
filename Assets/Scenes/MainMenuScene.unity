@@ -1583,7 +1583,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &365208775
 MonoBehaviour:
-  m_ObjectHideFlags: 10
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2208,13 +2208,13 @@ MonoBehaviour:
   - keybindingAction: 5
     keyCode: 276
   - keybindingAction: 0
-    keyCode: 122
+    keyCode: 32
   - keybindingAction: 3
     keyCode: 97
   - keybindingAction: 2
     keyCode: 115
   - keybindingAction: 1
-    keyCode: 120
+    keyCode: 100
   - keybindingAction: 10
     keyCode: 27
   keybinds: []
@@ -3780,6 +3780,7 @@ GameObject:
   - component: {fileID: 1088545282}
   - component: {fileID: 1088545281}
   - component: {fileID: 1088545283}
+  - component: {fileID: 1088545284}
   m_Layer: 0
   m_Name: ButtonExit
   m_TagString: Untagged
@@ -3830,7 +3831,19 @@ MonoBehaviour:
   state: 2
   theObjectToInteractWith:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1088545284}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LeaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &1088545282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3896,6 +3909,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Events:
   - event:/SFX/MenuButton
+--- !u!114 &1088545284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088545279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd57915319ac8034d87f32372a4c7579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theLevelName: SampleScene
 --- !u!212 &1100022803 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5004248450138659568, guid: 1797f02658318eb4db84a22fc45d4420, type: 3}
@@ -4470,7 +4496,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1356088371
 MonoBehaviour:
-  m_ObjectHideFlags: 10
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
