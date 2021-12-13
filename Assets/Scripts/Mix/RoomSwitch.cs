@@ -55,6 +55,7 @@ public class RoomSwitch : MonoBehaviour
                 RespawnEnemies();
                 theRoomController.SetInteger("theRoomNumber", roomNumber);
                 theRoomMaster.currentPlayerRoomLoc = fullRoomNumber;
+                //Invoke("DespawnEnemies", Time.deltaTime + 2f);
             }
             if (GameObject.FindGameObjectWithTag("Background Room"))
             {
@@ -75,22 +76,22 @@ public class RoomSwitch : MonoBehaviour
                     backgroundForRoom.GetComponent<Parallax>().ActivateObject();
                 }
             }
-            CancelInvoke("DespawnEnemies");
         }
     }
 
+    
     private void OnTriggerExit2D(Collider2D collission)
     {
-        if (collission.tag == "Player" && theRoomMaster.currentPlayerRoomLoc != fullRoomNumber)
+        if (collission.tag == "Player")
         {
-            CancelInvoke("DespawnEnemies");
             Invoke("DespawnEnemies", Time.deltaTime + 2f);
         }
     }
+    
 
     private void RespawnEnemies()
     {
-        if (theRoomMaster.currentPlayerRoomLoc != fullRoomNumber)
+        if (theRoomMaster.currentPlayerRoomLoc == fullRoomNumber)
         {
             foreach (var item in enemiesToRespawn)
             {
@@ -114,8 +115,9 @@ public class RoomSwitch : MonoBehaviour
     }
     private void DespawnEnemies()
     {
-        if (theRoomController.GetInteger("theRoomNumber") != roomNumber)
+        if (theRoomMaster.currentPlayerRoomLoc != fullRoomNumber)
         {
+            CancelInvoke("DespawnEnemies");
             foreach (var item in enemiesToRespawn)
             {
                 if (item != null)
