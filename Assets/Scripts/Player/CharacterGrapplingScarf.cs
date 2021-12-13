@@ -231,7 +231,7 @@ public class CharacterGrapplingScarf : MonoBehaviour
         player.state = Player.State.Attacking;
         player.myRigidbody.velocity = new Vector2(player.myRigidbody.velocity.x * 0.9f, player.myRigidbody.velocity.y);
 
-        redScarfPlayer.attackAreaMultiplier = 1.25f;
+        redScarfPlayer.attackAreaMultiplier = 1.35f;
 
         animator.Play("DashAttack");
         player.nextMeleeAttackTime = Time.time + 1f / player.meleeAttackRate;
