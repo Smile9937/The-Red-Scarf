@@ -380,7 +380,6 @@ public class LaserBoss : TripleBoss
     {
         if(collision.gameObject.CompareTag("Ground") && pattern == Pattern.PatternThree)
         {
-            Debug.Log("Collision");
             if(numberOfCharges >= 3)
             {
                 Vector2 contactPoint = collision.GetContact(0).point;
@@ -493,7 +492,7 @@ public class LaserBoss : TripleBoss
                 PlayAnimation(SHOOT_RIGHT);
                 break;
             case Pattern.PatternTwoMirror:
-                PlayAnimation(SHOOT_LEFT);
+                PlayAnimation(SHOOT_RIGHT);
                 break;
             case Pattern.PatternThree:
                 break;
@@ -512,7 +511,6 @@ public class LaserBoss : TripleBoss
     protected override void OnDeath()
     {
         base.OnDeath();
-        Debug.Log("DED");
         soundPlayer.ChangeSoundParameter(2, LASERPARAMETER, 2);
         Destroy(laserPrefab.gameObject);
         Destroy(laserOutlinePrefab.gameObject);

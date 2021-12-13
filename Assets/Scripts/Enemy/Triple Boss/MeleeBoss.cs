@@ -189,7 +189,7 @@ public class MeleeBoss : TripleBoss
         yield return new WaitForSeconds(largeWaveStuckInGroundTimer);
         PlayAnimation(IDLE);
         state = State.Attacking;
-        PickChargePosition();
+        PatternDone();
     }
     private void SwoopAttack()
     {
