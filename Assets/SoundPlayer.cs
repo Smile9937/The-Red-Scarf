@@ -10,6 +10,8 @@ public class SoundPlayer : MonoBehaviour
     public string[] Events;
 
     private List<EventInstance> playSounds = new List<EventInstance>();
+    private float highestVolume;
+    private SoundEffect currentSoundEffect;
     void Awake()
     {
         foreach(string Event in Events)
@@ -27,6 +29,24 @@ public class SoundPlayer : MonoBehaviour
     public void StopSound(int id)
     {
         playSounds[id].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void ChangeVolume(int id, float volume, SoundEffect soundEffect)
+    {
+        if(soundEffect == currentSoundEffect)
+        {
+            highestVolume = volume;
+        }
+        if(soundEffect != currentSoundEffect)
+        {
+            if(volume > highestVolume)
+            {
+                highestVolume = volume;
+                currentSoundEffect = soundEffect;
+            }
+        }
+
+        playSounds[id].setVolume(highestVolume);
     }
 
     public void ChangeSoundParameter(int id, string soundParameter, int value)

@@ -29,14 +29,6 @@ public class InputManager : MonoBehaviour
 
     public CustomKeybinds[] keybinds;
 
-    [Serializable]
-    public class KeyCodeImages
-    {
-        public Sprite sprite;
-        public KeyCode keyCode;
-    }
-    public KeyCodeImages[] keyCodeImages;
-
     public bool waitingForInput;
     KeybindInvoker currentKeybind;
 
@@ -124,11 +116,12 @@ public class InputManager : MonoBehaviour
                     int keybindingId = Array.IndexOf(keybinds, customKeybind);
                     if (SceneManager.GetActiveScene().buildIndex == 0)
                     {
-
+                        InputImages.Instance.SetKeyBindingsImage(customKeybind.keybindingAction, customKeybind.keyCode);
                     } else
                     {
                         PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
                     }
+                    GameEvents.Instance.KeyChange();
                 }
             }
         }
@@ -137,9 +130,18 @@ public class InputManager : MonoBehaviour
     {
         foreach (CustomKeybinds customKeybind in keybinds)
         {
-            if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keyTexts.Length)
-                return;
-            PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+                if (Array.IndexOf(keybinds, customKeybind) >= PauseMenu.Instance.keyTexts.Length)
+                    return;
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                InputImages.Instance.SetKeyBindingsImage(customKeybind.keybindingAction, customKeybind.keyCode);
+            }
+            else
+            {
+                PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
+            }
+            GameEvents.Instance.KeyChange();
         }
     }
     public void SetKeyBind(KeybindInvoker keybind)
@@ -182,7 +184,7 @@ public class InputManager : MonoBehaviour
                             customKeybind.keyCode = checkDuplicate.keyCode;
                             if (SceneManager.GetActiveScene().buildIndex == 0)
                             {
-
+                                InputImages.Instance.SetKeyBindingsImage(customKeybind.keybindingAction, customKeybind.keyCode);
                             } else
                             {
                                 PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
@@ -191,7 +193,7 @@ public class InputManager : MonoBehaviour
                             checkDuplicate.keyCode = keyCode;
                             if (SceneManager.GetActiveScene().buildIndex == 0)
                             {
-
+                                InputImages.Instance.SetKeyBindingsImage(checkDuplicate.keybindingAction, checkDuplicate.keyCode);
                             } else
                             {
                                 PauseMenu.Instance.SetKeyBindingsText(checkDuplicate.keybindingAction, checkDuplicate.keyCode);
@@ -207,7 +209,7 @@ public class InputManager : MonoBehaviour
                     customKeybind.keyCode = keyCode;
                     if (SceneManager.GetActiveScene().buildIndex == 0)
                     {
-
+                        InputImages.Instance.SetKeyBindingsImage(customKeybind.keybindingAction, customKeybind.keyCode);
                     } else
                     {
                         PauseMenu.Instance.SetKeyBindingsText(customKeybind.keybindingAction, customKeybind.keyCode);
@@ -216,6 +218,7 @@ public class InputManager : MonoBehaviour
                 }
             }
             waitingForInput = false;
+            GameEvents.Instance.KeyChange();
         }
     }
 }

@@ -104,6 +104,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     public SoundPlayer soundPlayer;
 
+    [SerializeField] private bool gravityFlip;
     private void OnDisable()
     {
         GameEvents.Instance.onSaveGame -= Save;
@@ -312,41 +313,53 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
 
     private void HandleJumping()
     {
-        if (grounded)
+        if(gravityFlip)
         {
-            myAnimator.SetFloat("axisYSpeed", 0);
-            countDownCanJumpTimer = false;
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && grounded)
+            {
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+                myRigidbody.gravityScale = -myRigidbody.gravityScale;
+            }
         }
         else
         {
-            myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
-        }
+            if (grounded)
+            {
+                myAnimator.SetFloat("axisYSpeed", 0);
+                countDownCanJumpTimer = false;
+            }
+            else
+            {
+                myAnimator.SetFloat("axisYSpeed", Mathf.Clamp(myRigidbody.velocity.y, -1, 1));
+            }
 
-        if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
-        {
-            Jump();
-            PlaySquashAndStretchAnimation(STRETCH);
-            stoppedJumping = false;
-        }
+            if (InputManager.Instance.GetKeyDown(KeybindingActions.Jump) && canJump)
+            {
+                Jump();
+                soundPlayer.PlaySound(3);
+                PlaySquashAndStretchAnimation(STRETCH);
+                stoppedJumping = false;
+            }
 
-        if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0 && !grounded)
-        {
-            Jump();
-            countDownCanJumpTimer = true;
-        }
+            if (InputManager.Instance.GetKey(KeybindingActions.Jump) && !stoppedJumping && jumpTimeCounter > 0 && !grounded)
+            {
+                Jump();
+                countDownCanJumpTimer = true;
+            }
 
-        if (InputManager.Instance.GetKeyUp(KeybindingActions.Jump))
-        {
-            jumpTimeCounter = 0;
-            stoppedJumping = true;
-        }
+            if (InputManager.Instance.GetKeyUp(KeybindingActions.Jump))
+            {
+                jumpTimeCounter = 0;
+                stoppedJumping = true;
+            }
 
-        if(grounded && !previouslyGrounded)
-        {
-            PlaySquashAndStretchAnimation(SQUASH);
-        }
+            if(grounded && !previouslyGrounded)
+            {
+                PlaySquashAndStretchAnimation(SQUASH);
+            }
 
-        previouslyGrounded = grounded;
+            previouslyGrounded = grounded;
+        }
     }
 
     private void Jump()
@@ -356,7 +369,10 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
     }
     public void Die()
     {
+        AudioLibrary.Instance.StopMusic();
+        Time.timeScale = 0.3f;
         state = State.Dead;
+        soundPlayer.PlaySound(4);
         myRigidbody.velocity = Vector2.zero;
         myAnimator.SetBool("isDead", true);
         StartCoroutine(Respawn());
@@ -372,24 +388,25 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
         if (isInvincible && !bypassInvincibility)
             return;
 
-        if (state == State.Blocking)
+        if (state == State.Blocking || state == State.Dead)
             return;
 
-        currentHealth -= damage;
-        PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
-
+        if(currentHealth > 0)
+        {
+            soundPlayer.PlaySound(2);
+            currentHealth -= damage;
+            PlayerUI.Instance.SetHealthUI(currentHealth, maxHealth);
+            StartCoroutine(InvincibilityFrames());
+        }
         if (currentHealth <= 0)
         {
             Die();
         }
-        StartCoroutine(InvincibilityFrames());
     }
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
-
         yield return new WaitForSeconds(secondsOfInvincibility);
-
         isInvincible = false;
     }
 
@@ -442,7 +459,7 @@ public class Player : MonoBehaviour, IDamageable, ICharacter
                     {
                         character.KnockBack(gameObject, currentPlayerStats.groundSlamKnockbackVelocity, currentPlayerStats.groundslamKnockbackLength);
                         Instantiate(damageText, target.transform.position, Quaternion.identity);
-                        damageText.SetText(currentPlayerStats.groundSlamDamage);
+                        damageText.SetText(currentPlayerStats.groundSlamDamage, currentPlayerStats.groundSlamDamage);
                     }
                 }
             }

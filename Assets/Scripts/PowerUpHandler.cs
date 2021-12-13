@@ -31,4 +31,8 @@ public class PowerUpHandler : MonoBehaviour
     {
         player.attackBonus += attackAmount;
     }
+    public void IncreaseSpeedBonus(float speedAmount)
+    {
+        player.speedBonus += speedAmount;
+    }
 }

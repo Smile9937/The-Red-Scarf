@@ -120,7 +120,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
         if (state == State.Dead)
             return;
 
-        startPosition = bossManager.GetStartPosition(this);
+        startPosition = bossManager.GetStartPosition();
 
         if (transform.position.x > startPosition.position.x)
         {
@@ -241,6 +241,7 @@ public abstract class TripleBoss : MonoBehaviour, IDamageable
             return;
 
         health -= damage;
+        soundPlayer.PlaySound(1);
         SetTheHealthOfBossUI();
         if (health <= 0)
         {

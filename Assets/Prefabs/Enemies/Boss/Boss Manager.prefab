@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 8362574402228271334}
   - component: {fileID: 8362574402228271328}
   - component: {fileID: 8362574402228271333}
+  - component: {fileID: 4830067359012141805}
   m_Layer: 7
   m_Name: Grenade Boss
   m_TagString: Enemy
@@ -489,19 +490,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c54d1531c3de94b95bbde9d6b77c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   returnTrajectoryOffset: {x: 0, y: -8}
-  startPosition: {fileID: 8362574402097101431}
   time: 0
+  startPosition: {fileID: 8362574402097101431}
   state: 0
   pattern: 0
+  theBossHealthUI: {fileID: 0}
   grenade: {fileID: 783759403534293578, guid: 42cc9e498cfcb6b438a2697402b3c717, type: 3}
   firePoint: {fileID: 8362574403147791387}
   timeBeforeGrenade: 2
@@ -616,6 +612,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4830067359012141805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8362574402228271260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/Hovercraft
+  - event:/SFX/RobotHit
+  - event:/SFX/GrenadeLaunch
+  - event:/SFX/AcidRain
 --- !u!1 &8362574402232959512
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +824,7 @@ GameObject:
   - component: {fileID: 8362574402649231439}
   - component: {fileID: 8362574402649231438}
   - component: {fileID: 8362574402649231433}
+  - component: {fileID: 1591708277838963698}
   m_Layer: 7
   m_Name: Laser Boss
   m_TagString: Enemy
@@ -898,19 +912,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee19d46953eb6604fa24e070ba53848f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   returnTrajectoryOffset: {x: 0, y: -8}
-  startPosition: {fileID: 8362574402232959519}
   time: 0
+  startPosition: {fileID: 8362574402232959519}
   state: 0
   pattern: 0
+  theBossHealthUI: {fileID: 0}
   topRightLaserPosition: {fileID: 8362574402147233190}
   topLeftLaserPosition: {fileID: 8362574402872004991}
   bottomRightLaserPosition: {fileID: 8362574403103449124}
@@ -1023,6 +1032,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02, y: 0.48}
   m_Size: {x: 1.5998306, y: 2.05}
   m_Direction: 0
+--- !u!114 &1591708277838963698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8362574402649231429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/Hovercraft
+  - event:/SFX/RobotHit
+  - event:/SFX/Laser
 --- !u!1 &8362574402805612106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,6 +1333,7 @@ GameObject:
   - component: {fileID: 8362574403611242186}
   - component: {fileID: 8362574403611242185}
   - component: {fileID: 8362574403611242180}
+  - component: {fileID: 8096991363526018589}
   m_Layer: 7
   m_Name: Melee Boss
   m_TagString: Enemy
@@ -1392,19 +1418,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f71eb0beabda9428bd0231adadefba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   health: 50
   moveSpeed: 7
   returnTrajectoryOffset: {x: 0, y: -8}
-  startPosition: {fileID: 8362574403186561994}
   time: 0
+  startPosition: {fileID: 8362574403186561994}
   state: 0
   pattern: 0
+  theBossHealthUI: {fileID: 0}
   swoopPositionLeft: {fileID: 8362574403596146197}
   swoopPositionRight: {fileID: 8362574403306166363}
   swoopSpeed: 0.7
@@ -1506,3 +1527,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.08, y: 0.44}
   m_Size: {x: 1.5998306, y: 2.05}
   m_Direction: 0
+--- !u!114 &8096991363526018589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8362574403611242176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a034c69c0de772748b783cdc53d11500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - event:/SFX/Hovercraft
+  - event:/SFX/RobotHit
+  - event:/SFX/Chainsaw
+  - event:/SFX/Groundslam

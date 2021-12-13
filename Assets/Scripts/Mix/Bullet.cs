@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
                 if (damageText != null && other.tag == "Enemy")
                 {
                     Instantiate(damageText, transform.position, Quaternion.identity);
-                    damageText.SetText(damage);
+                    damageText.SetText(damage, damage);
                 }
                 damageable.Damage(damage, bypassInvincibility);
             }

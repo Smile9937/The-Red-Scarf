@@ -459,7 +459,6 @@ public class LaserBoss : TripleBoss
 
         if(hit.collider.CompareTag("Ground"))
         {
-            Debug.Log(hit.collider.name);
             laserPrefab.SetPosition(1, hit.point);
         }
 
@@ -513,6 +512,8 @@ public class LaserBoss : TripleBoss
     protected override void OnDeath()
     {
         base.OnDeath();
+        Debug.Log("DED");
+        soundPlayer.ChangeSoundParameter(2, LASERPARAMETER, 2);
         Destroy(laserPrefab.gameObject);
         Destroy(laserOutlinePrefab.gameObject);
         foreach(LineRenderer lineRenderer in bouncingLasers)

@@ -179,7 +179,7 @@ public class DressPlayer : MonoBehaviour
                 if (player.damageText != null && target.tag == "Enemy")
                 {
                     Instantiate(player.damageText, target.transform.position, Quaternion.identity);
-                    player.damageText.SetText(myStats.attackDamage + player.attackBonus);
+                    player.damageText.SetText(myStats.attackDamage + player.attackBonus, myStats.attackDamage + player.attackBonus);
                 }
                 damageable.Damage(myStats.attackDamage + player.attackBonus, false);
             }
