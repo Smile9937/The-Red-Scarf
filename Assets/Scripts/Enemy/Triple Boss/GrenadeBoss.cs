@@ -238,6 +238,14 @@ public class GrenadeBoss : TripleBoss
             grenades.Add(currentGrenade);
             Vector2 negativeForce = new Vector2(-largeGrenadeForces[i].x * 9.82f, grenadeForces[i].y * 9.82f);
             currentGrenade2.GetComponent<Rigidbody2D>().AddForce(negativeForce);
+            PlayGrenadeLaunchSound();
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        
+        foreach(AcidSpot acidSpot in acidSpots)
+        {
+            acidSpot.ActivateAcid();
         }
 
         yield return new WaitForSeconds(timeUntilAcid);

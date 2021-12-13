@@ -243,8 +243,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICharacter, IGrabbable
 
     public void SelectTarget()
     {
-        if (state == State.Attacking || state == State.Staggered)
-            return;
         float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
         float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
 
