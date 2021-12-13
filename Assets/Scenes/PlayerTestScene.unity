@@ -4420,6 +4420,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
+      propertyPath: ground.m_Bits
+      value: 524480
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492771727813815868, guid: 3a0cab5360ed871449e65e54b1b4afe3, type: 3}
       propertyPath: squashAndStretch
       value: 
       objectReference: {fileID: 1139611925}
