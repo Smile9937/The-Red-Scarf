@@ -35,7 +35,7 @@ public class CameraMove : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, -15);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5);
         cam = GetComponent<Camera>();
         ortographicSize = startOrtographicSize;
         speed = startSpeed;

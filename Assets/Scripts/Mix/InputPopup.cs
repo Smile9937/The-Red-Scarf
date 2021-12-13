@@ -10,6 +10,7 @@ public class InputPopup : MonoBehaviour
 
     [SerializeField] GameObject theTarget;
     [SerializeField] Vector2 targetOffset;
+    [SerializeField] DoNotRespawn theAntiRespawnScript;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,8 @@ public class InputPopup : MonoBehaviour
             theSpriteRendererObject.transform.position = new Vector2(theTarget.transform.position.x + targetOffset.x, theTarget.transform.position.y + targetOffset.y);
             if (InputManager.Instance.GetKey(theKeyBind))
             {
+                if (theAntiRespawnScript != null)
+                    theAntiRespawnScript.Collected();
                 Destroy(gameObject);
             }
         }
