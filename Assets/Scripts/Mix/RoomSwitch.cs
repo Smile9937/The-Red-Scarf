@@ -89,6 +89,7 @@ public class RoomSwitch : MonoBehaviour
     }
     
 
+
     private void RespawnEnemies()
     {
         if (theRoomMaster.currentPlayerRoomLoc == fullRoomNumber)
@@ -101,6 +102,7 @@ public class RoomSwitch : MonoBehaviour
                     {
                         item.gameObject.SetActive(true);
                         item.GetComponentInChildren<Enemy>().currentHealth = item.GetComponentInChildren<Enemy>().maxHealth;
+                        item.GetComponentInChildren<TriggerAreaCheck>().gameObject.SetActive(true);
                         foreach (var itemLoc in enemiesToRespawnPos)
                         {
                             if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))
