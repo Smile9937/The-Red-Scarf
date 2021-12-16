@@ -1583,7 +1583,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &365208775
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2497,6 +2497,7 @@ MonoBehaviour:
   toggleEvent:
     m_PersistentCalls:
       m_Calls: []
+  isActivatedFromOther: 0
   type: 1
 --- !u!1 &632251382
 GameObject:
@@ -4496,7 +4497,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1356088371
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -6337,6 +6338,7 @@ MonoBehaviour:
   toggleEvent:
     m_PersistentCalls:
       m_Calls: []
+  isActivatedFromOther: 0
   type: 1
 --- !u!1 &1853349259
 GameObject:
