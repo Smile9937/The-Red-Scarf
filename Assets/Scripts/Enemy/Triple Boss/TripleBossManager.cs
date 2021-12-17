@@ -223,6 +223,7 @@ public class TripleBossManager : MonoBehaviour
         }
     }
 
+    [SerializeField] Animator backgroundDim;
     public void BossDead(TripleBoss boss)
     {
         GameEvents.Instance.TripleBossPatternEnd();
@@ -262,6 +263,9 @@ public class TripleBossManager : MonoBehaviour
         {
             Debug.Log("All Bosses Dead");
             AudioLibrary.Instance.StopMusic();
+
+            backgroundDim.SetBool("BackgroundDimOn", true);
+            FindObjectOfType<SceneLoader>().Invoke("StartLoadScene",1.25f);
         }
     }
 }

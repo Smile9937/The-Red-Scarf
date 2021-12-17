@@ -12,6 +12,7 @@ public class RoomSwitch : MonoBehaviour
     [SerializeField] List<GameObject> enemiesToRespawn = new List<GameObject>();
     List<Vector2> enemiesToRespawnPos = new List<Vector2>();
     List<TriggerAreaCheck> theTriggerArea = new List<TriggerAreaCheck>();
+    List<HotZoneCheck> theHotZones = new List<HotZoneCheck>();
     [Header("Which Method")]
     [SerializeField] bool useNewMethod = false;
     [Header("Normal Method")]
@@ -31,11 +32,8 @@ public class RoomSwitch : MonoBehaviour
         {
             if (item != null)
             {
-                if (!enemiesToRespawn.Contains(item))
-                {
-                    enemiesToRespawn.Add(item);
-                    theTriggerArea.Add(item.GetComponentInChildren<TriggerAreaCheck>());
-                }
+                theTriggerArea.Add(item.GetComponentInChildren<Enemy>().GetComponentInChildren<TriggerAreaCheck>());
+                theHotZones.Add(item.GetComponentInChildren<Enemy>().GetComponentInChildren<HotZoneCheck>());
                 if (!enemiesToRespawnPos.Contains(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y)))
                 {
                     enemiesToRespawnPos.Add(new Vector2(item.GetComponentInChildren<Enemy>().gameObject.transform.position.x, item.GetComponentInChildren<Enemy>().gameObject.transform.position.y));
@@ -106,7 +104,10 @@ public class RoomSwitch : MonoBehaviour
                         item.GetComponentInChildren<Enemy>().currentHealth = item.GetComponentInChildren<Enemy>().maxHealth;
                         //item.GetComponentInChildren<TriggerAreaCheck>().gameObject.SetActive(true);
                         //item.GetComponentInChildren<Enemy>().gameObject.transform.position = enemiesToRespawnPos[enemiesToRespawn.IndexOf(item)];
-                        theTriggerArea[enemiesToRespawn.IndexOf(item)].enabled = true;
+                        if (theHotZones[enemiesToRespawn.IndexOf(item)] != null)
+                            theHotZones[enemiesToRespawn.IndexOf(item)].enabled = false;
+                        if (theTriggerArea[enemiesToRespawn.IndexOf(item)] != null)
+                            theTriggerArea[enemiesToRespawn.IndexOf(item)].enabled = true;
                         foreach (var itemLoc in enemiesToRespawnPos)
                         {
                             if (enemiesToRespawn.IndexOf(item) == enemiesToRespawnPos.IndexOf(itemLoc))
